@@ -159,6 +159,91 @@
       font-weight: 800;
     }
 
+    .journey-map {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 24px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .map-canvas {
+      min-height: 340px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #eef3f1;
+      overflow: hidden;
+    }
+
+    .map-canvas svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+    }
+
+    .map-label {
+      fill: var(--ink);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .map-date {
+      fill: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .map-note {
+      fill: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .map-path {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .map-point {
+      fill: var(--red);
+      stroke: white;
+      stroke-width: 4;
+    }
+
+    .map-side {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .map-side h2 {
+      font-size: 23px;
+    }
+
+    .map-side ol {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .map-side li {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .map-side strong {
+      color: var(--ink);
+    }
+
     .days {
       display: grid;
       gap: 14px;
@@ -462,6 +547,78 @@
       color: var(--muted);
     }
 
+    .dialogue-panel {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .dialogue-panel label {
+      font-weight: 800;
+    }
+
+    .dialogue-panel textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: inherit;
+      line-height: 1.5;
+    }
+
+    .dialogue-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .dialogue-actions button {
+      min-height: 40px;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .dialogue-actions button.secondary-button {
+      background: #eef3f1;
+      color: var(--green);
+      border: 1px solid var(--line);
+    }
+
+    .dialogue-status {
+      min-height: 24px;
+      color: var(--muted);
+    }
+
+    .dialogue-log {
+      display: grid;
+      gap: 10px;
+    }
+
+    .dialogue-entry {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
+    .dialogue-entry strong {
+      color: var(--green);
+    }
+
     .lodging-table,
     .ticket-table {
       width: 100%;
@@ -518,7 +675,8 @@
 
     @media (max-width: 900px) {
       .summary-grid,
-      .feature-grid {
+      .feature-grid,
+      .journey-map {
         grid-template-columns: 1fr 1fr;
       }
 
@@ -538,7 +696,8 @@
       }
 
       .summary-grid,
-      .feature-grid {
+      .feature-grid,
+      .journey-map {
         grid-template-columns: 1fr;
       }
 
@@ -620,6 +779,45 @@
         <strong>本地网页</strong>
         <span>静态本地网页，不发布公网。</span>
       </div>
+    </section>
+
+    <section class="journey-map" aria-label="行程地图">
+      <div class="map-canvas">
+        <svg viewBox="0 0 860 420" role="img" aria-label="奥地利捷克行程地图">
+          <rect width="860" height="420" fill="#eef3f1"></rect>
+          <path d="M80 330 C170 250 230 220 310 210 C410 198 440 145 530 132 C620 120 675 150 760 90 L820 60 L820 420 L80 420 Z" fill="#dfe8e3"></path>
+          <path d="M40 235 C135 205 200 175 288 182 C385 190 445 235 545 218 C640 202 700 165 825 170" fill="none" stroke="#cbd8d0" stroke-width="34" stroke-linecap="round" opacity="0.75"></path>
+          <path class="map-path" d="M198 290 L332 260 L452 210 L570 172 L682 138"></path>
+          <circle class="map-point" cx="198" cy="290" r="11"></circle>
+          <circle class="map-point" cx="332" cy="260" r="11"></circle>
+          <circle class="map-point" cx="452" cy="210" r="11"></circle>
+          <circle class="map-point" cx="570" cy="172" r="11"></circle>
+          <circle class="map-point" cx="682" cy="138" r="11"></circle>
+
+          <text class="map-label" x="130" y="258">萨尔茨堡</text>
+          <text class="map-date" x="130" y="278">7 月 29 日到 7 月 31 日</text>
+          <text class="map-label" x="295" y="230">林茨</text>
+          <text class="map-date" x="295" y="250">7 月 31 日到 8 月 2 日</text>
+          <text class="map-label" x="365" y="178">毛特豪森</text>
+          <text class="map-date" x="365" y="198">8 月 2 日</text>
+          <text class="map-label" x="494" y="142">捷克布杰约维采</text>
+          <text class="map-date" x="494" y="162">8 月 2 日到 8 月 4 日</text>
+          <text class="map-label" x="704" y="118">布拉格</text>
+          <text class="map-date" x="704" y="138">8 月 4 日到 8 月 8 日</text>
+          <text class="map-note" x="42" y="386">示意地图：用于看路线顺序和停留日期，具体交通以车票和当天路线为准。</text>
+        </svg>
+      </div>
+      <aside class="map-side">
+        <h2>行程地图</h2>
+        <p class="note">从萨尔茨堡进入，向东到林茨，经过毛特豪森后进入捷克布杰约维采，最后在布拉格停留并返程。</p>
+        <ol>
+          <li><strong>萨尔茨堡：</strong>7 月 29 日到 7 月 31 日</li>
+          <li><strong>林茨：</strong>7 月 31 日到 8 月 2 日</li>
+          <li><strong>毛特豪森：</strong>8 月 2 日</li>
+          <li><strong>捷克布杰约维采：</strong>8 月 2 日到 8 月 4 日</li>
+          <li><strong>布拉格：</strong>8 月 4 日到 8 月 8 日</li>
+        </ol>
+      </aside>
     </section>
 
     <section class="section-head">
@@ -967,19 +1165,24 @@
     </section>
 
     <section class="section-head">
-      <h2>修改请求</h2>
-      <p>在这里写下你希望页面怎么改。内容会保存在本机浏览器里，也可以一键复制成给模型的修改请求。</p>
+      <h2>模型问答</h2>
+      <p>这里可以把当前页面和你的问题整理成提示词。静态网页不会直接调用模型；如要自动发送，需要另接后端服务，不能把密钥放在公开页面里。</p>
     </section>
 
-    <section class="request-panel" aria-label="修改请求">
-      <label for="change-request">想怎么改这个页面</label>
-      <textarea id="change-request" placeholder="例如：把 8 月 6 日下午改成犹太区；把需要预约的项目用红色标出来；把每天的照片放大一点。"></textarea>
-      <div class="request-actions">
-        <button type="button" id="save-request">保存草稿</button>
-        <button type="button" id="copy-request">复制给模型</button>
-        <button type="button" id="clear-request" class="secondary-button">清空</button>
+    <section class="dialogue-panel" aria-label="模型问答">
+      <label for="change-request">你的问题或修改要求</label>
+      <textarea id="change-request" placeholder="例如：8 月 6 日下午如果下雨，应该怎么调整？或者：把 8 月 3 日的行程改轻松一点。"></textarea>
+      <label for="model-response">模型回复粘贴处</label>
+      <textarea id="model-response" placeholder="把模型给你的回复贴在这里，然后保存成这页的问答记录。"></textarea>
+      <div class="dialogue-actions">
+        <button type="button" id="copy-request">复制提示词</button>
+        <button type="button" id="save-dialogue">保存问答</button>
+        <button type="button" id="save-request" class="secondary-button">保存草稿</button>
+        <button type="button" id="clear-request" class="secondary-button">清空草稿</button>
+        <button type="button" id="clear-dialogue" class="secondary-button">清空记录</button>
       </div>
-      <p class="request-status" id="request-status"></p>
+      <p class="dialogue-status" id="request-status"></p>
+      <div class="dialogue-log" id="dialogue-log" aria-label="问答记录"></div>
     </section>
 
     <section class="sources">
@@ -1001,10 +1204,14 @@
   </main>
   <script>
     const requestBox = document.getElementById("change-request");
+    const responseBox = document.getElementById("model-response");
+    const dialogueLog = document.getElementById("dialogue-log");
     const requestStatus = document.getElementById("request-status");
     const storageKey = "austria-czech-page-change-request";
+    const dialogueKey = "austria-czech-page-dialogue-log";
 
     requestBox.value = localStorage.getItem(storageKey) || "";
+    responseBox.value = "";
 
     document.querySelectorAll(".items li:not(.items-header)").forEach((item) => {
       const priceCell = document.createElement("span");
@@ -1035,6 +1242,52 @@
       }, 2600);
     }
 
+    function readDialogue() {
+      try {
+        return JSON.parse(localStorage.getItem(dialogueKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function writeDialogue(items) {
+      localStorage.setItem(dialogueKey, JSON.stringify(items));
+    }
+
+    function renderDialogue() {
+      const items = readDialogue();
+      dialogueLog.innerHTML = "";
+
+      items.forEach((item) => {
+        const entry = document.createElement("article");
+        entry.className = "dialogue-entry";
+
+        const questionTitle = document.createElement("strong");
+        questionTitle.textContent = "问题";
+        const questionText = document.createElement("p");
+        questionText.textContent = item.question;
+
+        const answerTitle = document.createElement("strong");
+        answerTitle.textContent = "回复";
+        const answerText = document.createElement("p");
+        answerText.textContent = item.answer;
+
+        entry.append(questionTitle, questionText, answerTitle, answerText);
+        dialogueLog.prepend(entry);
+      });
+    }
+
+    function pageBrief() {
+      return [
+        "当前网页是一份 2026 年奥地利捷克旅行计划。",
+        "日期范围：7 月 29 日到 8 月 8 日。",
+        "路线：萨尔茨堡、林茨、毛特豪森、捷克布杰约维采、布拉格。",
+        "要求：回复使用中文；如果建议修改网页，请说明具体日期、地点和改动。"
+      ].join("\n");
+    }
+
+    renderDialogue();
+
     document.getElementById("save-request").addEventListener("click", () => {
       localStorage.setItem(storageKey, requestBox.value.trim());
       showStatus("已保存到本机浏览器。");
@@ -1042,8 +1295,32 @@
 
     document.getElementById("clear-request").addEventListener("click", () => {
       requestBox.value = "";
+      responseBox.value = "";
       localStorage.removeItem(storageKey);
       showStatus("已清空。");
+    });
+
+    document.getElementById("save-dialogue").addEventListener("click", () => {
+      const question = requestBox.value.trim();
+      const answer = responseBox.value.trim();
+      if (!question || !answer) {
+        showStatus("请先填写问题和回复。");
+        return;
+      }
+
+      const items = readDialogue();
+      items.push({ question, answer, savedAt: new Date().toISOString() });
+      writeDialogue(items);
+      renderDialogue();
+      localStorage.setItem(storageKey, question);
+      responseBox.value = "";
+      showStatus("问答已保存到本机浏览器。");
+    });
+
+    document.getElementById("clear-dialogue").addEventListener("click", () => {
+      localStorage.removeItem(dialogueKey);
+      renderDialogue();
+      showStatus("问答记录已清空。");
     });
 
     document.getElementById("copy-request").addEventListener("click", async () => {
@@ -1054,10 +1331,9 @@
       }
 
       const prompt = [
-        "请修改旅行网页。",
-        "文件位置：/Users/kma/dev/travel/2026_austria_czech/index.html",
-        "要求：保持网页可见文字为中文；保留现有行程结构，除非下面明确要求调整；修改后检查图片、本地资源和表格显示。",
-        "用户希望的修改：",
+        "请根据下面的旅行网页摘要回答问题。",
+        pageBrief(),
+        "用户的问题或修改要求：",
         requestText
       ].join("\n");
 
