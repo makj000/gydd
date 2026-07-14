@@ -529,132 +529,6 @@
       padding-left: 18px;
     }
 
-    .request-panel {
-      display: grid;
-      gap: 14px;
-      padding: 18px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-
-    .request-panel label {
-      font-weight: 800;
-    }
-
-    .request-panel textarea {
-      width: 100%;
-      min-height: 140px;
-      resize: vertical;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--ink);
-      font: inherit;
-      line-height: 1.5;
-    }
-
-    .request-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .request-actions button {
-      min-height: 40px;
-      padding: 9px 13px;
-      border: 0;
-      border-radius: 6px;
-      background: var(--green);
-      color: white;
-      font: inherit;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .request-actions button.secondary-button {
-      background: #eef3f1;
-      color: var(--green);
-      border: 1px solid var(--line);
-    }
-
-    .request-status {
-      min-height: 24px;
-      color: var(--muted);
-    }
-
-    .dialogue-panel {
-      display: grid;
-      gap: 14px;
-      padding: 18px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-
-    .dialogue-panel label {
-      font-weight: 800;
-    }
-
-    .dialogue-panel textarea {
-      width: 100%;
-      min-height: 120px;
-      resize: vertical;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--ink);
-      font: inherit;
-      line-height: 1.5;
-    }
-
-    .dialogue-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .dialogue-actions button {
-      min-height: 40px;
-      padding: 9px 13px;
-      border: 0;
-      border-radius: 6px;
-      background: var(--green);
-      color: white;
-      font: inherit;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .dialogue-actions button.secondary-button {
-      background: #eef3f1;
-      color: var(--green);
-      border: 1px solid var(--line);
-    }
-
-    .dialogue-status {
-      min-height: 24px;
-      color: var(--muted);
-    }
-
-    .dialogue-log {
-      display: grid;
-      gap: 10px;
-    }
-
-    .dialogue-entry {
-      display: grid;
-      gap: 6px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfaf6;
-    }
-
-    .dialogue-entry strong {
-      color: var(--green);
-    }
-
     .lodging-table,
     .ticket-table {
       width: 100%;
@@ -1217,27 +1091,6 @@
       </ul>
     </section>
 
-    <section class="section-head">
-      <h2>模型问答</h2>
-      <p>这里可以把当前页面和你的问题整理成提示词。静态网页不会直接调用模型；如要自动发送，需要另接后端服务，不能把密钥放在公开页面里。</p>
-    </section>
-
-    <section class="dialogue-panel" aria-label="模型问答">
-      <label for="change-request">你的问题或修改要求</label>
-      <textarea id="change-request" placeholder="例如：8 月 6 日下午如果下雨，应该怎么调整？或者：把 8 月 3 日的行程改轻松一点。"></textarea>
-      <label for="model-response">模型回复粘贴处</label>
-      <textarea id="model-response" placeholder="把模型给你的回复贴在这里，然后保存成这页的问答记录。"></textarea>
-      <div class="dialogue-actions">
-        <button type="button" id="copy-request">复制提示词</button>
-        <button type="button" id="save-dialogue">保存问答</button>
-        <button type="button" id="save-request" class="secondary-button">保存草稿</button>
-        <button type="button" id="clear-request" class="secondary-button">清空草稿</button>
-        <button type="button" id="clear-dialogue" class="secondary-button">清空记录</button>
-      </div>
-      <p class="dialogue-status" id="request-status"></p>
-      <div class="dialogue-log" id="dialogue-log" aria-label="问答记录"></div>
-    </section>
-
     <section class="sources">
       <h2>来源</h2>
       <ul>
@@ -1258,12 +1111,6 @@
     </section>
   </main>
   <script>
-    const requestBox = document.getElementById("change-request");
-    const responseBox = document.getElementById("model-response");
-    const dialogueLog = document.getElementById("dialogue-log");
-    const requestStatus = document.getElementById("request-status");
-    const storageKey = "austria-czech-page-change-request";
-    const dialogueKey = "austria-czech-page-dialogue-log";
     const weatherPlans = {
       salzburg: {
         latitude: 47.8095,
@@ -1292,9 +1139,6 @@
       }
     };
 
-    requestBox.value = localStorage.getItem(storageKey) || "";
-    responseBox.value = "";
-
     document.querySelectorAll(".items li:not(.items-header)").forEach((item) => {
       const priceCell = document.createElement("span");
       const link = item.dataset.link;
@@ -1314,59 +1158,6 @@
 
       item.append(priceCell);
     });
-
-    function showStatus(message) {
-      requestStatus.textContent = message;
-      window.setTimeout(() => {
-        if (requestStatus.textContent === message) {
-          requestStatus.textContent = "";
-        }
-      }, 2600);
-    }
-
-    function readDialogue() {
-      try {
-        return JSON.parse(localStorage.getItem(dialogueKey) || "[]");
-      } catch {
-        return [];
-      }
-    }
-
-    function writeDialogue(items) {
-      localStorage.setItem(dialogueKey, JSON.stringify(items));
-    }
-
-    function renderDialogue() {
-      const items = readDialogue();
-      dialogueLog.innerHTML = "";
-
-      items.forEach((item) => {
-        const entry = document.createElement("article");
-        entry.className = "dialogue-entry";
-
-        const questionTitle = document.createElement("strong");
-        questionTitle.textContent = "问题";
-        const questionText = document.createElement("p");
-        questionText.textContent = item.question;
-
-        const answerTitle = document.createElement("strong");
-        answerTitle.textContent = "回复";
-        const answerText = document.createElement("p");
-        answerText.textContent = item.answer;
-
-        entry.append(questionTitle, questionText, answerTitle, answerText);
-        dialogueLog.prepend(entry);
-      });
-    }
-
-    function pageBrief() {
-      return [
-        "当前网页是一份 2026 年奥地利捷克旅行计划。",
-        "日期范围：7 月 29 日到 8 月 8 日。",
-        "路线：萨尔茨堡、林茨、毛特豪森、捷克布杰约维采、布拉格。",
-        "要求：回复使用中文；如果建议修改网页，请说明具体日期、地点和改动。"
-      ].join("\n");
-    }
 
     function formatTripDate(dateText) {
       const date = new Date(`${dateText}T00:00:00`);
@@ -1470,77 +1261,21 @@
           const iconName = availableRows.length > 0 ? availableRows[0].icon : "cloud";
 
           mapWeather.textContent = `天气：${mapText}`;
-          sideWeather.textContent = `天气：${sideText}`;
+          if (sideWeather) {
+            sideWeather.textContent = `天气：${sideText}`;
+          }
           updateWeatherIcon(city, iconName);
         } catch {
           mapWeather.textContent = "天气：暂时无法查询";
-          sideWeather.textContent = "天气：暂时无法查询";
+          if (sideWeather) {
+            sideWeather.textContent = "天气：暂时无法查询";
+          }
           updateWeatherIcon(city, "cloud");
         }
       }));
     }
 
-    renderDialogue();
     loadWeather();
-
-    document.getElementById("save-request").addEventListener("click", () => {
-      localStorage.setItem(storageKey, requestBox.value.trim());
-      showStatus("已保存到本机浏览器。");
-    });
-
-    document.getElementById("clear-request").addEventListener("click", () => {
-      requestBox.value = "";
-      responseBox.value = "";
-      localStorage.removeItem(storageKey);
-      showStatus("已清空。");
-    });
-
-    document.getElementById("save-dialogue").addEventListener("click", () => {
-      const question = requestBox.value.trim();
-      const answer = responseBox.value.trim();
-      if (!question || !answer) {
-        showStatus("请先填写问题和回复。");
-        return;
-      }
-
-      const items = readDialogue();
-      items.push({ question, answer, savedAt: new Date().toISOString() });
-      writeDialogue(items);
-      renderDialogue();
-      localStorage.setItem(storageKey, question);
-      responseBox.value = "";
-      showStatus("问答已保存到本机浏览器。");
-    });
-
-    document.getElementById("clear-dialogue").addEventListener("click", () => {
-      localStorage.removeItem(dialogueKey);
-      renderDialogue();
-      showStatus("问答记录已清空。");
-    });
-
-    document.getElementById("copy-request").addEventListener("click", async () => {
-      const requestText = requestBox.value.trim();
-      if (!requestText) {
-        showStatus("请先写下修改内容。");
-        return;
-      }
-
-      const prompt = [
-        "请根据下面的旅行网页摘要回答问题。",
-        pageBrief(),
-        "用户的问题或修改要求：",
-        requestText
-      ].join("\n");
-
-      try {
-        await navigator.clipboard.writeText(prompt);
-        localStorage.setItem(storageKey, requestText);
-        showStatus("已复制，可直接粘贴给模型。");
-      } catch {
-        localStorage.setItem(storageKey, requestText);
-        showStatus("复制失败，但草稿已保存。");
-      }
-    });
   </script>
 </body>
 </html>
