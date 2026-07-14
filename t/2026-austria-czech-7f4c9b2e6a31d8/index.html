@@ -204,6 +204,16 @@
       font-weight: 700;
     }
 
+    .map-weather-icon {
+      color: var(--gold);
+    }
+
+    .map-weather-icon use,
+    .inline-weather-icon use {
+      fill: currentColor;
+      stroke: currentColor;
+    }
+
     .map-path {
       fill: none;
       stroke: var(--red);
@@ -242,6 +252,19 @@
 
     .map-side strong {
       color: var(--ink);
+    }
+
+    .weather-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .inline-weather-icon {
+      width: 17px;
+      height: 17px;
+      color: var(--gold);
+      flex: 0 0 auto;
     }
 
     .days {
@@ -784,6 +807,31 @@
     <section class="journey-map" aria-label="行程地图">
       <div class="map-canvas">
         <svg viewBox="0 0 860 420" role="img" aria-label="奥地利捷克行程地图">
+          <defs>
+            <symbol id="weather-sun" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" fill="none" stroke-width="2" stroke-linecap="round"></path>
+            </symbol>
+            <symbol id="weather-cloud" viewBox="0 0 24 24">
+              <path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3 1.8A3.3 3.3 0 0 0 7 18Z" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </symbol>
+            <symbol id="weather-rain" viewBox="0 0 24 24">
+              <path d="M7 15h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3 1.8A3.3 3.3 0 0 0 7 15Z" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M8 19v2M12 18v3M16 19v2" fill="none" stroke-width="2" stroke-linecap="round"></path>
+            </symbol>
+            <symbol id="weather-storm" viewBox="0 0 24 24">
+              <path d="M7 14h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3 1.8A3.3 3.3 0 0 0 7 14Z" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="m13 15-3 5h4l-2 3" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </symbol>
+            <symbol id="weather-snow" viewBox="0 0 24 24">
+              <path d="M7 15h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3 1.8A3.3 3.3 0 0 0 7 15Z" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M8 20h.1M12 19h.1M16 20h.1" fill="none" stroke-width="3" stroke-linecap="round"></path>
+            </symbol>
+            <symbol id="weather-fog" viewBox="0 0 24 24">
+              <path d="M7 14h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.3 1.8A3.3 3.3 0 0 0 7 14Z" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M4 18h16M6 21h12" fill="none" stroke-width="2" stroke-linecap="round"></path>
+            </symbol>
+          </defs>
           <rect width="860" height="420" fill="#eef3f1"></rect>
           <path d="M80 330 C170 250 230 220 310 210 C410 198 440 145 530 132 C620 120 675 150 760 90 L820 60 L820 420 L80 420 Z" fill="#dfe8e3"></path>
           <path d="M40 235 C135 205 200 175 288 182 C385 190 445 235 545 218 C640 202 700 165 825 170" fill="none" stroke="#cbd8d0" stroke-width="34" stroke-linecap="round" opacity="0.75"></path>
@@ -796,18 +844,23 @@
 
           <text class="map-label" x="130" y="258">萨尔茨堡</text>
           <text class="map-date" x="130" y="278">7 月 29 日到 7 月 31 日</text>
+          <svg class="map-weather-icon" x="130" y="284" width="16" height="16"><use data-map-weather-icon="salzburg" href="#weather-cloud"></use></svg>
           <text class="map-note" x="130" y="296" data-map-weather="salzburg">天气：正在查询</text>
           <text class="map-label" x="295" y="230">林茨</text>
           <text class="map-date" x="295" y="250">7 月 31 日到 8 月 2 日</text>
+          <svg class="map-weather-icon" x="295" y="256" width="16" height="16"><use data-map-weather-icon="linz" href="#weather-cloud"></use></svg>
           <text class="map-note" x="295" y="268" data-map-weather="linz">天气：正在查询</text>
           <text class="map-label" x="365" y="178">毛特豪森</text>
           <text class="map-date" x="365" y="198">8 月 2 日</text>
+          <svg class="map-weather-icon" x="365" y="204" width="16" height="16"><use data-map-weather-icon="mauthausen" href="#weather-cloud"></use></svg>
           <text class="map-note" x="365" y="216" data-map-weather="mauthausen">天气：正在查询</text>
           <text class="map-label" x="494" y="142">捷克布杰约维采</text>
           <text class="map-date" x="494" y="162">8 月 2 日到 8 月 4 日</text>
+          <svg class="map-weather-icon" x="494" y="168" width="16" height="16"><use data-map-weather-icon="budejovice" href="#weather-cloud"></use></svg>
           <text class="map-note" x="494" y="180" data-map-weather="budejovice">天气：正在查询</text>
           <text class="map-label" x="704" y="118">布拉格</text>
           <text class="map-date" x="704" y="138">8 月 4 日到 8 月 8 日</text>
+          <svg class="map-weather-icon" x="704" y="144" width="16" height="16"><use data-map-weather-icon="prague" href="#weather-cloud"></use></svg>
           <text class="map-note" x="704" y="156" data-map-weather="prague">天气：正在查询</text>
           <text class="map-note" x="42" y="386">示意地图：用于看路线顺序和停留日期，具体交通以车票和当天路线为准。</text>
         </svg>
@@ -816,11 +869,11 @@
         <h2>行程地图</h2>
         <p class="note">从萨尔茨堡进入，向东到林茨，经过毛特豪森后进入捷克布杰约维采，最后在布拉格停留并返程。</p>
         <ol>
-          <li><strong>萨尔茨堡：</strong>7 月 29 日到 7 月 31 日；<span data-side-weather="salzburg">天气正在查询</span></li>
-          <li><strong>林茨：</strong>7 月 31 日到 8 月 2 日；<span data-side-weather="linz">天气正在查询</span></li>
-          <li><strong>毛特豪森：</strong>8 月 2 日；<span data-side-weather="mauthausen">天气正在查询</span></li>
-          <li><strong>捷克布杰约维采：</strong>8 月 2 日到 8 月 4 日；<span data-side-weather="budejovice">天气正在查询</span></li>
-          <li><strong>布拉格：</strong>8 月 4 日到 8 月 8 日；<span data-side-weather="prague">天气正在查询</span></li>
+          <li><strong>萨尔茨堡：</strong>7 月 29 日到 7 月 31 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="salzburg" href="#weather-cloud"></use></svg><span data-side-weather="salzburg">天气正在查询</span></span></li>
+          <li><strong>林茨：</strong>7 月 31 日到 8 月 2 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="linz" href="#weather-cloud"></use></svg><span data-side-weather="linz">天气正在查询</span></span></li>
+          <li><strong>毛特豪森：</strong>8 月 2 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="mauthausen" href="#weather-cloud"></use></svg><span data-side-weather="mauthausen">天气正在查询</span></span></li>
+          <li><strong>捷克布杰约维采：</strong>8 月 2 日到 8 月 4 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="budejovice" href="#weather-cloud"></use></svg><span data-side-weather="budejovice">天气正在查询</span></span></li>
+          <li><strong>布拉格：</strong>8 月 4 日到 8 月 8 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="prague" href="#weather-cloud"></use></svg><span data-side-weather="prague">天气正在查询</span></span></li>
         </ol>
       </aside>
     </section>
@@ -1352,6 +1405,34 @@
       return descriptions[code] || "天气待确认";
     }
 
+    function weatherIcon(code) {
+      if ([0, 1].includes(code)) {
+        return "sun";
+      }
+      if ([2, 3].includes(code)) {
+        return "cloud";
+      }
+      if ([45, 48].includes(code)) {
+        return "fog";
+      }
+      if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) {
+        return "rain";
+      }
+      if ([71, 73, 75].includes(code)) {
+        return "snow";
+      }
+      if ([95, 96, 99].includes(code)) {
+        return "storm";
+      }
+      return "cloud";
+    }
+
+    function updateWeatherIcon(city, iconName) {
+      document.querySelectorAll(`[data-map-weather-icon="${city}"], [data-side-weather-icon="${city}"]`).forEach((icon) => {
+        icon.setAttribute("href", `#weather-${iconName}`);
+      });
+    }
+
     async function loadWeather() {
       await Promise.all(Object.entries(weatherPlans).map(async ([city, plan]) => {
         const mapWeather = document.querySelector(`[data-map-weather="${city}"]`);
@@ -1378,9 +1459,10 @@
             const high = Math.round(daily.temperature_2m_max[index]);
             const low = Math.round(daily.temperature_2m_min[index]);
             const rain = daily.precipitation_probability_max[index];
-            const summary = describeWeather(daily.weather_code[index]);
+            const code = daily.weather_code[index];
+            const summary = describeWeather(code);
             const rainText = Number.isFinite(rain) ? `，降水概率 ${rain}%` : "";
-            return { text: `${formatTripDate(dateText)} ${summary}，${low} 到 ${high} 摄氏度${rainText}`, low, high, summary };
+            return { text: `${formatTripDate(dateText)} ${summary}，${low} 到 ${high} 摄氏度${rainText}`, low, high, summary, icon: weatherIcon(code) };
           }).filter(Boolean);
 
           const sideText = availableRows.length > 0
@@ -1389,12 +1471,15 @@
           const mapText = availableRows.length > 0
             ? `${[...new Set(availableRows.map((row) => row.summary))].slice(0, 2).join("、")}，${Math.min(...availableRows.map((row) => row.low))} 到 ${Math.max(...availableRows.map((row) => row.high))} 摄氏度`
             : "临近更新";
+          const iconName = availableRows.length > 0 ? availableRows[0].icon : "cloud";
 
           mapWeather.textContent = `天气：${mapText}`;
           sideWeather.textContent = `天气：${sideText}`;
+          updateWeatherIcon(city, iconName);
         } catch {
           mapWeather.textContent = "天气：暂时无法查询";
           sideWeather.textContent = "天气：暂时无法查询";
+          updateWeatherIcon(city, "cloud");
         }
       }));
     }
