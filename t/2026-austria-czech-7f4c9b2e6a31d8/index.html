@@ -529,6 +529,91 @@
       padding-left: 18px;
     }
 
+    .assistant-panel {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .assistant-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 12px;
+    }
+
+    .assistant-panel label {
+      display: grid;
+      gap: 6px;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .assistant-panel input,
+    .assistant-panel textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: inherit;
+      line-height: 1.5;
+    }
+
+    .assistant-panel textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .assistant-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .assistant-actions button {
+      min-height: 40px;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .assistant-actions button.secondary-button {
+      background: #eef3f1;
+      color: var(--green);
+      border: 1px solid var(--line);
+    }
+
+    .assistant-status {
+      min-height: 24px;
+      color: var(--muted);
+    }
+
+    .assistant-log {
+      display: grid;
+      gap: 10px;
+    }
+
+    .assistant-entry {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
+    .assistant-entry strong {
+      color: var(--green);
+    }
+
     .lodging-table,
     .ticket-table {
       width: 100%;
@@ -608,6 +693,10 @@
       .summary-grid,
       .feature-grid,
       .journey-map {
+        grid-template-columns: 1fr;
+      }
+
+      .assistant-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1091,6 +1180,31 @@
       </ul>
     </section>
 
+    <section class="section-head">
+      <h2>智能旅行助手</h2>
+      <p>输入访问码后可以直接提问，助手会根据这页行程回答；访问码只保存在你的浏览器里。</p>
+    </section>
+
+    <section class="assistant-panel" aria-label="智能旅行助手">
+      <div class="assistant-grid">
+        <label>
+          访问码
+          <input id="assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
+        </label>
+        <label>
+          问题
+          <textarea id="assistant-question" placeholder="例如：8 月 6 日去人骨教堂这天怎么安排更合理？"></textarea>
+        </label>
+      </div>
+      <div class="assistant-actions">
+        <button type="button" id="assistant-send">发送问题</button>
+        <button type="button" id="assistant-save-token" class="secondary-button">保存访问码</button>
+        <button type="button" id="assistant-clear" class="secondary-button">清空记录</button>
+      </div>
+      <p class="assistant-status" id="assistant-status"></p>
+      <div class="assistant-log" id="assistant-log" aria-label="助手回答记录"></div>
+    </section>
+
     <section class="sources">
       <h2>来源</h2>
       <ul>
@@ -1111,6 +1225,14 @@
     </section>
   </main>
   <script>
+    const assistantEndpoint = "https://vuwqcxqokoeo23yei6bw2mvjnu0yiqyv.lambda-url.us-west-2.on.aws/";
+    const assistantTokenKey = "austria-czech-assistant-token";
+    const assistantConversationKey = "austria-czech-assistant-conversation";
+    const assistantToken = document.getElementById("assistant-token");
+    const assistantQuestion = document.getElementById("assistant-question");
+    const assistantStatus = document.getElementById("assistant-status");
+    const assistantLog = document.getElementById("assistant-log");
+
     const weatherPlans = {
       salzburg: {
         latitude: 47.8095,
@@ -1139,6 +1261,8 @@
       }
     };
 
+    assistantToken.value = localStorage.getItem(assistantTokenKey) || "";
+
     document.querySelectorAll(".items li:not(.items-header)").forEach((item) => {
       const priceCell = document.createElement("span");
       const link = item.dataset.link;
@@ -1157,6 +1281,111 @@
       }
 
       item.append(priceCell);
+    });
+
+    function assistantMessage(message) {
+      assistantStatus.textContent = message;
+    }
+
+    function readAssistantConversation() {
+      try {
+        return JSON.parse(localStorage.getItem(assistantConversationKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function writeAssistantConversation(items) {
+      localStorage.setItem(assistantConversationKey, JSON.stringify(items.slice(-12)));
+    }
+
+    function renderAssistantConversation() {
+      const items = readAssistantConversation();
+      assistantLog.innerHTML = "";
+
+      items.slice().reverse().forEach((item) => {
+        const entry = document.createElement("article");
+        entry.className = "assistant-entry";
+
+        const questionTitle = document.createElement("strong");
+        questionTitle.textContent = "问题";
+        const questionText = document.createElement("p");
+        questionText.textContent = item.question;
+
+        const answerTitle = document.createElement("strong");
+        answerTitle.textContent = "回答";
+        const answerText = document.createElement("p");
+        answerText.textContent = item.answer;
+
+        entry.append(questionTitle, questionText, answerTitle, answerText);
+        assistantLog.append(entry);
+      });
+    }
+
+    function tripContext() {
+      const clone = document.querySelector("main").cloneNode(true);
+      clone.querySelector(".assistant-panel")?.remove();
+      return clone.innerText.replace(/\n{3,}/g, "\n\n").trim();
+    }
+
+    renderAssistantConversation();
+
+    document.getElementById("assistant-save-token").addEventListener("click", () => {
+      localStorage.setItem(assistantTokenKey, assistantToken.value.trim());
+      assistantMessage("访问码已保存在本机浏览器。");
+    });
+
+    document.getElementById("assistant-clear").addEventListener("click", () => {
+      localStorage.removeItem(assistantConversationKey);
+      renderAssistantConversation();
+      assistantMessage("记录已清空。");
+    });
+
+    document.getElementById("assistant-send").addEventListener("click", async () => {
+      const token = assistantToken.value.trim();
+      const question = assistantQuestion.value.trim();
+
+      if (!token) {
+        assistantMessage("请先输入访问码。");
+        return;
+      }
+
+      if (!question) {
+        assistantMessage("请先输入问题。");
+        return;
+      }
+
+      localStorage.setItem(assistantTokenKey, token);
+      assistantMessage("正在询问智能助手。");
+
+      try {
+        const response = await fetch(assistantEndpoint, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-travel-assistant-token": token
+          },
+          body: JSON.stringify({
+            question,
+            tripContext: tripContext(),
+            conversation: readAssistantConversation()
+          })
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || "请求失败。");
+        }
+
+        const items = readAssistantConversation();
+        items.push({ question, answer: result.answer, savedAt: new Date().toISOString() });
+        writeAssistantConversation(items);
+        renderAssistantConversation();
+        assistantQuestion.value = "";
+        assistantMessage("已收到回答。");
+      } catch (error) {
+        assistantMessage(error.message || "暂时无法连接智能助手。");
+      }
     });
 
     function formatTripDate(dateText) {
