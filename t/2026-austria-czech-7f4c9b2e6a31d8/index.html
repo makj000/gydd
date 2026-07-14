@@ -161,7 +161,7 @@
 
     .journey-map {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 260px;
+      grid-template-columns: 1fr;
       gap: 18px;
       align-items: stretch;
       margin-bottom: 24px;
@@ -202,6 +202,19 @@
       fill: var(--muted);
       font-size: 12px;
       font-weight: 700;
+    }
+
+    .map-label-box {
+      fill: rgba(255, 255, 255, 0.92);
+      stroke: var(--line);
+      stroke-width: 1;
+    }
+
+    .map-leader {
+      fill: none;
+      stroke: rgba(23, 32, 42, 0.38);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 4;
     }
 
     .map-weather-icon {
@@ -842,59 +855,42 @@
           <circle class="map-point" cx="570" cy="172" r="11"></circle>
           <circle class="map-point" cx="682" cy="138" r="11"></circle>
 
-          <text class="map-label" x="130" y="258">萨尔茨堡</text>
-          <text class="map-date" x="130" y="278">7 月 29 日到 7 月 31 日</text>
-          <svg class="map-weather-icon" x="130" y="284" width="16" height="16"><use data-map-weather-icon="salzburg" href="#weather-cloud"></use></svg>
-          <text class="map-note" x="130" y="296" data-map-weather="salzburg">天气：正在查询</text>
-          <text class="map-label" x="295" y="230">林茨</text>
-          <text class="map-date" x="295" y="250">7 月 31 日到 8 月 2 日</text>
-          <svg class="map-weather-icon" x="295" y="256" width="16" height="16"><use data-map-weather-icon="linz" href="#weather-cloud"></use></svg>
-          <text class="map-note" x="295" y="268" data-map-weather="linz">天气：正在查询</text>
-          <text class="map-label" x="365" y="178">毛特豪森</text>
-          <text class="map-date" x="365" y="198">8 月 2 日</text>
-          <svg class="map-weather-icon" x="365" y="204" width="16" height="16"><use data-map-weather-icon="mauthausen" href="#weather-cloud"></use></svg>
-          <text class="map-note" x="365" y="216" data-map-weather="mauthausen">天气：正在查询</text>
-          <text class="map-label" x="494" y="142">捷克布杰约维采</text>
-          <text class="map-date" x="494" y="162">8 月 2 日到 8 月 4 日</text>
-          <svg class="map-weather-icon" x="494" y="168" width="16" height="16"><use data-map-weather-icon="budejovice" href="#weather-cloud"></use></svg>
-          <text class="map-note" x="494" y="180" data-map-weather="budejovice">天气：正在查询</text>
-          <text class="map-label" x="704" y="118">布拉格</text>
-          <text class="map-date" x="704" y="138">8 月 4 日到 8 月 8 日</text>
-          <svg class="map-weather-icon" x="704" y="144" width="16" height="16"><use data-map-weather-icon="prague" href="#weather-cloud"></use></svg>
-          <text class="map-note" x="704" y="156" data-map-weather="prague">天气：正在查询</text>
-          <text class="map-note" x="42" y="386">示意地图：用于看路线顺序和停留日期，具体交通以车票和当天路线为准。</text>
+          <line class="map-leader" x1="198" y1="290" x2="142" y2="236"></line>
+          <rect class="map-label-box" x="54" y="190" width="220" height="78" rx="8"></rect>
+          <text class="map-label" x="70" y="214">萨尔茨堡</text>
+          <text class="map-date" x="70" y="235">7 月 29 日到 7 月 31 日</text>
+          <svg class="map-weather-icon" x="70" y="243" width="16" height="16"><use data-map-weather-icon="salzburg" href="#weather-cloud"></use></svg>
+          <text class="map-note" x="92" y="256" data-map-weather="salzburg">天气：正在查询</text>
+
+          <line class="map-leader" x1="332" y1="260" x2="332" y2="318"></line>
+          <rect class="map-label-box" x="246" y="318" width="204" height="78" rx="8"></rect>
+          <text class="map-label" x="262" y="342">林茨</text>
+          <text class="map-date" x="262" y="363">7 月 31 日到 8 月 2 日</text>
+          <svg class="map-weather-icon" x="262" y="371" width="16" height="16"><use data-map-weather-icon="linz" href="#weather-cloud"></use></svg>
+          <text class="map-note" x="284" y="384" data-map-weather="linz">天气：正在查询</text>
+
+          <line class="map-leader" x1="452" y1="210" x2="392" y2="124"></line>
+          <rect class="map-label-box" x="300" y="70" width="194" height="78" rx="8"></rect>
+          <text class="map-label" x="316" y="94">毛特豪森</text>
+          <text class="map-date" x="316" y="115">8 月 2 日</text>
+          <svg class="map-weather-icon" x="316" y="123" width="16" height="16"><use data-map-weather-icon="mauthausen" href="#weather-cloud"></use></svg>
+          <text class="map-note" x="338" y="136" data-map-weather="mauthausen">天气：正在查询</text>
+
+          <line class="map-leader" x1="570" y1="172" x2="610" y2="258"></line>
+          <rect class="map-label-box" x="494" y="258" width="246" height="78" rx="8"></rect>
+          <text class="map-label" x="510" y="282">捷克布杰约维采</text>
+          <text class="map-date" x="510" y="303">8 月 2 日到 8 月 4 日</text>
+          <svg class="map-weather-icon" x="510" y="311" width="16" height="16"><use data-map-weather-icon="budejovice" href="#weather-cloud"></use></svg>
+          <text class="map-note" x="532" y="324" data-map-weather="budejovice">天气：正在查询</text>
+
+          <line class="map-leader" x1="682" y1="138" x2="742" y2="78"></line>
+          <rect class="map-label-box" x="648" y="26" width="190" height="78" rx="8"></rect>
+          <text class="map-label" x="664" y="50">布拉格</text>
+          <text class="map-date" x="664" y="71">8 月 4 日到 8 月 8 日</text>
+          <svg class="map-weather-icon" x="664" y="79" width="16" height="16"><use data-map-weather-icon="prague" href="#weather-cloud"></use></svg>
+          <text class="map-note" x="686" y="92" data-map-weather="prague">天气：正在查询</text>
         </svg>
       </div>
-      <aside class="map-side">
-        <h2>行程地图</h2>
-        <p class="note">从萨尔茨堡进入，向东到林茨，经过毛特豪森后进入捷克布杰约维采，最后在布拉格停留并返程。</p>
-        <ol>
-          <li><strong>萨尔茨堡：</strong>7 月 29 日到 7 月 31 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="salzburg" href="#weather-cloud"></use></svg><span data-side-weather="salzburg">天气正在查询</span></span></li>
-          <li><strong>林茨：</strong>7 月 31 日到 8 月 2 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="linz" href="#weather-cloud"></use></svg><span data-side-weather="linz">天气正在查询</span></span></li>
-          <li><strong>毛特豪森：</strong>8 月 2 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="mauthausen" href="#weather-cloud"></use></svg><span data-side-weather="mauthausen">天气正在查询</span></span></li>
-          <li><strong>捷克布杰约维采：</strong>8 月 2 日到 8 月 4 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="budejovice" href="#weather-cloud"></use></svg><span data-side-weather="budejovice">天气正在查询</span></span></li>
-          <li><strong>布拉格：</strong>8 月 4 日到 8 月 8 日；<span class="weather-chip"><svg class="inline-weather-icon"><use data-side-weather-icon="prague" href="#weather-cloud"></use></svg><span data-side-weather="prague">天气正在查询</span></span></li>
-        </ol>
-      </aside>
-    </section>
-
-    <section class="section-head">
-      <h2>路线</h2>
-      <p>按你的住宿表安排：7 月 29 日约 14:00 抵达萨尔茨堡，7 月 31 日前往林茨，8 月 2 日前往捷克布杰约维采，8 月 4 日入住布拉格，8 月 8 日返程。</p>
-    </section>
-
-    <section class="route" aria-label="路线概览">
-      <div class="route-step"><b>7 月 29 日</b><span>萨尔茨堡</span></div>
-      <div class="route-step"><b>7 月 30 日</b><span>萨尔茨堡</span></div>
-      <div class="route-step"><b>7 月 31 日</b><span>萨尔茨堡到林茨</span></div>
-      <div class="route-step"><b>8 月 1 日</b><span>林茨</span></div>
-      <div class="route-step"><b>8 月 2 日</b><span>捷克布杰约维采</span></div>
-      <div class="route-step"><b>8 月 3 日</b><span>捷克布杰约维采</span></div>
-      <div class="route-step"><b>8 月 4 日</b><span>布拉格</span></div>
-      <div class="route-step"><b>8 月 5 日</b><span>布拉格</span></div>
-      <div class="route-step"><b>8 月 6 日</b><span>布拉格</span></div>
-      <div class="route-step"><b>8 月 7 日</b><span>布拉格</span></div>
-      <div class="route-step"><b>8 月 8 日</b><span>返程航班</span></div>
     </section>
 
     <section class="section-head">
@@ -921,7 +917,7 @@
         <tr><td>8 月 3 日</td><td>捷克布杰约维采</td><td>捷克布杰约维采</td><td>捷克布杰约维采</td><td>百威酿酒厂参观预约</td></tr>
         <tr><td>8 月 4 日</td><td>捷克布杰约维采</td><td>布拉格</td><td>布拉格</td><td>城际交通票；三世纪餐厅可订桌</td></tr>
         <tr><td>8 月 5 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td>布拉格城堡主线路门票；晚餐可订桌</td></tr>
-        <tr><td>8 月 6 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td>老市政厅塔楼门票可提前买；卢浮咖啡馆和科尔科夫纳可订桌</td></tr>
+        <tr><td>8 月 6 日</td><td>库特纳霍拉</td><td>布拉格</td><td>布拉格</td><td>人骨教堂限时票需提前买；塞德莱茨大教堂周五到周日关闭，周四安排更稳</td></tr>
         <tr><td>8 月 7 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td>无；弹性散步日</td></tr>
         <tr><td>8 月 8 日</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td>机场交通；航班值机</td></tr>
       </tbody>
@@ -1108,24 +1104,21 @@
       <article class="day">
         <div class="date">
           <strong>8 月 6 日，周四</strong>
-          <span>布拉格老城</span>
+          <span>库特纳霍拉人骨教堂</span>
           <div class="city">布拉格</div>
-          <div class="day-photo"><img src="photos/clock.jpg" alt="布拉格天文钟"></div>
+          <div class="day-photo"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"></div>
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-booking" data-price="塔楼 350 捷克克朗起"><span class="time">09:30</span><span>老城广场、天文钟、老市政厅。</span></li>
-          <li data-price="入内规则复核" data-link="https://www.tyn.cz/"><span class="time">11:30</span><span>泰恩教堂。</span></li>
-          <li class="needs-booking" data-price="餐费另计"><span class="time">午餐</span><span>卢浮咖啡馆或其他经典咖啡馆。</span></li>
-          <li data-price="按临时项目"><span class="time">下午</span><span>留作博物馆、购物或休息弹性时间。</span></li>
+          <li data-price="交通另计"><span class="time">上午</span><span>从布拉格出发前往库特纳霍拉，优先安排早一点的火车。</span></li>
+          <li class="needs-booking" data-price="成人 220 捷克克朗" data-link="https://sedlec.info/en/"><span class="time">10:30</span><span>人骨教堂；官网说明容量有限，门票需要按具体日期和时间提前购买。</span></li>
+          <li data-price="午餐另计"><span class="time">午餐</span><span>在库特纳霍拉简单午餐；如果体力允许，再看圣芭芭拉教堂外观或城内短走。</span></li>
+          <li data-price="交通另计"><span class="time">下午</span><span>返回布拉格。塞德莱茨大教堂周五、周六、周日可能关闭，所以这天不要推迟到周末。</span></li>
           <li class="needs-booking" data-price="餐费另计"><span class="time">晚餐</span><span>如果近期评价仍好，可去科尔科夫纳餐厅吃捷克菜和啤酒。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/clock.jpg" alt="天文钟"><span>天文钟 <small class="ticket-note">门票：外观免费，入内老市政厅另计</small></span></figure>
-          <figure class="place-card"><img src="photos/clock.jpg" alt="老市政厅塔楼"><span>老市政厅塔楼 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票：基础票成人 350 捷克克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/clock.jpg" alt="老城广场"><span>老城广场 <small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="泰恩教堂"><span>泰恩教堂 <small class="ticket-note">门票：开放时间和捐赠复核</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="卢浮咖啡馆"><span>卢浮咖啡馆 <em class="booking-tag">建议订桌</em><small class="ticket-note">门票：无</small></span></figure>
+          <figure class="place-card"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"><span>人骨教堂 <em class="booking-tag">限时票提前买</em><small class="ticket-note">门票：成人 220 捷克克朗</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="库特纳霍拉"><span>库特纳霍拉 <small class="ticket-note">门票：公共区域免费，场馆另计</small></span></figure>
           <figure class="place-card"><img src="photos/prague.jpg" alt="科尔科夫纳餐厅"><span>科尔科夫纳餐厅 <em class="booking-tag">建议订桌</em><small class="ticket-note">门票：无</small></span></figure>
         </div>
       </article>
@@ -1192,6 +1185,7 @@
         <li>萨尔茨堡抵达和布拉格离境的机场交通细节。</li>
         <li>城际交通：萨尔茨堡到林茨、林茨到捷克布杰约维采、捷克布杰约维采到布拉格。</li>
         <li>百威酿酒厂参观时间和预约。</li>
+        <li>人骨教堂 8 月 6 日限时票；出发前复核周五到周日关闭提醒是否仍适用。</li>
         <li>确认海尔布伦、萨尔茨堡城堡、毛特豪森、布拉格城堡的最新开放时间和票务规则。</li>
         <li>两晚卡比特尔广场放映前确认天气，并准备夜间薄外套。</li>
       </ul>
@@ -1209,6 +1203,7 @@
         <li>布拉格城堡主线路：建议提前购票或至少提前确认票种，8 月 5 日上午直接入场更稳。</li>
         <li>毛特豪森纪念馆：如果需要导览，建议提前预约；如果自助参观，也要提前确认开放时间和交通。</li>
         <li>百威酿酒厂：行程里安排 8 月 3 日 14:00，建议提前预约参观时段。</li>
+        <li>人骨教堂：官网说明容量有限，票需要按具体日期和时间提前购买；8 月 6 日周四优先锁定。</li>
         <li>布拉格热门餐厅：三世纪餐厅、卢浮咖啡馆、科尔科夫纳餐厅如要固定用餐时间，建议提前订桌。</li>
       </ul>
     </section>
@@ -1256,6 +1251,7 @@
         <li><a href="https://www.hrad.cz/en/prague-castle-for-visitors/tickets">布拉格城堡官网票务页</a></li>
         <li><a href="https://prague.eu/en/objevujte/old-town-hall-with-astronomical-clock-staromestska-radnice-s-orlojem">布拉格老市政厅官网票务页</a></li>
         <li><a href="https://www.mauthausen-memorial.org/en/Visit/Visitor-Information/Opening-times-and-prices">毛特豪森纪念馆官网票务页</a></li>
+        <li><a href="https://sedlec.info/en/">人骨教堂和塞德莱茨官网</a></li>
         <li><a href="https://www.oebb.at/en/">奥地利铁路官网</a></li>
         <li><a href="https://open-meteo.com/">天气预测数据服务</a></li>
       </ul>
