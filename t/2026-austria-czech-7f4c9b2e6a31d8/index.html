@@ -796,14 +796,19 @@
 
           <text class="map-label" x="130" y="258">萨尔茨堡</text>
           <text class="map-date" x="130" y="278">7 月 29 日到 7 月 31 日</text>
+          <text class="map-note" x="130" y="296" data-map-weather="salzburg">天气：正在查询</text>
           <text class="map-label" x="295" y="230">林茨</text>
           <text class="map-date" x="295" y="250">7 月 31 日到 8 月 2 日</text>
+          <text class="map-note" x="295" y="268" data-map-weather="linz">天气：正在查询</text>
           <text class="map-label" x="365" y="178">毛特豪森</text>
           <text class="map-date" x="365" y="198">8 月 2 日</text>
+          <text class="map-note" x="365" y="216" data-map-weather="mauthausen">天气：正在查询</text>
           <text class="map-label" x="494" y="142">捷克布杰约维采</text>
           <text class="map-date" x="494" y="162">8 月 2 日到 8 月 4 日</text>
+          <text class="map-note" x="494" y="180" data-map-weather="budejovice">天气：正在查询</text>
           <text class="map-label" x="704" y="118">布拉格</text>
           <text class="map-date" x="704" y="138">8 月 4 日到 8 月 8 日</text>
+          <text class="map-note" x="704" y="156" data-map-weather="prague">天气：正在查询</text>
           <text class="map-note" x="42" y="386">示意地图：用于看路线顺序和停留日期，具体交通以车票和当天路线为准。</text>
         </svg>
       </div>
@@ -811,11 +816,11 @@
         <h2>行程地图</h2>
         <p class="note">从萨尔茨堡进入，向东到林茨，经过毛特豪森后进入捷克布杰约维采，最后在布拉格停留并返程。</p>
         <ol>
-          <li><strong>萨尔茨堡：</strong>7 月 29 日到 7 月 31 日</li>
-          <li><strong>林茨：</strong>7 月 31 日到 8 月 2 日</li>
-          <li><strong>毛特豪森：</strong>8 月 2 日</li>
-          <li><strong>捷克布杰约维采：</strong>8 月 2 日到 8 月 4 日</li>
-          <li><strong>布拉格：</strong>8 月 4 日到 8 月 8 日</li>
+          <li><strong>萨尔茨堡：</strong>7 月 29 日到 7 月 31 日；<span data-side-weather="salzburg">天气正在查询</span></li>
+          <li><strong>林茨：</strong>7 月 31 日到 8 月 2 日；<span data-side-weather="linz">天气正在查询</span></li>
+          <li><strong>毛特豪森：</strong>8 月 2 日；<span data-side-weather="mauthausen">天气正在查询</span></li>
+          <li><strong>捷克布杰约维采：</strong>8 月 2 日到 8 月 4 日；<span data-side-weather="budejovice">天气正在查询</span></li>
+          <li><strong>布拉格：</strong>8 月 4 日到 8 月 8 日；<span data-side-weather="prague">天气正在查询</span></li>
         </ol>
       </aside>
     </section>
@@ -1199,6 +1204,7 @@
         <li><a href="https://prague.eu/en/objevujte/old-town-hall-with-astronomical-clock-staromestska-radnice-s-orlojem">布拉格老市政厅官网票务页</a></li>
         <li><a href="https://www.mauthausen-memorial.org/en/Visit/Visitor-Information/Opening-times-and-prices">毛特豪森纪念馆官网票务页</a></li>
         <li><a href="https://www.oebb.at/en/">奥地利铁路官网</a></li>
+        <li><a href="https://open-meteo.com/">天气预测数据服务</a></li>
       </ul>
     </section>
   </main>
@@ -1209,6 +1215,33 @@
     const requestStatus = document.getElementById("request-status");
     const storageKey = "austria-czech-page-change-request";
     const dialogueKey = "austria-czech-page-dialogue-log";
+    const weatherPlans = {
+      salzburg: {
+        latitude: 47.8095,
+        longitude: 13.055,
+        dates: ["2026-07-29", "2026-07-30", "2026-07-31"]
+      },
+      linz: {
+        latitude: 48.3069,
+        longitude: 14.2858,
+        dates: ["2026-07-31", "2026-08-01", "2026-08-02"]
+      },
+      mauthausen: {
+        latitude: 48.2567,
+        longitude: 14.5012,
+        dates: ["2026-08-02"]
+      },
+      budejovice: {
+        latitude: 48.9745,
+        longitude: 14.4743,
+        dates: ["2026-08-02", "2026-08-03", "2026-08-04"]
+      },
+      prague: {
+        latitude: 50.0755,
+        longitude: 14.4378,
+        dates: ["2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-08"]
+      }
+    };
 
     requestBox.value = localStorage.getItem(storageKey) || "";
     responseBox.value = "";
@@ -1286,7 +1319,88 @@
       ].join("\n");
     }
 
+    function formatTripDate(dateText) {
+      const date = new Date(`${dateText}T00:00:00`);
+      return `${date.getMonth() + 1} 月 ${date.getDate()} 日`;
+    }
+
+    function describeWeather(code) {
+      const descriptions = {
+        0: "晴",
+        1: "大致晴",
+        2: "局部多云",
+        3: "多云",
+        45: "有雾",
+        48: "雾凇",
+        51: "小毛毛雨",
+        53: "毛毛雨",
+        55: "较强毛毛雨",
+        61: "小雨",
+        63: "中雨",
+        65: "大雨",
+        71: "小雪",
+        73: "中雪",
+        75: "大雪",
+        80: "阵雨",
+        81: "较强阵雨",
+        82: "强阵雨",
+        95: "雷阵雨",
+        96: "雷阵雨伴冰雹",
+        99: "强雷阵雨伴冰雹"
+      };
+
+      return descriptions[code] || "天气待确认";
+    }
+
+    async function loadWeather() {
+      await Promise.all(Object.entries(weatherPlans).map(async ([city, plan]) => {
+        const mapWeather = document.querySelector(`[data-map-weather="${city}"]`);
+        const sideWeather = document.querySelector(`[data-side-weather="${city}"]`);
+        const url = new URL("https://api.open-meteo.com/v1/forecast");
+        url.searchParams.set("latitude", plan.latitude);
+        url.searchParams.set("longitude", plan.longitude);
+        url.searchParams.set("daily", "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max");
+        url.searchParams.set("temperature_unit", "celsius");
+        url.searchParams.set("timezone", "auto");
+        url.searchParams.set("forecast_days", "16");
+
+        try {
+          const weatherResponse = await fetch(url);
+          const data = await weatherResponse.json();
+          const daily = data.daily || {};
+          const times = daily.time || [];
+          const availableRows = plan.dates.map((dateText) => {
+            const index = times.indexOf(dateText);
+            if (index === -1) {
+              return null;
+            }
+
+            const high = Math.round(daily.temperature_2m_max[index]);
+            const low = Math.round(daily.temperature_2m_min[index]);
+            const rain = daily.precipitation_probability_max[index];
+            const summary = describeWeather(daily.weather_code[index]);
+            const rainText = Number.isFinite(rain) ? `，降水概率 ${rain}%` : "";
+            return { text: `${formatTripDate(dateText)} ${summary}，${low} 到 ${high} 摄氏度${rainText}`, low, high, summary };
+          }).filter(Boolean);
+
+          const sideText = availableRows.length > 0
+            ? availableRows.map((row) => row.text).join("；")
+            : "临近更新";
+          const mapText = availableRows.length > 0
+            ? `${[...new Set(availableRows.map((row) => row.summary))].slice(0, 2).join("、")}，${Math.min(...availableRows.map((row) => row.low))} 到 ${Math.max(...availableRows.map((row) => row.high))} 摄氏度`
+            : "临近更新";
+
+          mapWeather.textContent = `天气：${mapText}`;
+          sideWeather.textContent = `天气：${sideText}`;
+        } catch {
+          mapWeather.textContent = "天气：暂时无法查询";
+          sideWeather.textContent = "天气：暂时无法查询";
+        }
+      }));
+    }
+
     renderDialogue();
+    loadWeather();
 
     document.getElementById("save-request").addEventListener("click", () => {
       localStorage.setItem(storageKey, requestBox.value.trim());
