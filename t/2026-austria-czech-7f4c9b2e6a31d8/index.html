@@ -529,6 +529,52 @@
       padding-left: 18px;
     }
 
+    .version-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .version-list li {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
+    .version-text {
+      display: grid;
+      gap: 4px;
+    }
+
+    .version-text strong {
+      color: var(--green);
+    }
+
+    .rollback-button {
+      min-width: 76px;
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .version-note {
+      min-height: 24px;
+      color: var(--muted);
+    }
+
     .assistant-panel {
       display: grid;
       gap: 14px;
@@ -697,6 +743,10 @@
       }
 
       .assistant-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .version-list li {
         grid-template-columns: 1fr;
       }
 
@@ -1208,13 +1258,31 @@
 
     <section class="checklist">
       <h2>当前稳定点</h2>
-      <ul>
-        <li>当前基准版本：第八版，已移除过时概览卡片，并保留智能旅行助手。</li>
-        <li>上一个重要版本：第七版，新增真实智能旅行助手。</li>
-        <li>地图和人骨教堂版本：第六版，调整地图标签并加入 8 月 6 日人骨教堂。</li>
-        <li>回滚方法：在站点仓库运行回滚脚本，选择要恢复的版本，检查后提交并发布。</li>
-        <li>建议规则：如果只是小改错，优先回到第八版；如果智能助手出问题，回到第六版。</li>
+      <ul class="version-list">
+        <li>
+          <span class="version-text">
+            <strong>第八版</strong>
+            <span>当前基准版本，已移除过时概览卡片，并保留智能旅行助手。</span>
+          </span>
+          <button type="button" class="rollback-button" data-version="8">回滚</button>
+        </li>
+        <li>
+          <span class="version-text">
+            <strong>第七版</strong>
+            <span>上一个重要版本，新增真实智能旅行助手。</span>
+          </span>
+          <button type="button" class="rollback-button" data-version="7">回滚</button>
+        </li>
+        <li>
+          <span class="version-text">
+            <strong>第六版</strong>
+            <span>地图和人骨教堂版本，调整地图标签并加入 8 月 6 日人骨教堂。</span>
+          </span>
+          <button type="button" class="rollback-button" data-version="6">回滚</button>
+        </li>
       </ul>
+      <p class="version-note" id="version-note">回滚按钮会复制对应命令；在站点仓库运行后提交并发布。</p>
+      <p>建议规则：如果只是小改错，优先回到第八版；如果智能助手出问题，回到第六版。</p>
     </section>
 
     <section class="sources">
@@ -1244,6 +1312,17 @@
     const assistantQuestion = document.getElementById("assistant-question");
     const assistantStatus = document.getElementById("assistant-status");
     const assistantLog = document.getElementById("assistant-log");
+    const versionNote = document.getElementById("version-note");
+    const rollbackCommands = {
+      8: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 8\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 8\"\ngit push origin main",
+      7: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 7\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 7\"\ngit push origin main",
+      6: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 6\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 6\"\ngit push origin main"
+    };
+    const rollbackVersionNames = {
+      8: "第八版",
+      7: "第七版",
+      6: "第六版"
+    };
 
     const weatherPlans = {
       salzburg: {
@@ -1341,6 +1420,20 @@
     }
 
     renderAssistantConversation();
+
+    document.querySelectorAll(".rollback-button").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const version = button.dataset.version;
+        const command = rollbackCommands[version];
+
+        try {
+          await navigator.clipboard.writeText(command);
+          versionNote.textContent = `已复制${rollbackVersionNames[version]}回滚命令，请在站点仓库运行后提交并发布。`;
+        } catch {
+          versionNote.textContent = "浏览器暂时不能复制，请在本机站点仓库运行回滚脚本。";
+        }
+      });
+    });
 
     document.getElementById("assistant-save-token").addEventListener("click", () => {
       localStorage.setItem(assistantTokenKey, assistantToken.value.trim());
