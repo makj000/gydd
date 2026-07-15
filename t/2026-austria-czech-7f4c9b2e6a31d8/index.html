@@ -1015,7 +1015,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：22</div>
+    <div class="page-version" aria-label="网页版本">网页版本：23</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1910,11 +1910,16 @@
         const items = readAssistantConversation();
         items.push({ question, answer: result.answer, userName: result.userName || "你", savedAt: new Date().toISOString() });
         writeAssistantConversation(items);
-        lastAssistantExchange = { question, answer: result.answer };
-        assistantApply.hidden = false;
+        if (result.canApplyChange) {
+          lastAssistantExchange = { question, answer: result.answer };
+          assistantApply.hidden = false;
+        } else {
+          lastAssistantExchange = null;
+          assistantApply.hidden = true;
+        }
         renderAssistantConversation();
         assistantQuestion.value = "";
-        assistantMessage("已收到回答。");
+        assistantMessage(result.canApplyChange ? "已收到回答；如要更新页面，请确认改动。" : "已收到回答。");
       } catch (error) {
         assistantMessage(error.message || "暂时无法连接智能助手。");
       }
