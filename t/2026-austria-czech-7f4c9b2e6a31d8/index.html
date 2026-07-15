@@ -1015,7 +1015,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：21</div>
+    <div class="page-version" aria-label="网页版本">网页版本：22</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1631,8 +1631,10 @@
       return new Intl.DateTimeFormat("zh-CN", {
         month: "numeric",
         day: "numeric",
+        hour12: true,
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
+        timeZoneName: "short"
       }).format(date);
     }
 
@@ -1659,7 +1661,7 @@
         meta.textContent = `时间：${formatAssistantTime(item.savedAt)}`;
 
         const questionTitle = document.createElement("strong");
-        questionTitle.textContent = "你";
+        questionTitle.textContent = `${item.userName || "你"}：`;
         const questionText = document.createElement("p");
         questionText.textContent = item.question;
         const questionLine = document.createElement("div");
@@ -1667,7 +1669,7 @@
         questionLine.append(questionTitle, questionText);
 
         const answerTitle = document.createElement("strong");
-        answerTitle.textContent = "智能助手";
+        answerTitle.textContent = "智能助手：";
         const answerText = document.createElement("p");
         answerText.textContent = item.answer;
         const answerLine = document.createElement("div");
@@ -1906,7 +1908,7 @@
         }, token);
 
         const items = readAssistantConversation();
-        items.push({ question, answer: result.answer, savedAt: new Date().toISOString() });
+        items.push({ question, answer: result.answer, userName: result.userName || "你", savedAt: new Date().toISOString() });
         writeAssistantConversation(items);
         lastAssistantExchange = { question, answer: result.answer };
         assistantApply.hidden = false;
