@@ -207,19 +207,19 @@
 
     .map-label {
       fill: var(--ink);
-      font-size: 15px;
+      font-size: var(--map-label-size, 15px);
       font-weight: 900;
     }
 
     .map-date {
       fill: var(--muted);
-      font-size: 13px;
+      font-size: var(--map-date-size, 13px);
       font-weight: 800;
     }
 
     .map-note {
       fill: var(--muted);
-      font-size: 12px;
+      font-size: var(--map-note-size, 12px);
       font-weight: 700;
     }
 
@@ -983,7 +983,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：17</div>
+    <div class="page-version" aria-label="网页版本">网页版本：18</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1548,6 +1548,24 @@
     }
 
     linkTripPhotos();
+
+    function keepMapTextReadable() {
+      const mapSvg = document.querySelector(".map-canvas svg");
+
+      if (!mapSvg) {
+        return;
+      }
+
+      const renderedWidth = mapSvg.getBoundingClientRect().width || 860;
+      const scale = Math.max(0.52, Math.min(1, renderedWidth / 860));
+      const multiplier = 1 / scale;
+      mapSvg.style.setProperty("--map-label-size", `${Math.round(15 * multiplier * 10) / 10}px`);
+      mapSvg.style.setProperty("--map-date-size", `${Math.round(13 * multiplier * 10) / 10}px`);
+      mapSvg.style.setProperty("--map-note-size", `${Math.round(12 * multiplier * 10) / 10}px`);
+    }
+
+    keepMapTextReadable();
+    window.addEventListener("resize", keepMapTextReadable);
 
     function assistantMessage(message) {
       assistantStatus.textContent = message;
