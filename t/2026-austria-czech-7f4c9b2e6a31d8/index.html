@@ -947,7 +947,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：14</div>
+    <div class="page-version" aria-label="网页版本">网页版本：15</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1515,14 +1515,14 @@
       const items = readAssistantConversation().slice().sort((a, b) => {
         const first = Date.parse(a.savedAt || "");
         const second = Date.parse(b.savedAt || "");
-        return (Number.isNaN(first) ? 0 : first) - (Number.isNaN(second) ? 0 : second);
+        return (Number.isNaN(second) ? 0 : second) - (Number.isNaN(first) ? 0 : first);
       });
       assistantLog.innerHTML = "";
 
       items.forEach((item, index) => {
         const entry = document.createElement("article");
         entry.className = "assistant-entry";
-        const isNewest = index === items.length - 1;
+        const isNewest = index === 0;
         const shouldCollapse = !isNewest;
 
         if (shouldCollapse) {
