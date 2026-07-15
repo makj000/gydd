@@ -144,7 +144,7 @@
       z-index: 3;
       top: 20px;
       left: 20px;
-      width: min(430px, calc(100% - 40px));
+      width: min(560px, calc(100% - 40px));
       margin: 0;
       padding: 8px;
       background: rgba(255, 255, 255, 0.88);
@@ -154,7 +154,7 @@
     }
 
     .map-canvas {
-      min-height: 190px;
+      min-height: 247px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #eef3f1;
@@ -165,7 +165,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      min-height: 190px;
+      min-height: 247px;
     }
 
     .map-label {
@@ -692,7 +692,12 @@
       align-items: baseline;
     }
 
+    .assistant-line strong {
+      flex: 0 0 auto;
+    }
+
     .assistant-line p {
+      flex: 1 1 auto;
       margin: 0;
       min-width: 0;
     }
@@ -756,6 +761,15 @@
       border-bottom: 0;
     }
 
+    .lodging-table th:nth-child(2),
+    .lodging-table th:nth-child(3),
+    .lodging-table th:nth-child(4),
+    .lodging-table td:nth-child(2),
+    .lodging-table td:nth-child(3),
+    .lodging-table td:nth-child(4) {
+      white-space: nowrap;
+    }
+
     .sources {
       margin-top: 24px;
       padding: 18px;
@@ -801,13 +815,13 @@
       .journey-map {
         top: 12px;
         left: 12px;
-        width: min(320px, calc(100% - 24px));
+        width: min(416px, calc(100% - 24px));
         padding: 6px;
       }
 
       .map-canvas,
       .map-canvas svg {
-        min-height: 148px;
+        min-height: 192px;
       }
 
       .feature-grid,
@@ -998,7 +1012,7 @@
     <section class="days">
       <article class="day">
         <div class="date">
-          <strong>2026 年 7 月 29 日，周三</strong>
+          <strong>7 月 29 日，周三</strong>
           <span>抵达和第一场放映</span>
           <div class="city">萨尔茨堡</div>
           <div class="day-photo"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"></div>
@@ -1020,7 +1034,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 7 月 30 日，周四</strong>
+          <strong>7 月 30 日，周四</strong>
           <span>海尔布伦、城堡和第二场放映</span>
           <div class="city">萨尔茨堡</div>
           <div class="day-photo"><img src="photos/hellbrunn.jpg" alt="海尔布伦宫"></div>
@@ -1044,7 +1058,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 7 月 31 日，周五</strong>
+          <strong>7 月 31 日，周五</strong>
           <span>萨尔茨堡缓冲，然后去林茨</span>
           <div class="city">萨尔茨堡到林茨</div>
           <div class="day-photo"><img src="photos/linz.jpg" alt="林茨中央广场"></div>
@@ -1065,7 +1079,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 1 日，周六</strong>
+          <strong>8 月 1 日，周六</strong>
           <span>林茨城市日</span>
           <div class="city">林茨</div>
           <div class="day-photo"><img src="photos/postlingberg.jpg" alt="林茨登山火车"></div>
@@ -1086,7 +1100,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 2 日，周日</strong>
+          <strong>8 月 2 日，周日</strong>
           <span>毛特豪森，然后捷克布杰约维采</span>
           <div class="city">林茨到捷克布杰约维采</div>
           <div class="day-photo"><img src="photos/mauthausen.jpg" alt="毛特豪森纪念馆"></div>
@@ -1105,7 +1119,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 3 日，周一</strong>
+          <strong>8 月 3 日，周一</strong>
           <span>捷克布杰约维采</span>
           <div class="city">捷克布杰约维采</div>
           <div class="day-photo"><img src="photos/budejovice.jpg" alt="捷克布杰约维采广场"></div>
@@ -1126,7 +1140,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 4 日，周二</strong>
+          <strong>8 月 4 日，周二</strong>
           <span>转移到布拉格</span>
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/prague.jpg" alt="布拉格查理大桥"></div>
@@ -1147,7 +1161,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 5 日，周三</strong>
+          <strong>8 月 5 日，周三</strong>
           <span>布拉格城堡区</span>
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/stvitus.jpg" alt="圣维特大教堂"></div>
@@ -1170,7 +1184,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 6 日，周四</strong>
+          <strong>8 月 6 日，周四</strong>
           <span>库特纳霍拉人骨教堂</span>
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"></div>
@@ -1192,7 +1206,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 7 日，周五</strong>
+          <strong>8 月 7 日，周五</strong>
           <span>最后完整一天</span>
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/vltava.jpg" alt="布拉格伏尔塔瓦河"></div>
@@ -1214,7 +1228,7 @@
 
       <article class="day">
         <div class="date">
-          <strong>2026 年 8 月 8 日，周六</strong>
+          <strong>8 月 8 日，周六</strong>
           <span>返程</span>
           <div class="city">布拉格到北京</div>
           <div class="day-photo"><img src="photos/airport.jpg" alt="布拉格机场"></div>
