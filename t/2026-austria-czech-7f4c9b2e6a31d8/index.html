@@ -566,6 +566,37 @@
       color: var(--muted);
     }
 
+    .runtime-version-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .runtime-version-list li {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
+    .runtime-version-list button {
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #eef3f1;
+      color: var(--green);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
     .assistant-panel {
       display: grid;
       gap: 14px;
@@ -626,6 +657,10 @@
       background: #eef3f1;
       color: var(--green);
       border: 1px solid var(--line);
+    }
+
+    .assistant-actions button[hidden] {
+      display: none;
     }
 
     .assistant-status {
@@ -1267,6 +1302,7 @@
       </div>
       <div class="assistant-actions">
         <button type="button" id="assistant-send">发送问题</button>
+        <button type="button" id="assistant-apply" class="secondary-button" hidden>应用为新版</button>
         <button type="button" id="assistant-save-token" class="secondary-button">保存访问码</button>
         <button type="button" id="assistant-clear" class="secondary-button">清空记录</button>
       </div>
@@ -1305,6 +1341,8 @@
         </li>
       </ul>
       <p class="version-note" id="version-note">回滚按钮会复制对应命令；在站点仓库运行后提交并发布。</p>
+      <p class="version-note" id="runtime-version-status">正在读取页面运行版本。</p>
+      <ul class="runtime-version-list" id="runtime-version-list"></ul>
       <p>建议规则：如果只是小改错，优先回到 8；如果智能助手出问题，回到 6。</p>
     </section>
 
@@ -1333,9 +1371,13 @@
     const assistantConversationKey = "austria-czech-assistant-conversation";
     const assistantToken = document.getElementById("assistant-token");
     const assistantQuestion = document.getElementById("assistant-question");
+    const assistantApply = document.getElementById("assistant-apply");
     const assistantStatus = document.getElementById("assistant-status");
     const assistantLog = document.getElementById("assistant-log");
     const versionNote = document.getElementById("version-note");
+    const runtimeVersionStatus = document.getElementById("runtime-version-status");
+    const runtimeVersionList = document.getElementById("runtime-version-list");
+    let lastAssistantExchange = null;
     const rollbackCommands = {
       8: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 8\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 8\"\ngit push origin main",
       7: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 7\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 7\"\ngit push origin main",
@@ -1377,25 +1419,33 @@
 
     assistantToken.value = localStorage.getItem(assistantTokenKey) || "";
 
-    document.querySelectorAll(".items li:not(.items-header)").forEach((item) => {
-      const priceCell = document.createElement("span");
-      const link = item.dataset.link;
-      priceCell.className = "price-cell";
+    function fillPriceCells(root = document) {
+      root.querySelectorAll(".items li:not(.items-header)").forEach((item) => {
+        if (item.querySelector(":scope > .price-cell")) {
+          return;
+        }
 
-      if (link) {
-        priceCell.append(document.createTextNode(item.dataset.price));
-        const officialLink = document.createElement("a");
-        officialLink.href = link;
-        officialLink.target = "_blank";
-        officialLink.rel = "noreferrer";
-        officialLink.textContent = "官网";
-        priceCell.append(officialLink);
-      } else {
-        priceCell.textContent = item.dataset.price;
-      }
+        const priceCell = document.createElement("span");
+        const link = item.dataset.link;
+        priceCell.className = "price-cell";
 
-      item.append(priceCell);
-    });
+        if (link) {
+          priceCell.append(document.createTextNode(item.dataset.price));
+          const officialLink = document.createElement("a");
+          officialLink.href = link;
+          officialLink.target = "_blank";
+          officialLink.rel = "noreferrer";
+          officialLink.textContent = "官网";
+          priceCell.append(officialLink);
+        } else {
+          priceCell.textContent = item.dataset.price;
+        }
+
+        item.append(priceCell);
+      });
+    }
+
+    fillPriceCells();
 
     function assistantMessage(message) {
       assistantStatus.textContent = message;
@@ -1471,7 +1521,93 @@
       return clone.innerText.replace(/\n{3,}/g, "\n\n").trim();
     }
 
+    function editableTripHtml() {
+      return {
+        lodgingBody: document.querySelector(".lodging-table tbody").innerHTML,
+        daysHtml: document.querySelector(".days").innerHTML
+      };
+    }
+
+    function applyTripState(state) {
+      if (state.lodgingBody) {
+        document.querySelector(".lodging-table tbody").innerHTML = state.lodgingBody;
+      }
+
+      if (state.daysHtml) {
+        document.querySelector(".days").innerHTML = state.daysHtml;
+      }
+
+      fillPriceCells();
+      renderRuntimeVersions(state);
+    }
+
+    function renderRuntimeVersions(state) {
+      runtimeVersionStatus.textContent = `当前运行版本：${state.version}。${state.summary || ""}`;
+      runtimeVersionList.innerHTML = "";
+
+      [...(state.history || []), state].filter((item) => item.version).slice(-8).reverse().forEach((item) => {
+        const row = document.createElement("li");
+        const text = document.createElement("span");
+        text.textContent = `${item.version}：${item.summary || "未命名修改"}`;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "回滚";
+        button.addEventListener("click", () => rollbackRuntimeVersion(item.version));
+        row.append(text, button);
+        runtimeVersionList.append(row);
+      });
+    }
+
+    async function assistantRequest(body, token = "") {
+      const headers = { "content-type": "application/json" };
+      if (token) {
+        headers["x-travel-assistant-token"] = token;
+      }
+
+      const response = await fetch(assistantEndpoint, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body)
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "请求失败。");
+      }
+
+      return result;
+    }
+
+    async function loadRuntimeVersion() {
+      try {
+        const state = await assistantRequest({ action: "get_state" });
+        applyTripState(state);
+      } catch {
+        runtimeVersionStatus.textContent = "暂时无法读取页面运行版本。";
+      }
+    }
+
+    async function rollbackRuntimeVersion(version) {
+      const token = assistantToken.value.trim();
+      if (!token) {
+        assistantMessage("请先输入访问码。");
+        return;
+      }
+
+      localStorage.setItem(assistantTokenKey, token);
+      assistantMessage("正在回滚页面运行版本。");
+
+      try {
+        const state = await assistantRequest({ action: "rollback", version }, token);
+        applyTripState(state);
+        assistantMessage(`已回滚并保存为运行版本 ${state.version}。`);
+      } catch (error) {
+        assistantMessage(error.message || "暂时无法回滚。");
+      }
+    }
+
     renderAssistantConversation();
+    loadRuntimeVersion();
 
     document.querySelectorAll(".rollback-button").forEach((button) => {
       button.addEventListener("click", async () => {
@@ -1494,8 +1630,41 @@
 
     document.getElementById("assistant-clear").addEventListener("click", () => {
       localStorage.removeItem(assistantConversationKey);
+      lastAssistantExchange = null;
+      assistantApply.hidden = true;
       renderAssistantConversation();
       assistantMessage("记录已清空。");
+    });
+
+    assistantApply.addEventListener("click", async () => {
+      const token = assistantToken.value.trim();
+
+      if (!token) {
+        assistantMessage("请先输入访问码。");
+        return;
+      }
+
+      if (!lastAssistantExchange) {
+        assistantMessage("请先发送一个问题并收到回答。");
+        return;
+      }
+
+      localStorage.setItem(assistantTokenKey, token);
+      assistantMessage("正在应用修改并保存为新版。");
+
+      try {
+        const state = await assistantRequest({
+          action: "apply_change",
+          question: lastAssistantExchange.question,
+          answer: lastAssistantExchange.answer,
+          editable: editableTripHtml()
+        }, token);
+        applyTripState(state);
+        assistantApply.hidden = true;
+        assistantMessage(`已保存为运行版本 ${state.version}。`);
+      } catch (error) {
+        assistantMessage(error.message || "暂时无法应用修改。");
+      }
     });
 
     document.getElementById("assistant-send").addEventListener("click", async () => {
@@ -1513,30 +1682,21 @@
       }
 
       localStorage.setItem(assistantTokenKey, token);
+      assistantApply.hidden = true;
       assistantMessage("正在询问智能助手。");
 
       try {
-        const response = await fetch(assistantEndpoint, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "x-travel-assistant-token": token
-          },
-          body: JSON.stringify({
-            question,
-            tripContext: tripContext()
-          })
-        });
-
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.error || "请求失败。");
-        }
+        const result = await assistantRequest({
+          question,
+          tripContext: tripContext()
+        }, token);
 
         const items = readAssistantConversation();
         items.push({ question, answer: result.answer, savedAt: new Date().toISOString() });
         writeAssistantConversation(items);
         renderAssistantConversation();
+        lastAssistantExchange = { question, answer: result.answer };
+        assistantApply.hidden = false;
         assistantQuestion.value = "";
         assistantMessage("已收到回答。");
       } catch (error) {
