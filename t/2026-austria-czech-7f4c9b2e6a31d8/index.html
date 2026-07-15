@@ -86,33 +86,6 @@
       padding: 34px 0 56px;
     }
 
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .summary {
-      min-height: 116px;
-      padding: 18px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-
-    .summary strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 24px;
-    }
-
-    .summary span {
-      display: block;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
     .section-head {
       display: flex;
       align-items: end;
@@ -761,7 +734,6 @@
     }
 
     @media (max-width: 900px) {
-      .summary-grid,
       .feature-grid,
       .journey-map {
         grid-template-columns: 1fr 1fr;
@@ -782,7 +754,6 @@
         padding: 24px 16px;
       }
 
-      .summary-grid,
       .feature-grid,
       .journey-map {
         grid-template-columns: 1fr;
@@ -857,21 +828,6 @@
   </header>
 
   <main class="wrap">
-    <section class="summary-grid" aria-label="行程概览">
-      <div class="summary">
-        <strong>11 天</strong>
-        <span>7 月 29 日到 8 月 8 日。</span>
-      </div>
-      <div class="summary">
-        <strong>4 个住宿点</strong>
-        <span>四个住宿点：萨尔茨堡、林茨、捷克布杰约维采、布拉格。</span>
-      </div>
-      <div class="summary">
-        <strong>2 晚固定活动</strong>
-        <span>两晚 20:00 卡比特尔广场户外放映。</span>
-      </div>
-    </section>
-
     <section class="journey-map" aria-label="行程地图">
       <div class="map-canvas">
         <svg viewBox="0 0 860 420" role="img" aria-label="奥地利捷克行程地图">
@@ -1461,10 +1417,13 @@
         answerTitle.textContent = "回答";
         const answerText = document.createElement("p");
         answerText.textContent = item.answer;
+        const answerLine = document.createElement("div");
+        answerLine.className = "assistant-line";
+        answerLine.append(answerTitle, answerText);
 
         const body = document.createElement("div");
         body.className = "assistant-entry-body";
-        body.append(questionLine, answerTitle, answerText);
+        body.append(questionLine, answerLine);
         entry.append(body);
 
         if (shouldCollapse) {
