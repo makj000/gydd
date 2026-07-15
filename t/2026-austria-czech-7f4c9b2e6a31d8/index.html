@@ -714,13 +714,42 @@
       border: 1px solid var(--line);
     }
 
+    .assistant-actions button:disabled,
+    .assistant-entry #assistant-apply:disabled {
+      border-color: #d9ded8;
+      background: #e3e7e2;
+      color: #899286;
+      cursor: wait;
+      opacity: 0.82;
+    }
+
     .assistant-actions button[hidden] {
       display: none;
     }
 
     .assistant-status {
+      display: flex;
+      gap: 8px;
+      align-items: center;
       min-height: 24px;
       color: var(--muted);
+    }
+
+    .assistant-status.is-working::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      border: 2px solid rgba(66, 107, 79, 0.24);
+      border-top-color: var(--green);
+      border-radius: 999px;
+      animation: assistant-spin 0.8s linear infinite;
+    }
+
+    @keyframes assistant-spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .assistant-log {
@@ -983,7 +1012,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：18</div>
+    <div class="page-version" aria-label="网页版本">网页版本：19</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1394,7 +1423,7 @@
 
     <section class="section-head">
       <h2>智能助手</h2>
-      <p>输入访问码后可以直接提问；助手先回答当前问题，点击最新回答下方的“应用为新版”后，才会保存为服务器运行版本并更新页面。</p>
+      <p>输入访问码后可以直接提问；助手先回答当前问题，点击最新回答下方的“确认改动”后，才会保存为服务器运行版本并更新页面。</p>
     </section>
 
     <section class="assistant-panel" aria-label="智能助手">
@@ -1410,7 +1439,7 @@
       </div>
       <div class="assistant-actions">
         <button type="button" id="assistant-send">发送问题</button>
-        <button type="button" id="assistant-apply" class="secondary-button" hidden>应用为新版</button>
+        <button type="button" id="assistant-apply" class="secondary-button" hidden>确认改动</button>
         <button type="button" id="assistant-save-token" class="secondary-button">保存访问码</button>
         <button type="button" id="assistant-clear" class="secondary-button">清空记录</button>
       </div>
@@ -1569,6 +1598,12 @@
 
     function assistantMessage(message) {
       assistantStatus.textContent = message;
+      assistantStatus.classList.remove("is-working");
+    }
+
+    function assistantWorking(message) {
+      assistantStatus.textContent = message;
+      assistantStatus.classList.add("is-working");
     }
 
     function readAssistantConversation() {
@@ -1820,7 +1855,9 @@
       }
 
       localStorage.setItem(assistantTokenKey, token);
-      assistantMessage("正在应用修改并保存为新版。");
+      assistantApply.disabled = true;
+      assistantApply.textContent = "正在确认";
+      assistantWorking("正在确认改动并保存为新版。");
 
       try {
         const state = await assistantRequest({
@@ -1831,8 +1868,12 @@
         }, token);
         applyTripState(state);
         assistantApply.hidden = true;
-        assistantMessage(`已保存为运行版本 ${state.version}。`);
+        assistantApply.disabled = false;
+        assistantApply.textContent = "确认改动";
+        assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
       } catch (error) {
+        assistantApply.disabled = false;
+        assistantApply.textContent = "确认改动";
         assistantMessage(error.message || "暂时无法应用修改。");
       }
     });
