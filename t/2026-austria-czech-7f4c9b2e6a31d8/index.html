@@ -58,11 +58,11 @@
       position: absolute;
       top: 18px;
       left: min(6vw, 72px);
-      z-index: 3;
+      z-index: 6;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      max-width: min(760px, calc(100% - 32px));
+      max-width: min(760px, calc(100% - 190px));
       color: white;
       font-size: 14px;
       font-weight: 800;
@@ -73,6 +73,21 @@
       border: 1px solid rgba(255, 255, 255, 0.36);
       border-radius: 999px;
       background: rgba(13, 20, 24, 0.52);
+      backdrop-filter: blur(8px);
+    }
+
+    .page-version {
+      position: absolute;
+      top: 18px;
+      right: min(6vw, 72px);
+      z-index: 6;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 999px;
+      background: rgba(13, 20, 24, 0.52);
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
       backdrop-filter: blur(8px);
     }
 
@@ -164,7 +179,7 @@
       align-items: stretch;
       position: absolute;
       z-index: 3;
-      top: 20px;
+      top: 86px;
       left: 20px;
       width: min(616px, calc(100% - 40px));
       margin: 0;
@@ -836,8 +851,21 @@
         padding: 24px 16px;
       }
 
-      .journey-map {
+      .currency-strip {
+        top: 50px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+        font-size: 12px;
+      }
+
+      .page-version {
         top: 12px;
+        right: 12px;
+        font-size: 12px;
+      }
+
+      .journey-map {
+        top: 126px;
         left: 12px;
         width: min(458px, calc(100% - 24px));
         padding: 6px;
@@ -919,6 +947,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
+    <div class="page-version" aria-label="网页版本">网页版本：13</div>
     <div class="hero-content">
       <p class="eyebrow">更新行程</p>
       <h1>2026年奥地利捷克旅行</h1>
