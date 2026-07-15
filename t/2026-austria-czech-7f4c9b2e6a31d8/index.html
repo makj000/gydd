@@ -59,16 +59,16 @@
       top: 18px;
       left: min(6vw, 72px);
       z-index: 6;
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
       gap: 8px;
-      max-width: min(760px, calc(100% - 190px));
+      max-width: min(520px, calc(100% - 190px));
       color: white;
       font-size: 14px;
       font-weight: 800;
     }
 
     .currency-strip span {
+      width: fit-content;
       padding: 6px 10px;
       border: 1px solid rgba(255, 255, 255, 0.36);
       border-radius: 999px;
