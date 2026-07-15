@@ -542,25 +542,34 @@
       grid-template-columns: 1fr auto;
       gap: 12px;
       align-items: center;
-      padding: 12px;
+      padding: 10px 12px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfaf6;
     }
 
     .version-text {
-      display: grid;
-      gap: 4px;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      min-width: 0;
     }
 
     .version-text strong {
       color: var(--green);
+      font-size: 18px;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .version-text span {
+      min-width: 0;
     }
 
     .rollback-button {
-      min-width: 76px;
-      min-height: 38px;
-      padding: 8px 12px;
+      min-width: 68px;
+      min-height: 34px;
+      padding: 6px 10px;
       border: 0;
       border-radius: 6px;
       background: var(--green);
@@ -658,6 +667,17 @@
 
     .assistant-entry strong {
       color: var(--green);
+    }
+
+    .assistant-line {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .assistant-line p {
+      margin: 0;
+      min-width: 0;
     }
 
     .assistant-entry-body {
@@ -1287,28 +1307,28 @@
       <ul class="version-list">
         <li>
           <span class="version-text">
-            <strong>第八版</strong>
+            <strong>8</strong>
             <span>当前基准版本，已移除过时概览卡片，并保留智能旅行助手。</span>
           </span>
           <button type="button" class="rollback-button" data-version="8">回滚</button>
         </li>
         <li>
           <span class="version-text">
-            <strong>第七版</strong>
+            <strong>7</strong>
             <span>上一个重要版本，新增真实智能旅行助手。</span>
           </span>
           <button type="button" class="rollback-button" data-version="7">回滚</button>
         </li>
         <li>
           <span class="version-text">
-            <strong>第六版</strong>
+            <strong>6</strong>
             <span>地图和人骨教堂版本，调整地图标签并加入 8 月 6 日人骨教堂。</span>
           </span>
           <button type="button" class="rollback-button" data-version="6">回滚</button>
         </li>
       </ul>
       <p class="version-note" id="version-note">回滚按钮会复制对应命令；在站点仓库运行后提交并发布。</p>
-      <p>建议规则：如果只是小改错，优先回到第八版；如果智能助手出问题，回到第六版。</p>
+      <p>建议规则：如果只是小改错，优先回到 8；如果智能助手出问题，回到 6。</p>
     </section>
 
     <section class="sources">
@@ -1345,9 +1365,9 @@
       6: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 6\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 6\"\ngit push origin main"
     };
     const rollbackVersionNames = {
-      8: "第八版",
-      7: "第七版",
-      6: "第六版"
+      8: "8",
+      7: "7",
+      6: "6"
     };
 
     const weatherPlans = {
@@ -1433,6 +1453,9 @@
         questionTitle.textContent = "问题";
         const questionText = document.createElement("p");
         questionText.textContent = item.question;
+        const questionLine = document.createElement("div");
+        questionLine.className = "assistant-line";
+        questionLine.append(questionTitle, questionText);
 
         const answerTitle = document.createElement("strong");
         answerTitle.textContent = "回答";
@@ -1441,7 +1464,7 @@
 
         const body = document.createElement("div");
         body.className = "assistant-entry-body";
-        body.append(questionTitle, questionText, answerTitle, answerText);
+        body.append(questionLine, answerTitle, answerText);
         entry.append(body);
 
         if (shouldCollapse) {
@@ -1477,7 +1500,7 @@
 
         try {
           await navigator.clipboard.writeText(command);
-          versionNote.textContent = `已复制${rollbackVersionNames[version]}回滚命令，请在站点仓库运行后提交并发布。`;
+          versionNote.textContent = `已复制 ${rollbackVersionNames[version]} 回滚命令，请在站点仓库运行后提交并发布。`;
         } catch {
           versionNote.textContent = "浏览器暂时不能复制，请在本机站点仓库运行回滚脚本。";
         }
