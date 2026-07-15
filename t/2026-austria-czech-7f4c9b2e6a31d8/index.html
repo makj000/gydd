@@ -660,6 +660,32 @@
       color: var(--green);
     }
 
+    .assistant-entry-body {
+      display: grid;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .assistant-entry.is-collapsed .assistant-entry-body {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .assistant-entry-toggle {
+      justify-self: start;
+      width: 34px;
+      height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #eef3f1;
+      color: var(--green);
+      font: inherit;
+      font-weight: 900;
+      line-height: 1;
+      cursor: pointer;
+    }
+
     .lodging-table,
     .ticket-table {
       width: 100%;
@@ -1228,7 +1254,7 @@
 
     <section class="section-head">
       <h2>智能旅行助手</h2>
-      <p>输入访问码后可以直接提问，助手会根据这页行程回答；访问码只保存在你的浏览器里。</p>
+      <p>输入访问码后可以直接提问，助手每次只回答当前问题；历史记录只保存在你的浏览器里。</p>
     </section>
 
     <section class="assistant-panel" aria-label="智能旅行助手">
@@ -1394,9 +1420,14 @@
       const items = readAssistantConversation();
       assistantLog.innerHTML = "";
 
-      items.slice().reverse().forEach((item) => {
+      items.slice().reverse().forEach((item, index) => {
         const entry = document.createElement("article");
         entry.className = "assistant-entry";
+        const shouldCollapse = index > 0;
+
+        if (shouldCollapse) {
+          entry.classList.add("is-collapsed");
+        }
 
         const questionTitle = document.createElement("strong");
         questionTitle.textContent = "问题";
@@ -1408,7 +1439,25 @@
         const answerText = document.createElement("p");
         answerText.textContent = item.answer;
 
-        entry.append(questionTitle, questionText, answerTitle, answerText);
+        const body = document.createElement("div");
+        body.className = "assistant-entry-body";
+        body.append(questionTitle, questionText, answerTitle, answerText);
+        entry.append(body);
+
+        if (shouldCollapse) {
+          const toggle = document.createElement("button");
+          toggle.type = "button";
+          toggle.className = "assistant-entry-toggle";
+          toggle.textContent = "⌄";
+          toggle.setAttribute("aria-label", "展开记录");
+          toggle.addEventListener("click", () => {
+            const isCollapsed = entry.classList.toggle("is-collapsed");
+            toggle.textContent = isCollapsed ? "⌄" : "⌃";
+            toggle.setAttribute("aria-label", isCollapsed ? "展开记录" : "收起记录");
+          });
+          entry.append(toggle);
+        }
+
         assistantLog.append(entry);
       });
     }
@@ -1472,8 +1521,7 @@
           },
           body: JSON.stringify({
             question,
-            tripContext: tripContext(),
-            conversation: readAssistantConversation()
+            tripContext: tripContext()
           })
         });
 
