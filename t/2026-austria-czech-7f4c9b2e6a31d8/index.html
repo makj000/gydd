@@ -54,6 +54,28 @@
       max-width: 920px;
     }
 
+    .currency-strip {
+      position: absolute;
+      top: 18px;
+      left: min(6vw, 72px);
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: min(760px, calc(100% - 32px));
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .currency-strip span {
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 999px;
+      background: rgba(13, 20, 24, 0.52);
+      backdrop-filter: blur(8px);
+    }
+
     .eyebrow {
       margin: 0 0 10px;
       font-size: 14px;
@@ -572,6 +594,9 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      max-height: 458px;
+      overflow-y: auto;
+      padding-right: 4px;
     }
 
     .runtime-version-list li {
@@ -889,6 +914,11 @@
 </head>
 <body>
   <header class="hero">
+    <div class="currency-strip" aria-label="旅行货币汇率">
+      <span>奥地利使用欧元：1 欧元约 7.73 人民币</span>
+      <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
+      <span>汇率日期：2026 年 7 月 15 日</span>
+    </div>
     <div class="hero-content">
       <p class="eyebrow">更新行程</p>
       <h1>2026年奥地利捷克旅行</h1>
@@ -1298,11 +1328,11 @@
     </section>
 
     <section class="section-head">
-      <h2>智能旅行助手</h2>
+      <h2>智能助手</h2>
       <p>输入访问码后可以直接提问；助手先回答当前问题，点击最新回答下方的“应用为新版”后，才会保存为服务器运行版本并更新页面。</p>
     </section>
 
-    <section class="assistant-panel" aria-label="智能旅行助手">
+    <section class="assistant-panel" aria-label="智能助手">
       <div class="assistant-grid">
         <label>
           访问码
@@ -1332,7 +1362,7 @@
       <h2>全部版本</h2>
       <p class="version-note" id="runtime-version-status">正在读取页面运行版本。</p>
       <ul class="version-list runtime-version-list" id="runtime-version-list"></ul>
-      <p class="version-note" id="version-note">运行版本会直接回滚；发布基准会复制回滚命令。</p>
+      <p class="version-note" id="version-note">只显示最近 10 个版本；运行版本会直接回滚，发布基准会复制回滚命令。</p>
       <p>建议规则：如果只是小改错，优先回到 8；如果智能助手出问题，回到 6。</p>
     </section>
 
@@ -1369,8 +1399,8 @@
     const runtimeVersionList = document.getElementById("runtime-version-list");
     let lastAssistantExchange = null;
     const baselineVersions = [
-      { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能旅行助手。" },
-      { version: 7, summary: "发布基准：新增真实智能旅行助手。" },
+      { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能助手。" },
+      { version: 7, summary: "发布基准：新增真实智能助手。" },
       { version: 6, summary: "发布基准：调整地图标签，并加入 2026 年 8 月 6 日人骨教堂。" }
     ];
     const rollbackCommands = {
@@ -1453,13 +1483,18 @@
     }
 
     function renderAssistantConversation() {
-      const items = readAssistantConversation();
+      const items = readAssistantConversation().slice().sort((a, b) => {
+        const first = Date.parse(a.savedAt || "");
+        const second = Date.parse(b.savedAt || "");
+        return (Number.isNaN(first) ? 0 : first) - (Number.isNaN(second) ? 0 : second);
+      });
       assistantLog.innerHTML = "";
 
-      items.slice().reverse().forEach((item, index) => {
+      items.forEach((item, index) => {
         const entry = document.createElement("article");
         entry.className = "assistant-entry";
-        const shouldCollapse = index > 0;
+        const isNewest = index === items.length - 1;
+        const shouldCollapse = !isNewest;
 
         if (shouldCollapse) {
           entry.classList.add("is-collapsed");
@@ -1486,7 +1521,7 @@
         body.append(questionLine, answerLine);
         entry.append(body);
 
-        if (index === 0 && lastAssistantExchange && !assistantApply.hidden) {
+        if (isNewest && lastAssistantExchange && !assistantApply.hidden) {
           entry.append(assistantApply);
         }
 
@@ -1549,7 +1584,7 @@
         source: "baseline"
       })));
 
-      allVersions.sort((a, b) => b.version - a.version).slice(0, 12).forEach((item) => {
+      allVersions.sort((a, b) => b.version - a.version).slice(0, 10).forEach((item) => {
         const row = document.createElement("li");
         const text = document.createElement("span");
         text.className = "version-text";
