@@ -725,6 +725,26 @@
       color: var(--green);
     }
 
+    .assistant-entry-meta {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .assistant-entry #assistant-apply {
+      justify-self: start;
+      width: auto;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #eef3f1;
+      color: var(--green);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
     .assistant-line {
       display: flex;
       gap: 8px;
@@ -947,7 +967,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：15</div>
+    <div class="page-version" aria-label="网页版本">网页版本：16</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1511,6 +1531,21 @@
       localStorage.setItem(assistantConversationKey, JSON.stringify(items.slice(-12)));
     }
 
+    function formatAssistantTime(value) {
+      const date = new Date(value || "");
+
+      if (Number.isNaN(date.getTime())) {
+        return "时间未知";
+      }
+
+      return new Intl.DateTimeFormat("zh-CN", {
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(date);
+    }
+
     function renderAssistantConversation() {
       const items = readAssistantConversation().slice().sort((a, b) => {
         const first = Date.parse(a.savedAt || "");
@@ -1529,8 +1564,12 @@
           entry.classList.add("is-collapsed");
         }
 
+        const meta = document.createElement("div");
+        meta.className = "assistant-entry-meta";
+        meta.textContent = `时间：${formatAssistantTime(item.savedAt)}`;
+
         const questionTitle = document.createElement("strong");
-        questionTitle.textContent = "问题";
+        questionTitle.textContent = "你";
         const questionText = document.createElement("p");
         questionText.textContent = item.question;
         const questionLine = document.createElement("div");
@@ -1538,7 +1577,7 @@
         questionLine.append(questionTitle, questionText);
 
         const answerTitle = document.createElement("strong");
-        answerTitle.textContent = "回答";
+        answerTitle.textContent = "智能助手";
         const answerText = document.createElement("p");
         answerText.textContent = item.answer;
         const answerLine = document.createElement("div");
@@ -1547,7 +1586,7 @@
 
         const body = document.createElement("div");
         body.className = "assistant-entry-body";
-        body.append(questionLine, answerLine);
+        body.append(meta, questionLine, answerLine);
         entry.append(body);
 
         if (isNewest && lastAssistantExchange && !assistantApply.hidden) {
