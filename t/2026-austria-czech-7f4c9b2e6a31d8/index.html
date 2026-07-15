@@ -172,6 +172,25 @@
       font-weight: 800;
     }
 
+    .quick-link-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 0 18px;
+    }
+
+    .quick-link-bar a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--green);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
     .journey-map {
       display: grid;
       grid-template-columns: 1fr;
@@ -1015,7 +1034,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：23</div>
+    <div class="page-version" aria-label="网页版本">网页版本：24</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1098,6 +1117,10 @@
         </svg>
       </div>
     </section>
+
+    <nav class="quick-link-bar" aria-label="快捷链接">
+      <a href="#assistant-section">跳到智能助手问答</a>
+    </nav>
 
     <section class="section-head">
       <h2>安排</h2>
@@ -1424,7 +1447,7 @@
       </ul>
     </section>
 
-    <section class="section-head">
+    <section class="section-head" id="assistant-section">
       <h2>智能助手</h2>
       <p>输入访问码后可以直接提问；助手先回答当前问题，点击最新回答下方的“确认改动后会看到页面更新”后，才会保存为服务器运行版本并更新页面。</p>
     </section>
