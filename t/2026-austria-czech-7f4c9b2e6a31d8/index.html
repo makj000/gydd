@@ -838,6 +838,12 @@
       cursor: pointer;
     }
 
+    .assistant-repeat:disabled {
+      background: #e3e7e2;
+      color: #899286;
+      cursor: wait;
+    }
+
     .assistant-line {
       display: flex;
       gap: 8px;
@@ -1842,9 +1848,17 @@
         repeat.type = "button";
         repeat.className = "assistant-repeat";
         repeat.textContent = "重复问";
-        repeat.addEventListener("click", () => {
+        repeat.addEventListener("click", async () => {
           assistantQuestion.value = item.question;
-          sendAssistantQuestion(item.question);
+          repeat.disabled = true;
+          repeat.textContent = "正在重复问";
+
+          try {
+            await sendAssistantQuestion(item.question);
+          } finally {
+            repeat.disabled = false;
+            repeat.textContent = "重复问";
+          }
         });
         actions.append(repeat);
 
