@@ -1034,7 +1034,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：26</div>
+    <div class="page-version" aria-label="网页版本">网页版本：27</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1645,6 +1645,25 @@
       localStorage.setItem(assistantConversationKey, JSON.stringify(items.slice(-12)));
     }
 
+    function mergeAssistantConversations(...groups) {
+      const merged = [];
+      const seen = new Set();
+
+      groups.flat().forEach((item) => {
+        if (!item || !item.question || !item.answer) {
+          return;
+        }
+
+        const key = [item.savedAt || "", item.userName || "", item.question, item.answer].join("|");
+        if (!seen.has(key)) {
+          merged.push(item);
+          seen.add(key);
+        }
+      });
+
+      return merged;
+    }
+
     function formatAssistantTime(value) {
       const date = new Date(value || "");
 
@@ -1663,7 +1682,7 @@
     }
 
     function renderAssistantConversation() {
-      const sourceItems = sharedAssistantConversation || readAssistantConversation();
+      const sourceItems = mergeAssistantConversations(sharedAssistantConversation || [], readAssistantConversation());
       const items = sourceItems.slice().sort((a, b) => {
         const first = Date.parse(a.savedAt || "");
         const second = Date.parse(b.savedAt || "");
@@ -1753,6 +1772,7 @@
       if (Array.isArray(state.conversation)) {
         sharedAssistantConversation = state.conversation;
         renderAssistantConversation();
+        syncLocalConversationToServer();
       }
 
       fillPriceCells();
@@ -1829,6 +1849,24 @@
       }
 
       return result;
+    }
+
+    async function syncLocalConversationToServer() {
+      const token = assistantToken.value.trim();
+      const localItems = readAssistantConversation();
+
+      if (!token || !localItems.length) {
+        return;
+      }
+
+      try {
+        const state = await assistantRequest({ action: "import_conversation", conversation: localItems }, token);
+        sharedAssistantConversation = state.conversation || sharedAssistantConversation;
+        localStorage.removeItem(assistantConversationKey);
+        renderAssistantConversation();
+      } catch {
+        renderAssistantConversation();
+      }
     }
 
     async function loadRuntimeVersion() {
