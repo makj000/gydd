@@ -807,8 +807,26 @@
     }
 
     .assistant-entry #assistant-apply {
-      justify-self: start;
       width: auto;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #eef3f1;
+      color: var(--green);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .assistant-entry-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .assistant-repeat {
       min-height: 32px;
       padding: 6px 10px;
       border: 1px solid var(--line);
@@ -1816,11 +1834,25 @@
         const body = document.createElement("div");
         body.className = "assistant-entry-body";
         body.append(meta, questionLine, answerLine);
-        entry.append(body);
+
+        const actions = document.createElement("div");
+        actions.className = "assistant-entry-actions";
+
+        const repeat = document.createElement("button");
+        repeat.type = "button";
+        repeat.className = "assistant-repeat";
+        repeat.textContent = "重复问";
+        repeat.addEventListener("click", () => {
+          assistantQuestion.value = item.question;
+          sendAssistantQuestion(item.question);
+        });
+        actions.append(repeat);
 
         if (isNewest && lastAssistantExchange && !assistantApply.hidden) {
-          entry.append(assistantApply);
+          actions.append(assistantApply);
         }
+
+        entry.append(actions, body);
 
         if (shouldCollapse) {
           const toggle = document.createElement("button");
@@ -2120,9 +2152,9 @@
       }
     });
 
-    document.getElementById("assistant-send").addEventListener("click", async () => {
+    async function sendAssistantQuestion(questionOverride = "") {
       const token = assistantToken.value.trim();
-      const question = assistantQuestion.value.trim();
+      const question = (questionOverride || assistantQuestion.value).trim();
 
       if (!token) {
         assistantMessage("请先输入访问码。");
@@ -2160,6 +2192,10 @@
       } catch (error) {
         assistantMessage(error.message || "暂时无法连接智能助手。");
       }
+    }
+
+    document.getElementById("assistant-send").addEventListener("click", async () => {
+      await sendAssistantQuestion();
     });
 
     function formatTripDate(dateText) {
