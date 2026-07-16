@@ -451,9 +451,8 @@
       justify-self: center;
       min-width: 28px;
       min-height: 28px;
-      display: grid;
+      display: none;
       place-items: center;
-      border: 1px solid var(--line);
       border-radius: 999px;
       color: transparent;
       font-weight: 900;
@@ -461,7 +460,8 @@
 
     .items li.is-booked::after {
       content: "✓";
-      border-color: rgba(66, 107, 79, 0.35);
+      display: grid;
+      border: 1px solid rgba(66, 107, 79, 0.35);
       background: #eef3f1;
       color: var(--green);
     }
