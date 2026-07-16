@@ -466,6 +466,14 @@
       color: var(--green);
     }
 
+    .items li.needs-action::after {
+      content: "!";
+      display: grid;
+      border: 1px solid rgba(166, 108, 25, 0.35);
+      background: #fff7e6;
+      color: var(--gold);
+    }
+
     .items li:last-child {
       padding-bottom: 0;
       border-bottom: 0;
@@ -1154,7 +1162,7 @@
 
     <section class="section-head">
       <h2>详细计划</h2>
-      <p>时间是规划锚点，不等于已预订项目；其中萨尔茨堡两晚放映来自本地确认记录。</p>
+      <p>时间是规划锚点，不等于已预订项目；预订栏绿色勾表示已订，黄色感叹号表示还需要提前处理。</p>
     </section>
 
     <section class="days">
@@ -1191,7 +1199,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="免费"><span class="time">09:30</span><span>米拉贝尔花园、粮食胡同和老城轻松走，各点之间步行约 10 到 20 分钟，建议总停留 2 到 2.5 小时。</span></li>
           <li data-price="餐费另计"><span class="time">12:30</span><span>老城午餐，建议用餐 60 分钟；从老城去海尔布伦约 25 到 35 分钟。</span></li>
-          <li data-price="官网复核" data-link="https://www.hellbrunn.at/en/"><span class="time">14:30</span><span>海尔布伦戏水宫和水机关，天气热时下午玩水更舒服，建议停留 2 小时。</span></li>
+          <li class="needs-action" data-price="官网复核" data-link="https://www.hellbrunn.at/en/"><span class="time">14:30</span><span>海尔布伦戏水宫和水机关，天气热时下午玩水更舒服，建议停留 2 小时。</span></li>
           <li data-price="免费"><span class="time">17:00</span><span>从海尔布伦回老城约 25 到 35 分钟；回酒店休息，建议留 30 到 45 分钟。</span></li>
           <li data-price="餐费另计"><span class="time">17:45</span><span>提前晚餐，并带上夜间薄外套，建议用餐 60 分钟。</span></li>
           <li data-price="免费"><span class="time">19:00</span><span>从晚餐地点到卡比特尔广场约 5 到 15 分钟，提前到场占位置。</span></li>
@@ -1256,7 +1264,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li data-price="自助免费"><span class="time">上午</span><span>从林茨去毛特豪森纪念馆约 45 到 75 分钟；纪念馆建议停留 2.5 到 3 小时，这类参观不要赶时间。</span></li>
+          <li class="needs-action" data-price="自助免费"><span class="time">上午</span><span>从林茨去毛特豪森纪念馆约 45 到 75 分钟；纪念馆建议停留 2.5 到 3 小时，这类参观不要赶时间。</span></li>
           <li data-price="交通另计"><span class="time">下午</span><span>从毛特豪森前往布杰约维采约 3 到 4 小时，抵达后入住玛丽安斯卡公寓，建议整理 45 分钟。</span></li>
           <li data-price="公共区域免费"><span class="time">晚上</span><span>从公寓到广场约 5 到 15 分钟，轻松散步和晚餐，建议停留 60 到 90 分钟。</span></li>
         </ul>
@@ -1277,7 +1285,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="广场免费；黑塔复核" data-link="https://www.budejce.cz/"><span class="time">09:30</span><span>普瑞米斯欧塔卡拉二世广场和黑塔，城内步行约 5 到 15 分钟，建议总停留 2 小时。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>城内自行午餐，从黑塔到餐厅通常步行约 5 到 15 分钟，建议用餐 60 分钟。</span></li>
-          <li data-price="官网复核" data-link="https://www.visitbudvar.cz/en/"><span class="time">14:00</span><span>从市中心到百威酿酒厂约 15 到 25 分钟；酿酒厂建议停留 90 分钟，需确认参观时间和预约。</span></li>
+          <li class="needs-action" data-price="官网复核" data-link="https://www.visitbudvar.cz/en/"><span class="time">14:00</span><span>从市中心到百威酿酒厂约 15 到 25 分钟；酿酒厂建议停留 90 分钟，需确认参观时间和预约。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从酿酒厂回市中心或酒店约 15 到 25 分钟，轻松吃饭和休息，建议不要再排重项目。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
@@ -1298,7 +1306,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="交通另计"><span class="time">上午</span><span>退房前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时，车站到酒店约 15 到 25 分钟。</span></li>
           <li data-price="外观免费；入内复核" data-link="https://prague.eu/en/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店，整理约 45 分钟；酒店到老城桥塔约 15 到 25 分钟，查理大桥和小城附近建议停留 2 小时。</span></li>
-          <li data-price="餐费另计"><span class="time">晚餐</span><span>从小城到三世纪餐厅或晚餐地点约 5 到 15 分钟，建议用餐 60 到 90 分钟。</span></li>
+          <li class="needs-action" data-price="餐费另计"><span class="time">晚餐</span><span>从小城到三世纪餐厅或晚餐地点约 5 到 15 分钟，建议用餐 60 到 90 分钟。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥塔"><span>老城桥塔 <small class="ticket-note">门票：外观免费，登塔官网复核</small></span></figure>
@@ -1317,11 +1325,11 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li data-price="城堡票 450 捷克克朗"><span class="time">09:00</span><span>从酒店到皇家花园和布拉格城堡区域约 25 到 35 分钟，城堡区建议先停留 90 分钟。</span></li>
+          <li class="needs-action" data-price="城堡票 450 捷克克朗"><span class="time">09:00</span><span>从酒店到皇家花园和布拉格城堡区域约 25 到 35 分钟，城堡区建议先停留 90 分钟。</span></li>
           <li data-price="含在城堡票内"><span class="time">10:30</span><span>从皇家花园到圣维特大教堂约 5 到 10 分钟，教堂建议停留 45 到 60 分钟。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>从教堂到城堡区或地铁站附近餐厅约 10 到 20 分钟，建议用餐 60 分钟。</span></li>
           <li data-price="公共区域免费"><span class="time">下午</span><span>从城堡区慢慢下行到小城约 20 到 30 分钟，小城街区建议停留 90 分钟。</span></li>
-          <li data-price="餐费另计"><span class="time">晚餐</span><span>从小城到波希米亚小酒馆或晚餐地点约 10 到 20 分钟，建议用餐 60 到 90 分钟。</span></li>
+          <li class="needs-action" data-price="餐费另计"><span class="time">晚餐</span><span>从小城到波希米亚小酒馆或晚餐地点约 10 到 20 分钟，建议用餐 60 到 90 分钟。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园"><span>皇家花园 <small class="ticket-note">门票：公共区域免费，开放时间复核</small></span></figure>
@@ -1342,9 +1350,9 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="公共区域免费"><span class="time">上午</span><span>布拉格轻量安排：酒店附近早餐、短走或休息，步行约 10 到 20 分钟，建议停留 60 到 90 分钟。</span></li>
           <li data-price="交通另计"><span class="time">午餐前后</span><span>从布拉格前往库特纳霍拉约 1 到 1.5 小时，午餐可以在出发前或抵达后简单解决，建议用餐 45 到 60 分钟。</span></li>
-          <li data-price="成人 220 捷克克朗" data-link="https://sedlec.info/en/"><span class="time">下午</span><span>从车站或午餐地点到人骨教堂约 10 到 20 分钟；人骨教堂建议停留 45 到 60 分钟，优先选择下午时段。</span></li>
+          <li class="needs-action" data-price="成人 220 捷克克朗" data-link="https://sedlec.info/en/"><span class="time">下午</span><span>从车站或午餐地点到人骨教堂约 10 到 20 分钟；人骨教堂建议停留 45 到 60 分钟，优先选择下午时段。</span></li>
           <li data-price="交通另计"><span class="time">傍晚</span><span>返回布拉格约 1 到 1.5 小时。塞德莱茨大教堂周五、周六、周日可能关闭，所以这天不要推迟到周末。</span></li>
-          <li data-price="餐费另计"><span class="time">晚餐</span><span>从车站或酒店到科尔科夫纳餐厅约 10 到 20 分钟，建议用餐 60 到 90 分钟。</span></li>
+          <li class="needs-action" data-price="餐费另计"><span class="time">晚餐</span><span>从车站或酒店到科尔科夫纳餐厅约 10 到 20 分钟，建议用餐 60 到 90 分钟。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"><span>人骨教堂 <em class="booking-tag">限时票提前买</em><small class="ticket-note">门票：成人 220 捷克克朗</small></span></figure>
@@ -1364,7 +1372,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="公共区域免费；教堂入内复核"><span class="time">上午</span><span>从酒店到高堡约 20 到 30 分钟；高堡城墙、圣彼得与圣保罗教堂外观和河景建议停留 2 小时。</span></li>
           <li data-price="公共区域免费；缆车交通另计"><span class="time">下午</span><span>从高堡到康帕岛约 25 到 35 分钟；康帕岛、列侬墙、佩特任山公园和河边慢走建议总停留 2.5 到 3 小时。</span></li>
-          <li data-price="餐费另计"><span class="time">晚上</span><span>从河边或小城回老城约 15 到 25 分钟，安排告别晚餐 60 到 90 分钟，然后回酒店收拾行李。</span></li>
+          <li class="needs-action" data-price="餐费另计"><span class="time">晚上</span><span>从河边或小城回老城约 15 到 25 分钟，安排告别晚餐 60 到 90 分钟，然后回酒店收拾行李。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/prague.jpg" alt="高堡"><span>高堡 <small class="ticket-note">门票：公共区域免费，场馆另计</small></span></figure>
