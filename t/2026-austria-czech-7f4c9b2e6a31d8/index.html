@@ -773,6 +773,16 @@
       animation: assistant-spin 0.8s linear infinite;
     }
 
+    .assistant-panel.is-busy {
+      opacity: 0.62;
+    }
+
+    .assistant-panel.is-busy button,
+    .assistant-panel.is-busy textarea,
+    .assistant-panel.is-busy input {
+      cursor: wait;
+    }
+
     @keyframes assistant-spin {
       to {
         transform: rotate(360deg);
@@ -1629,6 +1639,8 @@
     const assistantToken = document.getElementById("assistant-token");
     const assistantQuestion = document.getElementById("assistant-question");
     const assistantApply = document.getElementById("assistant-apply");
+    const assistantSend = document.getElementById("assistant-send");
+    const assistantPanel = document.querySelector(".assistant-panel");
     const assistantStatus = document.getElementById("assistant-status");
     const assistantLog = document.getElementById("assistant-log");
     const versionNote = document.getElementById("version-note");
@@ -1750,6 +1762,15 @@
       assistantStatus.classList.add("is-working");
     }
 
+    function setAssistantBusy(isBusy) {
+      assistantPanel.classList.toggle("is-busy", isBusy);
+      assistantSend.disabled = isBusy;
+      assistantQuestion.disabled = isBusy;
+      document.querySelectorAll(".assistant-repeat").forEach((button) => {
+        button.disabled = isBusy;
+      });
+    }
+
     function readAssistantConversation() {
       try {
         return JSON.parse(localStorage.getItem(assistantConversationKey) || "[]");
@@ -1850,15 +1871,7 @@
         repeat.textContent = "重复问";
         repeat.addEventListener("click", async () => {
           assistantQuestion.value = item.question;
-          repeat.disabled = true;
-          repeat.textContent = "正在重复问";
-
-          try {
-            await sendAssistantQuestion(item.question, item.canApplyChange || clientCanApplyChange(item.question));
-          } finally {
-            repeat.disabled = false;
-            repeat.textContent = "重复问";
-          }
+          await sendAssistantQuestion(item.question, true);
         });
         actions.append(repeat);
 
@@ -2195,7 +2208,8 @@
 
       localStorage.setItem(assistantTokenKey, token);
       assistantApply.hidden = true;
-      assistantMessage("正在询问智能助手。");
+      setAssistantBusy(true);
+      assistantWorking("正在询问智能助手。");
 
       try {
         const result = await assistantRequest({
@@ -2219,6 +2233,8 @@
         assistantMessage(canApply ? "已收到改动建议；页面尚未修改，请确认后再应用。" : "已收到回答。");
       } catch (error) {
         assistantMessage(error.message || "暂时无法连接智能助手。");
+      } finally {
+        setAssistantBusy(false);
       }
     }
 
