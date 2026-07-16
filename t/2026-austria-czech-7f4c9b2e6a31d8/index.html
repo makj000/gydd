@@ -701,6 +701,12 @@
       font-weight: 800;
     }
 
+    .assistant-token-label {
+      grid-template-columns: auto minmax(180px, 280px);
+      align-items: center;
+      justify-content: start;
+    }
+
     .assistant-panel input,
     .assistant-panel textarea {
       width: 100%;
@@ -1083,6 +1089,10 @@
       }
 
       .assistant-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .assistant-token-label {
         grid-template-columns: 1fr;
       }
 
@@ -1577,7 +1587,7 @@
 
     <section class="assistant-panel" aria-label="智能助手">
       <div class="assistant-grid">
-        <label>
+        <label class="assistant-token-label">
           访问码
           <input id="assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
         </label>
@@ -1588,12 +1598,12 @@
       </div>
       <div class="assistant-actions">
         <button type="button" id="assistant-send">发送问题</button>
-        <button type="button" id="assistant-apply" class="secondary-button" hidden>确认按建议改页面</button>
         <button type="button" id="assistant-save-token" class="secondary-button">保存访问码</button>
         <button type="button" id="assistant-clear" class="secondary-button">清空记录</button>
       </div>
       <p class="assistant-status" id="assistant-status"></p>
       <div class="assistant-log" id="assistant-log" aria-label="助手回答记录"></div>
+      <button type="button" id="assistant-apply" class="secondary-button" hidden>确认按建议改页面</button>
     </section>
 
     <section class="section-head">
@@ -1875,11 +1885,11 @@
         });
         actions.append(repeat);
 
-        if (isNewest && lastAssistantExchange && !assistantApply.hidden) {
-          actions.append(assistantApply);
-        }
-
         entry.append(actions, body);
+
+        if (isNewest && lastAssistantExchange && !assistantApply.hidden) {
+          entry.append(assistantApply);
+        }
 
         if (shouldCollapse) {
           const toggle = document.createElement("button");
