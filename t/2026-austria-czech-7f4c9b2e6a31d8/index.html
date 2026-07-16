@@ -1034,7 +1034,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：24</div>
+    <div class="page-version" aria-label="网页版本">网页版本：25</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1518,6 +1518,7 @@
     const runtimeVersionStatus = document.getElementById("runtime-version-status");
     const runtimeVersionList = document.getElementById("runtime-version-list");
     let lastAssistantExchange = null;
+    let sharedAssistantConversation = null;
     const baselineVersions = [
       { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能助手。" },
       { version: 7, summary: "发布基准：新增真实智能助手。" },
@@ -1662,7 +1663,8 @@
     }
 
     function renderAssistantConversation() {
-      const items = readAssistantConversation().slice().sort((a, b) => {
+      const sourceItems = sharedAssistantConversation || readAssistantConversation();
+      const items = sourceItems.slice().sort((a, b) => {
         const first = Date.parse(a.savedAt || "");
         const second = Date.parse(b.savedAt || "");
         return (Number.isNaN(second) ? 0 : second) - (Number.isNaN(first) ? 0 : first);
@@ -1746,6 +1748,11 @@
 
       if (state.daysHtml) {
         document.querySelector(".days").innerHTML = state.daysHtml;
+      }
+
+      if (Array.isArray(state.conversation)) {
+        sharedAssistantConversation = state.conversation;
+        renderAssistantConversation();
       }
 
       fillPriceCells();
@@ -1866,7 +1873,7 @@
       lastAssistantExchange = null;
       assistantApply.hidden = true;
       renderAssistantConversation();
-      assistantMessage("记录已清空。");
+      assistantMessage("本机旧记录已清空；共享问答仍会显示。");
     });
 
     assistantApply.addEventListener("click", async () => {
@@ -1930,9 +1937,9 @@
           tripContext: tripContext()
         }, token);
 
-        const items = readAssistantConversation();
-        items.push({ question, answer: result.answer, userName: result.userName || "你", savedAt: new Date().toISOString() });
-        writeAssistantConversation(items);
+        sharedAssistantConversation = result.conversation || [
+          { question, answer: result.answer, userName: result.userName || "你", savedAt: result.savedAt || new Date().toISOString(), canApplyChange: result.canApplyChange }
+        ];
         if (result.canApplyChange) {
           lastAssistantExchange = { question, answer: result.answer };
           assistantApply.hidden = false;
