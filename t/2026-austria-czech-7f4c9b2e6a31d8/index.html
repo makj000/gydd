@@ -862,6 +862,74 @@
       cursor: pointer;
     }
 
+    .day-question {
+      grid-column: 2;
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid #edf0f4;
+    }
+
+    .day-question-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .day-question textarea {
+      width: 100%;
+      min-height: 44px;
+      max-height: 140px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+      color: var(--ink);
+      font: inherit;
+      line-height: 1.45;
+      resize: vertical;
+    }
+
+    .day-question button {
+      min-height: 44px;
+      padding: 9px 12px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .day-question button:disabled {
+      background: #e3e7e2;
+      color: #899286;
+      cursor: wait;
+    }
+
+    .day-question-status {
+      min-height: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .day-question-answer {
+      display: none;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+      white-space: pre-wrap;
+    }
+
+    .day-question-answer:not(:empty) {
+      display: block;
+    }
+
     .lodging-table,
     .ticket-table {
       width: 100%;
@@ -938,6 +1006,10 @@
       .place-gallery {
         grid-column: 1;
       }
+
+      .day-question {
+        grid-column: 1;
+      }
     }
 
     @media (max-width: 620px) {
@@ -977,6 +1049,10 @@
       }
 
       .assistant-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day-question-row {
         grid-template-columns: 1fr;
       }
 
@@ -1767,13 +1843,23 @@
     function tripContext() {
       const clone = document.querySelector("main").cloneNode(true);
       clone.querySelector(".assistant-panel")?.remove();
+      clone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
+      return clone.innerText.replace(/\n{3,}/g, "\n\n").trim();
+    }
+
+    function dayContext(dayArticle) {
+      const clone = dayArticle.cloneNode(true);
+      clone.querySelector(".day-question")?.remove();
       return clone.innerText.replace(/\n{3,}/g, "\n\n").trim();
     }
 
     function editableTripHtml() {
+      const daysClone = document.querySelector(".days").cloneNode(true);
+      daysClone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
+
       return {
         lodgingBody: document.querySelector(".lodging-table tbody").innerHTML,
-        daysHtml: document.querySelector(".days").innerHTML
+        daysHtml: daysClone.innerHTML
       };
     }
 
@@ -1794,7 +1880,72 @@
 
       fillPriceCells();
       linkTripPhotos();
+      renderDayQuestionPanels();
       renderRuntimeVersions(state);
+    }
+
+    function renderDayQuestionPanels() {
+      document.querySelectorAll(".day").forEach((day, index) => {
+        day.querySelector(".day-question")?.remove();
+
+        const dateText = day.querySelector(".date strong")?.textContent?.trim() || `第 ${index + 1} 天`;
+        const panel = document.createElement("div");
+        panel.className = "day-question";
+
+        const row = document.createElement("div");
+        row.className = "day-question-row";
+
+        const textarea = document.createElement("textarea");
+        textarea.placeholder = `只问${dateText}当天安排，例如：这天午饭放在哪里更顺？`;
+        textarea.setAttribute("aria-label", `${dateText}当天安排提问`);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "问这一天";
+
+        const status = document.createElement("div");
+        status.className = "day-question-status";
+
+        const answer = document.createElement("div");
+        answer.className = "day-question-answer";
+
+        button.addEventListener("click", async () => {
+          const token = assistantToken.value.trim();
+          const question = textarea.value.trim();
+
+          if (!token) {
+            status.textContent = "请先在智能助手区域输入访问码。";
+            return;
+          }
+
+          if (!question) {
+            status.textContent = "请先输入关于这一天的问题。";
+            return;
+          }
+
+          localStorage.setItem(assistantTokenKey, token);
+          button.disabled = true;
+          status.textContent = "正在询问这一天的安排。";
+          answer.textContent = "";
+
+          try {
+            const result = await assistantRequest({
+              question: `只根据${dateText}当天安排回答：${question}`,
+              tripContext: dayContext(day)
+            }, token);
+            answer.textContent = result.answer || "";
+            status.textContent = "已收到回答。";
+          } catch (error) {
+            status.textContent = error.message || "暂时无法连接智能助手。";
+          } finally {
+            button.disabled = false;
+          }
+        });
+
+        row.append(textarea, button);
+        panel.append(row, status, answer);
+        day.append(panel);
+      });
     }
 
     function renderRuntimeVersions(state) {
@@ -1916,6 +2067,7 @@
     }
 
     renderAssistantConversation();
+    renderDayQuestionPanels();
     loadRuntimeVersion();
 
     document.getElementById("assistant-save-token").addEventListener("click", () => {
