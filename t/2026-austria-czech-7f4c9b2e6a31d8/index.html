@@ -1854,7 +1854,7 @@
           repeat.textContent = "正在重复问";
 
           try {
-            await sendAssistantQuestion(item.question);
+            await sendAssistantQuestion(item.question, item.canApplyChange || clientCanApplyChange(item.question));
           } finally {
             repeat.disabled = false;
             repeat.textContent = "重复问";
@@ -2112,6 +2112,19 @@
       }
     }
 
+    function clientCanApplyChange(question) {
+      const text = (question || "").trim();
+      if (!text) {
+        return false;
+      }
+
+      const editTerms = ["改", "修改", "调整", "更新", "换成", "改成", "放到", "移到", "安排到", "加", "加入", "添加", "删除", "去掉", "移除", "替换"];
+      const pageTerms = ["页面", "网页", "行程", "安排", "表格", "地图", "版本", "住宿", "按钮", "问答", "图片", "照片", "票价", "预订", "天气", "当天", "这天", "这项", "项目", "注解", "备注", "说明", "西门子", "节日之夜"];
+      const datePattern = /(\d{1,2}\s*月\s*\d{1,2}\s*(日|号)?)|(\d{1,2}\/\d{1,2})/;
+
+      return editTerms.some((term) => text.includes(term)) && (pageTerms.some((term) => text.includes(term)) || datePattern.test(text));
+    }
+
     renderAssistantConversation();
     renderDayQuestionPanels();
     loadRuntimeVersion();
@@ -2166,7 +2179,7 @@
       }
     });
 
-    async function sendAssistantQuestion(questionOverride = "") {
+    async function sendAssistantQuestion(questionOverride = "", forceCanApply = false) {
       const token = assistantToken.value.trim();
       const question = (questionOverride || assistantQuestion.value).trim();
 
@@ -2190,10 +2203,11 @@
           tripContext: tripContext()
         }, token);
 
+        const canApply = Boolean(result.canApplyChange || forceCanApply);
         sharedAssistantConversation = result.conversation || [
-          { question, answer: result.answer, userName: result.userName || "你", savedAt: result.savedAt || new Date().toISOString(), canApplyChange: result.canApplyChange }
+          { question, answer: result.answer, userName: result.userName || "你", savedAt: result.savedAt || new Date().toISOString(), canApplyChange: canApply }
         ];
-        if (result.canApplyChange) {
+        if (canApply) {
           lastAssistantExchange = { question, answer: result.answer };
           assistantApply.hidden = false;
         } else {
@@ -2202,7 +2216,7 @@
         }
         renderAssistantConversation();
         assistantQuestion.value = "";
-        assistantMessage(result.canApplyChange ? "已收到改动建议；页面尚未修改，请确认后再应用。" : "已收到回答。");
+        assistantMessage(canApply ? "已收到改动建议；页面尚未修改，请确认后再应用。" : "已收到回答。");
       } catch (error) {
         assistantMessage(error.message || "暂时无法连接智能助手。");
       }
