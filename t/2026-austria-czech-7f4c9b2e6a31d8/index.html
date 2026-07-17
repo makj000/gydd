@@ -1661,7 +1661,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：64</div>
+    <div class="page-version" aria-label="网页版本">网页版本：65</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2675,6 +2675,151 @@
 
     linkTripPhotos();
 
+    const placeTermGroups = [
+      ["Zum Zirkelwirt", "Zirkelwirt"],
+      ["Gasthof Goldgasse", "Goldgasse"],
+      ["海尔布伦戏水宫", "海尔布伦", "戏水宫", "水机关"],
+      ["霍亨萨尔茨堡城堡", "霍亨萨尔茨堡"],
+      ["卡比特尔广场", "西门子节日之夜"],
+      ["萨尔茨堡老城", "粮食胡同", "米拉贝尔花园", "莫扎特出生地", "老城"],
+      ["匹斯特林山登山火车", "匹斯特林山", "登山火车"],
+      ["林茨中央广场", "中央广场"],
+      ["林茨圣玛丽大教堂", "圣玛丽大教堂"],
+      ["毛特豪森纪念馆", "毛特豪森"],
+      ["布杰约维采广场", "普瑞米斯欧塔卡拉二世广场", "布杰约维采"],
+      ["黑塔"],
+      ["百威酿酒厂", "酿酒厂"],
+      ["老城桥塔", "查理大桥", "桥塔"],
+      ["圣尼古拉教堂"],
+      ["Století", "三世纪餐厅"],
+      ["皇家花园", "布拉格城堡", "城堡区"],
+      ["圣维特大教堂", "圣维特"],
+      ["小城"],
+      ["波希米亚小酒馆"],
+      ["人骨教堂", "Sedlec", "塞德莱茨"],
+      ["库特纳霍拉"],
+      ["Kolkovna Dock", "科尔科夫纳餐厅", "Kolkovna"],
+      ["高堡"],
+      ["伏尔塔瓦河", "河边", "河景"],
+      ["康帕岛", "列侬墙", "佩特任山"],
+      ["犹太区"],
+      ["布拉格机场", "机场"]
+    ];
+
+    function normalizeMatchText(text) {
+      return (text || "").toLowerCase().replace(/[\s·（）()《》：:；;，,。.!！、\-]/g, "");
+    }
+
+    function groupScore(group, rowText) {
+      return group.reduce((score, term) => {
+        const normalized = normalizeMatchText(term);
+        if (!normalized || !rowText.includes(normalized)) {
+          return score;
+        }
+        return Math.max(score, normalized.length);
+      }, 0);
+    }
+
+    function bestLinkedRow(card, rows) {
+      const cardText = normalizeMatchText(card.innerText);
+      const matchedGroups = placeTermGroups.filter((group) => group.some((term) => cardText.includes(normalizeMatchText(term))));
+      if (!matchedGroups.length) {
+        return null;
+      }
+
+      return rows.reduce((best, row) => {
+        const rowText = normalizeMatchText(row.innerText);
+        const score = matchedGroups.reduce((total, group) => total + groupScore(group, rowText), 0);
+        if (score > best.score) {
+          return { row, score };
+        }
+        return best;
+      }, { row: null, score: 0 }).row;
+    }
+
+    function clearPlaceHover(day) {
+      day.querySelectorAll(".is-linked-active").forEach((item) => item.classList.remove("is-linked-active"));
+    }
+
+    function setPlaceHover(day, target) {
+      clearPlaceHover(day);
+      target.classList.add("is-linked-active");
+
+      const rowIds = (target.dataset.linkedRows || "").split(" ").filter(Boolean);
+      const cardIds = (target.dataset.linkedCards || "").split(" ").filter(Boolean);
+      rowIds.forEach((id) => day.querySelector(`[data-place-row-id="${id}"]`)?.classList.add("is-linked-active"));
+      cardIds.forEach((id) => day.querySelector(`[data-place-card-id="${id}"]`)?.classList.add("is-linked-active"));
+    }
+
+    function bindPlaceHover(day) {
+      if (day.dataset.placeHoverBound) {
+        return;
+      }
+
+      day.dataset.placeHoverBound = "true";
+      day.addEventListener("pointerover", (event) => {
+        const target = event.target.closest(".place-card.place-linked, .items li.place-linked");
+        if (target && day.contains(target)) {
+          setPlaceHover(day, target);
+        }
+      });
+      day.addEventListener("pointerout", (event) => {
+        const target = event.target.closest(".place-card.place-linked, .items li.place-linked");
+        if (target && !target.contains(event.relatedTarget)) {
+          clearPlaceHover(day);
+        }
+      });
+      day.addEventListener("focusin", (event) => {
+        const target = event.target.closest(".place-card.place-linked, .items li.place-linked");
+        if (target && day.contains(target)) {
+          setPlaceHover(day, target);
+        }
+      });
+      day.addEventListener("focusout", () => clearPlaceHover(day));
+    }
+
+    function initPlaceHoverLinks(root = document) {
+      const days = root.matches?.(".day") ? [root] : Array.from(root.querySelectorAll(".day"));
+      days.forEach((day, dayIndex) => {
+        const rows = Array.from(day.querySelectorAll(".items li:not(.items-header)")).filter((row) => row.querySelector(".time"));
+        const cards = Array.from(day.querySelectorAll(".place-card"));
+
+        rows.forEach((row, rowIndex) => {
+          row.classList.remove("place-linked", "is-linked-active");
+          row.dataset.placeRowId = `d${dayIndex}r${rowIndex}`;
+          delete row.dataset.linkedCards;
+        });
+
+        cards.forEach((card, cardIndex) => {
+          card.classList.remove("place-linked", "is-linked-active");
+          card.dataset.placeCardId = `d${dayIndex}c${cardIndex}`;
+          delete card.dataset.linkedRows;
+          card.querySelector(".place-snippet")?.remove();
+        });
+
+        cards.forEach((card) => {
+          const row = bestLinkedRow(card, rows);
+          if (!row) {
+            return;
+          }
+
+          card.classList.add("place-linked");
+          row.classList.add("place-linked");
+          card.dataset.linkedRows = row.dataset.placeRowId;
+          row.dataset.linkedCards = [row.dataset.linkedCards, card.dataset.placeCardId].filter(Boolean).join(" ");
+
+          const snippet = document.createElement("small");
+          snippet.className = "place-snippet";
+          snippet.textContent = row.querySelector(".time")?.textContent.trim() + " " + (row.querySelector(":scope > span:nth-child(2)")?.textContent.trim() || "").slice(0, 82);
+          card.querySelector("span")?.append(snippet);
+        });
+
+        bindPlaceHover(day);
+      });
+    }
+
+    initPlaceHoverLinks();
+
     function keepMapTextReadable() {
       const mapSvg = document.querySelector(".map-canvas svg");
 
@@ -3056,6 +3201,7 @@
       addDiningPhoto(day, dining);
       fillPriceCells(day);
       linkTripPhotos(day);
+      initPlaceHoverLinks(day);
       return true;
     }
 
@@ -3103,6 +3249,7 @@
       linkTripPhotos();
       renderDayQuestionPanels();
       renderTicketSignups();
+      initPlaceHoverLinks();
       renderRuntimeVersions(state);
     }
 
@@ -3396,6 +3543,7 @@
     renderAssistantConversation();
     renderTicketSignups();
     renderDayQuestionPanels();
+    initPlaceHoverLinks();
     loadRuntimeVersion();
 
     document.getElementById("assistant-clear").addEventListener("click", () => {
