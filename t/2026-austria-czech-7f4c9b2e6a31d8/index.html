@@ -1210,7 +1210,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：35</div>
+    <div class="page-version" aria-label="网页版本">网页版本：36</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -2088,7 +2088,7 @@
         applyButton.hidden = true;
 
         textarea.addEventListener("keydown", (event) => {
-          if (event.key !== "Enter" || event.shiftKey || button.disabled) {
+          if (event.key !== "Enter" || event.shiftKey || event.metaKey || event.altKey || event.ctrlKey || button.disabled) {
             return;
           }
 
