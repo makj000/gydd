@@ -1661,7 +1661,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：65</div>
+    <div class="page-version" aria-label="网页版本">网页版本：66</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2720,8 +2720,18 @@
       }, 0);
     }
 
+    function cardMatchText(card) {
+      return normalizeMatchText(`${card.innerText} ${card.querySelector("img")?.alt || ""}`);
+    }
+
+    function appendDataToken(element, key, token) {
+      const tokens = new Set((element.dataset[key] || "").split(" ").filter(Boolean));
+      tokens.add(token);
+      element.dataset[key] = Array.from(tokens).join(" ");
+    }
+
     function bestLinkedRow(card, rows) {
-      const cardText = normalizeMatchText(card.innerText);
+      const cardText = cardMatchText(card);
       const matchedGroups = placeTermGroups.filter((group) => group.some((term) => cardText.includes(normalizeMatchText(term))));
       if (!matchedGroups.length) {
         return null;
@@ -2735,6 +2745,23 @@
         }
         return best;
       }, { row: null, score: 0 }).row;
+    }
+
+    function bestLinkedCard(row, cards) {
+      const rowText = normalizeMatchText(row.innerText);
+      const matchedGroups = placeTermGroups.filter((group) => group.some((term) => rowText.includes(normalizeMatchText(term))));
+      if (!matchedGroups.length) {
+        return null;
+      }
+
+      return cards.reduce((best, card) => {
+        const cardText = cardMatchText(card);
+        const score = matchedGroups.reduce((total, group) => total + groupScore(group, cardText), 0);
+        if (score > best.score) {
+          return { card, score };
+        }
+        return best;
+      }, { card: null, score: 0 }).card;
     }
 
     function clearPlaceHover(day) {
@@ -2805,13 +2832,25 @@
 
           card.classList.add("place-linked");
           row.classList.add("place-linked");
-          card.dataset.linkedRows = row.dataset.placeRowId;
-          row.dataset.linkedCards = [row.dataset.linkedCards, card.dataset.placeCardId].filter(Boolean).join(" ");
+          appendDataToken(card, "linkedRows", row.dataset.placeRowId);
+          appendDataToken(row, "linkedCards", card.dataset.placeCardId);
 
           const snippet = document.createElement("small");
           snippet.className = "place-snippet";
           snippet.textContent = row.querySelector(".time")?.textContent.trim() + " " + (row.querySelector(":scope > span:nth-child(2)")?.textContent.trim() || "").slice(0, 82);
           card.querySelector("span")?.append(snippet);
+        });
+
+        rows.forEach((row) => {
+          const card = bestLinkedCard(row, cards);
+          if (!card) {
+            return;
+          }
+
+          row.classList.add("place-linked");
+          card.classList.add("place-linked");
+          appendDataToken(row, "linkedCards", card.dataset.placeCardId);
+          appendDataToken(card, "linkedRows", row.dataset.placeRowId);
         });
 
         bindPlaceHover(day);
