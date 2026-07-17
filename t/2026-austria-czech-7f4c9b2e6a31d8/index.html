@@ -443,6 +443,17 @@
       border-bottom: 1px solid #edf0f4;
     }
 
+    .items li.is-past {
+      opacity: .45;
+      filter: grayscale(.35);
+    }
+
+    .items li.is-current {
+      border-radius: 8px;
+      background: #fff7e6;
+      box-shadow: 0 0 0 2px rgba(166, 108, 25, 0.22);
+    }
+
     .items li.place-linked {
       border-radius: 8px;
       transition: background .16s ease, box-shadow .16s ease;
@@ -545,6 +556,27 @@
     .items li:last-child {
       padding-bottom: 0;
       border-bottom: 0;
+    }
+
+    .day-clock {
+      display: inline-grid;
+      gap: 2px;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 6px 9px;
+      border: 1px solid rgba(52, 91, 132, 0.25);
+      border-radius: 8px;
+      background: #edf4fb;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .day-clock small {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .place-gallery {
@@ -1540,7 +1572,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：44</div>
+    <div class="page-version" aria-label="网页版本">网页版本：45</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1668,7 +1700,7 @@
     </section>
 
     <section class="days">
-      <article class="day" id="day-0729">
+      <article class="day" id="day-0729" data-date="2026-07-29" data-time-zone="Europe/Vienna" data-time-zone-label="奥地利当地时间">
         <div class="date">
           <strong>7 月 29 日，周三</strong>
           <span>抵达和第一场放映</span>
@@ -1691,7 +1723,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0730">
+      <article class="day" id="day-0730" data-date="2026-07-30" data-time-zone="Europe/Vienna" data-time-zone-label="奥地利当地时间">
         <div class="date">
           <strong>7 月 30 日，周四</strong>
           <span>老城、海尔布伦和第二场放映</span>
@@ -1726,7 +1758,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0731">
+      <article class="day" id="day-0731" data-date="2026-07-31" data-time-zone="Europe/Vienna" data-time-zone-label="奥地利当地时间">
         <div class="date">
           <strong>7 月 31 日，周五</strong>
           <span>萨尔茨堡缓冲，然后去林茨</span>
@@ -1748,7 +1780,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0801">
+      <article class="day" id="day-0801" data-date="2026-08-01" data-time-zone="Europe/Vienna" data-time-zone-label="奥地利当地时间">
         <div class="date">
           <strong>8 月 1 日，周六</strong>
           <span>林茨城市日</span>
@@ -1769,7 +1801,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0802">
+      <article class="day" id="day-0802" data-date="2026-08-02" data-time-zone="Europe/Vienna" data-time-zone-label="奥地利/捷克当地时间">
         <div class="date">
           <strong>8 月 2 日，周日</strong>
           <span>毛特豪森，然后布杰约维采</span>
@@ -1798,7 +1830,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0803">
+      <article class="day" id="day-0803" data-date="2026-08-03" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 3 日，周一</strong>
           <span>布杰约维采</span>
@@ -1828,7 +1860,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0804">
+      <article class="day" id="day-0804" data-date="2026-08-04" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 4 日，周二</strong>
           <span>转移到布拉格</span>
@@ -1850,7 +1882,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0805">
+      <article class="day" id="day-0805" data-date="2026-08-05" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 5 日，周三</strong>
           <span>布拉格城堡区</span>
@@ -1882,7 +1914,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0806">
+      <article class="day" id="day-0806" data-date="2026-08-06" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 6 日，周四</strong>
           <span>库特纳霍拉人骨教堂</span>
@@ -1913,7 +1945,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0807">
+      <article class="day" id="day-0807" data-date="2026-08-07" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 7 日，周五</strong>
           <span>最后完整一天</span>
@@ -1936,7 +1968,7 @@
         </div>
       </article>
 
-      <article class="day" id="day-0808">
+      <article class="day" id="day-0808" data-date="2026-08-08" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 8 日，周六</strong>
           <span>返程</span>
@@ -3166,6 +3198,98 @@
     document.getElementById("assistant-send").addEventListener("click", async () => {
       await sendAssistantQuestion();
     });
+
+    function localParts(date, timeZone) {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).formatToParts(date).reduce((result, part) => {
+        result[part.type] = part.value;
+        return result;
+      }, {});
+
+      return {
+        date: `${parts.year}-${parts.month}-${parts.day}`,
+        minutes: Number(parts.hour) * 60 + Number(parts.minute),
+        label: `${parts.hour}:${parts.minute}`
+      };
+    }
+
+    function rowStartMinutes(row) {
+      const text = row.querySelector(".time")?.textContent.trim() || "";
+      const exact = text.match(/(\d{1,2}):(\d{2})/);
+      if (exact) {
+        return Number(exact[1]) * 60 + Number(exact[2]);
+      }
+
+      if (text.includes("上午")) {
+        return 9 * 60;
+      }
+      if (text.includes("午餐")) {
+        return 12 * 60 + 30;
+      }
+      if (text.includes("下午")) {
+        return 14 * 60;
+      }
+      if (text.includes("傍晚")) {
+        return 17 * 60 + 30;
+      }
+      if (text.includes("晚上") || text.includes("晚餐")) {
+        return 18 * 60;
+      }
+      return null;
+    }
+
+    function updateTripTimeline() {
+      const now = new Date();
+      document.querySelectorAll(".day[data-date][data-time-zone]").forEach((day) => {
+        const dateText = day.dataset.date;
+        const timeZone = day.dataset.timeZone;
+        const zoneLabel = day.dataset.timeZoneLabel || "当地时间";
+        const current = localParts(now, timeZone);
+        const rows = Array.from(day.querySelectorAll(".items li:not(.items-header)"));
+        const timedRows = rows.map((row) => ({ row, start: rowStartMinutes(row) })).filter((item) => item.start !== null);
+        let clock = day.querySelector(".day-clock");
+
+        if (!clock) {
+          clock = document.createElement("div");
+          clock.className = "day-clock";
+          day.querySelector(".date")?.append(clock);
+        }
+
+        clock.innerHTML = `<span>${zoneLabel} ${current.label}</span><small>${dateText}</small>`;
+        rows.forEach((row) => row.classList.remove("is-past", "is-current"));
+
+        if (current.date < dateText) {
+          clock.innerHTML += "<small>还没到这一天</small>";
+          return;
+        }
+
+        if (current.date > dateText) {
+          rows.forEach((row) => row.classList.add("is-past"));
+          clock.innerHTML += "<small>这一天已结束</small>";
+          return;
+        }
+
+        timedRows.forEach((item, index) => {
+          const next = timedRows[index + 1]?.start ?? 24 * 60;
+          if (current.minutes >= next) {
+            item.row.classList.add("is-past");
+          } else if (current.minutes >= item.start && current.minutes < next) {
+            item.row.classList.add("is-current");
+          }
+        });
+        clock.innerHTML += "<small>当前当地时间位置</small>";
+      });
+    }
+
+    updateTripTimeline();
+    window.setInterval(updateTripTimeline, 60 * 1000);
 
     function formatTripDate(dateText) {
       const date = new Date(`${dateText}T00:00:00`);
