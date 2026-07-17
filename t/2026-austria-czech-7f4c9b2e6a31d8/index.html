@@ -532,7 +532,9 @@
     .items li:not(.items-header)::after {
       content: "";
       grid-column: 4;
+      grid-row: 1;
       justify-self: center;
+      align-self: start;
       min-width: 28px;
       min-height: 28px;
       display: none;
@@ -583,8 +585,8 @@
     }
 
     .items li .signup-panel {
-      grid-column: 2 / 5;
-      margin-top: 12px;
+      grid-column: 2 / 4;
+      margin-top: 4px;
     }
 
     .items li:last-child {
@@ -1183,17 +1185,16 @@
 
     .signup-panel {
       display: grid;
-      gap: 10px;
-      padding: 12px;
+      gap: 4px;
+      padding: 0;
       scroll-margin-top: 68px;
-      border: 2px solid rgba(166, 108, 25, 0.38);
-      border-radius: 8px;
-      background: #fffdf7;
+      border: 0;
+      background: transparent;
     }
 
     .signup-panel:target {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 4px rgba(166, 108, 25, 0.16);
+      outline: 2px solid rgba(166, 108, 25, 0.38);
+      outline-offset: 3px;
     }
 
     .signup-panel.is-locked .family-grid {
@@ -1228,6 +1229,10 @@
       font-weight: 800;
     }
 
+    .signup-totals:empty {
+      display: none;
+    }
+
     .ticket-total {
       display: inline;
     }
@@ -1239,13 +1244,17 @@
 
     .signup-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(128px, auto));
+      grid-template-columns: repeat(3, minmax(128px, auto)) auto;
       gap: 8px;
       align-items: center;
-      padding: 8px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfaf6;
+      padding: 0;
+    }
+
+    .signup-total-inline {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .family-count {
@@ -1254,8 +1263,8 @@
       gap: 5px;
       align-items: center;
       justify-content: start;
-      min-height: 36px;
-      padding: 6px 8px;
+      min-height: 32px;
+      padding: 4px 7px;
       border: 1px solid var(--line);
       border-radius: 6px;
       background: white;
@@ -1271,7 +1280,7 @@
 
     .family-count select {
       min-width: 46px;
-      min-height: 30px;
+      min-height: 28px;
       padding: 4px 6px;
       border: 1px solid var(--line);
       border-radius: 6px;
@@ -1570,7 +1579,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：53</div>
+    <div class="page-version" aria-label="网页版本">网页版本：54</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2337,11 +2346,18 @@
           };
         }, { adults: 0, children: 0 });
 
-        const card = document.createElement("span");
-        card.className = "ticket-total";
         const unit = item.type === "restaurant" ? "人" : "张";
-        card.textContent = `合计：成人 ${total.adults}，小孩 ${total.children}，共 ${total.adults + total.children} ${unit}`;
-        signupTotals.append(card);
+        const text = `合计 成人 ${total.adults} / 小孩 ${total.children} / 共 ${total.adults + total.children} ${unit}`;
+        const inlineTotal = panel.querySelector(`[data-signup-total-inline="${item.id}"]`);
+
+        if (inlineTotal) {
+          inlineTotal.textContent = text;
+        } else {
+          const card = document.createElement("span");
+          card.className = "ticket-total";
+          card.textContent = text;
+          signupTotals.append(card);
+        }
       });
     }
 
@@ -2390,6 +2406,11 @@
             group.append(name, "成人", adults, "小孩", children);
             row.append(group);
           });
+
+          const total = document.createElement("span");
+          total.className = "signup-total-inline";
+          total.dataset.signupTotalInline = item.id;
+          row.append(total);
 
           familyGrid.append(row);
         });
