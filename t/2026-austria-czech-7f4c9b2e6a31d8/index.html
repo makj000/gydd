@@ -2665,6 +2665,19 @@
       }).format(date);
     }
 
+    function formatUsage(usage) {
+      if (!usage || !usage.totalTokens) {
+        return "";
+      }
+      const usd = Number(usage.estimatedUsd || 0);
+      return `Token：${usage.inputTokens || 0} 入 / ${usage.outputTokens || 0} 出 / ${usage.totalTokens || 0} 总；估算 $${usd.toFixed(6)}`;
+    }
+
+    function actionCostText(state) {
+      const text = formatUsage(state?.lastActionUsage);
+      return text ? `；本次确认 ${text}` : "";
+    }
+
     function renderAssistantConversation() {
       const sourceItems = mergeAssistantConversations(sharedAssistantConversation || [], readAssistantConversation());
       const items = sourceItems.slice().sort((a, b) => {
@@ -2686,7 +2699,8 @@
 
         const meta = document.createElement("div");
         meta.className = "assistant-entry-meta";
-        meta.textContent = `时间：${formatAssistantTime(item.savedAt)}`;
+        const usageText = formatUsage(item.usage);
+        meta.textContent = `时间：${formatAssistantTime(item.savedAt)}${usageText ? `；${usageText}` : ""}`;
 
         const questionTitle = document.createElement("strong");
         questionTitle.textContent = `${item.userName || "你"}：`;
@@ -3131,7 +3145,7 @@
               }, token);
             }
             applyTripState(state);
-            assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
+            assistantMessage(`改动已确认，已保存为运行版本 ${state.version}${actionCostText(state)}。`);
           } catch (error) {
             status.textContent = error.message || "暂时无法应用修改。";
             button.disabled = false;
@@ -3341,7 +3355,7 @@
         assistantApply.disabled = false;
         assistantApply.textContent = "确认改动后会看到页面更新";
         renderAssistantConversation();
-        assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
+        assistantMessage(`改动已确认，已保存为运行版本 ${state.version}${actionCostText(state)}。`);
       } catch (error) {
         assistantApply.disabled = false;
         assistantApply.textContent = "确认改动后会看到页面更新";
