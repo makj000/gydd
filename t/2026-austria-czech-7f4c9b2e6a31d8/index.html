@@ -1217,7 +1217,7 @@
       display: none;
     }
 
-    .family-count select:disabled,
+    .family-count input:disabled,
     .family-head input:disabled {
       cursor: not-allowed;
       opacity: .55;
@@ -1259,7 +1259,7 @@
 
     .family-count {
       display: grid;
-      grid-template-columns: auto auto auto auto auto;
+      grid-template-columns: auto auto auto auto;
       gap: 5px;
       align-items: center;
       justify-content: start;
@@ -1274,20 +1274,22 @@
       white-space: nowrap;
     }
 
+    .checkbox-pack {
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
+    }
+
     .family-count strong {
       color: var(--ink);
       white-space: nowrap;
     }
 
-    .family-count select {
-      min-width: 46px;
-      min-height: 28px;
-      padding: 4px 6px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: white;
-      color: var(--ink);
-      font: inherit;
+    .family-count input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: var(--green);
     }
 
     .lodging-table,
@@ -1539,7 +1541,7 @@
       }
 
       .family-count {
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: auto auto auto auto;
       }
 
       .items li::after {
@@ -1580,7 +1582,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：59</div>
+    <div class="page-version" aria-label="网页版本">网页版本：60</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2295,22 +2297,30 @@
       localStorage.setItem(ticketSignupKey, JSON.stringify(families));
     }
 
-    function countOptions(max, selected) {
-      return Array.from({ length: max + 1 }, (_, value) => {
-        const option = document.createElement("option");
-        option.value = String(value);
-        option.textContent = String(value);
-        option.selected = Number(selected || 0) === value;
-        return option;
-      });
-    }
-
     function familyItemCounts(family, itemId) {
       family.counts ||= {};
       family.counts[itemId] ||= { adults: 0, children: 0 };
       family.counts[itemId].adults = Math.min(Number(family.counts[itemId].adults || 0), family.maxAdults);
       family.counts[itemId].children = Math.min(Number(family.counts[itemId].children || 0), family.maxChildren);
       return family.counts[itemId];
+    }
+
+    function checkboxPack(count, checkedCount, labelText, onChange) {
+      const pack = document.createElement("span");
+      pack.className = "checkbox-pack";
+
+      Array.from({ length: count }, (_, index) => {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = index < checkedCount;
+        checkbox.setAttribute("aria-label", `${labelText} ${index + 1}`);
+        checkbox.addEventListener("change", () => {
+          onChange(Array.from(pack.querySelectorAll("input")).filter((input) => input.checked).length);
+        });
+        pack.append(checkbox);
+      });
+
+      return pack;
     }
 
     function moveSignupPanelsIntoRows() {
@@ -2390,24 +2400,22 @@
             const name = document.createElement("strong");
             name.textContent = family.name;
 
-            const adults = document.createElement("select");
-            countOptions(family.maxAdults, counts.adults).forEach((option) => adults.append(option));
-            adults.disabled = !canEditSignups;
-            adults.setAttribute("aria-label", `${family.name} 成人数量`);
-            adults.addEventListener("change", () => {
-              counts.adults = Number(adults.value);
+            const adults = checkboxPack(family.maxAdults, counts.adults, `${family.name} 成人`, (value) => {
+              counts.adults = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
             });
+            adults.querySelectorAll("input").forEach((input) => {
+              input.disabled = !canEditSignups;
+            });
 
-            const children = document.createElement("select");
-            countOptions(family.maxChildren, counts.children).forEach((option) => children.append(option));
-            children.disabled = !canEditSignups;
-            children.setAttribute("aria-label", `${family.name} 小孩数量`);
-            children.addEventListener("change", () => {
-              counts.children = Number(children.value);
+            const children = checkboxPack(family.maxChildren, counts.children, `${family.name} 小孩`, (value) => {
+              counts.children = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
+            });
+            children.querySelectorAll("input").forEach((input) => {
+              input.disabled = !canEditSignups;
             });
 
             group.append(name, "成人", adults, "小孩", children);
