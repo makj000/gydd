@@ -1266,6 +1266,7 @@
     .person-choice {
       display: inline-flex;
       align-items: center;
+      position: relative;
       cursor: pointer;
     }
 
@@ -1334,6 +1335,32 @@
     .person-choice.child .person-body {
       width: 8px;
       height: 8px;
+    }
+
+    .person-choice::after {
+      content: attr(data-person-label);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 5px);
+      z-index: 3;
+      transform: translateX(-50%);
+      display: none;
+      min-width: 18px;
+      padding: 2px 6px;
+      border: 1px solid rgba(25, 35, 43, 0.18);
+      border-radius: 999px;
+      background: #1f2933;
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.3;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .person-choice:hover::after,
+    .person-choice:focus-within::after {
+      display: block;
     }
 
     .family-count strong {
@@ -1647,7 +1674,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：68</div>
+    <div class="page-version" aria-label="网页版本">网页版本：69</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2319,9 +2346,9 @@
 
     function defaultFamilies() {
       return [
-        { id: "family-mq", name: "MQ", maxAdults: 2, maxChildren: 1, adultFigures: ["male", "female"], counts: {} },
-        { id: "family-gs", name: "GS", maxAdults: 2, maxChildren: 1, adultFigures: ["male", "female"], counts: {} },
-        { id: "family-x", name: "X", maxAdults: 1, maxChildren: 1, adultFigures: ["female"], counts: {} }
+        { id: "family-mq", name: "MQ", maxAdults: 2, maxChildren: 1, adultFigures: ["male", "female"], adultLabels: ["M", "Q"], childLabels: ["MQ 小孩"], counts: {} },
+        { id: "family-gs", name: "GS", maxAdults: 2, maxChildren: 1, adultFigures: ["male", "female"], adultLabels: ["G", "S"], childLabels: ["GS 小孩"], counts: {} },
+        { id: "family-x", name: "X", maxAdults: 1, maxChildren: 1, adultFigures: ["female"], adultLabels: ["X"], childLabels: ["X 小孩"], counts: {} }
       ];
     }
 
@@ -2370,20 +2397,24 @@
       return family.counts[itemId];
     }
 
-    function checkboxPack(count, checkedCount, labelText, variant, onChange, figuresOverride = null) {
+    function checkboxPack(count, checkedCount, labelText, variant, onChange, figuresOverride = null, labelsOverride = null) {
       const pack = document.createElement("span");
       pack.className = `checkbox-pack ${variant}`;
       const figures = figuresOverride || (variant === "adults" ? ["male", "female"] : ["child"]);
+      const labels = labelsOverride || [];
 
       Array.from({ length: count }, (_, index) => {
         const choice = document.createElement("label");
         const figure = figures[index] || figures[figures.length - 1];
+        const personLabel = labels[index] || `${labelText} ${index + 1}`;
         choice.className = `person-choice ${figure}`;
+        choice.dataset.personLabel = personLabel;
+        choice.title = personLabel;
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = index < checkedCount;
-        checkbox.setAttribute("aria-label", `${labelText} ${index + 1}`);
+        checkbox.setAttribute("aria-label", personLabel);
         checkbox.addEventListener("change", () => {
           onChange(Array.from(pack.querySelectorAll("input")).filter((input) => input.checked).length);
         });
@@ -2485,7 +2516,7 @@
               counts.adults = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
-            }, family.adultFigures);
+            }, family.adultFigures, family.adultLabels);
             adults.querySelectorAll("input").forEach((input) => {
               input.disabled = !canEditSignups;
             });
@@ -2494,7 +2525,7 @@
               counts.children = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
-            });
+            }, null, family.childLabels);
             children.querySelectorAll("input").forEach((input) => {
               input.disabled = !canEditSignups;
             });
