@@ -1259,7 +1259,7 @@
 
     .family-count {
       display: grid;
-      grid-template-columns: auto auto auto auto;
+      grid-template-columns: auto auto auto;
       gap: 5px;
       align-items: center;
       justify-content: start;
@@ -1276,8 +1276,68 @@
 
     .checkbox-pack {
       display: inline-flex;
-      gap: 3px;
+      gap: 5px;
       align-items: center;
+    }
+
+    .person-choice {
+      display: inline-flex;
+      gap: 2px;
+      align-items: center;
+    }
+
+    .person-icon {
+      display: inline-grid;
+      justify-items: center;
+      align-items: start;
+      width: 13px;
+      height: 18px;
+    }
+
+    .person-head {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .person-body {
+      width: 9px;
+      height: 10px;
+      margin-top: 1px;
+      background: currentColor;
+    }
+
+    .person-choice.male {
+      color: var(--blue);
+    }
+
+    .person-choice.female {
+      color: var(--red);
+    }
+
+    .person-choice.female .person-body {
+      width: 11px;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .person-choice.child {
+      color: var(--gold);
+    }
+
+    .person-choice.child .person-icon {
+      width: 11px;
+      height: 15px;
+    }
+
+    .person-choice.child .person-head {
+      width: 5px;
+      height: 5px;
+    }
+
+    .person-choice.child .person-body {
+      width: 8px;
+      height: 8px;
     }
 
     .family-count strong {
@@ -1289,7 +1349,6 @@
       width: 16px;
       height: 16px;
       margin: 0;
-      accent-color: var(--green);
     }
 
     .lodging-table,
@@ -1541,7 +1600,7 @@
       }
 
       .family-count {
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: auto auto auto;
       }
 
       .items li::after {
@@ -1582,7 +1641,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：60</div>
+    <div class="page-version" aria-label="网页版本">网页版本：62</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2256,7 +2315,7 @@
       return [
         { id: "family-mq", name: "MQ", maxAdults: 2, maxChildren: 1, counts: {} },
         { id: "family-gs", name: "GS", maxAdults: 2, maxChildren: 1, counts: {} },
-        { id: "family-x", name: "X", maxAdults: 1, maxChildren: 1, counts: {} }
+        { id: "family-x", name: "X", maxAdults: 2, maxChildren: 1, counts: {} }
       ];
     }
 
@@ -2305,11 +2364,16 @@
       return family.counts[itemId];
     }
 
-    function checkboxPack(count, checkedCount, labelText, onChange) {
+    function checkboxPack(count, checkedCount, labelText, variant, onChange) {
       const pack = document.createElement("span");
-      pack.className = "checkbox-pack";
+      pack.className = `checkbox-pack ${variant}`;
+      const figures = variant === "adults" ? ["male", "female"] : ["child"];
 
       Array.from({ length: count }, (_, index) => {
+        const choice = document.createElement("label");
+        const figure = figures[index] || figures[figures.length - 1];
+        choice.className = `person-choice ${figure}`;
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = index < checkedCount;
@@ -2317,7 +2381,18 @@
         checkbox.addEventListener("change", () => {
           onChange(Array.from(pack.querySelectorAll("input")).filter((input) => input.checked).length);
         });
-        pack.append(checkbox);
+
+        const icon = document.createElement("span");
+        icon.className = "person-icon";
+        icon.setAttribute("aria-hidden", "true");
+        const head = document.createElement("span");
+        head.className = "person-head";
+        const body = document.createElement("span");
+        body.className = "person-body";
+        icon.append(head, body);
+
+        choice.append(checkbox, icon);
+        pack.append(choice);
       });
 
       return pack;
@@ -2400,7 +2475,7 @@
             const name = document.createElement("strong");
             name.textContent = family.name;
 
-            const adults = checkboxPack(family.maxAdults, counts.adults, `${family.name} 成人`, (value) => {
+            const adults = checkboxPack(family.maxAdults, counts.adults, `${family.name} 成人`, "adults", (value) => {
               counts.adults = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
@@ -2409,7 +2484,7 @@
               input.disabled = !canEditSignups;
             });
 
-            const children = checkboxPack(family.maxChildren, counts.children, `${family.name} 小孩`, (value) => {
+            const children = checkboxPack(family.maxChildren, counts.children, `${family.name} 小孩`, "children", (value) => {
               counts.children = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
@@ -2418,7 +2493,7 @@
               input.disabled = !canEditSignups;
             });
 
-            group.append(name, "成人", adults, "小孩", children);
+            group.append(name, adults, children);
             row.append(group);
           });
 
