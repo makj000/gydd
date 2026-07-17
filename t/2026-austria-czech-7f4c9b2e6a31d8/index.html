@@ -1183,8 +1183,8 @@
 
     .signup-panel {
       display: grid;
-      gap: 16px;
-      padding: 18px;
+      gap: 10px;
+      padding: 12px;
       scroll-margin-top: 68px;
       border: 2px solid rgba(166, 108, 25, 0.38);
       border-radius: 8px;
@@ -1197,7 +1197,7 @@
     }
 
     .signup-panel::before {
-      content: "按家庭选择人数 / Ticket signup by family";
+      content: "报名人数";
       color: var(--gold);
       font-size: 13px;
       font-weight: 900;
@@ -1216,140 +1216,76 @@
     }
 
     .signup-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
+      display: grid;
+      gap: 4px;
     }
 
-    .signup-actions button,
-    .family-card button {
-      min-height: 36px;
-      padding: 8px 12px;
-      border: 0;
-      border-radius: 6px;
-      background: var(--green);
-      color: white;
-      font: inherit;
-      font-weight: 800;
-      cursor: pointer;
+    .signup-actions .version-note {
+      font-size: 14px;
     }
 
-    .signup-actions button:disabled,
-    .family-card button:disabled,
-    .signup-item select:disabled,
+    .family-count select:disabled,
     .family-head input:disabled {
       cursor: not-allowed;
       opacity: .55;
     }
 
-    .family-card button.secondary-button {
-      border: 1px solid var(--line);
-      background: #eef3f1;
-      color: var(--green);
-    }
-
     .signup-totals {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
-    }
-
-    .ticket-total {
-      display: grid;
-      gap: 4px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfaf6;
-    }
-
-    .ticket-total strong {
-      color: var(--green);
-    }
-
-    .ticket-total span {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .family-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 14px;
-    }
-
-    .family-card {
-      display: grid;
-      gap: 12px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfaf6;
-    }
-
-    .family-card.fallback {
-      border-style: dashed;
-    }
-
-    .family-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .family-head input {
-      width: 100%;
-      min-height: 38px;
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: white;
-      color: var(--ink);
-      font: inherit;
-      font-weight: 800;
-    }
-
-    .signup-items {
-      display: grid;
-      gap: 8px;
-    }
-
-    .signup-item {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: 10px;
-      align-items: center;
-      padding: 10px;
-      border: 1px solid #edf0f4;
-      border-radius: 8px;
-      background: white;
-    }
-
-    .signup-item b,
-    .signup-item small {
-      display: block;
-    }
-
-    .signup-item small {
-      color: var(--muted);
-    }
-
-    .count-control {
-      display: grid;
-      gap: 4px;
-      justify-items: start;
       color: var(--muted);
       font-size: 13px;
       font-weight: 800;
     }
 
-    .count-control select {
-      min-width: 58px;
-      min-height: 34px;
+    .ticket-total {
+      display: inline;
+    }
+
+    .family-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .signup-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) repeat(3, minmax(128px, auto));
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
+    .signup-row-title {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .family-count {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      gap: 5px;
+      align-items: center;
+      justify-content: start;
+      min-height: 36px;
       padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .family-count strong {
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .family-count select {
+      min-width: 46px;
+      min-height: 30px;
+      padding: 4px 6px;
       border: 1px solid var(--line);
       border-radius: 6px;
       background: white;
@@ -1601,6 +1537,14 @@
         grid-column: 1;
       }
 
+      .signup-row {
+        grid-template-columns: 1fr;
+      }
+
+      .family-count {
+        grid-template-columns: auto auto auto auto auto;
+      }
+
       .items li::after {
         display: none;
       }
@@ -1639,7 +1583,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：50</div>
+    <div class="page-version" aria-label="网页版本">网页版本：51</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1828,26 +1772,11 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0730" data-signup-date="7 月 30 日" aria-label="7 月 30 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：海尔布伦戏水宫</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>海尔布伦戏水宫</strong> 每家选成人 0-2、小孩 0-1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
-            <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid>
-            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
-              <div class="family-head">
-                <input value="家庭 1" aria-label="家庭名称" disabled>
-                <button type="button" class="secondary-button" disabled>删除</button>
-              </div>
-              <div class="signup-items">
-                <div class="signup-item">
-                  <div><b>海尔布伦戏水宫</b><small>输入访问码后可修改</small></div>
-                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
-                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="family-grid" data-family-grid></div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
@@ -1915,26 +1844,11 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0802" data-signup-date="8 月 2 日" aria-label="8 月 2 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：毛特豪森导览</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>毛特豪森导览</strong> 每家选成人 0-2、小孩 0-1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
-            <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid>
-            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
-              <div class="family-head">
-                <input value="家庭 1" aria-label="家庭名称" disabled>
-                <button type="button" class="secondary-button" disabled>删除</button>
-              </div>
-              <div class="signup-items">
-                <div class="signup-item">
-                  <div><b>毛特豪森纪念馆导览</b><small>输入访问码后可修改</small></div>
-                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
-                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="family-grid" data-family-grid></div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-residence-marianska.jpg" alt="Residence Mariánská 外观"><span>Residence Mariánská <small class="ticket-note">住宿：8 月 2 日到 8 月 4 日</small></span></figure>
@@ -1959,26 +1873,11 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0803" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：百威酿酒厂参观</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>百威酿酒厂参观</strong> 每家选成人 0-2、小孩 0-1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
-            <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid>
-            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
-              <div class="family-head">
-                <input value="家庭 1" aria-label="家庭名称" disabled>
-                <button type="button" class="secondary-button" disabled>删除</button>
-              </div>
-              <div class="signup-items">
-                <div class="signup-item">
-                  <div><b>百威酿酒厂参观</b><small>输入访问码后可修改</small></div>
-                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
-                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="family-grid" data-family-grid></div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场"><span>普瑞米斯欧塔卡拉二世广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
@@ -2026,26 +1925,11 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0805" data-signup-date="8 月 5 日" aria-label="8 月 5 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：布拉格城堡主线路</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>布拉格城堡主线路</strong> 每家选成人 0-2、小孩 0-1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
-            <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid>
-            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
-              <div class="family-head">
-                <input value="家庭 1" aria-label="家庭名称" disabled>
-                <button type="button" class="secondary-button" disabled>删除</button>
-              </div>
-              <div class="signup-items">
-                <div class="signup-item">
-                  <div><b>布拉格城堡主线路</b><small>输入访问码后可修改</small></div>
-                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
-                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="family-grid" data-family-grid></div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园"><span>皇家花园 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；开放时间复核</small></span></figure>
@@ -2072,26 +1956,11 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0806" data-signup-date="8 月 6 日" aria-label="8 月 6 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：人骨教堂限时票</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>人骨教堂限时票</strong> 每家选成人 0-2、小孩 0-1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
-            <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid>
-            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
-              <div class="family-head">
-                <input value="家庭 1" aria-label="家庭名称" disabled>
-                <button type="button" class="secondary-button" disabled>删除</button>
-              </div>
-              <div class="signup-items">
-                <div class="signup-item">
-                  <div><b>人骨教堂限时票</b><small>输入访问码后可修改</small></div>
-                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
-                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="family-grid" data-family-grid></div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"><span>人骨教堂 <em class="booking-tag">限时票提前买</em><small class="ticket-note">门票：成人 220 克朗；儿童 80 克朗</small></span></figure>
@@ -2339,19 +2208,28 @@
     heroAssistantToken.value = assistantToken.value;
 
     function defaultFamilies() {
-      return [
-        {
-          id: `family-${Date.now()}`,
-          name: "家庭 1",
-          counts: {}
-        }
-      ];
+      return [1, 2, 3].map((number) => ({
+        id: `family-${number}`,
+        name: `家庭 ${number}`,
+        counts: {}
+      }));
+    }
+
+    function fixedFamilies(families) {
+      const source = Array.isArray(families) ? families : [];
+      return defaultFamilies().map((family, index) => {
+        const saved = source[index] || source.find((item) => item?.id === family.id) || {};
+        return {
+          ...family,
+          counts: saved.counts || {}
+        };
+      });
     }
 
     function readTicketSignups() {
       try {
         const stored = JSON.parse(localStorage.getItem(ticketSignupKey) || "[]");
-        return Array.isArray(stored) && stored.length ? stored : defaultFamilies();
+        return fixedFamilies(stored);
       } catch {
         return defaultFamilies();
       }
@@ -2412,15 +2290,9 @@
           };
         }, { adults: 0, children: 0 });
 
-        const card = document.createElement("div");
+        const card = document.createElement("span");
         card.className = "ticket-total";
-        const title = document.createElement("strong");
-        title.textContent = `${item.date} ${item.name}`;
-        const count = document.createElement("span");
-        count.textContent = `成人 ${total.adults} 张，小孩 ${total.children} 张，总计 ${total.adults + total.children} 张`;
-        const note = document.createElement("span");
-        note.textContent = item.note;
-        card.append(title, count, note);
+        card.textContent = `合计：成人 ${total.adults}，小孩 ${total.children}，共 ${total.adults + total.children} 张`;
         signupTotals.append(card);
       });
     }
@@ -2435,90 +2307,47 @@
         familyGrid.innerHTML = "";
         panel.classList.toggle("is-locked", !canEditSignups);
         panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "已通过访问码解锁，可修改当天报名。" : "需要先在智能助手区输入访问码，才能修改报名。";
-        panel.querySelectorAll("[data-add-family]").forEach((button) => {
-          button.disabled = !canEditSignups;
-          button.onclick = () => {
-            const currentFamilies = readTicketSignups();
-            currentFamilies.push({ id: `family-${Date.now()}`, name: `家庭 ${currentFamilies.length + 1}`, counts: {} });
-            writeTicketSignups(currentFamilies);
-            renderTicketSignups();
-          };
-        });
+        itemsForPanel.forEach((item) => {
+          const row = document.createElement("div");
+          row.className = "signup-row";
 
-        families.forEach((family, familyIndex) => {
-          const card = document.createElement("article");
-          card.className = "family-card";
+          const title = document.createElement("div");
+          title.className = "signup-row-title";
+          title.textContent = item.name;
+          row.append(title);
 
-          const head = document.createElement("div");
-          head.className = "family-head";
-          const name = document.createElement("input");
-          name.value = family.name || `家庭 ${familyIndex + 1}`;
-          name.setAttribute("aria-label", "家庭名称");
-          name.disabled = !canEditSignups;
-          name.addEventListener("input", () => {
-            family.name = name.value;
-            writeTicketSignups(families);
-            renderTicketSignups();
-          });
-
-          const remove = document.createElement("button");
-          remove.type = "button";
-          remove.className = "secondary-button";
-          remove.textContent = "删除";
-          remove.disabled = !canEditSignups;
-          remove.addEventListener("click", () => {
-            families.splice(familyIndex, 1);
-            writeTicketSignups(families.length ? families : defaultFamilies());
-            renderTicketSignups();
-          });
-          head.append(name, remove);
-
-          const items = document.createElement("div");
-          items.className = "signup-items";
-          itemsForPanel.forEach((item) => {
+          families.forEach((family) => {
             const counts = familyItemCounts(family, item.id);
-            const row = document.createElement("div");
-            row.className = "signup-item";
+            const group = document.createElement("label");
+            group.className = "family-count";
+            const name = document.createElement("strong");
+            name.textContent = family.name;
 
-            const label = document.createElement("div");
-            const title = document.createElement("b");
-            title.textContent = item.name;
-            const note = document.createElement("small");
-            note.textContent = item.note;
-            label.append(title, note);
-
-            const adultLabel = document.createElement("label");
-            adultLabel.className = "count-control";
-            adultLabel.textContent = "成人";
             const adults = document.createElement("select");
             countOptions(2, counts.adults).forEach((option) => adults.append(option));
             adults.disabled = !canEditSignups;
+            adults.setAttribute("aria-label", `${family.name} 成人数量`);
             adults.addEventListener("change", () => {
               counts.adults = Number(adults.value);
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
             });
-            adultLabel.append(adults);
 
-            const childLabel = document.createElement("label");
-            childLabel.className = "count-control";
-            childLabel.textContent = "小孩";
             const children = document.createElement("select");
             countOptions(1, counts.children).forEach((option) => children.append(option));
             children.disabled = !canEditSignups;
+            children.setAttribute("aria-label", `${family.name} 小孩数量`);
             children.addEventListener("change", () => {
               counts.children = Number(children.value);
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
             });
-            childLabel.append(children);
 
-            row.append(label, adultLabel, childLabel);
-            items.append(row);
+            group.append(name, "成人", adults, "小孩", children);
+            row.append(group);
           });
 
-          card.append(head, items);
-          familyGrid.append(card);
+          familyGrid.append(row);
         });
 
         renderSignupTotals(panel, families, itemsForPanel);
