@@ -1210,7 +1210,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：36</div>
+    <div class="page-version" aria-label="网页版本">网页版本：37</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -2026,6 +2026,21 @@
       return Boolean(result?.canApplyChange || clientCanApplyChange(text) || asksDining);
     }
 
+    function dayApplyQuestion(dateText, question, answerText) {
+      const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question || "");
+      if (asksDining) {
+        return [
+          `只修改${dateText}当天详细计划里对应的午餐或晚餐那一行。`,
+          "把助手推荐的餐馆名称、餐费标准和菜单链接写进这一行；如果助手提到首选餐馆，只采用首选餐馆，不要把备选餐馆都写进详细计划。",
+          "如果这一天的照片区还没有该餐馆照片，并且页面已有对应本地图片，可以在当天照片区最后加一张餐馆照片。",
+          `原始问题：${question}`,
+          `助手建议：${answerText}`
+        ].join("\n");
+      }
+
+      return [`只修改${dateText}当天详细计划中和下面建议直接相关的一行或一个项目。`, `原始问题：${question}`, `助手建议：${answerText}`].join("\n");
+    }
+
     function editableTripHtml() {
       const daysClone = document.querySelector(".days").cloneNode(true);
       daysClone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
@@ -2126,7 +2141,7 @@
             answer.textContent = answerText;
             if (answerText && daySuggestionCanApply(question, result)) {
               applyButton.hidden = false;
-              applyButton.dataset.question = `把${dateText}当天安排按这个建议更新。原始问题：${question}`;
+              applyButton.dataset.question = dayApplyQuestion(dateText, question, answerText);
               applyButton.dataset.answer = answerText;
             }
             status.textContent = "已收到回答。";
