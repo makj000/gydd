@@ -1580,7 +1580,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：56</div>
+    <div class="page-version" aria-label="网页版本">网页版本：57</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2195,6 +2195,7 @@
     const runtimeVersionList = document.getElementById("runtime-version-list");
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
+    let sharedTicketSignups = null;
     let lastAppliedAssistantQuestion = "";
     const baselineVersions = [
       { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能助手。" },
@@ -2277,6 +2278,10 @@
     }
 
     function readTicketSignups() {
+      if (sharedTicketSignups) {
+        return fixedFamilies(sharedTicketSignups);
+      }
+
       try {
         const stored = JSON.parse(localStorage.getItem(ticketSignupKey) || "[]");
         return fixedFamilies(stored);
@@ -2286,6 +2291,7 @@
     }
 
     function writeTicketSignups(families) {
+      sharedTicketSignups = fixedFamilies(families);
       localStorage.setItem(ticketSignupKey, JSON.stringify(families));
     }
 
@@ -2421,6 +2427,81 @@
 
       writeTicketSignups(families);
       moveSignupPanelsIntoRows();
+    }
+
+    function signupRequestMode(question) {
+      const text = question || "";
+      if (!/(统计|人数|报名|参加|参与|几个人)/.test(text)) {
+        return "";
+      }
+      if (/(所有人|全部人|全员|都参加|都去|全都参加)/.test(text)) {
+        return "all";
+      }
+      if (/(没人|不参加|都不去|清空|取消)/.test(text)) {
+        return "none";
+      }
+      return "";
+    }
+
+    function signupPanelsForQuestion(day, question) {
+      const panels = Array.from(day.querySelectorAll(".day-signup"));
+      const text = question || "";
+      if (/晚餐|晚饭/.test(text)) {
+        const matched = panels.filter((panel) => /晚餐|Zum|Století|波希米亚|Kolkovna|科尔科夫纳/.test(panel.getAttribute("aria-label") || ""));
+        return matched.length ? matched : panels;
+      }
+      if (/午餐|午饭/.test(text)) {
+        const matched = panels.filter((panel) => /午餐|Goldgasse/.test(panel.getAttribute("aria-label") || ""));
+        return matched.length ? matched : panels;
+      }
+      return panels;
+    }
+
+    function dayForQuestion(question) {
+      const text = question || "";
+      const match = text.match(/(\d{1,2})\s*月\s*(\d{1,2})\s*(日|号)?/);
+      if (!match) {
+        return null;
+      }
+      const dateText = `${Number(match[1])} 月 ${Number(match[2])} 日`;
+      return Array.from(document.querySelectorAll(".day")).find((day) => {
+        const strong = day.querySelector(".date strong")?.textContent || "";
+        return strong.includes(dateText);
+      }) || null;
+    }
+
+    function applySignupRequestLocally(day, question) {
+      const mode = signupRequestMode(question);
+      if (!mode) {
+        return { changed: false, families: readTicketSignups(), summary: "" };
+      }
+
+      const panels = signupPanelsForQuestion(day, question);
+      if (!panels.length) {
+        return { changed: false, families: readTicketSignups(), summary: "" };
+      }
+
+      const families = readTicketSignups();
+      panels.forEach((panel) => {
+        const itemId = panel.dataset.signupItem;
+        if (!itemId) {
+          return;
+        }
+        families.forEach((family) => {
+          const counts = familyItemCounts(family, itemId);
+          counts.adults = mode === "all" ? family.maxAdults : 0;
+          counts.children = mode === "all" ? family.maxChildren : 0;
+        });
+      });
+
+      writeTicketSignups(families);
+      renderTicketSignups();
+      const names = panels.map((panel) => panel.getAttribute("aria-label") || "报名统计").join("、");
+      return {
+        changed: true,
+        families,
+        summary: mode === "all" ? `${names}：所有人参加` : `${names}：清空参加人数`
+      };
     }
 
     function syncAssistantToken(token, sourceInput) {
@@ -2713,7 +2794,7 @@
     function daySuggestionCanApply(question, result) {
       const text = question || "";
       const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(text);
-      return Boolean(result?.canApplyChange || clientCanApplyChange(text) || asksDining);
+      return Boolean(result?.canApplyChange || clientCanApplyChange(text) || asksDining || signupRequestMode(text));
     }
 
     function dayApplyQuestion(dateText, question, answerText) {
@@ -2896,6 +2977,11 @@
         syncLocalConversationToServer();
       }
 
+      if (Array.isArray(state.ticketSignups)) {
+        sharedTicketSignups = fixedFamilies(state.ticketSignups);
+        localStorage.setItem(ticketSignupKey, JSON.stringify(sharedTicketSignups));
+      }
+
       fillPriceCells();
       linkTripPhotos();
       renderDayQuestionPanels();
@@ -3009,7 +3095,14 @@
 
           try {
             let state;
-            if (applyButton.dataset.localMode === "dining" && applyDiningSuggestionLocally(day, originalQuestion, answerText)) {
+            const signupChange = applySignupRequestLocally(day, originalQuestion);
+            if (signupChange.changed) {
+              state = await assistantRequest({
+                action: "save_signups",
+                summary: signupChange.summary,
+                ticketSignups: signupChange.families
+              }, token);
+            } else if (applyButton.dataset.localMode === "dining" && applyDiningSuggestionLocally(day, originalQuestion, answerText)) {
               state = await assistantRequest({
                 action: "save_state",
                 summary: "当天助手确认餐馆建议",
@@ -3209,12 +3302,20 @@
       assistantWorking("正在确认改动并保存为新版。");
 
       try {
-        const state = await assistantRequest({
-          action: "apply_change",
-          question: lastAssistantExchange.question,
-          answer: lastAssistantExchange.answer,
-          editable: editableTripHtml()
-        }, token);
+        const targetDay = dayForQuestion(lastAssistantExchange.question);
+        const signupChange = targetDay ? applySignupRequestLocally(targetDay, lastAssistantExchange.question) : { changed: false };
+        const state = signupChange.changed
+          ? await assistantRequest({
+              action: "save_signups",
+              summary: signupChange.summary,
+              ticketSignups: signupChange.families
+            }, token)
+          : await assistantRequest({
+              action: "apply_change",
+              question: lastAssistantExchange.question,
+              answer: lastAssistantExchange.answer,
+              editable: editableTripHtml()
+            }, token);
         applyTripState(state);
         lastAppliedAssistantQuestion = lastAssistantExchange.question;
         lastAssistantExchange = null;
