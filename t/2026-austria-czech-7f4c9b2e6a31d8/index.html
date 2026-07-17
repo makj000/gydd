@@ -2078,7 +2078,14 @@
         headers,
         body: JSON.stringify(body)
       });
-      const result = await response.json();
+      const responseText = await response.text();
+      let result = {};
+
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        result = { error: responseText || "后端返回了非 JSON 响应。" };
+      }
 
       if (!response.ok) {
         throw new Error(result.error || "请求失败。");
