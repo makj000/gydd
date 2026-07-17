@@ -1580,7 +1580,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：55</div>
+    <div class="page-version" aria-label="网页版本">网页版本：56</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2106,7 +2106,7 @@
       <h2>智能助手</h2>
       <div>
         <a class="assistant-jump" href="#detailed-plan">回到详细计划</a>
-        <p>输入访问码后可以直接提问；助手只会先给改动建议，点击最新回答下方的“确认按建议改页面”后，才会保存为服务器运行版本并更新页面。</p>
+        <p>输入访问码后可以直接提问；需要改页面时，助手会先给建议，点击最新回答下方的“确认改动后会看到页面更新”后，服务器会按行程行生成新版并保留回滚版本。</p>
       </div>
     </section>
 
@@ -2127,7 +2127,7 @@
       </div>
       <p class="assistant-status" id="assistant-status"></p>
       <div class="assistant-log" id="assistant-log" aria-label="助手回答记录"></div>
-      <button type="button" id="assistant-apply" class="secondary-button" hidden>确认按建议改页面</button>
+      <button type="button" id="assistant-apply" class="secondary-button" hidden>确认改动后会看到页面更新</button>
     </section>
 
     <details class="collapsed-section" id="version-section">
@@ -2864,9 +2864,19 @@
     function editableTripHtml() {
       const daysClone = document.querySelector(".days").cloneNode(true);
       daysClone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
+      daysClone.querySelectorAll(".price-cell").forEach((cell) => cell.remove());
+      daysClone.querySelectorAll(".day-photo a, .place-card a").forEach((link) => {
+        const image = link.querySelector("img");
+        if (image) {
+          link.replaceWith(image);
+        }
+      });
+
+      const lodgingBody = document.querySelector(".lodging-table tbody").cloneNode(true);
+      lodgingBody.querySelectorAll(".price-cell").forEach((cell) => cell.remove());
 
       return {
-        lodgingBody: document.querySelector(".lodging-table tbody").innerHTML,
+        lodgingBody: lodgingBody.innerHTML,
         daysHtml: daysClone.innerHTML
       };
     }
@@ -2920,7 +2930,7 @@
 
         const applyButton = document.createElement("button");
         applyButton.type = "button";
-        applyButton.textContent = "确认按建议改页面";
+        applyButton.textContent = "确认改动后会看到页面更新";
         applyButton.hidden = true;
 
         textarea.addEventListener("keydown", (event) => {
@@ -2960,7 +2970,7 @@
             }, token);
             const answerText = result.answer || "";
             answer.textContent = answerText;
-            if (answerText) {
+            if (answerText && daySuggestionCanApply(question, result)) {
               applyButton.hidden = false;
               applyButton.dataset.question = dayApplyQuestion(dateText, question, answerText);
               applyButton.dataset.originalQuestion = question;
@@ -3019,7 +3029,7 @@
             status.textContent = error.message || "暂时无法应用修改。";
             button.disabled = false;
             applyButton.disabled = false;
-            applyButton.textContent = "确认按建议改页面";
+            applyButton.textContent = "确认改动后会看到页面更新";
           }
         });
 
@@ -3210,12 +3220,12 @@
         lastAssistantExchange = null;
         assistantApply.hidden = true;
         assistantApply.disabled = false;
-        assistantApply.textContent = "确认按建议改页面";
+        assistantApply.textContent = "确认改动后会看到页面更新";
         renderAssistantConversation();
         assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
       } catch (error) {
         assistantApply.disabled = false;
-        assistantApply.textContent = "确认按建议改页面";
+        assistantApply.textContent = "确认改动后会看到页面更新";
         assistantMessage(error.message || "暂时无法应用修改。");
       }
     });
