@@ -1399,6 +1399,17 @@
       color: var(--gold);
     }
 
+    a.overview-tag {
+      text-decoration: none;
+    }
+
+    a.overview-tag:hover,
+    a.overview-tag:focus {
+      border-color: rgba(52, 91, 132, 0.45);
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
     .lodging-table th:nth-child(2),
     .lodging-table th:nth-child(3),
     .lodging-table th:nth-child(4),
@@ -1601,7 +1612,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：47</div>
+    <div class="page-version" aria-label="网页版本">网页版本：48</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1621,7 +1632,7 @@
     <span>/</span>
     <a href="#booking-section">提前预订建议</a>
     <span>/</span>
-    <a href="#signup-section">报名购票</a>
+    <a href="#signup-0730">报名购票</a>
     <span>/</span>
     <a href="#assistant-section">智能助手</a>
     <span>/</span>
@@ -1727,16 +1738,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>7 月 29 日</td><td>飞往萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="overview-tags"><span class="overview-tag booked">Zum Zirkelwirt 17:30 已订</span><span class="overview-tag">西门子节日之夜免费</span><span class="overview-tag action">提前到场占位置</span></div></td><td><a href="#day-0729">查看</a></td></tr>
-        <tr><td>7 月 30 日</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="overview-tags"><span class="overview-tag action">海尔布伦戏水宫可提前买通用票</span></div></td><td><a href="#day-0730">查看</a></td></tr>
+        <tr><td>7 月 29 日</td><td>飞往萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="overview-tags"><span class="overview-tag booked">Zum Zirkelwirt 17:30 已订</span><span class="overview-tag">西门子节日之夜免费</span><a class="overview-tag action" href="#day-0729">提前到场占位置</a></div></td><td><a href="#day-0729">查看</a></td></tr>
+        <tr><td>7 月 30 日</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0730">海尔布伦戏水宫可提前买通用票</a></div></td><td><a href="#day-0730">查看</a></td></tr>
         <tr><td>7 月 31 日</td><td>萨尔茨堡</td><td>林茨</td><td>林茨</td><td><div class="overview-tags"><span class="overview-tag">城际交通票</span></div></td><td><a href="#day-0731">查看</a></td></tr>
         <tr><td>8 月 1 日</td><td>林茨</td><td>林茨</td><td>林茨</td><td><div class="overview-tags"><span class="overview-tag">匹斯特林山交通票可现场处理</span></div></td><td><a href="#day-0801">查看</a></td></tr>
-        <tr><td>8 月 2 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="overview-tags"><span class="overview-tag action">毛特豪森导览如需要则预约</span><span class="overview-tag">城际交通票</span></div></td><td><a href="#day-0802">查看</a></td></tr>
-        <tr><td>8 月 3 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="overview-tags"><span class="overview-tag action">百威酿酒厂参观预约</span></div></td><td><a href="#day-0803">查看</a></td></tr>
-        <tr><td>8 月 4 日</td><td>布杰约维采</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag">城际交通票</span><span class="overview-tag action">三世纪餐厅可订桌</span></div></td><td><a href="#day-0804">查看</a></td></tr>
-        <tr><td>8 月 5 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag action">布拉格城堡主线路门票</span><span class="overview-tag action">晚餐可订桌</span></div></td><td><a href="#day-0805">查看</a></td></tr>
-        <tr><td>8 月 6 日</td><td>布拉格</td><td>库特纳霍拉人骨教堂</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag action">人骨教堂下午限时票提前买</span><span class="overview-tag">周四安排更稳</span></div></td><td><a href="#day-0806">查看</a></td></tr>
-        <tr><td>8 月 7 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag">高堡、康帕岛、列侬墙、佩特任山</span><span class="overview-tag action">告别晚餐可订桌</span></div></td><td><a href="#day-0807">查看</a></td></tr>
+        <tr><td>8 月 2 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0802">毛特豪森导览如需要则预约</a><span class="overview-tag">城际交通票</span></div></td><td><a href="#day-0802">查看</a></td></tr>
+        <tr><td>8 月 3 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0803">百威酿酒厂参观预约</a></div></td><td><a href="#day-0803">查看</a></td></tr>
+        <tr><td>8 月 4 日</td><td>布杰约维采</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag">城际交通票</span><a class="overview-tag action" href="#day-0804">三世纪餐厅可订桌</a></div></td><td><a href="#day-0804">查看</a></td></tr>
+        <tr><td>8 月 5 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0805">布拉格城堡主线路门票</a><a class="overview-tag action" href="#day-0805">晚餐可订桌</a></div></td><td><a href="#day-0805">查看</a></td></tr>
+        <tr><td>8 月 6 日</td><td>布拉格</td><td>库特纳霍拉人骨教堂</td><td>布拉格</td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0806">人骨教堂下午限时票提前买</a><span class="overview-tag">周四安排更稳</span></div></td><td><a href="#day-0806">查看</a></td></tr>
+        <tr><td>8 月 7 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag">高堡、康帕岛、列侬墙、佩特任山</span><a class="overview-tag action" href="#day-0807">告别晚餐可订桌</a></div></td><td><a href="#day-0807">查看</a></td></tr>
         <tr><td>8 月 8 日</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td><div class="overview-tags"><span class="overview-tag">机场交通</span><span class="overview-tag">航班值机</span></div></td><td><a href="#day-0808">查看</a></td></tr>
       </tbody>
     </table>
@@ -1788,7 +1799,7 @@
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>普契尼《三联剧》，免费入场不需预订，建议停留 170 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">22:50</span><span>放映结束，回酒店约 10 到 20 分钟；公共区域不需预订。</span></li>
         </ul>
-        <section class="signup-panel day-signup" id="signup-section" data-signup-date="7 月 30 日" aria-label="7 月 30 日报名与购票统计">
+        <section class="signup-panel day-signup" id="signup-0730" data-signup-date="7 月 30 日" aria-label="7 月 30 日报名与购票统计">
           <div class="signup-actions">
             <p class="version-note"><strong>报名与购票统计：海尔布伦戏水宫</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
@@ -1861,7 +1872,7 @@
           <li data-price="交通另计"><span class="time">下午</span><span>从毛特豪森前往布杰约维采约 3 到 4 小时，抵达后入住玛丽安斯卡公寓，建议整理 45 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">晚上</span><span>从公寓到广场约 5 到 15 分钟，轻松散步和晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
         </ul>
-        <section class="signup-panel day-signup" data-signup-date="8 月 2 日" aria-label="8 月 2 日报名与购票统计">
+        <section class="signup-panel day-signup" id="signup-0802" data-signup-date="8 月 2 日" aria-label="8 月 2 日报名与购票统计">
           <div class="signup-actions">
             <p class="version-note"><strong>报名与购票统计：毛特豪森导览</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
@@ -1891,7 +1902,7 @@
           <li class="needs-action" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://budweiserbudvar.com/visit-us/"><span class="time">14:00</span><span>从市中心到百威酿酒厂约 15 到 25 分钟；酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。预订建议：锁定 2026 年 8 月 3 日 14:00 左右的英文参观时段；先用下方报名统计确认人数，再预约。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从酿酒厂回市中心或酒店约 15 到 25 分钟，轻松吃饭和休息，建议不要再排重项目。</span></li>
         </ul>
-        <section class="signup-panel day-signup" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
+        <section class="signup-panel day-signup" id="signup-0803" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
           <div class="signup-actions">
             <p class="version-note"><strong>报名与购票统计：百威酿酒厂参观</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
@@ -1944,7 +1955,7 @@
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">下午</span><span>从城堡区慢慢下行到小城约 20 到 30 分钟，小城街区建议停留 90 分钟；公共街区不需预订。</span></li>
           <li data-price="约 500-800 克朗/人"><span class="time">晚餐</span><span>从小城到波希米亚小酒馆或晚餐地点约 10 到 20 分钟，餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
-        <section class="signup-panel day-signup" data-signup-date="8 月 5 日" aria-label="8 月 5 日报名与购票统计">
+        <section class="signup-panel day-signup" id="signup-0805" data-signup-date="8 月 5 日" aria-label="8 月 5 日报名与购票统计">
           <div class="signup-actions">
             <p class="version-note"><strong>报名与购票统计：布拉格城堡主线路</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
@@ -1976,7 +1987,7 @@
           <li data-price="交通另计"><span class="time">傍晚</span><span>返回布拉格约 1 到 1.5 小时。塞德莱茨大教堂周五、周六、周日可能关闭，所以这天不要推迟到周末。</span></li>
           <li data-price="约 500-800 克朗/人" data-link="https://dock.kolkovna.cz/en/?forceVersion=front" data-link-label="菜单"><span class="time">晚餐</span><span>从车站或酒店到 Kolkovna Dock（科尔科夫纳餐厅）约 10 到 20 分钟；地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
-        <section class="signup-panel day-signup" data-signup-date="8 月 6 日" aria-label="8 月 6 日报名与购票统计">
+        <section class="signup-panel day-signup" id="signup-0806" data-signup-date="8 月 6 日" aria-label="8 月 6 日报名与购票统计">
           <div class="signup-actions">
             <p class="version-note"><strong>报名与购票统计：人骨教堂限时票</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
