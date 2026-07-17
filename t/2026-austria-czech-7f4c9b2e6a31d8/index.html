@@ -1196,14 +1196,6 @@
       box-shadow: 0 0 0 4px rgba(166, 108, 25, 0.16);
     }
 
-    .signup-panel::before {
-      content: "报名人数";
-      color: var(--gold);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.02em;
-    }
-
     .signup-panel.is-locked .family-grid {
       opacity: .58;
     }
@@ -1221,7 +1213,7 @@
     }
 
     .signup-actions .version-note {
-      font-size: 14px;
+      display: none;
     }
 
     .family-count select:disabled,
@@ -1247,18 +1239,13 @@
 
     .signup-row {
       display: grid;
-      grid-template-columns: minmax(120px, 1fr) repeat(3, minmax(128px, auto));
+      grid-template-columns: repeat(3, minmax(128px, auto));
       gap: 8px;
       align-items: center;
       padding: 8px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfaf6;
-    }
-
-    .signup-row-title {
-      color: var(--green);
-      font-weight: 900;
     }
 
     .family-count {
@@ -1583,7 +1570,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：52</div>
+    <div class="page-version" aria-label="网页版本">网页版本：53</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2253,17 +2240,25 @@
     heroAssistantToken.value = assistantToken.value;
 
     function defaultFamilies() {
-      return [1, 2, 3].map((number) => ({
-        id: `family-${number}`,
-        name: `家庭 ${number}`,
-        counts: {}
-      }));
+      return [
+        { id: "family-mq", name: "MQ", maxAdults: 2, maxChildren: 2, counts: {} },
+        { id: "family-gs", name: "GS", maxAdults: 2, maxChildren: 2, counts: {} },
+        { id: "family-x", name: "X", maxAdults: 2, maxChildren: 1, counts: {} }
+      ];
     }
 
     function fixedFamilies(families) {
       const source = Array.isArray(families) ? families : [];
       return defaultFamilies().map((family, index) => {
-        const saved = source[index] || source.find((item) => item?.id === family.id) || {};
+        const legacyNames = {
+          "family-mq": ["MQ", "M", "秦", "家庭 1", "family-1"],
+          "family-gs": ["GS", "家庭 2", "family-2"],
+          "family-x": ["X", "家庭 3", "family-3"]
+        };
+        const saved = source.find((item) => item?.id === family.id) ||
+          source.find((item) => legacyNames[family.id].includes(item?.name) || legacyNames[family.id].includes(item?.id)) ||
+          source[index] ||
+          {};
         return {
           ...family,
           counts: saved.counts || {}
@@ -2297,6 +2292,8 @@
     function familyItemCounts(family, itemId) {
       family.counts ||= {};
       family.counts[itemId] ||= { adults: 0, children: 0 };
+      family.counts[itemId].adults = Math.min(Number(family.counts[itemId].adults || 0), family.maxAdults);
+      family.counts[itemId].children = Math.min(Number(family.counts[itemId].children || 0), family.maxChildren);
       return family.counts[itemId];
     }
 
@@ -2358,15 +2355,10 @@
         const familyGrid = panel.querySelector("[data-family-grid]");
         familyGrid.innerHTML = "";
         panel.classList.toggle("is-locked", !canEditSignups);
-        panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "已通过访问码解锁，可修改当天报名。" : "需要先在智能助手区输入访问码，才能修改报名。";
+        panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "" : "输入访问码解锁。";
         itemsForPanel.forEach((item) => {
           const row = document.createElement("div");
           row.className = "signup-row";
-
-          const title = document.createElement("div");
-          title.className = "signup-row-title";
-          title.textContent = item.name;
-          row.append(title);
 
           families.forEach((family) => {
             const counts = familyItemCounts(family, item.id);
@@ -2376,7 +2368,7 @@
             name.textContent = family.name;
 
             const adults = document.createElement("select");
-            countOptions(2, counts.adults).forEach((option) => adults.append(option));
+            countOptions(family.maxAdults, counts.adults).forEach((option) => adults.append(option));
             adults.disabled = !canEditSignups;
             adults.setAttribute("aria-label", `${family.name} 成人数量`);
             adults.addEventListener("change", () => {
@@ -2386,7 +2378,7 @@
             });
 
             const children = document.createElement("select");
-            countOptions(1, counts.children).forEach((option) => children.append(option));
+            countOptions(family.maxChildren, counts.children).forEach((option) => children.append(option));
             children.disabled = !canEditSignups;
             children.setAttribute("aria-label", `${family.name} 小孩数量`);
             children.addEventListener("change", () => {
