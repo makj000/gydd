@@ -1580,7 +1580,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：57</div>
+    <div class="page-version" aria-label="网页版本">网页版本：58</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3061,7 +3061,9 @@
               applyButton.dataset.question = dayApplyQuestion(dateText, question, answerText);
               applyButton.dataset.originalQuestion = question;
               applyButton.dataset.answer = answerText;
-              applyButton.dataset.localMode = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question) ? "dining" : "";
+              applyButton.dataset.localMode = signupRequestMode(question)
+                ? "signup"
+                : (/午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question) ? "dining" : "");
             }
             status.textContent = "已收到回答。";
           } catch (error) {
@@ -3095,13 +3097,17 @@
 
           try {
             let state;
-            const signupChange = applySignupRequestLocally(day, originalQuestion);
+            const signupQuestion = `${originalQuestion} ${question} ${answerText}`;
+            const isSignupChange = applyButton.dataset.localMode === "signup" || Boolean(signupRequestMode(signupQuestion));
+            const signupChange = isSignupChange ? applySignupRequestLocally(day, signupQuestion) : { changed: false };
             if (signupChange.changed) {
               state = await assistantRequest({
                 action: "save_signups",
                 summary: signupChange.summary,
                 ticketSignups: signupChange.families
               }, token);
+            } else if (isSignupChange) {
+              throw new Error("没有找到这一天对应的报名统计项，未保存。");
             } else if (applyButton.dataset.localMode === "dining" && applyDiningSuggestionLocally(day, originalQuestion, answerText)) {
               state = await assistantRequest({
                 action: "save_state",
@@ -3303,7 +3309,11 @@
 
       try {
         const targetDay = dayForQuestion(lastAssistantExchange.question);
-        const signupChange = targetDay ? applySignupRequestLocally(targetDay, lastAssistantExchange.question) : { changed: false };
+        const isSignupChange = Boolean(signupRequestMode(`${lastAssistantExchange.question} ${lastAssistantExchange.answer}`));
+        const signupChange = targetDay && isSignupChange ? applySignupRequestLocally(targetDay, `${lastAssistantExchange.question} ${lastAssistantExchange.answer}`) : { changed: false };
+        if (isSignupChange && !signupChange.changed) {
+          throw new Error("没有找到对应日期的报名统计项；请在当天的小框里提这个人数修改。");
+        }
         const state = signupChange.changed
           ? await assistantRequest({
               action: "save_signups",
