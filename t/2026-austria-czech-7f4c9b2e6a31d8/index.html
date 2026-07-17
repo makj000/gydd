@@ -94,6 +94,36 @@
       backdrop-filter: blur(8px);
     }
 
+    .hero-access {
+      position: absolute;
+      left: min(6vw, 72px);
+      bottom: 28px;
+      z-index: 6;
+      display: inline-grid;
+      grid-template-columns: auto minmax(160px, 240px);
+      gap: 8px;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 8px;
+      background: rgba(13, 20, 24, 0.56);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-access input {
+      width: 100%;
+      min-height: 34px;
+      padding: 6px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      font: inherit;
+    }
+
     .eyebrow {
       margin: 0 0 10px;
       font-size: 14px;
@@ -413,6 +443,16 @@
       border-bottom: 1px solid #edf0f4;
     }
 
+    .items li.place-linked {
+      border-radius: 8px;
+      transition: background .16s ease, box-shadow .16s ease;
+    }
+
+    .items li.place-linked.is-linked-active {
+      background: #fff7e6;
+      box-shadow: 0 0 0 2px rgba(166, 108, 25, 0.22);
+    }
+
     .items li.items-header {
       color: var(--muted);
       font-size: 13px;
@@ -516,11 +556,23 @@
     }
 
     .place-card {
+      position: relative;
       margin: 0;
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfaf6;
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+
+    .place-card.place-linked {
+      cursor: pointer;
+    }
+
+    .place-card.place-linked.is-linked-active {
+      border-color: rgba(166, 108, 25, 0.65);
+      box-shadow: 0 10px 24px rgba(25, 35, 43, 0.14);
+      transform: translateY(-2px);
     }
 
     .place-card img {
@@ -562,6 +614,28 @@
       color: var(--muted);
       font-size: 12px;
       font-weight: 700;
+    }
+
+    .place-card.is-linked-active .ticket-note,
+    .place-card:hover .ticket-note,
+    .place-card:focus .ticket-note,
+    .place-card:focus-within .ticket-note {
+      display: block;
+    }
+
+    .place-snippet {
+      display: none;
+      margin-top: 6px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .place-card.is-linked-active .place-snippet,
+    .place-card:hover .place-snippet,
+    .place-card:focus .place-snippet,
+    .place-card:focus-within .place-snippet {
+      display: block;
     }
 
     .time {
@@ -1050,6 +1124,17 @@
       background: var(--panel);
     }
 
+    .signup-panel.is-locked .family-grid {
+      opacity: .58;
+    }
+
+    .signup-lock-note {
+      width: 100%;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .signup-actions {
       display: flex;
       flex-wrap: wrap;
@@ -1069,6 +1154,14 @@
       font: inherit;
       font-weight: 800;
       cursor: pointer;
+    }
+
+    .signup-actions button:disabled,
+    .family-card button:disabled,
+    .signup-item select:disabled,
+    .family-head input:disabled {
+      cursor: not-allowed;
+      opacity: .55;
     }
 
     .family-card button.secondary-button {
@@ -1213,6 +1306,38 @@
       border-bottom: 0;
     }
 
+    .overview-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .overview-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fbfaf6;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .overview-tag.booked {
+      border-color: rgba(66, 107, 79, 0.35);
+      background: #eef3f1;
+      color: var(--green);
+    }
+
+    .overview-tag.action {
+      border-color: rgba(166, 108, 25, 0.32);
+      background: #fff7e6;
+      color: var(--gold);
+    }
+
     .lodging-table th:nth-child(2),
     .lodging-table th:nth-child(3),
     .lodging-table th:nth-child(4),
@@ -1241,6 +1366,43 @@
     .sources ul {
       margin: 0;
       padding-left: 18px;
+    }
+
+    .collapsed-section {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .collapsed-section summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      color: var(--green);
+      font-size: 19px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .collapsed-section summary::after {
+      content: "展开";
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .collapsed-section[open] summary::after {
+      content: "收起";
+    }
+
+    .collapsed-section-body {
+      display: grid;
+      gap: 14px;
+      padding: 0 18px 18px;
     }
 
     @media (max-width: 900px) {
@@ -1378,10 +1540,14 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：41</div>
+    <div class="page-version" aria-label="网页版本">网页版本：44</div>
+    <label class="hero-access">
+      访问码
+      <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
+    </label>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
-      <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
+      <p class="hero-copy">2026 年 7 月 29 日到 2026 年 8 月 8 日，奥地利和捷克 11 天家庭行程。</p>
     </div>
   </header>
 
@@ -1468,7 +1634,6 @@
 
     <section class="section-head">
       <h2>总览</h2>
-      <p>这张表按你的截图整理，方便先看每天上午、下午和住宿城市。</p>
     </section>
 
     <table class="lodging-table" aria-label="总览">
@@ -1479,20 +1644,21 @@
           <th>下午</th>
           <th>住宿</th>
           <th>需提前买票/预约</th>
+          <th>详细计划</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>7 月 29 日</td><td>飞往萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td>Zum Zirkelwirt 17:30 已订；西门子节日之夜免费，需提前到场占位置</td></tr>
-        <tr><td>7 月 30 日</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td>海尔布伦戏水宫建议提前买下午票</td></tr>
-        <tr><td>7 月 31 日</td><td>萨尔茨堡</td><td>林茨</td><td>林茨</td><td>城际交通票</td></tr>
-        <tr><td>8 月 1 日</td><td>林茨</td><td>林茨</td><td>林茨</td><td>匹斯特林山交通票可现场处理</td></tr>
-        <tr><td>8 月 2 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td>毛特豪森导览如需要则预约；城际交通票</td></tr>
-        <tr><td>8 月 3 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td>百威酿酒厂参观预约</td></tr>
-        <tr><td>8 月 4 日</td><td>布杰约维采</td><td>布拉格</td><td>布拉格</td><td>城际交通票；三世纪餐厅可订桌</td></tr>
-        <tr><td>8 月 5 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td>布拉格城堡主线路门票；晚餐可订桌</td></tr>
-        <tr><td>8 月 6 日</td><td>布拉格</td><td>库特纳霍拉人骨教堂</td><td>布拉格</td><td>人骨教堂下午限时票需提前买；塞德莱茨大教堂周五到周日关闭，周四安排更稳</td></tr>
-        <tr><td>8 月 7 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td>高堡、康帕岛、列侬墙、佩特任山；告别晚餐可订桌</td></tr>
-        <tr><td>8 月 8 日</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td>机场交通；航班值机</td></tr>
+        <tr><td>7 月 29 日</td><td>飞往萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="overview-tags"><span class="overview-tag booked">Zum Zirkelwirt 17:30 已订</span><span class="overview-tag">西门子节日之夜免费</span><span class="overview-tag action">提前到场占位置</span></div></td><td><a href="#day-0729">查看</a></td></tr>
+        <tr><td>7 月 30 日</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="overview-tags"><span class="overview-tag action">海尔布伦戏水宫可提前买通用票</span></div></td><td><a href="#day-0730">查看</a></td></tr>
+        <tr><td>7 月 31 日</td><td>萨尔茨堡</td><td>林茨</td><td>林茨</td><td><div class="overview-tags"><span class="overview-tag">城际交通票</span></div></td><td><a href="#day-0731">查看</a></td></tr>
+        <tr><td>8 月 1 日</td><td>林茨</td><td>林茨</td><td>林茨</td><td><div class="overview-tags"><span class="overview-tag">匹斯特林山交通票可现场处理</span></div></td><td><a href="#day-0801">查看</a></td></tr>
+        <tr><td>8 月 2 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="overview-tags"><span class="overview-tag action">毛特豪森导览如需要则预约</span><span class="overview-tag">城际交通票</span></div></td><td><a href="#day-0802">查看</a></td></tr>
+        <tr><td>8 月 3 日</td><td>布杰约维采</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="overview-tags"><span class="overview-tag action">百威酿酒厂参观预约</span></div></td><td><a href="#day-0803">查看</a></td></tr>
+        <tr><td>8 月 4 日</td><td>布杰约维采</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag">城际交通票</span><span class="overview-tag action">三世纪餐厅可订桌</span></div></td><td><a href="#day-0804">查看</a></td></tr>
+        <tr><td>8 月 5 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag action">布拉格城堡主线路门票</span><span class="overview-tag action">晚餐可订桌</span></div></td><td><a href="#day-0805">查看</a></td></tr>
+        <tr><td>8 月 6 日</td><td>布拉格</td><td>库特纳霍拉人骨教堂</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag action">人骨教堂下午限时票提前买</span><span class="overview-tag">周四安排更稳</span></div></td><td><a href="#day-0806">查看</a></td></tr>
+        <tr><td>8 月 7 日</td><td>布拉格</td><td>布拉格</td><td>布拉格</td><td><div class="overview-tags"><span class="overview-tag">高堡、康帕岛、列侬墙、佩特任山</span><span class="overview-tag action">告别晚餐可订桌</span></div></td><td><a href="#day-0807">查看</a></td></tr>
+        <tr><td>8 月 8 日</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td><div class="overview-tags"><span class="overview-tag">机场交通</span><span class="overview-tag">航班值机</span></div></td><td><a href="#day-0808">查看</a></td></tr>
       </tbody>
     </table>
 
@@ -1502,7 +1668,7 @@
     </section>
 
     <section class="days">
-      <article class="day">
+      <article class="day" id="day-0729">
         <div class="date">
           <strong>7 月 29 日，周三</strong>
           <span>抵达和第一场放映</span>
@@ -1512,20 +1678,20 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="交通另计"><span class="time">13:55</span><span>抵达萨尔茨堡；这天第一段不是从酒店出发，从机场到酒店约 25 到 40 分钟，建议入住和整理 60 分钟。</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">15:30</span><span>休息、洗漱；如果体力可以，再短走老城，酒店到老城步行约 10 到 20 分钟，建议停留 60 到 90 分钟；公共区域不需预订。</span></li>
-          <li class="is-booked" data-price="约 €25-40/人" data-link="https://zumzirkelwirt.at/en/#speisekarte" data-link-label="菜单"><span class="time">17:30</span><span><strong>Zum Zirkelwirt 晚餐已订位。</strong>餐厅在 Pfeifergasse 14，餐费标准约 €25-40/人；吃完从老城步行到卡比特尔广场约 5 到 15 分钟，建议 18:45 到 19:00 左右离开餐厅去占位置。</span></li>
-          <li class="no-booking" data-price="免费"><span class="time">19:00</span><span>从晚餐地点到卡比特尔广场约 5 到 15 分钟，提前到场占位置，建议预留 60 分钟；免费户外区域不需预订。</span></li>
-          <li class="no-booking" data-price="免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>莫扎特《女人心》，免费入场不需预订，建议停留 135 分钟。注：第二晚 7 月 30 日同一地点还有普契尼《三联剧》，如果第一晚体力一般，可以把这晚当作轻量体验，第二晚再完整观看。</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">22:15</span><span>放映结束后穿过老城返回，步行回酒店约 10 到 20 分钟；公共区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">15:30</span><span>休息、洗漱；如果体力可以，再短走老城，酒店到老城步行约 10 到 20 分钟，建议停留 60 到 90 分钟；公共区域不需预订。</span></li>
+          <li class="is-booked" data-price="约 €25-40/人" data-link="https://zumzirkelwirt.at/en/#speisekarte" data-link-label="菜单"><span class="time">17:30</span><span><strong>Zum Zirkelwirt 晚餐已订位。</strong>地址：Pfeifergasse 14, 5020 Salzburg；电话：+43 662 842796；餐费标准约 €25-40/人；吃完从老城步行到卡比特尔广场约 5 到 15 分钟，建议 18:45 到 19:00 左右离开餐厅去占位置。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">19:00</span><span>从晚餐地点到卡比特尔广场约 5 到 15 分钟，提前到场占位置，建议预留 60 分钟；免费户外区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>莫扎特《女人心》，免费入场不需预订，建议停留 135 分钟。注：第二晚 7 月 30 日同一地点还有普契尼《三联剧》，如果第一晚体力一般，可以把这晚当作轻量体验，第二晚再完整观看。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">22:15</span><span>放映结束后穿过老城返回，步行回酒店约 10 到 20 分钟；公共区域不需预订。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-radisson-salzburg-converted.jpg" alt="Radisson Blu Hotel & Conference Centre Salzburg 外观"><span>Radisson Blu Hotel & Conference Centre Salzburg <small class="ticket-note">住宿：7 月 29 日到 7 月 31 日</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"><span>萨尔茨堡老城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场"><span>卡比特尔广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"><span>萨尔茨堡老城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场"><span>卡比特尔广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0730">
         <div class="date">
           <strong>7 月 30 日，周四</strong>
           <span>老城、海尔布伦和第二场放映</span>
@@ -1534,24 +1700,33 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="免费"><span class="time">09:30</span><span>从酒店步行到米拉贝尔花园约 10 到 20 分钟；之后粮食胡同和老城轻松走，各点之间步行约 10 到 20 分钟，建议总停留 2 到 2.5 小时；米拉贝尔花园和老城公共区域不需预订。</span></li>
-          <li data-price="约 €35-55/人" data-link="https://www.gasthofgoldgasse.at/en/" data-link-label="菜单"><span class="time">12:30</span><span>推荐 Gasthof Goldgasse 老城午餐，餐费标准约 €35-55/人，建议用餐 60 分钟；从老城去海尔布伦约 25 到 35 分钟。</span></li>
-          <li class="needs-action" data-price="官网复核" data-link="https://www.hellbrunn.at/en/"><span class="time">14:30</span><span>海尔布伦戏水宫和水机关，天气热时下午玩水更舒服，建议停留 2 小时。</span></li>
-          <li data-price="免费"><span class="time">17:00</span><span>从海尔布伦回老城约 25 到 35 分钟；回酒店休息，建议留 30 到 45 分钟。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">09:30</span><span>从酒店步行到米拉贝尔花园约 10 到 20 分钟；之后粮食胡同和老城轻松走，各点之间步行约 10 到 20 分钟，建议总停留 2 到 2.5 小时；米拉贝尔花园和老城公共区域不需预订。</span></li>
+          <li data-price="约 €35-55/人" data-link="https://www.gasthofgoldgasse.at/en/" data-link-label="菜单"><span class="time">12:30</span><span>推荐 Gasthof Goldgasse 老城午餐，地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费标准约 €35-55/人，建议用餐 60 分钟；从老城去海尔布伦约 25 到 35 分钟。</span></li>
+          <li class="needs-action" data-price="成人 €16.50；儿童 €6.50" data-link="https://www.hellbrunn.at/en/info/opening-hours-prices-arrival"><span class="time">14:30</span><span>海尔布伦戏水宫和水机关，天气热时下午玩水更舒服，建议停留 2 小时；2026 票价为成人 €16.50，儿童/学生 4-18 岁 €6.50。预订建议：可提前买通用门票，7 月 30 日下午使用；这不是预约固定入场时间，主要是减少现场售票排队。</span></li>
+          <li data-price="成人免费；儿童免费"><span class="time">17:00</span><span>从海尔布伦回老城约 25 到 35 分钟；回酒店休息，建议留 30 到 45 分钟。</span></li>
           <li data-price="餐费另计"><span class="time">17:45</span><span>提前晚餐，并带上夜间薄外套，建议用餐 60 分钟。</span></li>
-          <li class="no-booking" data-price="免费"><span class="time">19:00</span><span>从晚餐地点到卡比特尔广场约 5 到 15 分钟，提前到场占位置；免费户外区域不需预订。</span></li>
-          <li class="no-booking" data-price="免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>普契尼《三联剧》，免费入场不需预订，建议停留 170 分钟。</span></li>
-          <li class="no-booking" data-price="免费"><span class="time">22:50</span><span>放映结束，回酒店约 10 到 20 分钟；公共区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">19:00</span><span>从晚餐地点到卡比特尔广场约 5 到 15 分钟，提前到场占位置；免费户外区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>普契尼《三联剧》，免费入场不需预订，建议停留 170 分钟。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">22:50</span><span>放映结束，回酒店约 10 到 20 分钟；公共区域不需预订。</span></li>
         </ul>
+        <section class="signup-panel day-signup" data-signup-date="7 月 30 日" aria-label="7 月 30 日报名与购票统计">
+          <div class="signup-actions">
+            <p class="version-note">当天报名：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="signup-lock-note" data-signup-lock-note></p>
+            <button type="button" data-add-family>添加家庭</button>
+          </div>
+          <div class="signup-totals" data-signup-totals></div>
+          <div class="family-grid" data-family-grid></div>
+        </section>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前买票</em><small class="ticket-note">门票：官网复核</small></span></figure>
-          <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡"><span>霍亨萨尔茨堡城堡 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票：官网复核</small></span></figure>
-          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场"><span>卡比特尔广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/gasthof-goldgasse.jpg" alt="Gasthof Goldgasse 餐厅"><span>Gasthof Goldgasse <em class="booking-tag">推荐午餐</em><small class="ticket-note">餐费：约 €35-55/人；菜单见午餐行官网链接</small></span></figure>
+          <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
+          <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡"><span>霍亨萨尔茨堡城堡 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票：Basic 成人 €15.50；儿童 €6.30；All-inclusive 成人 €19.20；儿童 €7.30</small></span></figure>
+          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场"><span>卡比特尔广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/gasthof-goldgasse.jpg" alt="Gasthof Goldgasse 餐厅"><span>Gasthof Goldgasse <em class="booking-tag">推荐午餐</em><small class="ticket-note">地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费：约 €35-55/人；菜单见午餐行官网链接</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0731">
         <div class="date">
           <strong>7 月 31 日，周五</strong>
           <span>萨尔茨堡缓冲，然后去林茨</span>
@@ -1560,20 +1735,20 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">上午</span><span>从酒店步行到米拉贝尔花园约 10 到 20 分钟；慢节奏恢复上午：米拉贝尔花园、粮食胡同、莫扎特出生地外观或咖啡，各点步行约 5 到 15 分钟，建议停留 2 小时；米拉贝尔花园、粮食胡同和外观散步不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">上午</span><span>从酒店步行到米拉贝尔花园约 10 到 20 分钟；慢节奏恢复上午：米拉贝尔花园、粮食胡同、莫扎特出生地外观或咖啡，各点步行约 5 到 15 分钟，建议停留 2 小时；米拉贝尔花园、粮食胡同和外观散步不需预订。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>离开萨尔茨堡前午餐，建议用餐 60 分钟；从老城到车站约 15 到 25 分钟。</span></li>
           <li data-price="交通另计"><span class="time">下午</span><span>前往林茨并入住，萨尔茨堡到林茨火车约 1.5 小时，车站到酒店约 15 到 25 分钟，入住整理约 45 分钟。</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">晚上</span><span>从酒店到中央广场约 10 到 20 分钟，轻松走中央广场或酒店附近晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">晚上</span><span>从酒店到中央广场约 10 到 20 分钟，轻松走中央广场或酒店附近晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/mirabell.jpg" alt="米拉贝尔花园"><span>米拉贝尔花园 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="粮食胡同"><span>粮食胡同 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
+          <figure class="place-card"><img src="photos/mirabell.jpg" alt="米拉贝尔花园"><span>米拉贝尔花园 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="粮食胡同"><span>粮食胡同 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/hotel-courtyard-linz.jpg" alt="Courtyard by Marriott Linz 酒店"><span>Courtyard by Marriott Linz <small class="ticket-note">住宿：7 月 31 日到 8 月 2 日</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场"><span>林茨中央广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场"><span>林茨中央广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0801">
         <div class="date">
           <strong>8 月 1 日，周六</strong>
           <span>林茨城市日</span>
@@ -1582,19 +1757,19 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li data-price="交通票另计"><span class="time">09:30</span><span>从酒店步行到林茨市中心或登山火车接驳点约 15 到 25 分钟；坐匹斯特林山登山火车看城市景观，从市中心上山约 30 到 40 分钟，山上建议停留 90 分钟。</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">13:00</span><span>回到中央广场和老城，交通约 30 到 40 分钟，建议停留 90 分钟并顺便午餐；公共区域不需预订。</span></li>
-          <li class="no-booking" data-price="入内通常免费"><span class="time">15:00</span><span>从中央广场到林茨圣玛丽大教堂步行约 10 到 15 分钟，建议停留 45 到 60 分钟；普通入内通常不需预订。</span></li>
+          <li data-price="成人 €9.00；儿童/优惠 €4.50"><span class="time">09:30</span><span>从酒店步行到林茨市中心或登山火车接驳点约 15 到 25 分钟；坐匹斯特林山登山火车看城市景观，从市中心上山约 30 到 40 分钟，山上建议停留 90 分钟；往返票成人 €9.00，儿童/优惠 €4.50。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">13:00</span><span>回到中央广场和老城，交通约 30 到 40 分钟，建议停留 90 分钟并顺便午餐；公共区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">15:00</span><span>从中央广场到林茨圣玛丽大教堂步行约 10 到 15 分钟，建议停留 45 到 60 分钟；普通入内通常不需预订，现场捐赠另计。</span></li>
           <li data-price="餐费另计"><span class="time">晚餐</span><span>从教堂到金山饭店或其他晚餐地点约 10 到 20 分钟，建议用餐 60 到 90 分钟。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山登山火车"><span>匹斯特林山登山火车 <small class="ticket-note">门票：交通票另计</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场"><span>林茨中央广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂"><span>林茨圣玛丽大教堂 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：入内通常免费，现场捐赠另计</small></span></figure>
+          <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山登山火车"><span>匹斯特林山登山火车 <small class="ticket-note">门票：往返成人 €9.00；儿童/优惠 €4.50</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场"><span>林茨中央广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂"><span>林茨圣玛丽大教堂 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；现场捐赠另计</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0802">
         <div class="date">
           <strong>8 月 2 日，周日</strong>
           <span>毛特豪森，然后布杰约维采</span>
@@ -1603,18 +1778,27 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action" data-price="自助免费"><span class="time">上午</span><span>从酒店步行到林茨出发站点约 15 到 25 分钟；再从林茨去毛特豪森纪念馆约 45 到 75 分钟，纪念馆建议停留 2.5 到 3 小时，这类参观不要赶时间。</span></li>
+          <li class="needs-action" data-price="成人免费；儿童免费；导览另计"><span class="time">上午</span><span>从酒店步行到林茨出发站点约 15 到 25 分钟；再从林茨去毛特豪森纪念馆约 45 到 75 分钟，纪念馆建议停留 2.5 到 3 小时；自助参观成人和儿童免费，导览需预约且费用另计。预订建议：如果要导览，先用下方报名统计确认人数，再提前预约；如果自助参观，出发前复核开放时间和交通即可。</span></li>
           <li data-price="交通另计"><span class="time">下午</span><span>从毛特豪森前往布杰约维采约 3 到 4 小时，抵达后入住玛丽安斯卡公寓，建议整理 45 分钟。</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">晚上</span><span>从公寓到广场约 5 到 15 分钟，轻松散步和晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">晚上</span><span>从公寓到广场约 5 到 15 分钟，轻松散步和晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
         </ul>
+        <section class="signup-panel day-signup" data-signup-date="8 月 2 日" aria-label="8 月 2 日报名与购票统计">
+          <div class="signup-actions">
+            <p class="version-note">当天报名：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="signup-lock-note" data-signup-lock-note></p>
+            <button type="button" data-add-family>添加家庭</button>
+          </div>
+          <div class="signup-totals" data-signup-totals></div>
+          <div class="family-grid" data-family-grid></div>
+        </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-residence-marianska.jpg" alt="Residence Mariánská 外观"><span>Residence Mariánská <small class="ticket-note">住宿：8 月 2 日到 8 月 4 日</small></span></figure>
-          <figure class="place-card"><img src="photos/mauthausen.jpg" alt="毛特豪森纪念馆"><span>毛特豪森纪念馆 <em class="booking-tag">导览需预约</em><small class="ticket-note">门票：自助参观免费</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="布杰约维采广场"><span>布杰约维采广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
+          <figure class="place-card"><img src="photos/mauthausen.jpg" alt="毛特豪森纪念馆"><span>毛特豪森纪念馆 <em class="booking-tag">导览需预约</em><small class="ticket-note">门票：成人免费；儿童免费；导览另计</small></span></figure>
+          <figure class="place-card"><img src="photos/budejovice.jpg" alt="布杰约维采广场"><span>布杰约维采广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0803">
         <div class="date">
           <strong>8 月 3 日，周一</strong>
           <span>布杰约维采</span>
@@ -1623,19 +1807,28 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="广场免费；黑塔复核" data-link="https://www.budejce.cz/"><span class="time">09:30</span><span>从公寓步行到普瑞米斯欧塔卡拉二世广场约 5 到 15 分钟；广场公共区域不需预订，黑塔现场登塔规则出发前复核，建议总停留 2 小时。</span></li>
+          <li class="no-booking" data-price="广场成人/儿童免费；黑塔成人约 80 克朗、儿童约 40 克朗" data-link="https://www.budejce.cz/en/activities/2-black-tower"><span class="time">09:30</span><span>从公寓步行到普瑞米斯欧塔卡拉二世广场约 5 到 15 分钟；广场公共区域不需预订，黑塔登塔参考价成人约 80 克朗、儿童约 40 克朗，出发前复核，建议总停留 2 小时。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>城内自行午餐，从黑塔到餐厅通常步行约 5 到 15 分钟，建议用餐 60 分钟。</span></li>
-          <li class="needs-action" data-price="官网复核" data-link="https://www.visitbudvar.cz/en/"><span class="time">14:00</span><span>从市中心到百威酿酒厂约 15 到 25 分钟；酿酒厂建议停留 90 分钟，需确认参观时间和预约。</span></li>
+          <li class="needs-action" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://budweiserbudvar.com/visit-us/"><span class="time">14:00</span><span>从市中心到百威酿酒厂约 15 到 25 分钟；酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。预订建议：锁定 2026 年 8 月 3 日 14:00 左右的英文参观时段；先用下方报名统计确认人数，再预约。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从酿酒厂回市中心或酒店约 15 到 25 分钟，轻松吃饭和休息，建议不要再排重项目。</span></li>
         </ul>
+        <section class="signup-panel day-signup" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
+          <div class="signup-actions">
+            <p class="version-note">当天报名：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="signup-lock-note" data-signup-lock-note></p>
+            <button type="button" data-add-family>添加家庭</button>
+          </div>
+          <div class="signup-totals" data-signup-totals></div>
+          <div class="family-grid" data-family-grid></div>
+        </section>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场"><span>普瑞米斯欧塔卡拉二世广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/blacktower.jpg" alt="黑塔"><span>黑塔 <small class="ticket-note">门票：官网复核</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="百威酿酒厂"><span>百威酿酒厂 <em class="booking-tag">提前预约</em><small class="ticket-note">门票：官网复核</small></span></figure>
+          <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场"><span>普瑞米斯欧塔卡拉二世广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/blacktower.jpg" alt="黑塔"><span>黑塔 <small class="ticket-note">门票：成人约 80 克朗；儿童约 40 克朗，现场复核</small></span></figure>
+          <figure class="place-card"><img src="photos/budejovice.jpg" alt="百威酿酒厂"><span>百威酿酒厂 <em class="booking-tag">提前预约</em><small class="ticket-note">门票：成人 290 克朗；儿童/优惠 220 克朗</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0804">
         <div class="date">
           <strong>8 月 4 日，周二</strong>
           <span>转移到布拉格</span>
@@ -1645,19 +1838,19 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="交通另计"><span class="time">上午</span><span>从公寓步行到布杰约维采出发站点约 10 到 20 分钟；退房前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时，车站到酒店约 15 到 25 分钟。</span></li>
-          <li class="no-booking" data-price="外观免费；入内复核" data-link="https://prague.eu/en/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店，整理约 45 分钟；酒店到老城桥塔约 15 到 25 分钟，查理大桥和小城附近建议停留 2 小时；桥面和外观散步不需预订。</span></li>
-          <li data-price="约 550-850 克朗/人" data-link="https://stoleti.cz/menu.php" data-link-label="菜单"><span class="time">晚餐</span><span>从小城到三世纪餐厅或晚餐地点约 5 到 15 分钟，餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
+          <li class="no-booking" data-price="桥面成人/儿童免费；老城桥塔成人 250 克朗、儿童 170 克朗" data-link="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店，整理约 45 分钟；酒店到老城桥塔约 15 到 25 分钟，查理大桥和小城附近建议停留 2 小时；桥面和外观散步不需预订，老城桥塔登塔成人 250 克朗、儿童/优惠 170 克朗。</span></li>
+          <li data-price="约 550-850 克朗/人" data-link="https://stoleti.cz/en/menu.php" data-link-label="菜单"><span class="time">晚餐</span><span>从小城到 Století（三世纪餐厅）或晚餐地点约 5 到 15 分钟；地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-the-julius-prague.jpg" alt="The Julius Prague 外观"><span>The Julius Prague <small class="ticket-note">住宿：8 月 4 日到 8 月 8 日</small></span></figure>
-          <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥塔"><span>老城桥塔 <small class="ticket-note">门票：外观免费，登塔官网复核</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="查理大桥"><span>查理大桥 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="圣尼古拉教堂附近"><span>圣尼古拉教堂附近 <small class="ticket-note">门票：外观免费，入内官网复核</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="三世纪餐厅"><span>三世纪餐厅 <em class="booking-tag">建议订桌</em><small class="ticket-note">餐费：约 550-850 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥塔"><span>老城桥塔 <small class="ticket-note">门票：成人 250 克朗；儿童/优惠 170 克朗；外观免费</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="查理大桥"><span>查理大桥 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="圣尼古拉教堂附近"><span>圣尼古拉教堂附近 <small class="ticket-note">门票：外观免费；入内成人 150 克朗，儿童/学生 10-26 岁 90 克朗，10 岁以下免费</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="三世纪餐厅"><span>Století（三世纪餐厅） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费：约 550-850 克朗/人</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0805">
         <div class="date">
           <strong>8 月 5 日，周三</strong>
           <span>布拉格城堡区</span>
@@ -1666,21 +1859,30 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action" data-price="城堡票 450 捷克克朗"><span class="time">09:00</span><span>从酒店步行到皇家花园和布拉格城堡区域约 45 到 60 分钟；如果想省体力，可结合电车上坡，城堡区建议先停留 90 分钟。</span></li>
-          <li class="included-ticket" data-price="含在城堡票内"><span class="time">10:30</span><span>从皇家花园到圣维特大教堂约 5 到 10 分钟，教堂建议停留 45 到 60 分钟；按城堡主线路门票入内，不另行预订。</span></li>
+          <li class="needs-action" data-price="成人 450 克朗；儿童 300 克朗"><span class="time">09:00</span><span>从酒店步行到皇家花园和布拉格城堡区域约 45 到 60 分钟；如果想省体力，可结合电车上坡，城堡区建议先停留 90 分钟；城堡主线路成人 450 克朗，儿童/学生优惠 300 克朗。预订建议：建议提前买 2026 年 8 月 5 日上午可用的城堡主线路票，现场直接排入场安检和检票。</span></li>
+          <li class="included-ticket" data-price="成人 450 克朗；儿童 300 克朗；含在城堡票内"><span class="time">10:30</span><span>从皇家花园到圣维特大教堂约 5 到 10 分钟，教堂建议停留 45 到 60 分钟；按城堡主线路门票入内，不另行预订。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>从教堂到城堡区或地铁站附近餐厅约 10 到 20 分钟，建议用餐 60 分钟。</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">下午</span><span>从城堡区慢慢下行到小城约 20 到 30 分钟，小城街区建议停留 90 分钟；公共街区不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">下午</span><span>从城堡区慢慢下行到小城约 20 到 30 分钟，小城街区建议停留 90 分钟；公共街区不需预订。</span></li>
           <li data-price="约 500-800 克朗/人"><span class="time">晚餐</span><span>从小城到波希米亚小酒馆或晚餐地点约 10 到 20 分钟，餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
+        <section class="signup-panel day-signup" data-signup-date="8 月 5 日" aria-label="8 月 5 日报名与购票统计">
+          <div class="signup-actions">
+            <p class="version-note">当天报名：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="signup-lock-note" data-signup-lock-note></p>
+            <button type="button" data-add-family>添加家庭</button>
+          </div>
+          <div class="signup-totals" data-signup-totals></div>
+          <div class="family-grid" data-family-grid></div>
+        </section>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园"><span>皇家花园 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费，开放时间复核</small></span></figure>
-          <figure class="place-card"><img src="photos/stvitus.jpg" alt="圣维特大教堂"><span>圣维特大教堂 <em class="booking-tag">城堡票</em><small class="ticket-note">门票：城堡主线路成人 450 捷克克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="小城"><span>小城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
+          <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园"><span>皇家花园 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；开放时间复核</small></span></figure>
+          <figure class="place-card"><img src="photos/stvitus.jpg" alt="圣维特大教堂"><span>圣维特大教堂 <em class="booking-tag">城堡票</em><small class="ticket-note">门票：城堡主线路成人 450 克朗；儿童/学生优惠 300 克朗</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="小城"><span>小城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/prague.jpg" alt="波希米亚小酒馆"><span>波希米亚小酒馆 <em class="booking-tag">建议订桌</em><small class="ticket-note">餐费：约 500-800 克朗/人</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0806">
         <div class="date">
           <strong>8 月 6 日，周四</strong>
           <span>库特纳霍拉人骨教堂</span>
@@ -1689,20 +1891,29 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="公共区域免费"><span class="time">上午</span><span>从酒店步行到附近早餐或短走区域约 5 到 15 分钟；布拉格轻量安排：早餐、短走或休息，建议停留 60 到 90 分钟；公共区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">上午</span><span>从酒店步行到附近早餐或短走区域约 5 到 15 分钟；布拉格轻量安排：早餐、短走或休息，建议停留 60 到 90 分钟；公共区域不需预订。</span></li>
           <li data-price="交通另计"><span class="time">午餐前后</span><span>从布拉格前往库特纳霍拉约 1 到 1.5 小时，午餐可以在出发前或抵达后简单解决，建议用餐 45 到 60 分钟。</span></li>
-          <li class="needs-action" data-price="成人 220 捷克克朗" data-link="https://sedlec.info/en/"><span class="time">下午</span><span>从车站或午餐地点到人骨教堂约 10 到 20 分钟；人骨教堂建议停留 45 到 60 分钟，优先选择下午时段。</span></li>
+          <li class="needs-action" data-price="成人 220 克朗；儿童 80 克朗" data-link="https://sedlec.info/en/ossuary/before-visiting/"><span class="time">下午</span><span>从车站或午餐地点到人骨教堂约 10 到 20 分钟；人骨教堂建议停留 45 到 60 分钟，优先选择下午时段；Sedlec Area 票成人 220 克朗，儿童/PWD 80 克朗。预订建议：官网票按具体日期和时间购买，优先锁定 2026 年 8 月 6 日周四下午；出发前复核塞德莱茨大教堂周五到周日关闭提醒是否仍适用。</span></li>
           <li data-price="交通另计"><span class="time">傍晚</span><span>返回布拉格约 1 到 1.5 小时。塞德莱茨大教堂周五、周六、周日可能关闭，所以这天不要推迟到周末。</span></li>
-          <li data-price="约 500-800 克朗/人" data-link="https://dock.kolkovna.cz/en/?forceVersion=front" data-link-label="菜单"><span class="time">晚餐</span><span>从车站或酒店到科尔科夫纳餐厅约 10 到 20 分钟，餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
+          <li data-price="约 500-800 克朗/人" data-link="https://dock.kolkovna.cz/en/?forceVersion=front" data-link-label="菜单"><span class="time">晚餐</span><span>从车站或酒店到 Kolkovna Dock（科尔科夫纳餐厅）约 10 到 20 分钟；地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
+        <section class="signup-panel day-signup" data-signup-date="8 月 6 日" aria-label="8 月 6 日报名与购票统计">
+          <div class="signup-actions">
+            <p class="version-note">当天报名：成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="signup-lock-note" data-signup-lock-note></p>
+            <button type="button" data-add-family>添加家庭</button>
+          </div>
+          <div class="signup-totals" data-signup-totals></div>
+          <div class="family-grid" data-family-grid></div>
+        </section>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"><span>人骨教堂 <em class="booking-tag">限时票提前买</em><small class="ticket-note">门票：成人 220 捷克克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="库特纳霍拉"><span>库特纳霍拉 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费，场馆另计</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="科尔科夫纳餐厅"><span>科尔科夫纳餐厅 <em class="booking-tag">建议订桌</em><small class="ticket-note">餐费：约 500-800 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"><span>人骨教堂 <em class="booking-tag">限时票提前买</em><small class="ticket-note">门票：成人 220 克朗；儿童 80 克朗</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="库特纳霍拉"><span>库特纳霍拉 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；场馆另计</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="科尔科夫纳餐厅"><span>Kolkovna Dock（科尔科夫纳餐厅） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费：约 500-800 克朗/人</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0807">
         <div class="date">
           <strong>8 月 7 日，周五</strong>
           <span>最后完整一天</span>
@@ -1711,21 +1922,21 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="公共区域免费；教堂入内复核"><span class="time">上午</span><span>从酒店步行到高堡约 35 到 50 分钟；如果想省体力，可结合地铁/电车，高堡城墙、圣彼得与圣保罗教堂外观和河景建议停留 2 小时；城墙和外观散步不需预订。</span></li>
-          <li class="no-booking" data-price="公共区域免费；缆车交通另计"><span class="time">下午</span><span>从高堡到康帕岛约 25 到 35 分钟；康帕岛、列侬墙、佩特任山公园和河边慢走建议总停留 2.5 到 3 小时；这些公共区域不需预订。</span></li>
+          <li class="no-booking" data-price="公共区成人/儿童免费；教堂入内复核"><span class="time">上午</span><span>从酒店步行到高堡约 35 到 50 分钟；如果想省体力，可结合地铁/电车，高堡城墙、圣彼得与圣保罗教堂外观和河景建议停留 2 小时；城墙和外观散步不需预订，教堂入内出发前复核。</span></li>
+          <li class="no-booking" data-price="公共区成人/儿童免费；佩特任塔成人 250 克朗、儿童 170 克朗"><span class="time">下午</span><span>从高堡到康帕岛约 25 到 35 分钟；康帕岛、列侬墙、佩特任山公园和河边慢走建议总停留 2.5 到 3 小时；公共区域不需预订，若登佩特任塔则成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从河边或小城回老城约 15 到 25 分钟，安排告别晚餐 60 到 90 分钟，然后回酒店收拾行李；如要固定餐厅和时间再订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/prague.jpg" alt="高堡"><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费，场馆另计</small></span></figure>
-          <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河"><span>伏尔塔瓦河 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕岛"><span>康帕岛 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="列侬墙"><span>列侬墙 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区域免费</small></span></figure>
-          <figure class="place-card"><img src="photos/vltava.jpg" alt="佩特任山"><span>佩特任山 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公园免费，缆车交通另计</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="犹太区"><span>犹太区 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：街区免费，场馆另计</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="高堡"><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区成人免费；儿童免费；场馆另计</small></span></figure>
+          <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河"><span>伏尔塔瓦河 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕岛"><span>康帕岛 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="列侬墙"><span>列侬墙 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/vltava.jpg" alt="佩特任山"><span>佩特任山 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公园成人免费；儿童免费；佩特任塔成人 250 克朗、儿童/优惠 170 克朗</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="犹太区"><span>犹太区 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：街区成人免费；儿童免费；犹太博物馆成人 600 克朗、儿童 7-15 岁 200 克朗</small></span></figure>
         </div>
       </article>
 
-      <article class="day">
+      <article class="day" id="day-0808">
         <div class="date">
           <strong>8 月 8 日，周六</strong>
           <span>返程</span>
@@ -1738,7 +1949,7 @@
           <li data-price="机票已另计"><span class="time">14:20</span><span>按你的表格，14:20 从布拉格出发，建议至少提前 2.5 到 3 小时到机场。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/airport.jpg" alt="布拉格机场"><span>布拉格机场 <small class="ticket-note">门票：无，交通另计</small></span></figure>
+          <figure class="place-card"><img src="photos/airport.jpg" alt="布拉格机场"><span>布拉格机场 <small class="ticket-note">门票：成人免费；儿童免费；交通另计</small></span></figure>
         </div>
       </article>
     </section>
@@ -1779,7 +1990,7 @@
     <section class="checklist">
       <h2>优先预订</h2>
       <ul>
-        <li>海尔布伦戏水宫：建议提前买 2026 年 7 月 30 日下午票，减少现场排队。</li>
+        <li>海尔布伦戏水宫：可提前买通用门票，2026 年 7 月 30 日下午使用；不是预约固定入场时间。</li>
         <li>布拉格城堡主线路：建议提前购票或至少提前确认票种，2026 年 8 月 5 日上午直接入场更稳。</li>
         <li>毛特豪森纪念馆：如果需要导览，建议提前预约；如果自助参观，也要提前确认开放时间和交通。</li>
         <li>百威酿酒厂：行程里安排 2026 年 8 月 3 日 14:00，建议提前预约参观时段。</li>
@@ -1796,20 +2007,6 @@
         <li>查理大桥、伏尔塔瓦河边散步、小城街区、康帕岛、列侬墙、佩特任山公园、高堡公共区域：通常不需预订。</li>
         <li>林茨圣玛丽大教堂普通入内通常不需预订；特殊导览、音乐会或关闭日另行复核。</li>
       </ul>
-    </section>
-
-    <section class="section-head">
-      <h2>报名与购票统计</h2>
-      <p>每家按项目填写成人和小孩人数；成人可选 0、1、2，小孩可选 0、1，页面会自动汇总每个项目需要买几张票。</p>
-    </section>
-
-    <section class="signup-panel" aria-label="报名与购票统计">
-      <div class="signup-actions">
-        <p class="version-note">数据保存在当前浏览器里；每家可以自己维护一张家庭卡。</p>
-        <button type="button" id="add-family">添加家庭</button>
-      </div>
-      <div class="signup-totals" id="signup-totals"></div>
-      <div class="family-grid" id="family-grid"></div>
     </section>
 
     <section class="section-head" id="assistant-section">
@@ -1840,21 +2037,23 @@
       <button type="button" id="assistant-apply" class="secondary-button" hidden>确认按建议改页面</button>
     </section>
 
-    <section class="section-head">
-      <h2>版本管理</h2>
-      <p>每次发布都会保存在站点仓库的提交记录里；如果改错，可以运行回滚脚本，把页面恢复到指定版本。</p>
-    </section>
+    <details class="collapsed-section">
+      <summary>版本管理</summary>
+      <div class="collapsed-section-body">
+        <p class="version-note">每次发布都会保存在站点仓库的提交记录里；如果改错，可以运行回滚脚本，把页面恢复到指定版本。</p>
+        <section class="checklist">
+          <h2>全部版本</h2>
+          <p class="version-note" id="runtime-version-status">正在读取页面运行版本。</p>
+          <ul class="version-list runtime-version-list" id="runtime-version-list"></ul>
+          <p class="version-note" id="version-note">只显示最近 10 个版本；运行版本会直接回滚，发布基准会复制回滚命令。</p>
+          <p>建议规则：如果只是小改错，优先回到 8；如果智能助手出问题，回到 6。</p>
+        </section>
+      </div>
+    </details>
 
-    <section class="checklist">
-      <h2>全部版本</h2>
-      <p class="version-note" id="runtime-version-status">正在读取页面运行版本。</p>
-      <ul class="version-list runtime-version-list" id="runtime-version-list"></ul>
-      <p class="version-note" id="version-note">只显示最近 10 个版本；运行版本会直接回滚，发布基准会复制回滚命令。</p>
-      <p>建议规则：如果只是小改错，优先回到 8；如果智能助手出问题，回到 6。</p>
-    </section>
-
-    <section class="sources">
-      <h2>来源</h2>
+    <details class="collapsed-section sources">
+      <summary>来源</summary>
+      <div class="collapsed-section-body">
       <ul>
         <li>本地西门子节目记录。</li>
         <li>导入的原始行程文件。</li>
@@ -1873,7 +2072,7 @@
         <li><a href="https://zumzirkelwirt.at/en/#speisekarte">Zum Zirkelwirt 英文菜单页</a></li>
         <li><a href="https://www.gasthofgoldgasse.at/en/">Gasthof Goldgasse 英文菜单页</a></li>
         <li><a href="https://www.gasthofgoldgasse.at/en/">Gasthof Goldgasse 图片来源</a></li>
-        <li><a href="https://stoleti.cz/menu.php">三世纪餐厅菜单</a></li>
+        <li><a href="https://stoleti.cz/en/menu.php">Století 英文菜单</a></li>
         <li><a href="https://dock.kolkovna.cz/en/?forceVersion=front">科尔科夫纳菜单</a></li>
         <li><a href="https://immofokus.at/a/radisson-hotel-group-unterzeichnet-radisson-blu-hotel-conference-centre">Radisson Blu Hotel & Conference Centre Salzburg 图片来源</a></li>
         <li><a href="https://www.kitchenandbar-linz.at/en/hotel">Courtyard by Marriott Linz 图片来源</a></li>
@@ -1882,13 +2081,15 @@
         <li><a href="https://www.oebb.at/en/">奥地利铁路官网</a></li>
         <li><a href="https://open-meteo.com/">天气预测数据服务</a></li>
       </ul>
-    </section>
+      </div>
+    </details>
   </main>
   <script>
     const assistantEndpoint = "https://vuwqcxqokoeo23yei6bw2mvjnu0yiqyv.lambda-url.us-west-2.on.aws/";
     const assistantTokenKey = "austria-czech-assistant-token";
     const assistantConversationKey = "austria-czech-assistant-conversation";
     const ticketSignupKey = "austria-czech-ticket-signups";
+    const heroAssistantToken = document.getElementById("hero-assistant-token");
     const assistantToken = document.getElementById("assistant-token");
     const assistantQuestion = document.getElementById("assistant-question");
     const assistantApply = document.getElementById("assistant-apply");
@@ -1899,9 +2100,7 @@
     const versionNote = document.getElementById("version-note");
     const runtimeVersionStatus = document.getElementById("runtime-version-status");
     const runtimeVersionList = document.getElementById("runtime-version-list");
-    const familyGrid = document.getElementById("family-grid");
-    const signupTotals = document.getElementById("signup-totals");
-    const addFamilyButton = document.getElementById("add-family");
+    const signupPanels = Array.from(document.querySelectorAll(".day-signup"));
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
     let lastAppliedAssistantQuestion = "";
@@ -1951,6 +2150,7 @@
     ];
 
     assistantToken.value = localStorage.getItem(assistantTokenKey) || "";
+    heroAssistantToken.value = assistantToken.value;
 
     function defaultFamilies() {
       return [
@@ -1991,9 +2191,10 @@
       return family.counts[itemId];
     }
 
-    function renderSignupTotals(families) {
+    function renderSignupTotals(panel, families, itemsForPanel) {
+      const signupTotals = panel.querySelector("[data-signup-totals]");
       signupTotals.innerHTML = "";
-      ticketItems.forEach((item) => {
+      itemsForPanel.forEach((item) => {
         const total = families.reduce((sum, family) => {
           const counts = familyItemCounts(family, item.id);
           return {
@@ -2017,88 +2218,129 @@
 
     function renderTicketSignups() {
       const families = readTicketSignups();
-      familyGrid.innerHTML = "";
-
-      families.forEach((family, familyIndex) => {
-        const card = document.createElement("article");
-        card.className = "family-card";
-
-        const head = document.createElement("div");
-        head.className = "family-head";
-        const name = document.createElement("input");
-        name.value = family.name || `家庭 ${familyIndex + 1}`;
-        name.setAttribute("aria-label", "家庭名称");
-        name.addEventListener("input", () => {
-          family.name = name.value;
-          writeTicketSignups(families);
+      const canEditSignups = Boolean(assistantToken.value.trim());
+      signupPanels.forEach((panel) => {
+        const date = panel.dataset.signupDate;
+        const itemsForPanel = ticketItems.filter((item) => item.date === date);
+        const familyGrid = panel.querySelector("[data-family-grid]");
+        familyGrid.innerHTML = "";
+        panel.classList.toggle("is-locked", !canEditSignups);
+        panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "已通过访问码解锁，可修改当天报名。" : "需要先在智能助手区输入访问码，才能修改报名。";
+        panel.querySelectorAll("[data-add-family]").forEach((button) => {
+          button.disabled = !canEditSignups;
         });
 
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "secondary-button";
-        remove.textContent = "删除";
-        remove.addEventListener("click", () => {
-          families.splice(familyIndex, 1);
-          writeTicketSignups(families.length ? families : defaultFamilies());
-          renderTicketSignups();
-        });
-        head.append(name, remove);
+        families.forEach((family, familyIndex) => {
+          const card = document.createElement("article");
+          card.className = "family-card";
 
-        const items = document.createElement("div");
-        items.className = "signup-items";
-        ticketItems.forEach((item) => {
-          const counts = familyItemCounts(family, item.id);
-          const row = document.createElement("div");
-          row.className = "signup-item";
-
-          const label = document.createElement("div");
-          const title = document.createElement("b");
-          title.textContent = `${item.date} ${item.name}`;
-          const note = document.createElement("small");
-          note.textContent = item.note;
-          label.append(title, note);
-
-          const adultLabel = document.createElement("label");
-          adultLabel.className = "count-control";
-          adultLabel.textContent = "成人";
-          const adults = document.createElement("select");
-          countOptions(2, counts.adults).forEach((option) => adults.append(option));
-          adults.addEventListener("change", () => {
-            counts.adults = Number(adults.value);
+          const head = document.createElement("div");
+          head.className = "family-head";
+          const name = document.createElement("input");
+          name.value = family.name || `家庭 ${familyIndex + 1}`;
+          name.setAttribute("aria-label", "家庭名称");
+          name.disabled = !canEditSignups;
+          name.addEventListener("input", () => {
+            family.name = name.value;
             writeTicketSignups(families);
-            renderSignupTotals(families);
+            renderTicketSignups();
           });
-          adultLabel.append(adults);
 
-          const childLabel = document.createElement("label");
-          childLabel.className = "count-control";
-          childLabel.textContent = "小孩";
-          const children = document.createElement("select");
-          countOptions(1, counts.children).forEach((option) => children.append(option));
-          children.addEventListener("change", () => {
-            counts.children = Number(children.value);
-            writeTicketSignups(families);
-            renderSignupTotals(families);
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "secondary-button";
+          remove.textContent = "删除";
+          remove.disabled = !canEditSignups;
+          remove.addEventListener("click", () => {
+            families.splice(familyIndex, 1);
+            writeTicketSignups(families.length ? families : defaultFamilies());
+            renderTicketSignups();
           });
-          childLabel.append(children);
+          head.append(name, remove);
 
-          row.append(label, adultLabel, childLabel);
-          items.append(row);
+          const items = document.createElement("div");
+          items.className = "signup-items";
+          itemsForPanel.forEach((item) => {
+            const counts = familyItemCounts(family, item.id);
+            const row = document.createElement("div");
+            row.className = "signup-item";
+
+            const label = document.createElement("div");
+            const title = document.createElement("b");
+            title.textContent = item.name;
+            const note = document.createElement("small");
+            note.textContent = item.note;
+            label.append(title, note);
+
+            const adultLabel = document.createElement("label");
+            adultLabel.className = "count-control";
+            adultLabel.textContent = "成人";
+            const adults = document.createElement("select");
+            countOptions(2, counts.adults).forEach((option) => adults.append(option));
+            adults.disabled = !canEditSignups;
+            adults.addEventListener("change", () => {
+              counts.adults = Number(adults.value);
+              writeTicketSignups(families);
+              renderSignupTotals(panel, families, itemsForPanel);
+            });
+            adultLabel.append(adults);
+
+            const childLabel = document.createElement("label");
+            childLabel.className = "count-control";
+            childLabel.textContent = "小孩";
+            const children = document.createElement("select");
+            countOptions(1, counts.children).forEach((option) => children.append(option));
+            children.disabled = !canEditSignups;
+            children.addEventListener("change", () => {
+              counts.children = Number(children.value);
+              writeTicketSignups(families);
+              renderSignupTotals(panel, families, itemsForPanel);
+            });
+            childLabel.append(children);
+
+            row.append(label, adultLabel, childLabel);
+            items.append(row);
+          });
+
+          card.append(head, items);
+          familyGrid.append(card);
         });
 
-        card.append(head, items);
-        familyGrid.append(card);
+        renderSignupTotals(panel, families, itemsForPanel);
       });
 
       writeTicketSignups(families);
-      renderSignupTotals(families);
     }
 
-    addFamilyButton.addEventListener("click", () => {
-      const families = readTicketSignups();
-      families.push({ id: `family-${Date.now()}`, name: `家庭 ${families.length + 1}`, counts: {} });
-      writeTicketSignups(families);
+    function syncAssistantToken(token, sourceInput) {
+      assistantToken.value = token;
+      heroAssistantToken.value = token;
+      if (token) {
+        localStorage.setItem(assistantTokenKey, token);
+      } else {
+        localStorage.removeItem(assistantTokenKey);
+      }
       renderTicketSignups();
+      if (sourceInput) {
+        sourceInput.focus();
+      }
+    }
+
+    assistantToken.addEventListener("input", () => {
+      syncAssistantToken(assistantToken.value.trim(), assistantToken);
+    });
+
+    heroAssistantToken.addEventListener("input", () => {
+      syncAssistantToken(heroAssistantToken.value.trim(), heroAssistantToken);
+    });
+
+    document.querySelectorAll("[data-add-family]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const families = readTicketSignups();
+        families.push({ id: `family-${Date.now()}`, name: `家庭 ${families.length + 1}`, counts: {} });
+        writeTicketSignups(families);
+        renderTicketSignups();
+      });
     });
 
     function fillPriceCells(root = document) {
@@ -2340,21 +2582,21 @@
 
       const diningNotes = {
         "7 月 30 日": [
-          "7 月 30 日午餐建议优先 Gasthof Goldgasse：在萨尔茨堡老城 Goldgasse 10，适合上午老城路线后用餐，再去海尔布伦；餐费标准约 €35-55/人；英文菜单页：https://www.gasthofgoldgasse.at/en/。",
+          "7 月 30 日午餐建议优先 Gasthof Goldgasse：地址 Goldgasse 10, 5020 Salzburg；电话 +43 662 84 82 00；适合上午老城路线后用餐，再去海尔布伦；餐费标准约 €35-55/人；英文菜单页：https://www.gasthofgoldgasse.at/en/。",
           "7 月 30 日午餐备选 Sternbräu：老城 Griesgasse 23，更随意，适合想吃传统奥地利菜和啤酒馆风格；餐费标准约 €25-40/人，菜单和营业时间需官网复核。",
           "7 月 30 日午餐备选 St. Peter Stiftskulinarium：靠近老城核心，更有历史感，但更正式；餐费标准约 €40-70/人，时间和订位需官网复核。"
         ],
         "7 月 29 日": [
-          "7 月 29 日晚餐已订 Zum Zirkelwirt 17:30，餐费标准约 €25-40/人，英文菜单页：https://zumzirkelwirt.at/en/#speisekarte；不需要再推荐其他晚餐，除非用户明确要求备选。"
+          "7 月 29 日晚餐已订 Zum Zirkelwirt 17:30；地址 Pfeifergasse 14, 5020 Salzburg；电话 +43 662 842796；餐费标准约 €25-40/人，英文菜单页：https://zumzirkelwirt.at/en/#speisekarte；不需要再推荐其他晚餐，除非用户明确要求备选。"
         ],
         "8 月 4 日": [
-          "8 月 4 日晚餐可考虑三世纪餐厅，行程里已标为建议订桌；餐费标准约 550-850 克朗/人，菜单：https://stoleti.cz/menu.php。"
+          "8 月 4 日晚餐可考虑 Století（三世纪餐厅），地址 Karolíny Světlé 21/320, 110 00 Prague 1；电话 +420 222 220 008；行程里已标为建议订桌；餐费标准约 550-850 克朗/人，英文菜单：https://stoleti.cz/en/menu.php。"
         ],
         "8 月 5 日": [
           "8 月 5 日晚餐可考虑波希米亚小酒馆或城堡区到小城一带餐厅，固定时间建议提前订桌；餐费标准约 500-800 克朗/人。"
         ],
         "8 月 6 日": [
-          "8 月 6 日晚餐可考虑科尔科夫纳餐厅，行程里已标为建议订桌；餐费标准约 500-800 克朗/人，菜单：https://dock.kolkovna.cz/en/?forceVersion=front。"
+          "8 月 6 日晚餐可考虑 Kolkovna Dock（科尔科夫纳餐厅），地址 Boudníkova 2506/1, 180 00 Praha 8；电话 +420 226 521 510；行程里已标为建议订桌；餐费标准约 500-800 克朗/人，菜单：https://dock.kolkovna.cz/en/?forceVersion=front。"
         ]
       };
 
@@ -2397,7 +2639,7 @@
           photo: "photos/gasthof-goldgasse.jpg",
           alt: "Gasthof Goldgasse 餐厅",
           tag: "推荐午餐",
-          text: "推荐 Gasthof Goldgasse 老城午餐，餐费标准约 €35-55/人，建议用餐 60 分钟；从老城去海尔布伦约 25 到 35 分钟。"
+          text: "推荐 Gasthof Goldgasse 老城午餐，地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费标准约 €35-55/人，建议用餐 60 分钟；从老城去海尔布伦约 25 到 35 分钟。"
         },
         {
           name: "Zum Zirkelwirt",
@@ -2405,15 +2647,15 @@
           price: "约 €25-40/人",
           link: "https://zumzirkelwirt.at/en/#speisekarte",
           tag: "已订位",
-          text: "Zum Zirkelwirt 晚餐，餐费标准约 €25-40/人，建议用餐 60 到 90 分钟。"
+          text: "Zum Zirkelwirt 晚餐，地址：Pfeifergasse 14, 5020 Salzburg；电话：+43 662 842796；餐费标准约 €25-40/人，建议用餐 60 到 90 分钟。"
         },
         {
           name: "三世纪餐厅",
           aliases: ["三世纪", "U Tri Stoleti", "U Tří Století"],
           price: "约 550-850 克朗/人",
-          link: "https://stoleti.cz/menu.php",
+          link: "https://stoleti.cz/en/menu.php",
           tag: "建议订桌",
-          text: "三世纪餐厅晚餐，餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟。"
+          text: "Století（三世纪餐厅）晚餐，地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟。"
         },
         {
           name: "波希米亚小酒馆",
@@ -2428,7 +2670,7 @@
           price: "约 500-800 克朗/人",
           link: "https://dock.kolkovna.cz/en/?forceVersion=front",
           tag: "建议订桌",
-          text: "科尔科夫纳餐厅晚餐，餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟。"
+          text: "Kolkovna Dock（科尔科夫纳餐厅）晚餐，地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟。"
         }
       ];
     }
