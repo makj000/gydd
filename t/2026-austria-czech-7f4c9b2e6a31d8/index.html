@@ -1598,7 +1598,6 @@
       </div>
       <div class="assistant-actions">
         <button type="button" id="assistant-send">发送问题</button>
-        <button type="button" id="assistant-save-token" class="secondary-button">保存访问码</button>
         <button type="button" id="assistant-clear" class="secondary-button">清空记录</button>
       </div>
       <p class="assistant-status" id="assistant-status"></p>
@@ -2151,11 +2150,6 @@
     renderAssistantConversation();
     renderDayQuestionPanels();
     loadRuntimeVersion();
-
-    document.getElementById("assistant-save-token").addEventListener("click", () => {
-      localStorage.setItem(assistantTokenKey, assistantToken.value.trim());
-      assistantMessage("访问码已保存在本机浏览器。");
-    });
 
     document.getElementById("assistant-clear").addEventListener("click", () => {
       localStorage.removeItem(assistantConversationKey);
