@@ -729,7 +729,11 @@
       gap: 10px;
     }
 
-    .assistant-actions button {
+    .assistant-actions button,
+    .assistant-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       min-height: 40px;
       padding: 9px 13px;
       border: 0;
@@ -739,9 +743,11 @@
       font: inherit;
       font-weight: 800;
       cursor: pointer;
+      text-decoration: none;
     }
 
-    .assistant-actions button.secondary-button {
+    .assistant-actions button.secondary-button,
+    .assistant-actions a.secondary-button {
       background: #eef3f1;
       color: var(--green);
       border: 1px solid var(--line);
@@ -833,6 +839,20 @@
       font: inherit;
       font-weight: 800;
       cursor: pointer;
+    }
+
+    .assistant-complete {
+      justify-self: start;
+      width: fit-content;
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid rgba(66, 107, 79, 0.35);
+      border-radius: 6px;
+      background: #eef3f1;
+      color: var(--green);
+      font-weight: 900;
     }
 
     .assistant-entry-actions {
@@ -1280,7 +1300,7 @@
       </tbody>
     </table>
 
-    <section class="section-head">
+    <section class="section-head" id="detailed-plan">
       <h2>详细计划</h2>
       <p>时间是规划锚点，不等于已预订项目；预订栏绿色勾表示已订，黄色感叹号表示还需要提前处理。</p>
     </section>
@@ -1299,7 +1319,7 @@
           <li data-price="公共区域免费"><span class="time">15:30</span><span>休息、洗漱；如果体力可以，再短走老城，酒店到老城步行约 10 到 20 分钟，建议停留 60 到 90 分钟。</span></li>
           <li class="is-booked" data-price="餐费另计"><span class="time">17:30</span><span><strong>Zum Zirkelwirt 晚餐已订位。</strong>餐厅在 Pfeifergasse 14，吃完从老城步行到卡比特尔广场约 5 到 15 分钟，建议 18:45 到 19:00 左右离开餐厅去占位置。</span></li>
           <li data-price="免费"><span class="time">19:00</span><span>从晚餐地点到卡比特尔广场约 5 到 15 分钟，提前到场占位置，建议预留 60 分钟。</span></li>
-          <li data-price="免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>莫扎特《女人心》，建议停留 135 分钟。</span></li>
+          <li data-price="免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>莫扎特《女人心》，建议停留 135 分钟。注：第二晚 7 月 30 日同一地点还有普契尼《三联剧》，如果第一晚体力一般，可以把这晚当作轻量体验，第二晚再完整观看。</span></li>
           <li data-price="公共区域免费"><span class="time">22:15</span><span>放映结束后穿过老城返回，步行回酒店约 10 到 20 分钟。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
@@ -1586,6 +1606,9 @@
     </section>
 
     <section class="assistant-panel" aria-label="智能助手">
+      <div class="assistant-actions">
+        <a class="secondary-button" href="#detailed-plan">回到详细计划</a>
+      </div>
       <div class="assistant-grid">
         <label class="assistant-token-label">
           访问码
@@ -1657,6 +1680,7 @@
     const runtimeVersionList = document.getElementById("runtime-version-list");
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
+    let lastAppliedAssistantQuestion = "";
     const baselineVersions = [
       { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能助手。" },
       { version: 7, summary: "发布基准：新增真实智能助手。" },
@@ -1888,6 +1912,13 @@
 
         if (isNewest && lastAssistantExchange && !assistantApply.hidden) {
           entry.append(assistantApply);
+        }
+
+        if (isNewest && lastAppliedAssistantQuestion && item.question === lastAppliedAssistantQuestion) {
+          const complete = document.createElement("div");
+          complete.className = "assistant-complete";
+          complete.textContent = "已完成";
+          entry.append(complete);
         }
 
         if (shouldCollapse) {
@@ -2192,9 +2223,12 @@
           editable: editableTripHtml()
         }, token);
         applyTripState(state);
+        lastAppliedAssistantQuestion = lastAssistantExchange.question;
+        lastAssistantExchange = null;
         assistantApply.hidden = true;
         assistantApply.disabled = false;
         assistantApply.textContent = "确认按建议改页面";
+        renderAssistantConversation();
         assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
       } catch (error) {
         assistantApply.disabled = false;
