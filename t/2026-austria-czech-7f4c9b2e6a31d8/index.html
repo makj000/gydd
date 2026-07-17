@@ -582,6 +582,11 @@
       font-size: 12px;
     }
 
+    .items li .signup-panel {
+      grid-column: 2 / 5;
+      margin-top: 12px;
+    }
+
     .items li:last-child {
       padding-bottom: 0;
       border-bottom: 0;
@@ -1180,9 +1185,23 @@
       display: grid;
       gap: 16px;
       padding: 18px;
-      border: 1px solid var(--line);
+      scroll-margin-top: 68px;
+      border: 2px solid rgba(166, 108, 25, 0.38);
       border-radius: 8px;
-      background: var(--panel);
+      background: #fffdf7;
+    }
+
+    .signup-panel:target {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(166, 108, 25, 0.16);
+    }
+
+    .signup-panel::before {
+      content: "按家庭选择人数 / Ticket signup by family";
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
     }
 
     .signup-panel.is-locked .family-grid {
@@ -1268,6 +1287,10 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfaf6;
+    }
+
+    .family-card.fallback {
+      border-style: dashed;
     }
 
     .family-head {
@@ -1574,6 +1597,10 @@
         grid-column: 1;
       }
 
+      .items li .signup-panel {
+        grid-column: 1;
+      }
+
       .items li::after {
         display: none;
       }
@@ -1612,7 +1639,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：48</div>
+    <div class="page-version" aria-label="网页版本">网页版本：50</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1801,12 +1828,26 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0730" data-signup-date="7 月 30 日" aria-label="7 月 30 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：海尔布伦戏水宫</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>报名与购票统计：海尔布伦戏水宫</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
             <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid></div>
+          <div class="family-grid" data-family-grid>
+            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
+              <div class="family-head">
+                <input value="家庭 1" aria-label="家庭名称" disabled>
+                <button type="button" class="secondary-button" disabled>删除</button>
+              </div>
+              <div class="signup-items">
+                <div class="signup-item">
+                  <div><b>海尔布伦戏水宫</b><small>输入访问码后可修改</small></div>
+                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
+                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
@@ -1874,12 +1915,26 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0802" data-signup-date="8 月 2 日" aria-label="8 月 2 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：毛特豪森导览</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>报名与购票统计：毛特豪森导览</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
             <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid></div>
+          <div class="family-grid" data-family-grid>
+            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
+              <div class="family-head">
+                <input value="家庭 1" aria-label="家庭名称" disabled>
+                <button type="button" class="secondary-button" disabled>删除</button>
+              </div>
+              <div class="signup-items">
+                <div class="signup-item">
+                  <div><b>毛特豪森纪念馆导览</b><small>输入访问码后可修改</small></div>
+                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
+                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-residence-marianska.jpg" alt="Residence Mariánská 外观"><span>Residence Mariánská <small class="ticket-note">住宿：8 月 2 日到 8 月 4 日</small></span></figure>
@@ -1904,12 +1959,26 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0803" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：百威酿酒厂参观</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>报名与购票统计：百威酿酒厂参观</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
             <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid></div>
+          <div class="family-grid" data-family-grid>
+            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
+              <div class="family-head">
+                <input value="家庭 1" aria-label="家庭名称" disabled>
+                <button type="button" class="secondary-button" disabled>删除</button>
+              </div>
+              <div class="signup-items">
+                <div class="signup-item">
+                  <div><b>百威酿酒厂参观</b><small>输入访问码后可修改</small></div>
+                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
+                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场"><span>普瑞米斯欧塔卡拉二世广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
@@ -1957,12 +2026,26 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0805" data-signup-date="8 月 5 日" aria-label="8 月 5 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：布拉格城堡主线路</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>报名与购票统计：布拉格城堡主线路</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
             <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid></div>
+          <div class="family-grid" data-family-grid>
+            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
+              <div class="family-head">
+                <input value="家庭 1" aria-label="家庭名称" disabled>
+                <button type="button" class="secondary-button" disabled>删除</button>
+              </div>
+              <div class="signup-items">
+                <div class="signup-item">
+                  <div><b>布拉格城堡主线路</b><small>输入访问码后可修改</small></div>
+                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
+                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园"><span>皇家花园 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；开放时间复核</small></span></figure>
@@ -1989,12 +2072,26 @@
         </ul>
         <section class="signup-panel day-signup" id="signup-0806" data-signup-date="8 月 6 日" aria-label="8 月 6 日报名与购票统计">
           <div class="signup-actions">
-            <p class="version-note"><strong>报名与购票统计：人骨教堂限时票</strong> 成人可选 0、1、2；小孩可选 0、1。</p>
+            <p class="version-note"><strong>报名与购票统计：人骨教堂限时票</strong> 这里按每家填写人数：成人可选 0、1、2；小孩可选 0、1。</p>
             <p class="signup-lock-note" data-signup-lock-note></p>
             <button type="button" data-add-family>添加家庭</button>
           </div>
           <div class="signup-totals" data-signup-totals></div>
-          <div class="family-grid" data-family-grid></div>
+          <div class="family-grid" data-family-grid>
+            <article class="family-card fallback" aria-label="家庭 1 人数选择示例">
+              <div class="family-head">
+                <input value="家庭 1" aria-label="家庭名称" disabled>
+                <button type="button" class="secondary-button" disabled>删除</button>
+              </div>
+              <div class="signup-items">
+                <div class="signup-item">
+                  <div><b>人骨教堂限时票</b><small>输入访问码后可修改</small></div>
+                  <label class="count-control">成人<select disabled><option>0</option><option>1</option><option>2</option></select></label>
+                  <label class="count-control">小孩<select disabled><option>0</option><option>1</option></select></label>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/sedlec_ossuary.jpg" alt="人骨教堂"><span>人骨教堂 <em class="booking-tag">限时票提前买</em><small class="ticket-note">门票：成人 220 克朗；儿童 80 克朗</small></span></figure>
@@ -2190,7 +2287,6 @@
     const versionNote = document.getElementById("version-note");
     const runtimeVersionStatus = document.getElementById("runtime-version-status");
     const runtimeVersionList = document.getElementById("runtime-version-list");
-    const signupPanels = Array.from(document.querySelectorAll(".day-signup"));
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
     let lastAppliedAssistantQuestion = "";
@@ -2281,6 +2377,29 @@
       return family.counts[itemId];
     }
 
+    function moveSignupPanelsIntoRows() {
+      const signupTargets = {
+        "signup-0730": "海尔布伦戏水宫和水机关",
+        "signup-0802": "毛特豪森纪念馆",
+        "signup-0803": "百威酿酒厂",
+        "signup-0805": "布拉格城堡区域",
+        "signup-0806": "人骨教堂"
+      };
+
+      Object.entries(signupTargets).forEach(([panelId, text]) => {
+        const panel = document.getElementById(panelId);
+        const day = panel?.closest(".day");
+        if (!panel || !day) {
+          return;
+        }
+
+        const targetRow = Array.from(day.querySelectorAll(".items li:not(.items-header)")).find((row) => row.innerText.includes(text));
+        if (targetRow && panel.parentElement !== targetRow) {
+          targetRow.append(panel);
+        }
+      });
+    }
+
     function renderSignupTotals(panel, families, itemsForPanel) {
       const signupTotals = panel.querySelector("[data-signup-totals]");
       signupTotals.innerHTML = "";
@@ -2309,7 +2428,7 @@
     function renderTicketSignups() {
       const families = readTicketSignups();
       const canEditSignups = Boolean(assistantToken.value.trim());
-      signupPanels.forEach((panel) => {
+      document.querySelectorAll(".day-signup").forEach((panel) => {
         const date = panel.dataset.signupDate;
         const itemsForPanel = ticketItems.filter((item) => item.date === date);
         const familyGrid = panel.querySelector("[data-family-grid]");
@@ -2318,6 +2437,12 @@
         panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "已通过访问码解锁，可修改当天报名。" : "需要先在智能助手区输入访问码，才能修改报名。";
         panel.querySelectorAll("[data-add-family]").forEach((button) => {
           button.disabled = !canEditSignups;
+          button.onclick = () => {
+            const currentFamilies = readTicketSignups();
+            currentFamilies.push({ id: `family-${Date.now()}`, name: `家庭 ${currentFamilies.length + 1}`, counts: {} });
+            writeTicketSignups(currentFamilies);
+            renderTicketSignups();
+          };
         });
 
         families.forEach((family, familyIndex) => {
@@ -2400,6 +2525,7 @@
       });
 
       writeTicketSignups(families);
+      moveSignupPanelsIntoRows();
     }
 
     function syncAssistantToken(token, sourceInput) {
@@ -2422,15 +2548,6 @@
 
     heroAssistantToken.addEventListener("input", () => {
       syncAssistantToken(heroAssistantToken.value.trim(), heroAssistantToken);
-    });
-
-    document.querySelectorAll("[data-add-family]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const families = readTicketSignups();
-        families.push({ id: `family-${Date.now()}`, name: `家庭 ${families.length + 1}`, counts: {} });
-        writeTicketSignups(families);
-        renderTicketSignups();
-      });
     });
 
     function fillPriceCells(root = document) {
@@ -2877,6 +2994,7 @@
       fillPriceCells();
       linkTripPhotos();
       renderDayQuestionPanels();
+      renderTicketSignups();
       renderRuntimeVersions(state);
     }
 
