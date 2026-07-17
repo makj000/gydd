@@ -1210,7 +1210,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：32</div>
+    <div class="page-version" aria-label="网页版本">网页版本：33</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -2014,6 +2014,12 @@
       return ["饭馆候选上下文：", ...diningNotes[matchedDate]].join("\n");
     }
 
+    function daySuggestionCanApply(question, result) {
+      const text = question || "";
+      const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(text);
+      return Boolean(result?.canApplyChange || clientCanApplyChange(text) || asksDining);
+    }
+
     function editableTripHtml() {
       const daysClone = document.querySelector(".days").cloneNode(true);
       daysClone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
@@ -2070,6 +2076,11 @@
         const answer = document.createElement("div");
         answer.className = "day-question-answer";
 
+        const applyButton = document.createElement("button");
+        applyButton.type = "button";
+        applyButton.textContent = "确认按建议改页面";
+        applyButton.hidden = true;
+
         button.addEventListener("click", async () => {
           const token = assistantToken.value.trim();
           const question = textarea.value.trim();
@@ -2086,15 +2097,23 @@
 
           localStorage.setItem(assistantTokenKey, token);
           button.disabled = true;
+          applyButton.hidden = true;
           status.textContent = "正在询问这一天的安排。";
           answer.textContent = "";
 
           try {
+            const wrappedQuestion = `只根据${dateText}当天安排回答：${question}`;
             const result = await assistantRequest({
-              question: `只根据${dateText}当天安排回答：${question}`,
+              question: wrappedQuestion,
               tripContext: [dayContext(day), diningContext(dateText, question)].filter(Boolean).join("\n\n")
             }, token);
-            answer.textContent = result.answer || "";
+            const answerText = result.answer || "";
+            answer.textContent = answerText;
+            if (answerText && daySuggestionCanApply(question, result)) {
+              applyButton.hidden = false;
+              applyButton.dataset.question = `把${dateText}当天安排按这个建议更新。原始问题：${question}`;
+              applyButton.dataset.answer = answerText;
+            }
             status.textContent = "已收到回答。";
           } catch (error) {
             status.textContent = error.message || "暂时无法连接智能助手。";
@@ -2103,8 +2122,46 @@
           }
         });
 
+        applyButton.addEventListener("click", async () => {
+          const token = assistantToken.value.trim();
+          const question = applyButton.dataset.question || "";
+          const answerText = applyButton.dataset.answer || "";
+
+          if (!token) {
+            status.textContent = "请先在智能助手区域输入访问码。";
+            return;
+          }
+
+          if (!question || !answerText) {
+            status.textContent = "请先收到这一天的建议。";
+            return;
+          }
+
+          localStorage.setItem(assistantTokenKey, token);
+          button.disabled = true;
+          applyButton.disabled = true;
+          applyButton.textContent = "正在确认";
+          status.textContent = "正在确认改动并保存为新版。";
+
+          try {
+            const state = await assistantRequest({
+              action: "apply_change",
+              question,
+              answer: answerText,
+              editable: editableTripHtml()
+            }, token);
+            applyTripState(state);
+            assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
+          } catch (error) {
+            status.textContent = error.message || "暂时无法应用修改。";
+            button.disabled = false;
+            applyButton.disabled = false;
+            applyButton.textContent = "确认按建议改页面";
+          }
+        });
+
         row.append(textarea, button);
-        panel.append(row, status, answer);
+        panel.append(row, status, answer, applyButton);
         day.append(panel);
       });
     }
