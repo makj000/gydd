@@ -1210,7 +1210,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：31</div>
+    <div class="page-version" aria-label="网页版本">网页版本：32</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -1980,6 +1980,40 @@
       return clone.innerText.replace(/\n{3,}/g, "\n\n").trim();
     }
 
+    function diningContext(dateText, question) {
+      const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question || "");
+      if (!asksDining) {
+        return "";
+      }
+
+      const diningNotes = {
+        "7 月 30 日": [
+          "7 月 30 日午餐建议优先 Gasthof Goldgasse：在萨尔茨堡老城 Goldgasse 10，适合上午老城路线后用餐，再去海尔布伦。",
+          "7 月 30 日午餐备选 Sternbräu：老城 Griesgasse 23，更随意，适合想吃传统奥地利菜和啤酒馆风格。",
+          "7 月 30 日午餐备选 St. Peter Stiftskulinarium：靠近老城核心，更有历史感，但更正式，时间和订位需官网复核。"
+        ],
+        "7 月 29 日": [
+          "7 月 29 日晚餐已订 Zum Zirkelwirt 17:30，不需要再推荐其他晚餐，除非用户明确要求备选。"
+        ],
+        "8 月 4 日": [
+          "8 月 4 日晚餐可考虑三世纪餐厅，行程里已标为建议订桌。"
+        ],
+        "8 月 5 日": [
+          "8 月 5 日晚餐可考虑波希米亚小酒馆或城堡区到小城一带餐厅，固定时间建议提前订桌。"
+        ],
+        "8 月 6 日": [
+          "8 月 6 日晚餐可考虑科尔科夫纳餐厅，行程里已标为建议订桌。"
+        ]
+      };
+
+      const matchedDate = Object.keys(diningNotes).find((date) => dateText.includes(date));
+      if (!matchedDate) {
+        return "饭馆建议：当前页面没有这一天的具体饭馆候选；可以根据当天所在街区给出区域建议，并提醒官网复核营业时间和是否需要订位。";
+      }
+
+      return ["饭馆候选上下文：", ...diningNotes[matchedDate]].join("\n");
+    }
+
     function editableTripHtml() {
       const daysClone = document.querySelector(".days").cloneNode(true);
       daysClone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
@@ -2058,7 +2092,7 @@
           try {
             const result = await assistantRequest({
               question: `只根据${dateText}当天安排回答：${question}`,
-              tripContext: dayContext(day)
+              tripContext: [dayContext(day), diningContext(dateText, question)].filter(Boolean).join("\n\n")
             }, token);
             answer.textContent = result.answer || "";
             status.textContent = "已收到回答。";
