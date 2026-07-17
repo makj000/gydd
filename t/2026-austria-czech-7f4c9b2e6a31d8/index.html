@@ -1210,7 +1210,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：37</div>
+    <div class="page-version" aria-label="网页版本">网页版本：38</div>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
       <p class="hero-copy">这是 2026 年 7 月 29 日到 2026 年 8 月 8 日的 11 天行程，以行程文件为骨架，以你的住宿表为约束，并把萨尔茨堡西门子节日之夜作为固定晚间安排。</p>
@@ -2041,6 +2041,136 @@
       return [`只修改${dateText}当天详细计划中和下面建议直接相关的一行或一个项目。`, `原始问题：${question}`, `助手建议：${answerText}`].join("\n");
     }
 
+    function diningCatalog() {
+      return [
+        {
+          name: "Gasthof Goldgasse",
+          aliases: ["Gasthof Goldgasse", "Goldgasse"],
+          price: "约 €35-55/人",
+          link: "https://www.gasthofgoldgasse.at/content/uploads/250627-speisekarte-festspiele-web.pdf",
+          photo: "photos/gasthof-goldgasse.jpg",
+          alt: "Gasthof Goldgasse 餐厅",
+          tag: "推荐午餐",
+          text: "推荐 Gasthof Goldgasse 老城午餐，餐费标准约 €35-55/人，建议用餐 60 分钟；从老城去海尔布伦约 25 到 35 分钟。"
+        },
+        {
+          name: "Zum Zirkelwirt",
+          aliases: ["Zum Zirkelwirt", "Zirkelwirt"],
+          price: "约 €25-40/人",
+          link: "https://zumzirkelwirt.at/de/speisekarte/",
+          tag: "已订位",
+          text: "Zum Zirkelwirt 晚餐，餐费标准约 €25-40/人，建议用餐 60 到 90 分钟。"
+        },
+        {
+          name: "三世纪餐厅",
+          aliases: ["三世纪", "U Tri Stoleti", "U Tří Století"],
+          price: "约 550-850 克朗/人",
+          link: "https://stoleti.cz/menu.php",
+          tag: "建议订桌",
+          text: "三世纪餐厅晚餐，餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟。"
+        },
+        {
+          name: "波希米亚小酒馆",
+          aliases: ["波希米亚小酒馆", "Bohemia"],
+          price: "约 500-800 克朗/人",
+          tag: "建议订桌",
+          text: "波希米亚小酒馆或同区晚餐，餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟。"
+        },
+        {
+          name: "科尔科夫纳餐厅",
+          aliases: ["科尔科夫纳", "Kolkovna"],
+          price: "约 500-800 克朗/人",
+          link: "https://dock.kolkovna.cz/en/?forceVersion=front",
+          tag: "建议订桌",
+          text: "科尔科夫纳餐厅晚餐，餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟。"
+        }
+      ];
+    }
+
+    function matchedDining(answerText) {
+      return diningCatalog().find((item) => item.aliases.some((alias) => answerText.includes(alias)));
+    }
+
+    function diningMeal(question, answerText) {
+      const text = `${question || ""} ${answerText || ""}`;
+      if (/晚餐|晚饭/.test(text)) {
+        return "dinner";
+      }
+      return "lunch";
+    }
+
+    function findDiningRow(day, meal) {
+      const rows = Array.from(day.querySelectorAll(".items li:not(.items-header)"));
+      const lunchPattern = /午餐|午饭|12:30|午餐前后/;
+      const dinnerPattern = /晚餐|晚饭|17:30|17:45|晚上/;
+      return rows.find((row) => (meal === "dinner" ? dinnerPattern : lunchPattern).test(row.innerText));
+    }
+
+    function itemDescriptionSpan(row) {
+      return Array.from(row.children).find((child) => child.tagName === "SPAN" && !child.classList.contains("time") && !child.classList.contains("price-cell"));
+    }
+
+    function addDiningPhoto(day, dining) {
+      if (!dining.photo || day.querySelector(`img[src="${dining.photo}"]`)) {
+        return;
+      }
+
+      const gallery = day.querySelector(".place-gallery");
+      if (!gallery) {
+        return;
+      }
+
+      const figure = document.createElement("figure");
+      figure.className = "place-card";
+      const image = document.createElement("img");
+      image.src = dining.photo;
+      image.alt = dining.alt || dining.name;
+      const caption = document.createElement("span");
+      caption.textContent = dining.name;
+      const tag = document.createElement("em");
+      tag.className = "booking-tag";
+      tag.textContent = dining.tag || "推荐";
+      const note = document.createElement("small");
+      note.className = "ticket-note";
+      note.textContent = `餐费：${dining.price}${dining.link ? "；菜单见餐饮行链接" : ""}`;
+      caption.append(" ", tag, note);
+      figure.append(image, caption);
+      gallery.append(figure);
+    }
+
+    function applyDiningSuggestionLocally(day, question, answerText) {
+      const dining = matchedDining(answerText || "");
+      if (!dining) {
+        return false;
+      }
+
+      const meal = diningMeal(question, answerText);
+      const row = findDiningRow(day, meal);
+      if (!row) {
+        return false;
+      }
+
+      const description = itemDescriptionSpan(row);
+      if (!description) {
+        return false;
+      }
+
+      row.dataset.price = dining.price;
+      if (dining.link) {
+        row.dataset.link = dining.link;
+        row.dataset.linkLabel = "菜单";
+      } else {
+        delete row.dataset.link;
+        delete row.dataset.linkLabel;
+      }
+      row.querySelector(".price-cell")?.remove();
+      description.textContent = dining.text;
+      addDiningPhoto(day, dining);
+      fillPriceCells(day);
+      linkTripPhotos(day);
+      return true;
+    }
+
     function editableTripHtml() {
       const daysClone = document.querySelector(".days").cloneNode(true);
       daysClone.querySelectorAll(".day-question").forEach((panel) => panel.remove());
@@ -2142,7 +2272,9 @@
             if (answerText && daySuggestionCanApply(question, result)) {
               applyButton.hidden = false;
               applyButton.dataset.question = dayApplyQuestion(dateText, question, answerText);
+              applyButton.dataset.originalQuestion = question;
               applyButton.dataset.answer = answerText;
+              applyButton.dataset.localMode = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question) ? "dining" : "";
             }
             status.textContent = "已收到回答。";
           } catch (error) {
@@ -2155,6 +2287,7 @@
         applyButton.addEventListener("click", async () => {
           const token = assistantToken.value.trim();
           const question = applyButton.dataset.question || "";
+          const originalQuestion = applyButton.dataset.originalQuestion || question;
           const answerText = applyButton.dataset.answer || "";
 
           if (!token) {
@@ -2174,12 +2307,21 @@
           status.textContent = "正在确认改动并保存为新版。";
 
           try {
-            const state = await assistantRequest({
-              action: "apply_change",
-              question,
-              answer: answerText,
-              editable: editableTripHtml()
-            }, token);
+            let state;
+            if (applyButton.dataset.localMode === "dining" && applyDiningSuggestionLocally(day, originalQuestion, answerText)) {
+              state = await assistantRequest({
+                action: "save_state",
+                summary: "当天助手确认餐馆建议",
+                editable: editableTripHtml()
+              }, token);
+            } else {
+              state = await assistantRequest({
+                action: "apply_change",
+                question,
+                answer: answerText,
+                editable: editableTripHtml()
+              }, token);
+            }
             applyTripState(state);
             assistantMessage(`改动已确认，已保存为运行版本 ${state.version}。`);
           } catch (error) {
