@@ -1282,8 +1282,8 @@
 
     .person-choice {
       display: inline-flex;
-      gap: 2px;
       align-items: center;
+      cursor: pointer;
     }
 
     .person-icon {
@@ -1292,27 +1292,40 @@
       align-items: start;
       width: 13px;
       height: 18px;
+      color: var(--muted);
+      opacity: .72;
     }
 
     .person-head {
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: currentColor;
+      border: 1.5px solid currentColor;
+      background: transparent;
     }
 
     .person-body {
       width: 9px;
       height: 10px;
       margin-top: 1px;
+      border: 1.5px solid currentColor;
+      background: transparent;
+    }
+
+    .person-choice input:checked + .person-icon {
+      opacity: 1;
+    }
+
+    .person-choice input:checked + .person-icon .person-head,
+    .person-choice input:checked + .person-icon .person-body {
       background: currentColor;
     }
 
-    .person-choice.male {
+    .person-choice.male input:checked + .person-icon {
       color: var(--blue);
     }
 
-    .person-choice.female {
+    .person-choice.female input:checked + .person-icon {
       color: var(--red);
     }
 
@@ -1321,7 +1334,7 @@
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
     }
 
-    .person-choice.child {
+    .person-choice.child input:checked + .person-icon {
       color: var(--gold);
     }
 
@@ -1346,9 +1359,19 @@
     }
 
     .family-count input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      margin: 0;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .family-count input[type="checkbox"]:focus-visible + .person-icon {
+      outline: 2px solid rgba(25, 94, 131, 0.38);
+      outline-offset: 2px;
     }
 
     .lodging-table,
@@ -1641,7 +1664,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：62</div>
+    <div class="page-version" aria-label="网页版本">网页版本：63</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
