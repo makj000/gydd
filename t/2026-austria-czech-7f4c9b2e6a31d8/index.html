@@ -154,6 +154,35 @@
       color: rgba(255, 255, 255, 0.9);
     }
 
+    .section-breadcrumb {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px max(16px, calc((100vw - 1180px) / 2));
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, 0.94);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    .section-breadcrumb a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .section-breadcrumb a:hover,
+    .section-breadcrumb a:focus {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
     .wrap {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
@@ -1572,7 +1601,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：45</div>
+    <div class="page-version" aria-label="网页版本">网页版本：46</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1582,6 +1611,22 @@
       <p class="hero-copy">2026 年 7 月 29 日到 2026 年 8 月 8 日，奥地利和捷克 11 天家庭行程。</p>
     </div>
   </header>
+
+  <nav class="section-breadcrumb" aria-label="页面板块导航">
+    <a href="#overview-section">总览</a>
+    <span>/</span>
+    <a href="#detailed-plan">详细行程</a>
+    <span>/</span>
+    <a href="#pending-section">待确认事项</a>
+    <span>/</span>
+    <a href="#booking-section">提前预订建议</a>
+    <span>/</span>
+    <a href="#assistant-section">智能助手</a>
+    <span>/</span>
+    <a href="#version-section">版本管理</a>
+    <span>/</span>
+    <a href="#sources-section">来源</a>
+  </nav>
 
   <main class="wrap">
     <section class="journey-map" aria-label="行程地图">
@@ -1664,7 +1709,7 @@
       <a href="#assistant-section">跳到智能助手问答</a>
     </nav>
 
-    <section class="section-head">
+    <section class="section-head" id="overview-section">
       <h2>总览</h2>
     </section>
 
@@ -1997,7 +2042,7 @@
       </article>
     </section>
 
-    <section class="section-head">
+    <section class="section-head" id="pending-section">
       <h2>待确认事项</h2>
       <p>下面这些项目确认后，这份草案就可以进一步变成更精确的每日计划。</p>
     </section>
@@ -2014,7 +2059,7 @@
       </ul>
     </section>
 
-    <section class="section-head">
+    <section class="section-head" id="booking-section">
       <h2>提前预订建议</h2>
       <p>按目前行程节奏，下面这些项目最值得提前处理；其余城市散步类景点通常不需要预订。</p>
     </section>
@@ -2069,7 +2114,7 @@
       <button type="button" id="assistant-apply" class="secondary-button" hidden>确认按建议改页面</button>
     </section>
 
-    <details class="collapsed-section">
+    <details class="collapsed-section" id="version-section">
       <summary>版本管理</summary>
       <div class="collapsed-section-body">
         <p class="version-note">每次发布都会保存在站点仓库的提交记录里；如果改错，可以运行回滚脚本，把页面恢复到指定版本。</p>
@@ -2083,7 +2128,7 @@
       </div>
     </details>
 
-    <details class="collapsed-section sources">
+    <details class="collapsed-section sources" id="sources-section">
       <summary>来源</summary>
       <div class="collapsed-section-body">
       <ul>
