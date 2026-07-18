@@ -1275,8 +1275,8 @@
       align-items: start;
       width: 13px;
       height: 18px;
-      color: var(--muted);
-      opacity: .72;
+      color: #1f2933;
+      opacity: .9;
     }
 
     .person-head {
@@ -1308,11 +1308,6 @@
       color: var(--blue);
     }
 
-    .person-choice.female .person-icon {
-      color: var(--red);
-      opacity: .82;
-    }
-
     .person-choice.female input:checked + .person-icon {
       color: var(--red);
       opacity: 1;
@@ -1321,7 +1316,7 @@
     .person-choice.female .person-body {
       width: 11px;
       border: 1.5px solid currentColor;
-      background: rgba(142, 60, 54, 0.18);
+      background: transparent;
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
     }
 
@@ -1486,6 +1481,37 @@
     .hotel-stay strong {
       color: var(--ink);
       font-size: 13px;
+    }
+
+    .place-original {
+      color: var(--muted);
+      font-size: 0.88em;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .place-glossary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+      margin: 12px 0 24px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
+    .place-glossary div {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .place-glossary strong {
+      color: var(--ink);
+      font-size: 14px;
     }
 
     .sources {
@@ -1693,7 +1719,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：77</div>
+    <div class="page-version" aria-label="网页版本">网页版本：79</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1763,35 +1789,35 @@
 
           <line class="map-leader" x1="198" y1="290" x2="142" y2="236"></line>
           <rect class="map-label-box" x="54" y="190" width="220" height="78" rx="8"></rect>
-          <text class="map-label" x="70" y="214">萨尔茨堡</text>
+          <text class="map-label" x="70" y="214">萨尔茨堡 Salzburg</text>
           <text class="map-date" x="70" y="235">2026 年 7/29 到 7/31</text>
           <svg class="map-weather-icon" x="70" y="243" width="16" height="16"><use data-map-weather-icon="salzburg" href="#weather-cloud"></use></svg>
           <text class="map-note" x="92" y="256" data-map-weather="salzburg">天气：正在查询</text>
 
           <line class="map-leader" x1="332" y1="260" x2="332" y2="318"></line>
           <rect class="map-label-box" x="246" y="318" width="204" height="78" rx="8"></rect>
-          <text class="map-label" x="262" y="342">林茨</text>
+          <text class="map-label" x="262" y="342">林茨 Linz</text>
           <text class="map-date" x="262" y="363">2026 年 7/31 到 8/2</text>
           <svg class="map-weather-icon" x="262" y="371" width="16" height="16"><use data-map-weather-icon="linz" href="#weather-cloud"></use></svg>
           <text class="map-note" x="284" y="384" data-map-weather="linz">天气：正在查询</text>
 
           <line class="map-leader" x1="452" y1="210" x2="392" y2="124"></line>
           <rect class="map-label-box" x="300" y="70" width="194" height="78" rx="8"></rect>
-          <text class="map-label" x="316" y="94">毛特豪森</text>
+          <text class="map-label" x="316" y="94">毛特豪森 Mauthausen</text>
           <text class="map-date" x="316" y="115">2026 年 8/2</text>
           <svg class="map-weather-icon" x="316" y="123" width="16" height="16"><use data-map-weather-icon="mauthausen" href="#weather-cloud"></use></svg>
           <text class="map-note" x="338" y="136" data-map-weather="mauthausen">天气：正在查询</text>
 
           <line class="map-leader" x1="570" y1="172" x2="610" y2="258"></line>
           <rect class="map-label-box" x="494" y="258" width="246" height="78" rx="8"></rect>
-          <text class="map-label" x="510" y="282">布杰约维采</text>
+          <text class="map-label" x="510" y="282">布杰约维采 České Budějovice</text>
           <text class="map-date" x="510" y="303">2026 年 8/2 到 8/4</text>
           <svg class="map-weather-icon" x="510" y="311" width="16" height="16"><use data-map-weather-icon="budejovice" href="#weather-cloud"></use></svg>
           <text class="map-note" x="532" y="324" data-map-weather="budejovice">天气：正在查询</text>
 
           <line class="map-leader" x1="682" y1="138" x2="742" y2="78"></line>
           <rect class="map-label-box" x="648" y="26" width="190" height="78" rx="8"></rect>
-          <text class="map-label" x="664" y="50">布拉格</text>
+          <text class="map-label" x="664" y="50">布拉格 Praha</text>
           <text class="map-date" x="664" y="71">2026 年 8/4 到 8/8</text>
           <svg class="map-weather-icon" x="664" y="79" width="16" height="16"><use data-map-weather-icon="prague" href="#weather-cloud"></use></svg>
           <text class="map-note" x="686" y="92" data-map-weather="prague">天气：正在查询</text>
@@ -1801,6 +1827,40 @@
 
     <section class="section-head" id="overview-section">
       <h2>总览</h2>
+    </section>
+
+    <section class="place-glossary" aria-label="地名原文对照">
+      <div><strong>萨尔茨堡</strong><span class="place-original">Salzburg</span></div>
+      <div><strong>萨尔茨堡老城</strong><span class="place-original">Altstadt Salzburg</span></div>
+      <div><strong>米拉贝尔花园</strong><span class="place-original">Mirabellgarten</span></div>
+      <div><strong>粮食胡同</strong><span class="place-original">Getreidegasse</span></div>
+      <div><strong>卡比特尔广场</strong><span class="place-original">Kapitelplatz</span></div>
+      <div><strong>海尔布伦戏水宫和水机关</strong><span class="place-original">Schloss Hellbrunn / Wasserspiele Hellbrunn</span></div>
+      <div><strong>霍亨萨尔茨堡城堡</strong><span class="place-original">Festung Hohensalzburg</span></div>
+      <div><strong>林茨</strong><span class="place-original">Linz</span></div>
+      <div><strong>匹斯特林山</strong><span class="place-original">Pöstlingberg</span></div>
+      <div><strong>林茨中央广场</strong><span class="place-original">Hauptplatz Linz</span></div>
+      <div><strong>林茨圣玛丽大教堂</strong><span class="place-original">Mariendom Linz</span></div>
+      <div><strong>毛特豪森纪念馆</strong><span class="place-original">Mauthausen Memorial</span></div>
+      <div><strong>布杰约维采</strong><span class="place-original">České Budějovice</span></div>
+      <div><strong>布杰约维采广场</strong><span class="place-original">Náměstí Přemysla Otakara II</span></div>
+      <div><strong>百威酿酒厂</strong><span class="place-original">Budweiser Budvar Brewery</span></div>
+      <div><strong>布拉格</strong><span class="place-original">Praha / Prague</span></div>
+      <div><strong>老城桥塔</strong><span class="place-original">Staroměstská mostecká věž</span></div>
+      <div><strong>查理大桥</strong><span class="place-original">Karlův most / Charles Bridge</span></div>
+      <div><strong>小城</strong><span class="place-original">Malá Strana</span></div>
+      <div><strong>皇家花园</strong><span class="place-original">Královská zahrada</span></div>
+      <div><strong>布拉格城堡</strong><span class="place-original">Pražský hrad / Prague Castle</span></div>
+      <div><strong>圣维特大教堂</strong><span class="place-original">Katedrála svatého Víta</span></div>
+      <div><strong>库特纳霍拉</strong><span class="place-original">Kutná Hora</span></div>
+      <div><strong>人骨教堂</strong><span class="place-original">Kostnice Sedlec / Sedlec Ossuary</span></div>
+      <div><strong>塞德莱茨大教堂</strong><span class="place-original">Katedrála Nanebevzetí Panny Marie a svatého Jana Křtitele</span></div>
+      <div><strong>高堡</strong><span class="place-original">Vyšehrad</span></div>
+      <div><strong>伏尔塔瓦河</strong><span class="place-original">Vltava</span></div>
+      <div><strong>康帕岛</strong><span class="place-original">Kampa</span></div>
+      <div><strong>列侬墙</strong><span class="place-original">Lennonova zeď / Lennon Wall</span></div>
+      <div><strong>佩特任山</strong><span class="place-original">Petřín</span></div>
+      <div><strong>布拉格机场</strong><span class="place-original">Letiště Václava Havla Praha</span></div>
     </section>
 
     <table class="lodging-table" aria-label="总览">
