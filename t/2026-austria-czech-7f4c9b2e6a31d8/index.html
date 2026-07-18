@@ -1674,7 +1674,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：69</div>
+    <div class="page-version" aria-label="网页版本">网页版本：70</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2394,7 +2394,46 @@
       family.counts[itemId] ||= { adults: 0, children: 0 };
       family.counts[itemId].adults = Math.min(Number(family.counts[itemId].adults || 0), family.maxAdults);
       family.counts[itemId].children = Math.min(Number(family.counts[itemId].children || 0), family.maxChildren);
+      family.counts[itemId].adultAudit = Array.isArray(family.counts[itemId].adultAudit) ? family.counts[itemId].adultAudit.slice(0, family.maxAdults) : [];
+      family.counts[itemId].childAudit = Array.isArray(family.counts[itemId].childAudit) ? family.counts[itemId].childAudit.slice(0, family.maxChildren) : [];
       return family.counts[itemId];
+    }
+
+    function slotAuditLabel(audit) {
+      if (!audit?.by) {
+        return "还没有修改记录";
+      }
+      return `${audit.by} ${audit.selected ? "选中" : "取消"}`;
+    }
+
+    function setSlotAudit(counts, kind, index, audit) {
+      const key = kind === "adults" ? "adultAudit" : "childAudit";
+      counts[key] ||= [];
+      counts[key][index] = audit;
+    }
+
+    function signupSaveSummary(itemName, familyName, kind, index, selected) {
+      const typeText = kind === "adults" ? "成人" : "小孩";
+      return `${itemName}：${familyName} ${typeText}${index + 1} ${selected ? "选中" : "取消"}`;
+    }
+
+    async function saveSignupClick(families, change, summary) {
+      const token = assistantToken.value.trim();
+      if (!token) {
+        return;
+      }
+
+      try {
+        const state = await assistantRequest({
+          action: "save_signups",
+          summary,
+          ticketSignups: families,
+          change
+        }, token);
+        applyTripState(state);
+      } catch (error) {
+        assistantMessage(error.message || "报名统计暂时无法保存。");
+      }
     }
 
     function checkboxPack(count, checkedCount, labelText, variant, onChange, figuresOverride = null, labelsOverride = null) {
@@ -2406,7 +2445,7 @@
       Array.from({ length: count }, (_, index) => {
         const choice = document.createElement("label");
         const figure = figures[index] || figures[figures.length - 1];
-        const personLabel = labels[index] || `${labelText} ${index + 1}`;
+        const personLabel = labels[index] || "还没有修改记录";
         choice.className = `person-choice ${figure}`;
         choice.dataset.personLabel = personLabel;
         choice.title = personLabel;
@@ -2416,7 +2455,7 @@
         checkbox.checked = index < checkedCount;
         checkbox.setAttribute("aria-label", personLabel);
         checkbox.addEventListener("change", () => {
-          onChange(Array.from(pack.querySelectorAll("input")).filter((input) => input.checked).length);
+          onChange(Array.from(pack.querySelectorAll("input")).filter((input) => input.checked).length, index, checkbox.checked);
         });
 
         const icon = document.createElement("span");
@@ -2512,20 +2551,36 @@
             const name = document.createElement("strong");
             name.textContent = family.name;
 
-            const adults = checkboxPack(family.maxAdults, counts.adults, `${family.name} 成人`, "adults", (value) => {
+            const adults = checkboxPack(family.maxAdults, counts.adults, `${family.name} 成人`, "adults", (value, index, selected) => {
+              setSlotAudit(counts, "adults", index, { by: "正在保存", selected });
               counts.adults = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
-            }, family.adultFigures, family.adultLabels);
+              saveSignupClick(families, {
+                familyId: family.id,
+                itemId: item.id,
+                kind: "adults",
+                index,
+                selected
+              }, signupSaveSummary(item.name, family.name, "adults", index, selected));
+            }, family.adultFigures, counts.adultAudit.map(slotAuditLabel));
             adults.querySelectorAll("input").forEach((input) => {
               input.disabled = !canEditSignups;
             });
 
-            const children = checkboxPack(family.maxChildren, counts.children, `${family.name} 小孩`, "children", (value) => {
+            const children = checkboxPack(family.maxChildren, counts.children, `${family.name} 小孩`, "children", (value, index, selected) => {
+              setSlotAudit(counts, "children", index, { by: "正在保存", selected });
               counts.children = value;
               writeTicketSignups(families);
               renderSignupTotals(panel, families, itemsForPanel);
-            }, null, family.childLabels);
+              saveSignupClick(families, {
+                familyId: family.id,
+                itemId: item.id,
+                kind: "children",
+                index,
+                selected
+              }, signupSaveSummary(item.name, family.name, "children", index, selected));
+            }, null, counts.childAudit.map(slotAuditLabel));
             children.querySelectorAll("input").forEach((input) => {
               input.disabled = !canEditSignups;
             });
