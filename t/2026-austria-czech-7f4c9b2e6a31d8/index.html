@@ -1673,7 +1673,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：74</div>
+    <div class="page-version" aria-label="网页版本">网页版本：75</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3124,8 +3124,29 @@
       return clone.innerText.replace(/\n{3,}/g, "\n\n").trim();
     }
 
+    function isDiningQuestion(question) {
+      return /午餐|午饭|晚餐|晚饭|饭馆|餐馆|餐厅|用餐|吃饭|吃|菜单|menu|restaurant|where to eat|lunch|dinner/i.test(question || "");
+    }
+
+    function dayAssistantApplyMode(question, result = {}) {
+      const text = question || "";
+      if (signupRequestMode(text)) {
+        return "signup";
+      }
+      if (isDiningQuestion(text)) {
+        return "dining";
+      }
+      if (result?.canApplyChange || clientCanApplyChange(text)) {
+        return "patch";
+      }
+      if (/(建议|推荐|安排|加|加入|添加|写|写上|放进|放到|改|修改|调整|换|替换|要不要|能不能|可不可以|哪里|哪儿|哪个|哪家|怎么)/.test(text)) {
+        return "patch";
+      }
+      return "";
+    }
+
     function diningContext(dateText, question) {
-      const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question || "");
+      const asksDining = isDiningQuestion(question);
       if (!asksDining) {
         return "";
       }
@@ -3159,13 +3180,11 @@
     }
 
     function daySuggestionCanApply(question, result) {
-      const text = question || "";
-      const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(text);
-      return Boolean(result?.canApplyChange || clientCanApplyChange(text) || asksDining || signupRequestMode(text));
+      return Boolean(dayAssistantApplyMode(question, result));
     }
 
     function dayApplyQuestion(dateText, question, answerText) {
-      const asksDining = /午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question || "");
+      const asksDining = isDiningQuestion(question);
       if (asksDining) {
         return [
           `只修改${dateText}当天详细计划里对应的午餐或晚餐那一行。`,
@@ -3425,14 +3444,13 @@
             }, token);
             const answerText = result.answer || "";
             answer.textContent = answerText;
-            if (answerText && daySuggestionCanApply(question, result)) {
+            const applyMode = dayAssistantApplyMode(question, result);
+            if (answerText && applyMode) {
               applyButton.hidden = false;
               applyButton.dataset.question = dayApplyQuestion(dateText, question, answerText);
               applyButton.dataset.originalQuestion = question;
               applyButton.dataset.answer = answerText;
-              applyButton.dataset.localMode = signupRequestMode(question)
-                ? "signup"
-                : (/午餐|午饭|晚餐|晚饭|饭馆|餐厅|吃|restaurant/i.test(question) ? "dining" : "");
+              applyButton.dataset.localMode = applyMode;
             }
             status.textContent = "已收到回答。";
           } catch (error) {
