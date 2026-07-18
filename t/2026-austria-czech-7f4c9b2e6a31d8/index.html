@@ -2642,7 +2642,8 @@
                 itemId: item.id,
                 kind: "adults",
                 index,
-                selected
+                selected,
+                value
               }, signupSaveSummary(item.name, family.name, "adults", index, selected));
             }, family.adultFigures, counts.adultAudit.map(slotAuditLabel));
             adults.querySelectorAll("input").forEach((input) => {
@@ -2659,7 +2660,8 @@
                 itemId: item.id,
                 kind: "children",
                 index,
-                selected
+                selected,
+                value
               }, signupSaveSummary(item.name, family.name, "children", index, selected));
             }, null, counts.childAudit.map(slotAuditLabel));
             children.querySelectorAll("input").forEach((input) => {
@@ -3717,6 +3719,24 @@
       }
     }
 
+    async function refreshSharedTicketSignups() {
+      if (document.hidden || assistantStatus.classList.contains("is-working")) {
+        return;
+      }
+
+      try {
+        const state = await assistantRequest({ action: "get_state" });
+        if (Array.isArray(state.ticketSignups)) {
+          sharedTicketSignups = fixedFamilies(state.ticketSignups);
+          localStorage.setItem(ticketSignupKey, JSON.stringify(sharedTicketSignups));
+          renderTicketSignups();
+        }
+        renderRuntimeVersions(state);
+      } catch {
+        // Keep the current view when the shared state cannot be reached.
+      }
+    }
+
     async function rollbackRuntimeVersion(version) {
       const token = assistantToken.value.trim();
       if (!token) {
@@ -3754,6 +3774,12 @@
     renderDayQuestionPanels();
     initPlaceHoverLinks();
     loadRuntimeVersion();
+    window.setInterval(refreshSharedTicketSignups, 30000);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        refreshSharedTicketSignups();
+      }
+    });
 
     document.getElementById("assistant-clear").addEventListener("click", () => {
       localStorage.removeItem(assistantConversationKey);
