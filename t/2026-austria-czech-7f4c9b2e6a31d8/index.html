@@ -183,6 +183,24 @@
       text-decoration: underline;
     }
 
+    .section-breadcrumb .breadcrumb-button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border: 1px solid rgba(66, 107, 79, 0.35);
+      border-radius: 999px;
+      background: #eef3f1;
+      color: var(--green);
+    }
+
+    .section-breadcrumb .breadcrumb-button:hover,
+    .section-breadcrumb .breadcrumb-button:focus {
+      background: #edf4fb;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
     .wrap {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
@@ -1655,7 +1673,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：73</div>
+    <div class="page-version" aria-label="网页版本">网页版本：74</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1671,13 +1689,13 @@
     <span>/</span>
     <a href="#detailed-plan">详细行程</a>
     <span>/</span>
+    <a class="breadcrumb-button" href="#assistant-section">智能助手问答</a>
+    <span>/</span>
     <a href="#pending-section">待确认事项</a>
     <span>/</span>
     <a href="#booking-section">提前预订建议</a>
     <span>/</span>
     <a href="#signup-0730">报名购票</a>
-    <span>/</span>
-    <a href="#assistant-section">智能助手问答</a>
     <span>/</span>
     <a href="#version-section">版本管理</a>
     <span>/</span>
