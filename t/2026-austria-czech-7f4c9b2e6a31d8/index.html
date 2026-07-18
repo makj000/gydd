@@ -559,6 +559,14 @@
       color: var(--gold);
     }
 
+    .items li.needs-action.urgent-booking::after {
+      content: "!!";
+      min-width: 34px;
+      border-color: rgba(176, 63, 45, 0.4);
+      background: #fff0ea;
+      color: #b03f2d;
+    }
+
     .items li.no-booking::after {
       content: "不需";
       display: grid;
@@ -1725,7 +1733,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：88</div>
+    <div class="page-version" aria-label="网页版本">网页版本：89</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2038,7 +2046,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="广场成人/儿童免费；黑塔成人约 80 克朗、儿童约 40 克朗" data-link="https://www.budejce.cz/en/activities/2-black-tower"><span class="time">09:30</span><span>从公寓大致向西南↙步行👣到普瑞米斯欧塔卡拉二世广场约 5 到 15 分钟；广场公共区域不需预订，黑塔登塔参考价成人约 80 克朗、儿童约 40 克朗，出发前复核，建议总停留 2 小时。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>城内自行午餐，从黑塔到餐厅🍽️通常大致向广场周边步行👣约 5 到 15 分钟，建议用餐 60 分钟。</span></li>
-          <li class="needs-action" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://www.budejovickybudvar.cz/en/tours" data-link-label="预约"><span class="time">14:00</span><span>从市中心大致向北↑去百威酿酒厂，建议优先坐公交🚌或短程出租车🚕约 15 到 25 分钟；体力好也可步行👣约 25 到 35 分钟。酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。官方预约链接见本行“预约”；预订建议：锁定 2026 年 8 月 3 日 14:40 英文参观时段，先用下方报名统计确认人数，再预约并等待邮件确认。</span></li>
+          <li class="needs-action urgent-booking" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://www.budejovickybudvar.cz/en/tours" data-link-label="预约"><span class="time">14:00</span><span>从市中心大致向北↑去百威酿酒厂，建议优先坐公交🚌或短程出租车🚕约 15 到 25 分钟；体力好也可步行👣约 25 到 35 分钟。酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。官方预约链接见本行“预约”；预订建议：锁定 2026 年 8 月 3 日 14:40 英文参观时段，先用下方报名统计确认人数，再预约并等待邮件确认。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从酿酒厂大致向南↓坐公交🚌、短程出租车🚕或步行👣回市中心或酒店🏨约 15 到 35 分钟，轻松吃饭和休息，建议不要再排重项目。</span></li>
         </ul>
         <section class="signup-panel day-signup" id="signup-0803" data-signup-item="budvar" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
