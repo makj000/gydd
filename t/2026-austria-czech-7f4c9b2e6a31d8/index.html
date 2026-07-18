@@ -1308,12 +1308,20 @@
       color: var(--blue);
     }
 
+    .person-choice.female .person-icon {
+      color: var(--red);
+      opacity: .82;
+    }
+
     .person-choice.female input:checked + .person-icon {
       color: var(--red);
+      opacity: 1;
     }
 
     .person-choice.female .person-body {
       width: 11px;
+      border: 1.5px solid currentColor;
+      background: rgba(142, 60, 54, 0.18);
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
     }
 
@@ -1685,7 +1693,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：76</div>
+    <div class="page-version" aria-label="网页版本">网页版本：77</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
