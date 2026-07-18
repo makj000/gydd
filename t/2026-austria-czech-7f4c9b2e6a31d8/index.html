@@ -1117,6 +1117,19 @@
       background: var(--panel);
     }
 
+    .day-expense-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin: 10px 0 0;
+    }
+
+    .day-expense-button {
+      min-height: 34px;
+      padding: 7px 11px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
     .expense-form {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1988,23 +2001,21 @@
     <div class="currency-strip" aria-label="旅行货币汇率">
       <span>奥地利使用欧元：1 欧元约 7.73 人民币</span>
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
-      <span>汇率日期：2026年7/15</span>
+      <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：96</div>
+    <div class="page-version" aria-label="网页版本">网页版本：97</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
     </label>
     <div class="hero-content">
       <h1>2026年奥地利捷克旅行</h1>
-      <p class="hero-copy">2026年7/29到2026年8/8，奥地利和捷克 11 天家庭行程。</p>
+      <p class="hero-copy">2026 年行程：7/29到8/8，奥地利和捷克 11 天家庭行程。</p>
     </div>
   </header>
 
   <nav class="section-breadcrumb" aria-label="页面板块导航">
     <a href="#overview-section">总览</a>
-    <span>/</span>
-    <a href="#luggage-section">存包</a>
     <span>/</span>
     <a href="#detailed-plan">详细行程</a>
     <span>/</span>
@@ -2066,28 +2077,28 @@
           <line class="map-leader" x1="198" y1="290" x2="142" y2="236"></line>
           <rect class="map-label-box" x="54" y="190" width="220" height="78" rx="8"></rect>
           <text class="map-label" x="70" y="214">萨尔茨堡 Salzburg</text>
-          <text class="map-date" x="70" y="235">2026年7/29-7/31</text>
+          <text class="map-date" x="70" y="235">7/29-7/31</text>
           <svg class="map-weather-icon" x="70" y="243" width="16" height="16"><use data-map-weather-icon="salzburg" href="#weather-cloud"></use></svg>
           <text class="map-note" x="92" y="256" data-map-weather="salzburg">天气：正在查询</text>
 
           <line class="map-leader" x1="332" y1="260" x2="332" y2="318"></line>
           <rect class="map-label-box" x="246" y="318" width="204" height="78" rx="8"></rect>
           <text class="map-label" x="262" y="342">林茨 Linz</text>
-          <text class="map-date" x="262" y="363">2026年7/31-8/2</text>
+          <text class="map-date" x="262" y="363">7/31-8/2</text>
           <svg class="map-weather-icon" x="262" y="371" width="16" height="16"><use data-map-weather-icon="linz" href="#weather-cloud"></use></svg>
           <text class="map-note" x="284" y="384" data-map-weather="linz">天气：正在查询</text>
 
           <line class="map-leader" x1="570" y1="172" x2="610" y2="258"></line>
           <rect class="map-label-box" x="494" y="258" width="246" height="78" rx="8"></rect>
           <text class="map-label" x="510" y="282">布杰约维采 České Budějovice</text>
-          <text class="map-date" x="510" y="303">2026年8/2-8/4</text>
+          <text class="map-date" x="510" y="303">8/2-8/4</text>
           <svg class="map-weather-icon" x="510" y="311" width="16" height="16"><use data-map-weather-icon="budejovice" href="#weather-cloud"></use></svg>
           <text class="map-note" x="532" y="324" data-map-weather="budejovice">天气：正在查询</text>
 
           <line class="map-leader" x1="682" y1="138" x2="742" y2="78"></line>
           <rect class="map-label-box" x="648" y="26" width="190" height="78" rx="8"></rect>
           <text class="map-label" x="664" y="50">布拉格 Praha</text>
-          <text class="map-date" x="664" y="71">2026年8/4-8/8</text>
+          <text class="map-date" x="664" y="71">8/4-8/8</text>
           <svg class="map-weather-icon" x="664" y="79" width="16" height="16"><use data-map-weather-icon="prague" href="#weather-cloud"></use></svg>
           <text class="map-note" x="686" y="92" data-map-weather="prague">天气：正在查询</text>
         </svg>
@@ -2159,31 +2170,8 @@
         <tr><td>8/4</td><td>布杰约维采</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0804">!!! 火车/巴士票全员提前订</a><a class="overview-tag action" href="#signup-stoleti">三世纪餐厅🍽️可订桌</a></div></td><td><a href="#day-0804">查看</a></td></tr>
         <tr><td>8/5</td><td>布拉格</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0805">布拉格城堡🏰主线路门票</a><a class="overview-tag action" href="#signup-bohemia">晚餐可订桌</a></div></td><td><a href="#day-0805">查看</a></td></tr>
         <tr><td>8/6</td><td>布拉格</td><td>库特纳霍拉人骨教堂💀</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0806">人骨教堂💀下午限时票提前买</a><span class="overview-tag">周四安排更稳</span></div></td><td><a href="#day-0806">查看</a></td></tr>
-        <tr><td>8/7</td><td>切尔尼、多普勒、开普勒、卡夫卡主题步行</td><td>高堡或佩特任山⛰️备选</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag no-booking" href="#science-walk-section">主题步行不需预订</a><a class="overview-tag action" href="#day-0807">告别晚餐待定</a></div></td><td><a href="#day-0807">查看</a></td></tr>
+        <tr><td>8/7</td><td>卡夫卡头像、老城、查理大桥🌉、康帕岛</td><td>多普勒和开普勒选走，高堡或佩特任山⛰️备选</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag no-booking" href="#science-walk-section">短版主题步行不需预订</a><a class="overview-tag action" href="#day-0807">告别晚餐待定</a></div></td><td><a href="#day-0807">查看</a></td></tr>
         <tr><td>8/8</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td><div class="overview-tags"><span class="overview-tag">机场🛫交通</span><span class="overview-tag">航班值机</span></div></td><td><a href="#day-0808">查看</a></td></tr>
-      </tbody>
-    </table>
-
-    <section class="section-head" id="luggage-section">
-      <h2>存包</h2>
-      <p>优先用酒店前台寄存；只有退房后还要逛、早到不能入住、或中途改线时，才使用车站或市中心存包。</p>
-    </section>
-
-    <table class="lodging-table" aria-label="存包建议">
-      <thead>
-        <tr>
-          <th>地点</th>
-          <th>什么时候需要</th>
-          <th>存包处</th>
-          <th>是否预订</th>
-          <th>备注</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>萨尔茨堡</td><td>7/31退房后还想逛老城</td><td><a href="https://bahnhof.oebb.at/en/salzburg/salzburg-hauptbahnhof">Salzburg Hauptbahnhof</a> 多功能储物柜；从 harry's home Salzburg 大致向西←步行👣约 3 到 6 分钟</td><td>不需预订</td><td>优先问酒店前台；车站柜按空位现场使用，适合临时改线。</td></tr>
-        <tr><td>林茨</td><td>8/2退房后先吃午饭或等车</td><td><a href="https://www.oebb.at/de/reiseplanung-services/am-bahnhof/gepaeckaufbewahrung">Linz Hauptbahnhof</a> 储物柜；从 Courtyard by Marriott Linz 大致向西南↙步行👣约 10 到 15 分钟</td><td>不需预订</td><td>ÖBB 储物柜通常按 24 小时计费，小/中/大/加大柜约 €2、€2.50、€3.50、€4.50。</td></tr>
-        <tr><td>布杰约维采</td><td>8/4退房后早到车站，或想先吃饭再走</td><td><a href="https://www.budejce.cz/en/news/55-uschovna-zavazadel-v-prostorach-vlakoveho-nadrazi">布杰约维采火车站大厅自助柜</a>；从 Residence Mariánská 大致向东南↘步行👣约 10 到 20 分钟</td><td>不需预订</td><td>官网写有 15 个柜，L 和 XL 两种尺寸，车站大厅开放时可用，只能刷卡。</td></tr>
-        <tr><td>布拉格</td><td>8/8退房后还想逛，或不想拖箱去机场🛫</td><td>优先问 The Julius Prague 前台；备选 <a href="https://www.easylocker.cz/">EasyLocker 小城店</a>，Prokopská 625/3，靠近查理大桥🌉</td><td>可现场使用；也可线上预留</td><td>EasyLocker 官网写可直接到店、不需预约、刷卡支付；9:00-20:00 开放。若直接去机场🛫，没必要存包。</td></tr>
       </tbody>
     </table>
 
@@ -2234,7 +2222,7 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.christian-doppler.net/en/station/salzburg-where-everything-began/" data-link-label="介绍"><span class="time">09:30</span><span>从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟；之后大致向西←步行👣到 Makartplatz 1 的多普勒出生地纪念牌约 5 到 10 分钟，再大致向南↓步行👣过河🌊到粮食胡同和老城核心区约 10 到 20 分钟。建议总停留 2 到 2.5 小时；多普勒纪念牌、米拉贝尔花园🌷和老城公共区域不需预订。</span></li>
-          <li class="needs-action" data-price="外观成人/儿童免费；入内成人 €15；儿童/优惠 €4.50" data-link="https://mozarteum.at/en/mozart-museums/mozarts-birthplace" data-link-label="官网"><span class="time">11:00</span><span>把莫扎特出生地作为老城快停点：从粮食胡同大致向西←步行👣到 Getreidegasse 9 约 3 到 8 分钟；如果只看外观和门牌，10 到 15 分钟即可，不需预订；如果临时决定入内，官网建议参观约 1 小时，7月和8月开放时间更长，门票和入场规则见本行“官网”。</span></li>
+          <li class="needs-action" data-price="外观成人/儿童免费；入内成人 €15；儿童/优惠 €4.50" data-link="https://mozarteum.at/en/mozart-museums/mozarts-birthplace" data-link-label="官网"><span class="time">11:00</span><span>把莫扎特出生地作为老城快停点：从粮食胡同大致向西←步行👣到 Getreidegasse 9 约 3 到 8 分钟；如果只看外观和门牌，10 到 15 分钟即可，不需预订；如果临时决定入内，官网建议参观约 1 小时，暑期开放时间更长，门票和入场规则见本行“官网”。</span></li>
           <li data-price="约 €35-55/人" data-link="https://www.gasthofgoldgasse.at/en/" data-link-label="菜单"><span class="time">12:30</span><span>推荐 Gasthof Goldgasse 老城午餐，地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费标准约 €35-55/人，建议用餐 60 分钟；午餐后从老城大致向南↓坐 25 路公交🚌去海尔布伦约 25 到 35 分钟，孩子累或时间紧时可打车🚕约 15 到 25 分钟。</span></li>
           <li class="needs-action" data-price="成人 €16.50；儿童 €6.50" data-link="https://www.hellbrunn.at/en/info/opening-hours-prices-arrival"><span class="time">14:30</span><span>海尔布伦戏水宫和水机关，天气热时下午玩水更舒服，建议停留 2 小时；2026 票价为成人 €16.50，儿童/学生 4-18 岁 €6.50。预订建议：可提前买通用门票，7/30下午使用；这不是预约固定入场时间，主要是减少现场售票排队。</span></li>
           <li data-price="成人免费；儿童免费"><span class="time">17:00</span><span>从海尔布伦大致向北↑坐公交🚌回老城或 harry's home Salzburg 约 25 到 40 分钟，也可打车🚕约 15 到 25 分钟；如果要先回酒店🏨休息，建议留 45 到 60 分钟。</span></li>
@@ -2279,7 +2267,7 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">上午</span><span>从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟；慢节奏恢复上午：米拉贝尔花园🌷、粮食胡同、莫扎特出生地外观或咖啡，各点步行👣大致向南↓或西南↙约 5 到 20 分钟，建议停留 2 小时；米拉贝尔花园🌷免费入场，不用预约，粮食胡同和外观散步也不用预约。</span></li>
-          <li data-price="约 €25-40/人" data-link="https://www.sternbrau.at/food-drink/?lang=en" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Sternbräu 午餐：Griesgasse 23, 5020 Salzburg；电话 +43 662 84 21 40；从老城核心大致向西←步行👣约 5 到 15 分钟，餐费标准约 €25-40/人，建议用餐 60 分钟；午餐后从老城大致向北↑步行👣或坐公交🚌回 Salzburg Hauptbahnhof 约 15 到 25 分钟。若退房后不想带箱子，可把行李留酒店；临时改线时 Salzburg Hauptbahnhof 也有 24 小时储物柜，不需预订，按柜子空位现场使用。</span></li>
+          <li data-price="约 €25-40/人" data-link="https://www.sternbrau.at/food-drink/?lang=en" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Sternbräu 午餐：Griesgasse 23, 5020 Salzburg；电话 +43 662 84 21 40；从老城核心大致向西←步行👣约 5 到 15 分钟，餐费标准约 €25-40/人，建议用餐 60 分钟；午餐后从老城大致向北↑步行👣或坐公交🚌回 Salzburg Hauptbahnhof 约 15 到 25 分钟。若退房后不想带箱子，优先把行李留酒店🏨；临时改线时 Salzburg Hauptbahnhof 有多功能储物柜，从酒店🏨大致向西←步行👣约 3 到 6 分钟，不需预订，按柜子空位现场使用。</span></li>
           <li class="needs-action urgent-booking" data-price="交通另计" data-link="https://www.oebb.at/en/reiseplanung-services/oebb-zugverbindungen/zugverbindungen-oesterreich/weststrecke/salzburg-linz" data-link-label="购票"><span class="time">下午</span><span>!!! 全员参加，不用统计人数；需要提前订萨尔茨堡到林茨火车票，官方购票链接见本行“购票”。从 Salzburg Hauptbahnhof 坐火车🚆大致向东北↗前往林茨并入住 Courtyard by Marriott Linz，萨尔茨堡到林茨火车🚆约 1.5 小时；林茨火车🚆站到 Europaplatz 酒店🏨大致向东北↗步行👣或短程出租车🚕约 10 到 15 分钟，入住整理约 45 分钟。</span></li>
           <li data-price="约 €25-45/人" data-link="https://www.klosterhof.at/kontakt-service/kontakt/" data-link-label="官网"><span class="time">晚上</span><span>推荐 Stiegl-Klosterhof 晚餐：Landstraße 30, 4020 Linz；电话 +43 732 773373；从 Courtyard by Marriott Linz 大致向西←步行👣约 20 到 30 分钟，或电车/出租车🚕约 10 到 15 分钟；餐费标准约 €25-45/人，建议用餐 60 到 90 分钟；固定时间建议订桌。</span></li>
         </ul>
@@ -2323,7 +2311,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计；快餐约 €8-15/人" data-link="https://www.oebb.at/en/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订林茨到布杰约维采火车/巴士票，先用 ÖBB 官方购票链接查询跨境段。从 Courtyard by Marriott Linz 大致向西南↙步行👣或短程出租车🚕到 Linz Hauptbahnhof 约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑或东北↗前往布杰约维采，建议选择换乘少、总时长约 3 到 4 小时的城际交通。午餐若在车站解决，推荐 BahnhofCity Linz 地下层 Leberkas Pepi，快餐约 €8-15/人。若想先吃再走，Linz Hauptbahnhof 有储物柜，不需预订，现场按空位使用。</span></li>
+          <li class="needs-action urgent-booking" data-price="交通另计；快餐约 €8-15/人" data-link="https://www.oebb.at/en/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订林茨到布杰约维采火车/巴士票，先用 ÖBB 官方购票链接查询跨境段。从 Courtyard by Marriott Linz 大致向西南↙步行👣或短程出租车🚕到 Linz Hauptbahnhof 约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑或东北↗前往布杰约维采，建议选择换乘少、总时长约 3 到 4 小时的城际交通。午餐若在车站解决，推荐 BahnhofCity Linz 地下层 Leberkas Pepi，快餐约 €8-15/人。若想先吃再走，Linz Hauptbahnhof 有 ÖBB 储物柜，不需预订，现场按空位使用；小/中/大/加大柜约 €2、€2.50、€3.50、€4.50，通常按 24 小时计费。</span></li>
           <li data-price="交通另计"><span class="time">下午</span><span>抵达布杰约维采后，从车站大致向西北↖到 Residence Mariánská，步行👣或短程车约 10 到 20 分钟；入住和整理建议 45 到 60 分钟。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://www.masne-kramy.cz/cs/menujidelni-listek/" data-link-label="菜单"><span class="time">晚上</span><span>推荐 Masné krámy 晚餐：Krajinská 13, 370 01 České Budějovice；电话 +420 387 201 301；从公寓大致向西南↙步行👣到餐厅🍽️约 5 到 15 分钟，餐费标准约 350-650 克朗/人，建议用餐 60 到 90 分钟；公共广场⛲不需预订，但餐厅固定时间建议订桌。</span></li>
         </ul>
@@ -2345,7 +2333,7 @@
           <li class="no-booking" data-price="广场⛲成人/儿童免费；黑塔🗼成人约 80 克朗、儿童约 40 克朗" data-link="https://www.budejce.cz/en/activities/2-black-tower"><span class="time">09:30</span><span>从公寓大致向西南↙步行👣到普瑞米斯欧塔卡拉二世广场⛲约 5 到 15 分钟；广场⛲公共区域不需预订，黑塔🗼登塔🗼参考价成人约 80 克朗、儿童约 40 克朗，出发前复核，建议总停留 2 小时。</span></li>
           <li class="needs-action" data-price="票价官网复核" data-link="https://www.seidel.cz/cz/kontakty/" data-link-label="官网"><span class="time">备选</span><span>赛德尔摄影工作室博物馆在克鲁姆洛夫，不在布杰约维采；从布杰约维采往返通常会吃掉半天，且官网开放为周二到周日 9:00-12:00、13:00-17:00，周一关闭。8/3是周一，所以这天不适合安排；如果很想去，需要改成 8/2抵达前绕去克鲁姆洛夫，或牺牲百威酿酒厂。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://www.masne-kramy.cz/cs/menujidelni-listek/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Masné krámy 午餐：Krajinská 13, 370 01 České Budějovice；从黑塔🗼大致向东北↗步行👣到餐厅🍽️约 5 到 10 分钟，传统捷克菜和百威啤酒更贴合下午酿酒厂，餐费标准约 350-650 克朗/人，建议用餐 60 分钟；大桌建议订位。</span></li>
-          <li class="needs-action urgent-booking" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://budweiserbudvar.com/visit-us/" data-link-label="预约"><span class="time">14:00</span><span>从市中心大致向北↑去百威酿酒厂，建议优先坐公交🚌或短程出租车🚕约 15 到 25 分钟；体力好也可步行👣约 25 到 35 分钟。酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。官方预约链接见本行“预约”；预订建议：锁定 2026年8/3 14:40 英文参观时段，先用下方报名统计确认人数，再预约并等待邮件确认。</span></li>
+          <li class="needs-action urgent-booking" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://budweiserbudvar.com/visit-us/" data-link-label="预约"><span class="time">14:00</span><span>从市中心大致向北↑去百威酿酒厂，建议优先坐公交🚌或短程出租车🚕约 15 到 25 分钟；体力好也可步行👣约 25 到 35 分钟。酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。官方预约链接见本行“预约”；预订建议：锁定 8/3 14:40 英文参观时段，先用下方报名统计确认人数，再预约并等待邮件确认。</span></li>
           <li data-price="约 400-700 克朗/人" data-link="https://www.restauracesolnice.cz/" data-link-label="官网"><span class="time">晚上</span><span>推荐 Solnice 晚餐：Piaristické náměstí 3, 370 01 České Budějovice；电话 +420 777 357 120；从酿酒厂大致向南↓坐公交🚌、短程出租车🚕或步行👣回市中心约 15 到 35 分钟，再步行👣到餐厅🍽️约 5 到 10 分钟；餐费标准约 400-700 克朗/人，建议不要再排重项目，固定时间建议订桌。</span></li>
         </ul>
         <section class="signup-panel day-signup" id="signup-0803" data-signup-item="budvar" data-signup-date="8/3" aria-label="8/3报名与购票统计">
@@ -2372,7 +2360,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计；午餐约 600-1000 克朗/人" data-link="https://www.cd.cz/en/eshop/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票，官方购票链接见本行“购票”。从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时。布杰约维采车站大厅有自助存包柜，早到或退房后想先吃饭时可现场刷卡使用，不需预订；到布拉格后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟。午餐若抵达后解决，推荐 Café Imperial：Na Poříčí 15, Prague 1；从 The Julius Prague 大致向东北↗步行👣约 8 到 12 分钟，餐费标准约 600-1000 克朗/人，建议提前订位。</span></li>
+          <li class="needs-action urgent-booking" data-price="交通另计；午餐约 600-1000 克朗/人" data-link="https://www.cd.cz/en/eshop/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票，官方购票链接见本行“购票”。从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时。布杰约维采火车站大厅有 15 个自助存包柜，L 和 XL 两种尺寸，只能刷卡，早到或退房后想先吃饭时可现场使用，不需预订；到布拉格后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟。午餐若抵达后解决，推荐 Café Imperial：Na Poříčí 15, Prague 1；从 The Julius Prague 大致向东北↗步行👣约 8 到 12 分钟，餐费标准约 600-1000 克朗/人，建议提前订位。</span></li>
           <li class="no-booking" data-price="桥🌉面成人/儿童免费；老城桥🌉塔🗼成人 250 克朗、儿童 170 克朗" data-link="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店🏨，整理约 45 分钟；从酒店🏨大致向西←步行👣或坐电车到老城桥🌉塔🗼约 15 到 25 分钟，查理大桥🌉和小城附近建议停留 2 小时；桥🌉面和外观散步不需预订，老城桥🌉塔🗼登塔🗼成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="约 550-850 克朗/人" data-link="https://stoleti.cz/en/menu.php" data-link-label="菜单"><span class="time">晚餐</span><span>从小城大致向东→步行👣到 Století（三世纪餐厅🍽️）或晚餐地点约 5 到 15 分钟；地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
@@ -2402,7 +2390,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action" data-price="成人 450 克朗；儿童 300 克朗" data-link="https://www.getyourguide.com/en-gb/prague-castle-l2720/prague-prague-castle-ticket-t406279/" data-link-label="预订"><span class="time">09:00</span><span>从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟；如果想省体力，可结合电车大致向西←上坡，城堡🏰区建议先停留 90 分钟。皇家花园🌷通常属于城堡🏰公共区域，重点需要提前处理的是布拉格城堡🏰主线路票；主线路成人 450 克朗，儿童/学生优惠 300 克朗。布拉格城堡🏰官网说明主线路票可通过 GetYourGuide 在线购买；预订链接见本行“预订”。建议提前买 2026年8/5上午可用的票，现场直接排入场安检和检票。</span></li>
+          <li class="needs-action" data-price="成人 450 克朗；儿童 300 克朗" data-link="https://www.getyourguide.com/en-gb/prague-castle-l2720/prague-prague-castle-ticket-t406279/" data-link-label="预订"><span class="time">09:00</span><span>从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟；如果想省体力，可结合电车大致向西←上坡，城堡🏰区建议先停留 90 分钟。皇家花园🌷通常属于城堡🏰公共区域，重点需要提前处理的是布拉格城堡🏰主线路票；主线路成人 450 克朗，儿童/学生优惠 300 克朗。布拉格城堡🏰官网说明主线路票可通过 GetYourGuide 在线购买；预订链接见本行“预订”。建议提前买 8/5上午可用的票，现场直接排入场安检和检票。</span></li>
           <li class="included-ticket"><span class="time">10:30</span><span>从皇家花园🌷大致向南↓步行👣到圣维特大教堂⛪约 5 到 10 分钟，教堂⛪建议停留 45 到 60 分钟；按城堡🏰主线路门票入内，不另行预订。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://lokal-ubilekuzelky.ambi.cz/en/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Lokál U Bílé kuželky 午餐：Míšeňská 12, 118 00 Prague 1；电话 +420 257 212 014；从城堡🏰区大致向东南↘下坡到小城，步行👣或坐电车约 15 到 25 分钟；餐费标准约 350-650 克朗/人，建议用餐 60 分钟；大桌建议订位。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">下午</span><span>从城堡🏰区大致向东南↘步行👣慢慢下行到小城约 20 到 30 分钟，小城街区建议停留 90 分钟；公共街区不需预订。</span></li>
@@ -2443,7 +2431,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="约 250-450 克朗/人" data-link="https://www.cafelouvre.cz/en/contact" data-link-label="官网"><span class="time">上午</span><span>推荐 Café Louvre 早餐或早午餐：Národní 22, Prague 1；从酒店🏨大致向西南↙步行👣约 15 到 20 分钟，也可坐电车约 10 到 15 分钟；布拉格轻量安排：早餐、短走或休息，建议停留 60 到 90 分钟；固定大桌建议订位。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://restaurace.dacicky.com/kontakt/" data-link-label="订桌"><span class="time">午餐前后</span><span>从布拉格坐火车🚆大致向东→前往库特纳霍拉约 1 到 1.5 小时；推荐 Restaurant Dačický 午餐：Rakova 8, 284 01 Kutná Hora，电话 +420 603 434 367；从库特纳霍拉主站或 Sedlec 区域坐公交🚌或短程出租车🚕到餐厅🍽️约 10 到 20 分钟，餐费标准约 350-650 克朗/人；如果下午人骨教堂💀票时段紧，就改成布拉格出发前简餐。</span></li>
-          <li class="needs-action" data-price="成人 220 克朗；儿童 80 克朗" data-link="https://sedlec.info/en/ossuary/before-visiting/"><span class="time">下午</span><span>从车站或午餐地点大致向东北↗步行👣、公交🚌或短程出租车🚕到人骨教堂💀约 10 到 20 分钟；人骨教堂💀建议停留 45 到 60 分钟，优先选择下午时段；Sedlec Area 票成人 220 克朗，儿童/PWD 80 克朗。预订建议：官网票按具体日期和时间购买，优先锁定 2026年8/6周四下午；出发前复核塞德莱茨大教堂⛪周五到周日关闭提醒是否仍适用。</span></li>
+          <li class="needs-action" data-price="成人 220 克朗；儿童 80 克朗" data-link="https://sedlec.info/en/ossuary/before-visiting/"><span class="time">下午</span><span>从车站或午餐地点大致向东北↗步行👣、公交🚌或短程出租车🚕到人骨教堂💀约 10 到 20 分钟；人骨教堂💀建议停留 45 到 60 分钟，优先选择下午时段；Sedlec Area 票成人 220 克朗，儿童/PWD 80 克朗。预订建议：官网票按具体日期和时间购买，优先锁定 8/6周四下午；出发前复核塞德莱茨大教堂⛪周五到周日关闭提醒是否仍适用。</span></li>
           <li data-price="交通另计"><span class="time">傍晚</span><span>从库特纳霍拉坐火车🚆大致向西←返回布拉格约 1 到 1.5 小时。塞德莱茨大教堂⛪周五、周六、周日可能关闭，所以这天不要推迟到周末。</span></li>
           <li data-price="约 500-800 克朗/人" data-link="https://dock.kolkovna.cz/en/?forceVersion=front" data-link-label="菜单"><span class="time">晚餐</span><span>从车站或酒店🏨大致向东北↗步行👣、电车或短程出租车🚕到 Kolkovna Dock（科尔科夫纳餐厅🍽️）约 10 到 20 分钟；地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
@@ -2473,17 +2461,17 @@
       <article class="day" id="day-0807" data-date="2026-08-07" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8/7，周五</strong>
-          <span>切尔尼、多普勒、开普勒、卡夫卡主题步行</span>
+          <span>卡夫卡、查理大桥🌉、康帕岛短版主题步行</span>
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/vltava.jpg" alt="布拉格伏尔塔瓦河🌊"></div>
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.davidcerny.cz/work/k-kafka-head" data-link-label="介绍"><span class="time">09:45</span><span>从 The Julius Prague 大致向西南↙步行👣到 Quadrio 的卡夫卡头像约 15 到 20 分钟；这是 David Černý 的动态雕塑，免费开放，适合作为“切尔尼和卡夫卡”主题起点。建议停留 20 到 30 分钟，等它整点前后转动更有意思。</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://historyofscience.cz/katalog_en/index.php?id=556" data-link-label="介绍"><span class="time">10:30</span><span>从卡夫卡头像大致向东南↘步行👣到 Karlovo náměstí 6/20 的多普勒纪念牌约 12 到 18 分钟；这里纪念多普勒在布拉格生活、研究并提出多普勒效应相关思想。建议停留 10 到 15 分钟。</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://mapy.com/en/?id=2480759&source=base" data-link-label="地图"><span class="time">11:15</span><span>从多普勒纪念牌大致向北↑步行👣到 Karlova 188/4 的开普勒纪念牌约 20 到 30 分钟；这段会穿过新城和老城，作为“科学家在布拉格”的主线。开普勒纪念牌在建筑通道内，停留 10 分钟即可。</span></li>
-          <li class="no-booking" data-price="约 350-650 克朗/人" data-link="https://lokal-ubilekuzelky.ambi.cz/en/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Lokál U Bílé kuželky 午餐：Míšeňská 12, 118 00 Prague 1；从开普勒纪念牌大致向西←步行👣到餐厅🍽️约 10 到 15 分钟，靠近查理大桥🌉；餐费标准约 350-650 克朗/人，建议用餐 60 到 75 分钟；如果小孩累，可以到这里结束主题步行，下午改为酒店🏨休息。</span></li>
-          <li class="no-booking" data-price="公共区成人/儿童免费；佩特任塔🗼成人 250 克朗、儿童 170 克朗"><span class="time">下午</span><span>从老城大致向西←步行👣过查理大桥🌉到康帕岛约 15 到 25 分钟，看 David Černý 的婴儿雕塑，再按体力选择列侬墙、河🌊边慢走或佩特任山⛰️；公共区域不需预订，若登佩特任塔🗼则成人 250 克朗、儿童/优惠 170 克朗。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://prague.eu/en/objevujte/charles-bridge-karluv-most/" data-link-label="介绍"><span class="time">10:30</span><span>从卡夫卡头像大致向北↑步行👣穿过老城街巷到查理大桥🌉约 20 到 30 分钟；这段比直接绕去多普勒和开普勒更好看，适合边走边看橱窗、街景和桥塔🗼。公共街区不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://historyofscience.cz/katalog_en/index.php?id=556" data-link-label="介绍"><span class="time">选走</span><span>如果大人想补“多普勒、开普勒”科学线，可从卡夫卡头像大致向东南↘绕到多普勒纪念牌，再大致向北↑去开普勒纪念牌；这段风景普通，主要是科学史意义，孩子累就跳过。两个纪念牌都不需预订。</span></li>
+          <li class="no-booking" data-price="约 350-650 克朗/人" data-link="https://lokal-ubilekuzelky.ambi.cz/en/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Lokál U Bílé kuželky 午餐：Míšeňská 12, 118 00 Prague 1；从查理大桥🌉东侧大致向西←或西北↖步行👣到餐厅🍽️约 3 到 8 分钟；餐费标准约 350-650 克朗/人，建议用餐 60 到 75 分钟；如果小孩累，可以到这里结束主题步行，下午改为酒店🏨休息。</span></li>
+          <li class="no-booking" data-price="公共区成人/儿童免费；佩特任塔🗼成人 250 克朗、儿童 170 克朗"><span class="time">下午</span><span>饭后大致向西←步行👣过查理大桥🌉到康帕岛约 10 到 20 分钟，看 David Černý 的婴儿雕塑，再按体力选择列侬墙、河🌊边慢走或佩特任山⛰️；公共区域不需预订，若登佩特任塔🗼则成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="约 1000-1800 克朗/人" data-link="https://www.vzatisi.cz/en/" data-link-label="订桌"><span class="time">晚上</span><span>推荐 V Zátiší 告别晚餐：Liliová 1, Praha 1；电话 +420 222 221 155；从河🌊边或小城大致向东→步行👣或坐电车回老城约 15 到 25 分钟，餐厅离查理大桥🌉约 3 分钟步行；餐费标准约 1000-1800 克朗/人，建议提前订桌。饭后步行👣、电车或短程出租车🚕大致向东→或东北↗回酒店🏨收拾行李。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
@@ -2509,7 +2497,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li data-price="早餐约 250-450 克朗/人；交通另计"><span class="time">上午</span><span>推荐酒店🏨早餐或 Café Louvre 早餐：Národní 22, Prague 1；从酒店🏨大致向西南↙步行👣约 15 到 20 分钟。退房和整理建议 90 分钟；若退房后还想逛，优先问 The Julius Prague 是否可寄存行李；也可用 Praha hlavní nádraží 或市中心自助存包，EasyLocker 小城店不需预订、可现场刷卡。交通建议：有行李时从 The Julius Prague 直接打车🚕或官方 Uber 大致向西←到布拉格机场🛫最省心，通常约 25 到 40 分钟；若行李少，可大致向东→步行👣到主站坐 AE 机场🛫巴士，或地铁 A 线转 59 路机场🛫车大致向西←去机场🛫，约 40 到 50 分钟。无论哪种方式，都额外留 30 分钟缓冲。</span></li>
+          <li data-price="早餐约 250-450 克朗/人；交通另计"><span class="time">上午</span><span>推荐酒店🏨早餐或 Café Louvre 早餐：Národní 22, Prague 1；从酒店🏨大致向西南↙步行👣约 15 到 20 分钟。退房和整理建议 90 分钟；若退房后还想逛，优先问 The Julius Prague 是否可寄存行李；备选 EasyLocker 小城店，地址 Prokopská 625/3，靠近查理大桥🌉，9:00-20:00 开放，可现场刷卡，也可线上预留；若直接去机场🛫，没必要存包。交通建议：有行李时从 The Julius Prague 直接打车🚕或官方 Uber 大致向西←到布拉格机场🛫最省心，通常约 25 到 40 分钟；若行李少，可大致向东→步行👣到主站坐 AE 机场🛫巴士，或地铁 A 线转 59 路机场🛫车大致向西←去机场🛫，约 40 到 50 分钟。无论哪种方式，都额外留 30 分钟缓冲。</span></li>
           <li data-price="机票已另计"><span class="time">14:20</span><span>按你的表格，14:20 从布拉格出发，建议至少提前 2.5 到 3 小时到机场🛫。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
@@ -2520,34 +2508,34 @@
 
     <section class="section-head" id="science-walk-section">
       <h2>主题步行</h2>
-      <p>切尔尼、多普勒、开普勒、卡夫卡：把现代艺术、科学史和文学放在同一条布拉格步行线上。</p>
+      <p>主线走卡夫卡头像、老城、查理大桥🌉和康帕岛；多普勒和开普勒作为选走支线，不让孩子在普通街段上消耗太多体力。</p>
     </section>
 
     <section class="theme-walk" aria-label="布拉格主题步行地图和导览">
       <div class="theme-map">
-        <svg viewBox="0 0 520 360" role="img" aria-label="切尔尼多普勒开普勒卡夫卡主题步行地图">
+        <svg viewBox="0 0 520 360" role="img" aria-label="卡夫卡查理大桥康帕岛短版主题步行地图">
           <rect width="520" height="360" fill="#eef3f1"></rect>
           <path d="M70 270 C135 230 180 240 225 205 C270 170 318 166 366 132 C400 108 430 95 462 78" fill="none" stroke="#d7e1da" stroke-width="34" stroke-linecap="round"></path>
           <path class="theme-map-path" d="M112 266 L182 220 L300 164 L384 116"></path>
           <circle class="theme-map-point" cx="112" cy="266" r="10"></circle>
           <text x="32" y="306">卡夫卡头像</text>
           <circle class="theme-map-point" cx="182" cy="220" r="10"></circle>
-          <text x="132" y="198">多普勒纪念牌</text>
+          <text x="132" y="198">老城桥🌉塔🗼</text>
           <circle class="theme-map-point" cx="300" cy="164" r="10"></circle>
-          <text x="266" y="142">开普勒纪念牌</text>
+          <text x="266" y="142">查理大桥🌉</text>
           <circle class="theme-map-point" cx="384" cy="116" r="10"></circle>
           <text x="352" y="92">康帕婴儿雕塑</text>
-          <text x="28" y="34">建议方向：酒店 → 卡夫卡头像 → 多普勒 → 开普勒 → 康帕岛</text>
-          <text x="28" y="58">纯步行约 4 到 5 公里；带小孩按 2.5 到 4 小时看体力拆段。</text>
+          <text x="28" y="34">建议方向：酒店 → 卡夫卡头像 → 老城 → 查理大桥🌉 → 康帕岛</text>
+          <text x="28" y="58">主线约 2.5 到 3 公里；多普勒和开普勒只作为选走支线。</text>
         </svg>
       </div>
       <div class="theme-guide">
         <h3>导览文字</h3>
         <ol>
           <li><strong>卡夫卡头像：</strong>从酒店出发先看 David Černý 的动态卡夫卡头像。它把文学人物做成机械结构，正好打开“现代艺术和技术”的主题。</li>
-          <li><strong>多普勒纪念牌：</strong>走到查理广场⛲附近，看 Christian Doppler 在布拉格研究和生活的纪念牌。这里把萨尔茨堡出生地和布拉格学术生涯连起来。</li>
-          <li><strong>开普勒纪念牌：</strong>继续走到老城 Karlova 188/4，讲 Johannes Kepler 在布拉格完成行星运动定律相关工作的故事。和多普勒一起形成“波、光、天体”的科学线。</li>
-          <li><strong>康帕婴儿雕塑：</strong>过查理大桥🌉到康帕岛，看 David Černý 的婴儿雕塑。这里可以结束主题步行，也可以接列侬墙和伏尔塔瓦河🌊边慢走。</li>
+          <li><strong>老城和查理大桥🌉：</strong>从卡夫卡头像转向老城和查理大桥🌉，这段景观更密集，也更适合孩子边走边看。</li>
+          <li><strong>多普勒和开普勒选走：</strong>这两个点更适合大人补科学史背景；如果当天热、累、或孩子无聊，直接跳过。</li>
+          <li><strong>康帕岛：</strong>过查理大桥🌉到康帕岛，看 David Černý 的婴儿雕塑。这里可以结束主题步行，也可以接列侬墙和伏尔塔瓦河🌊边慢走。</li>
         </ol>
       </div>
     </section>
@@ -2574,7 +2562,7 @@
         <li>萨尔茨堡抵达和布拉格离境的机场🛫交通细节。</li>
         <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数；购票链接已放在对应日期的票价栏。</li>
         <li>百威酿酒厂参观时间和预约；预约链接已放在 8/3票价栏。</li>
-        <li>人骨教堂💀 2026年8/6限时票；购票链接已放在 8/6票价栏，出发前复核周五到周日关闭提醒是否仍适用。</li>
+        <li>人骨教堂💀 8/6限时票；购票链接已放在 8/6票价栏，出发前复核周五到周日关闭提醒是否仍适用。</li>
         <li>确认海尔布伦、萨尔茨堡城堡🏰、布拉格城堡🏰的最新开放时间和票务规则。</li>
         <li>两晚卡比特尔广场⛲放映前确认天气，并准备夜间薄外套。</li>
       </ul>
@@ -2589,10 +2577,10 @@
       <h2>优先预订</h2>
       <ul>
         <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数，建议尽快订；购票链接已放在对应日期的票价栏。</li>
-        <li>海尔布伦戏水宫：可提前买通用门票，2026年7/30下午使用；不是预约固定入场时间；官网链接已放在 7/30票价栏。</li>
-        <li>布拉格城堡🏰主线路：建议提前购票或至少提前确认票种，2026年8/5上午直接入场更稳；官网链接已放在 8/5票价栏。</li>
-        <li>百威酿酒厂：行程里安排 2026年8/3 14:00，建议提前预约参观时段；预约链接已放在 8/3票价栏。</li>
-        <li>人骨教堂💀：官网说明容量有限，票需要按具体日期和时间提前购买；2026年8/6周四优先锁定；购票链接已放在 8/6票价栏。</li>
+        <li>海尔布伦戏水宫：可提前买通用门票，7/30下午使用；不是预约固定入场时间；官网链接已放在 7/30票价栏。</li>
+        <li>布拉格城堡🏰主线路：建议提前购票或至少提前确认票种，8/5上午直接入场更稳；官网链接已放在 8/5票价栏。</li>
+        <li>百威酿酒厂：行程里安排 8/3 14:00，建议提前预约参观时段；预约链接已放在 8/3票价栏。</li>
+        <li>人骨教堂💀：官网说明容量有限，票需要按具体日期和时间提前购买；8/6周四优先锁定；购票链接已放在 8/6票价栏。</li>
         <li>布拉格热门餐厅🍽️：三世纪餐厅🍽️、卢浮咖啡馆、科尔科夫纳餐厅🍽️如要固定用餐时间，建议提前订桌。</li>
       </ul>
     </section>
@@ -2707,7 +2695,7 @@
         </label>
         <label>
           问题
-          <textarea id="assistant-question" placeholder="例如：2026年8/6去人骨教堂💀这天怎么安排更合理？"></textarea>
+          <textarea id="assistant-question" placeholder="例如：8/6去人骨教堂💀这天怎么安排更合理？"></textarea>
         </label>
       </div>
       <div class="assistant-actions">
@@ -2739,7 +2727,7 @@
       <ul>
         <li>本地西门子节目记录。</li>
         <li>导入的原始行程文件。</li>
-        <li>2026年7/11用户提供的住宿安排截图。</li>
+        <li>7/11用户提供的住宿安排截图。</li>
         <li>真实地点照片来自维基共享资源，已保存为本地图片。</li>
         <li><a href="https://www.salzburg.info/en">萨尔茨堡官方旅游网站</a></li>
         <li><a href="https://www.salzburg.info/en/sights/top10/mirabell-palace-gardens">米拉贝尔宫和花园🌷官方页面</a></li>
@@ -2847,7 +2835,7 @@
     const baselineVersions = [
       { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能助手。" },
       { version: 7, summary: "发布基准：新增真实智能助手。" },
-      { version: 6, summary: "发布基准：调整地图标签，并加入 2026年8/6人骨教堂。" }
+      { version: 6, summary: "发布基准：调整地图标签，并加入 8/6人骨教堂。" }
     ];
     const rollbackCommands = {
       8: "cd /Users/kma/dev/sites/gydd\n./scripts/rollback-travel-page.sh 8\ngit add t/2026-austria-czech-7f4c9b2e6a31d8\ngit commit -m \"Rollback travel page to version 8\"\ngit push origin main",
@@ -3202,11 +3190,11 @@
 
     function dayForQuestion(question) {
       const text = question || "";
-      const match = text.match(/(\d{1,2})\s*月\s*(\d{1,2})\s*(日|号)?/);
+      const match = text.match(/(\d{1,2})\s*(?:月|\/)\s*(\d{1,2})\s*(日|号)?/);
       if (!match) {
         return null;
       }
-      const dateText = `${Number(match[1])} 月 ${Number(match[2])} 日`;
+      const dateText = `${Number(match[1])}/${Number(match[2])}`;
       return Array.from(document.querySelectorAll(".day")).find((day) => {
         const strong = day.querySelector(".date strong")?.textContent || "";
         return strong.includes(dateText);
@@ -3410,6 +3398,55 @@
       document.getElementById("expense-save").textContent = "保存修改";
       expenseStatus.textContent = "正在修改这一条账目。";
       expenseForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function displayDateFromIso(isoDate) {
+      const parts = String(isoDate || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!parts) {
+        return "";
+      }
+      return `${Number(parts[2])}/${Number(parts[3])}`;
+    }
+
+    function defaultCurrencyForDate(dateText) {
+      return ["7/29", "7/30", "7/31", "8/1"].includes(dateText) ? "EUR" : "CZK";
+    }
+
+    function focusExpenseForDay(dateText, placeText) {
+      resetExpenseForm();
+      if (dateText) {
+        expenseDate.value = dateText;
+        expenseCurrency.value = defaultCurrencyForDate(dateText);
+      }
+      expensePlace.value = placeText || "";
+      expenseStatus.textContent = `${dateText || "当天"}账目已选好，填写项目和金额后保存。`;
+      expenseForm.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.setTimeout(() => expenseItem.focus(), 280);
+    }
+
+    function initDayExpenseButtons() {
+      document.querySelectorAll(".day").forEach((day) => {
+        if (day.querySelector(".day-expense-actions")) {
+          return;
+        }
+
+        const items = day.querySelector(".items");
+        if (!items) {
+          return;
+        }
+
+        const dateText = displayDateFromIso(day.dataset.date) || day.querySelector(".date strong")?.textContent.split("，")[0] || "";
+        const placeText = day.querySelector(".city")?.textContent.trim() || "";
+        const actions = document.createElement("div");
+        actions.className = "day-expense-actions";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "secondary-button day-expense-button";
+        button.textContent = `${dateText} 记账`;
+        button.addEventListener("click", () => focusExpenseForDay(dateText, placeText));
+        actions.append(button);
+        items.insertAdjacentElement("afterend", actions);
+      });
     }
 
     function expenseSettlement(expenses) {
@@ -4909,6 +4946,7 @@
 
     renderExpenseControls();
     renderExpenseLedger();
+    initDayExpenseButtons();
     renderAssistantConversation();
     renderTicketSignups();
     renderDayQuestionPanels();
