@@ -1108,6 +1108,236 @@
       cursor: pointer;
     }
 
+    .expense-panel {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .expense-form {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .expense-form label,
+    .expense-form fieldset {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .expense-form input,
+    .expense-form select,
+    .expense-form textarea {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: inherit;
+      line-height: 1.45;
+      background: #fff;
+    }
+
+    .expense-form textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .expense-form .expense-wide {
+      grid-column: span 2;
+    }
+
+    .expense-form .expense-full {
+      grid-column: 1 / -1;
+    }
+
+    .expense-participants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      min-height: 42px;
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .expense-participants label {
+      display: inline-flex;
+      grid-template-columns: none;
+      gap: 5px;
+      align-items: center;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .expense-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .expense-actions button,
+    .expense-table button {
+      min-height: 36px;
+      padding: 7px 10px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .expense-actions .secondary-button,
+    .expense-table .secondary-button {
+      border: 1px solid var(--line);
+      background: #eef3f1;
+      color: var(--green);
+    }
+
+    .expense-status {
+      min-height: 24px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .expense-summary {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid rgba(66, 107, 79, 0.24);
+      border-radius: 8px;
+      background: #f3f7f2;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .expense-summary:empty {
+      display: none;
+    }
+
+    .expense-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .expense-table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    .expense-table th,
+    .expense-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .expense-table th {
+      background: #eef3f1;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .expense-table td {
+      font-size: 14px;
+    }
+
+    .expense-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .expense-row-actions {
+      display: flex;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .theme-walk {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .theme-map {
+      min-height: 320px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #eef3f1;
+    }
+
+    .theme-map svg {
+      width: 100%;
+      height: auto;
+      min-height: 320px;
+      display: block;
+    }
+
+    .theme-map-path {
+      fill: none;
+      stroke: var(--green);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .theme-map-point {
+      fill: var(--red);
+      stroke: #fff;
+      stroke-width: 4;
+    }
+
+    .theme-map text {
+      font-size: 16px;
+      font-weight: 900;
+      fill: var(--ink);
+    }
+
+    .theme-guide {
+      display: grid;
+      gap: 10px;
+    }
+
+    .theme-guide ol {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .theme-guide li {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf6;
+    }
+
     .day-question {
       grid-column: 2;
       display: grid;
@@ -1667,6 +1897,21 @@
         grid-template-columns: 1fr;
       }
 
+      .expense-form,
+      .expense-form .expense-wide,
+      .expense-form .expense-full {
+        grid-template-columns: 1fr;
+        grid-column: 1;
+      }
+
+      .expense-table {
+        min-width: 820px;
+      }
+
+      .theme-walk {
+        grid-template-columns: 1fr;
+      }
+
       .day-question-row {
         grid-template-columns: 1fr;
       }
@@ -1745,7 +1990,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：2026 年 7 月 15 日</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：90</div>
+    <div class="page-version" aria-label="网页版本">网页版本：94</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -1761,7 +2006,11 @@
     <span>/</span>
     <a href="#detailed-plan">详细行程</a>
     <span>/</span>
+    <a href="#science-walk-section">主题步行</a>
+    <span>/</span>
     <a class="breadcrumb-button" href="#assistant-section">智能助手</a>
+    <span>/</span>
+    <a href="#expense-section">旅行记账</a>
     <span>/</span>
     <a href="#pending-section">待确认事项</a>
     <span>/</span>
@@ -1851,18 +2100,25 @@
       <div><strong>萨尔茨堡</strong><span class="place-original">Salzburg</span></div>
       <div><strong>萨尔茨堡老城</strong><span class="place-original">Altstadt Salzburg</span></div>
       <div><strong>米拉贝尔花园🌷</strong><span class="place-original">Mirabellgarten</span></div>
+      <div><strong>多普勒出生地纪念牌</strong><span class="place-original">Christian-Doppler-Geburtshaus, Makartplatz 1</span></div>
       <div><strong>粮食胡同</strong><span class="place-original">Getreidegasse</span></div>
+      <div><strong>莫扎特出生地</strong><span class="place-original">Mozarts Geburtshaus, Getreidegasse 9</span></div>
       <div><strong>卡比特尔广场</strong><span class="place-original">Kapitelplatz</span></div>
       <div><strong>海尔布伦戏水宫和水机关</strong><span class="place-original">Schloss Hellbrunn / Wasserspiele Hellbrunn</span></div>
       <div><strong>霍亨萨尔茨堡城堡🏰</strong><span class="place-original">Festung Hohensalzburg</span></div>
       <div><strong>林茨</strong><span class="place-original">Linz</span></div>
+      <div><strong>电子艺术中心和深空展厅</strong><span class="place-original">Ars Electronica Center / Deep Space</span></div>
       <div><strong>匹斯特林山</strong><span class="place-original">Pöstlingberg</span></div>
       <div><strong>林茨中央广场</strong><span class="place-original">Hauptplatz Linz</span></div>
       <div><strong>林茨圣玛丽大教堂⛪</strong><span class="place-original">Mariendom Linz</span></div>
       <div><strong>布杰约维采</strong><span class="place-original">České Budějovice</span></div>
       <div><strong>布杰约维采广场</strong><span class="place-original">Náměstí Přemysla Otakara II</span></div>
       <div><strong>百威酿酒厂</strong><span class="place-original">Budweiser Budvar Brewery</span></div>
+      <div><strong>赛德尔摄影工作室博物馆</strong><span class="place-original">Museum Fotoatelier Seidel, Český Krumlov</span></div>
       <div><strong>布拉格</strong><span class="place-original">Praha / Prague</span></div>
+      <div><strong>卡夫卡头像</strong><span class="place-original">K. / Head of Franz Kafka, Quadrio</span></div>
+      <div><strong>多普勒纪念牌</strong><span class="place-original">Christian Doppler plaque, Karlovo náměstí 6/20</span></div>
+      <div><strong>开普勒纪念牌</strong><span class="place-original">Johannes Kepler plaque, Karlova 188/4</span></div>
       <div><strong>老城桥塔</strong><span class="place-original">Staroměstská mostecká věž</span></div>
       <div><strong>查理大桥</strong><span class="place-original">Karlův most / Charles Bridge</span></div>
       <div><strong>小城</strong><span class="place-original">Malá Strana</span></div>
@@ -1893,15 +2149,15 @@
       </thead>
       <tbody>
         <tr><td>7 月 29 日</td><td>飞往萨尔茨堡</td><td>萨尔茨堡</td><td><div class="hotel-stay"><strong>harry's home Salzburg</strong><span>Fanny-von-Lehnert-Straße 6, Salzburg, Land Salzburg, 5020, Österreich</span><span>电话：0043-5012142190</span></div></td><td><div class="overview-tags"><a class="overview-tag booked" href="#signup-zum">Zum Zirkelwirt 17:30 已订</a><span class="overview-tag">西门子节日之夜免费</span><a class="overview-tag action" href="#day-0729">提前到场占位置</a></div></td><td><a href="#day-0729">查看</a></td></tr>
-        <tr><td>7 月 30 日</td><td>萨尔茨堡</td><td>萨尔茨堡</td><td><div class="hotel-stay"><strong>harry's home Salzburg</strong><span>Fanny-von-Lehnert-Straße 6, Salzburg, Land Salzburg, 5020, Österreich</span><span>电话：0043-5012142190</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0730">海尔布伦戏水宫可提前买通用票</a></div></td><td><a href="#day-0730">查看</a></td></tr>
+        <tr><td>7 月 30 日</td><td>萨尔茨堡老城、多普勒、莫扎特</td><td>海尔布伦</td><td><div class="hotel-stay"><strong>harry's home Salzburg</strong><span>Fanny-von-Lehnert-Straße 6, Salzburg, Land Salzburg, 5020, Österreich</span><span>电话：0043-5012142190</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0730">海尔布伦戏水宫可提前买通用票</a><span class="overview-tag no-booking">多普勒纪念牌不需预订</span></div></td><td><a href="#day-0730">查看</a></td></tr>
         <tr><td>7 月 31 日</td><td>萨尔茨堡</td><td>林茨</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0731">!!! 火车票全员提前订</a></div></td><td><a href="#day-0731">查看</a></td></tr>
-        <tr><td>8 月 1 日</td><td>林茨</td><td>林茨</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><span class="overview-tag">匹斯特林山交通票可现场处理</span></div></td><td><a href="#day-0801">查看</a></td></tr>
+        <tr><td>8 月 1 日</td><td>电子艺术中心和深空展厅</td><td>匹斯特林山、圣玛丽大教堂</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0801">电子艺术中心可提前买票</a><span class="overview-tag">匹斯特林山交通票可现场处理</span></div></td><td><a href="#day-0801">查看</a></td></tr>
         <tr><td>8 月 2 日</td><td>林茨到布杰约维采</td><td>布杰约维采</td><td><div class="hotel-stay"><strong>Residence Mariánská</strong><span>1 Pražská třída, České Budějovice, 370 04, Czech Republic</span><span>电话：+420 720 829 866</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0802">!!! 火车/巴士票全员提前订</a><span class="overview-tag no-booking">晚上广场散步不需预订</span></div></td><td><a href="#day-0802">查看</a></td></tr>
-        <tr><td>8 月 3 日</td><td>布杰约维采</td><td>布杰约维采</td><td><div class="hotel-stay"><strong>Residence Mariánská</strong><span>1 Pražská třída, České Budějovice, 370 04, Czech Republic</span><span>电话：+420 720 829 866</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0803">百威酿酒厂参观预约</a></div></td><td><a href="#day-0803">查看</a></td></tr>
+        <tr><td>8 月 3 日</td><td>布杰约维采</td><td>百威酿酒厂</td><td><div class="hotel-stay"><strong>Residence Mariánská</strong><span>1 Pražská třída, České Budějovice, 370 04, Czech Republic</span><span>电话：+420 720 829 866</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0803">百威酿酒厂参观预约</a><span class="overview-tag">赛德尔摄影工作室是备选，不和酿酒厂同排</span></div></td><td><a href="#day-0803">查看</a></td></tr>
         <tr><td>8 月 4 日</td><td>布杰约维采</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0804">!!! 火车/巴士票全员提前订</a><a class="overview-tag action" href="#signup-stoleti">三世纪餐厅🍽️可订桌</a></div></td><td><a href="#day-0804">查看</a></td></tr>
         <tr><td>8 月 5 日</td><td>布拉格</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0805">布拉格城堡🏰主线路门票</a><a class="overview-tag action" href="#signup-bohemia">晚餐可订桌</a></div></td><td><a href="#day-0805">查看</a></td></tr>
         <tr><td>8 月 6 日</td><td>布拉格</td><td>库特纳霍拉人骨教堂💀</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0806">人骨教堂💀下午限时票提前买</a><span class="overview-tag">周四安排更稳</span></div></td><td><a href="#day-0806">查看</a></td></tr>
-        <tr><td>8 月 7 日</td><td>布拉格</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><span class="overview-tag">高堡、康帕岛、列侬墙、佩特任山</span><a class="overview-tag action" href="#day-0807">告别晚餐待定</a></div></td><td><a href="#day-0807">查看</a></td></tr>
+        <tr><td>8 月 7 日</td><td>切尔尼、多普勒、开普勒、卡夫卡主题步行</td><td>高堡或佩特任山备选</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag no-booking" href="#science-walk-section">主题步行不需预订</a><a class="overview-tag action" href="#day-0807">告别晚餐待定</a></div></td><td><a href="#day-0807">查看</a></td></tr>
         <tr><td>8 月 8 日</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td><div class="overview-tags"><span class="overview-tag">机场交通</span><span class="overview-tag">航班值机</span></div></td><td><a href="#day-0808">查看</a></td></tr>
       </tbody>
     </table>
@@ -1952,7 +2208,8 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">09:30</span><span>从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟；之后步行👣大致向南↓到粮食胡同和老城核心区约 15 到 25 分钟，也可短程公交🚌进城。建议总停留 2 到 2.5 小时；米拉贝尔花园🌷和老城公共区域不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.christian-doppler.net/en/station/salzburg-where-everything-began/" data-link-label="介绍"><span class="time">09:30</span><span>从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟；之后大致向西←步行👣到 Makartplatz 1 的多普勒出生地纪念牌约 5 到 10 分钟，再大致向南↓步行👣过河到粮食胡同和老城核心区约 10 到 20 分钟。建议总停留 2 到 2.5 小时；多普勒纪念牌、米拉贝尔花园🌷和老城公共区域不需预订。</span></li>
+          <li class="needs-action" data-price="外观成人/儿童免费；入内成人 €15；儿童/优惠 €4.50" data-link="https://mozarteum.at/en/mozart-museums/mozarts-birthplace" data-link-label="官网"><span class="time">11:00</span><span>把莫扎特出生地作为老城快停点：从粮食胡同大致向西←步行👣到 Getreidegasse 9 约 3 到 8 分钟；如果只看外观和门牌，10 到 15 分钟即可，不需预订；如果临时决定入内，官网建议参观约 1 小时，7 月和 8 月开放时间更长，门票和入场规则见本行“官网”。</span></li>
           <li data-price="约 €35-55/人" data-link="https://www.gasthofgoldgasse.at/en/" data-link-label="菜单"><span class="time">12:30</span><span>推荐 Gasthof Goldgasse 老城午餐，地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费标准约 €35-55/人，建议用餐 60 分钟；午餐后从老城大致向南↓坐 25 路公交🚌去海尔布伦约 25 到 35 分钟，孩子累或时间紧时可打车🚕约 15 到 25 分钟。</span></li>
           <li class="needs-action" data-price="成人 €16.50；儿童 €6.50" data-link="https://www.hellbrunn.at/en/info/opening-hours-prices-arrival"><span class="time">14:30</span><span>海尔布伦戏水宫和水机关，天气热时下午玩水更舒服，建议停留 2 小时；2026 票价为成人 €16.50，儿童/学生 4-18 岁 €6.50。预订建议：可提前买通用门票，7 月 30 日下午使用；这不是预约固定入场时间，主要是减少现场售票排队。</span></li>
           <li data-price="成人免费；儿童免费"><span class="time">17:00</span><span>从海尔布伦大致向北↑坐公交🚌回老城或 harry's home Salzburg 约 25 到 40 分钟，也可打车🚕约 15 到 25 分钟；如果要先回酒店🏨休息，建议留 45 到 60 分钟。</span></li>
@@ -1979,6 +2236,8 @@
         </section>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="多普勒出生地纪念牌"><span>多普勒出生地纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Makartplatz 1</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="莫扎特出生地"><span>莫扎特出生地 <em class="booking-tag">入内可买票</em><small class="ticket-note">门票：外观免费；入内成人 €15；儿童/优惠 €4.50</small></span></figure>
           <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡🏰"><span>霍亨萨尔茨堡城堡🏰 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票：Basic 成人 €15.50；儿童 €6.30；All-inclusive 成人 €19.20；儿童 €7.30</small></span></figure>
           <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场"><span>卡比特尔广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/gasthof-goldgasse.jpg" alt="Gasthof Goldgasse 餐厅🍽️"><span>Gasthof Goldgasse <em class="booking-tag">推荐午餐</em><small class="ticket-note">地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费：约 €35-55/人；菜单见午餐行官网链接</small></span></figure>
@@ -1996,7 +2255,7 @@
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">上午</span><span>从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟；慢节奏恢复上午：米拉贝尔花园🌷、粮食胡同、莫扎特出生地外观或咖啡，各点步行👣大致向南↓或西南↙约 5 到 20 分钟，建议停留 2 小时；米拉贝尔花园🌷免费入场，不用预约，粮食胡同和外观散步也不用预约。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>离开萨尔茨堡前午餐，建议用餐 60 分钟；从老城大致向北↑步行👣或坐公交🚌回 Salzburg Hauptbahnhof 约 15 到 25 分钟，从酒店🏨大致向西←步行👣到车站约 3 到 6 分钟。</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计"><span class="time">下午</span><span>!!! 全员参加，不用统计人数；需要提前订萨尔茨堡到林茨火车票。从 Salzburg Hauptbahnhof 坐火车🚆大致向东北↗前往林茨并入住 Courtyard by Marriott Linz，萨尔茨堡到林茨火车🚆约 1.5 小时；林茨火车🚆站到 Europaplatz 酒店🏨大致向东北↗步行👣或短程出租车🚕约 10 到 15 分钟，入住整理约 45 分钟。</span></li>
+          <li class="needs-action urgent-booking" data-price="交通另计" data-link="https://www.oebb.at/en/reiseplanung-services/oebb-zugverbindungen/zugverbindungen-oesterreich/weststrecke/salzburg-linz" data-link-label="购票"><span class="time">下午</span><span>!!! 全员参加，不用统计人数；需要提前订萨尔茨堡到林茨火车票，官方购票链接见本行“购票”。从 Salzburg Hauptbahnhof 坐火车🚆大致向东北↗前往林茨并入住 Courtyard by Marriott Linz，萨尔茨堡到林茨火车🚆约 1.5 小时；林茨火车🚆站到 Europaplatz 酒店🏨大致向东北↗步行👣或短程出租车🚕约 10 到 15 分钟，入住整理约 45 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">晚上</span><span>从 Courtyard by Marriott Linz 大致向西←到中央广场，步行👣约 20 到 30 分钟，或电车/出租车🚕约 10 到 15 分钟；轻松走中央广场或酒店🏨附近晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
@@ -2016,13 +2275,15 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li data-price="成人 €9.00；儿童/优惠 €4.50"><span class="time">09:30</span><span>从 Courtyard by Marriott Linz 大致向西←到中央广场或登山火车🚆接驳点，步行👣约 20 到 30 分钟，电车/出租车🚕约 10 到 15 分钟；坐匹斯特林山登山火车🚆大致向北↑上山看城市景观，从市中心上山约 30 到 40 分钟，山上建议停留 90 分钟；往返票成人 €9.00，儿童/优惠 €4.50。</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">13:00</span><span>从山上坐匹斯特林山登山火车🚆或电车大致向南↓回到中央广场和老城，交通约 30 到 40 分钟，建议停留 90 分钟并顺便午餐；公共区域不需预订。</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">15:00</span><span>从中央广场大致向南↓到林茨圣玛丽大教堂⛪，步行👣约 10 到 15 分钟，建议停留 45 到 60 分钟；普通入内通常不需预订，现场捐赠另计。</span></li>
+          <li class="needs-action" data-price="成人 €14；优惠 €12；儿童约 €5.50" data-link="https://ars.electronica.art/center/de/tickets/" data-link-label="购票"><span class="time">10:00</span><span>从 Courtyard by Marriott Linz 大致向西北↖坐电车或短程出租车🚕到电子艺术中心和深空展厅约 15 到 25 分钟；电子艺术中心周二到周日 10:00-17:00 开放，Deep Space 是重点，建议停留 2 到 2.5 小时。门票成人 €14，优惠 €12，儿童约 €5.50；可提前买票，现场根据当天 Deep Space 节目安排调整。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">12:45</span><span>从电子艺术中心大致向南↓过桥到中央广场和老城，步行👣约 10 到 20 分钟；午餐和中央广场短走建议 75 到 90 分钟，公共区域不需预订。</span></li>
+          <li data-price="成人 €9.00；儿童/优惠 €4.50"><span class="time">14:15</span><span>从中央广场或接驳点坐匹斯特林山登山火车🚆大致向北↑上山看城市景观，从市中心上山约 30 到 40 分钟；山上建议停留 60 到 75 分钟，往返票成人 €9.00，儿童/优惠 €4.50。若电子艺术中心玩得久，这一项可压缩或取消。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">16:30</span><span>回到市中心后，从中央广场大致向南↓到林茨圣玛丽大教堂⛪，步行👣约 10 到 15 分钟；普通入内通常不需预订，现场捐赠另计。若孩子累，这一项只看外观。</span></li>
           <li data-price="餐费另计"><span class="time">晚餐</span><span>从教堂⛪到金山饭店或其他晚餐地点，按具体餐厅🍽️大致向北↑或向东步行👣、坐电车或短程出租车🚕约 10 到 20 分钟，建议用餐 60 到 90 分钟。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山登山火车🚆"><span>匹斯特林山登山火车🚆 <small class="ticket-note">门票：往返成人 €9.00；儿童/优惠 €4.50</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="电子艺术中心和深空展厅"><span>电子艺术中心和深空展厅 <em class="booking-tag">可提前买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
           <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场"><span>林茨中央广场 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂⛪"><span>林茨圣玛丽大教堂⛪ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；现场捐赠另计</small></span></figure>
         </div>
@@ -2037,7 +2298,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订林茨到布杰约维采火车/巴士票。从 Courtyard by Marriott Linz 大致向西南↙步行👣或短程出租车🚕到 Linz Hauptbahnhof 约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑或东北↗前往布杰约维采，建议选择换乘少、总时长约 3 到 4 小时的城际交通。</span></li>
+          <li class="needs-action urgent-booking" data-price="交通另计" data-link="https://www.oebb.at/en/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订林茨到布杰约维采火车/巴士票，先用 ÖBB 官方购票链接查询跨境段。从 Courtyard by Marriott Linz 大致向西南↙步行👣或短程出租车🚕到 Linz Hauptbahnhof 约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑或东北↗前往布杰约维采，建议选择换乘少、总时长约 3 到 4 小时的城际交通。</span></li>
           <li data-price="交通另计"><span class="time">下午</span><span>抵达布杰约维采后，从车站大致向西北↖到 Residence Mariánská，步行👣或短程车约 10 到 20 分钟；入住和整理建议 45 到 60 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">晚上</span><span>从公寓大致向西南↙步行👣到广场约 5 到 15 分钟，轻松散步和晚餐，建议停留 60 到 90 分钟；公共广场不需预订。</span></li>
         </ul>
@@ -2057,8 +2318,9 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="广场成人/儿童免费；黑塔成人约 80 克朗、儿童约 40 克朗" data-link="https://www.budejce.cz/en/activities/2-black-tower"><span class="time">09:30</span><span>从公寓大致向西南↙步行👣到普瑞米斯欧塔卡拉二世广场约 5 到 15 分钟；广场公共区域不需预订，黑塔登塔参考价成人约 80 克朗、儿童约 40 克朗，出发前复核，建议总停留 2 小时。</span></li>
+          <li class="needs-action" data-price="票价官网复核" data-link="https://www.seidel.cz/cz/kontakty/" data-link-label="官网"><span class="time">备选</span><span>赛德尔摄影工作室博物馆在克鲁姆洛夫，不在布杰约维采；从布杰约维采往返通常会吃掉半天，且官网开放为周二到周日 9:00-12:00、13:00-17:00，周一关闭。8 月 3 日是周一，所以这天不适合安排；如果很想去，需要改成 8 月 2 日抵达前绕去克鲁姆洛夫，或牺牲百威酿酒厂。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>城内自行午餐，从黑塔到餐厅🍽️通常大致向广场周边步行👣约 5 到 15 分钟，建议用餐 60 分钟。</span></li>
-          <li class="needs-action urgent-booking" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://www.budejovickybudvar.cz/en/tours" data-link-label="预约"><span class="time">14:00</span><span>从市中心大致向北↑去百威酿酒厂，建议优先坐公交🚌或短程出租车🚕约 15 到 25 分钟；体力好也可步行👣约 25 到 35 分钟。酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。官方预约链接见本行“预约”；预订建议：锁定 2026 年 8 月 3 日 14:40 英文参观时段，先用下方报名统计确认人数，再预约并等待邮件确认。</span></li>
+          <li class="needs-action urgent-booking" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://budweiserbudvar.com/visit-us/" data-link-label="预约"><span class="time">14:00</span><span>从市中心大致向北↑去百威酿酒厂，建议优先坐公交🚌或短程出租车🚕约 15 到 25 分钟；体力好也可步行👣约 25 到 35 分钟。酿酒厂建议停留 90 分钟，需确认参观时间和预约；标准票 290 克朗，儿童/学生等优惠票 220 克朗。官方预约链接见本行“预约”；预订建议：锁定 2026 年 8 月 3 日 14:40 英文参观时段，先用下方报名统计确认人数，再预约并等待邮件确认。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从酿酒厂大致向南↓坐公交🚌、短程出租车🚕或步行👣回市中心或酒店🏨约 15 到 35 分钟，轻松吃饭和休息，建议不要再排重项目。</span></li>
         </ul>
         <section class="signup-panel day-signup" id="signup-0803" data-signup-item="budvar" data-signup-date="8 月 3 日" aria-label="8 月 3 日报名与购票统计">
@@ -2085,7 +2347,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票。从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时；到站后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟。</span></li>
+          <li class="needs-action urgent-booking" data-price="交通另计" data-link="https://www.cd.cz/en/eshop/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票，官方购票链接见本行“购票”。从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟；退房后坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时；到站后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟。</span></li>
           <li class="no-booking" data-price="桥面成人/儿童免费；老城桥塔成人 250 克朗、儿童 170 克朗" data-link="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店🏨，整理约 45 分钟；从酒店🏨大致向西←步行👣或坐电车到老城桥塔约 15 到 25 分钟，查理大桥和小城附近建议停留 2 小时；桥面和外观散步不需预订，老城桥塔登塔成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="约 550-850 克朗/人" data-link="https://stoleti.cz/en/menu.php" data-link-label="菜单"><span class="time">晚餐</span><span>从小城大致向东→步行👣到 Století（三世纪餐厅🍽️）或晚餐地点约 5 到 15 分钟；地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span></li>
         </ul>
@@ -2115,7 +2377,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action" data-price="成人 450 克朗；儿童 300 克朗"><span class="time">09:00</span><span>从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟；如果想省体力，可结合电车大致向西←上坡，城堡🏰区建议先停留 90 分钟；城堡🏰主线路成人 450 克朗，儿童/学生优惠 300 克朗。预订建议：建议提前买 2026 年 8 月 5 日上午可用的城堡🏰主线路票，现场直接排入场安检和检票。</span></li>
+          <li class="needs-action" data-price="成人 450 克朗；儿童 300 克朗" data-link="https://www.hrad.cz/cn/prague-castle-for-visitors/tickets" data-link-label="官网"><span class="time">09:00</span><span>从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟；如果想省体力，可结合电车大致向西←上坡，城堡🏰区建议先停留 90 分钟。皇家花园🌷通常属于城堡🏰公共区域，重点需要提前处理的是布拉格城堡🏰主线路票；主线路成人 450 克朗，儿童/学生优惠 300 克朗。官方票务说明和购票入口见本行“官网”；预订建议：建议提前买 2026 年 8 月 5 日上午可用的城堡🏰主线路票，现场直接排入场安检和检票。</span></li>
           <li class="included-ticket" data-price="成人 450 克朗；儿童 300 克朗；含在城堡🏰票内"><span class="time">10:30</span><span>从皇家花园🌷大致向南↓步行👣到圣维特大教堂⛪约 5 到 10 分钟，教堂⛪建议停留 45 到 60 分钟；按城堡🏰主线路门票入内，不另行预订。</span></li>
           <li data-price="餐费另计"><span class="time">午餐</span><span>从教堂⛪到城堡🏰区或地铁站附近餐厅🍽️，大致向东→或东北↗步行👣、电车或短程出租车🚕约 10 到 20 分钟，建议用餐 60 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">下午</span><span>从城堡🏰区大致向东南↘步行👣慢慢下行到小城约 20 到 30 分钟，小城街区建议停留 90 分钟；公共街区不需预订。</span></li>
@@ -2186,17 +2448,24 @@
       <article class="day" id="day-0807" data-date="2026-08-07" data-time-zone="Europe/Prague" data-time-zone-label="捷克当地时间">
         <div class="date">
           <strong>8 月 7 日，周五</strong>
-          <span>最后完整一天</span>
+          <span>切尔尼、多普勒、开普勒、卡夫卡主题步行</span>
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/vltava.jpg" alt="布拉格伏尔塔瓦河"></div>
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="no-booking" data-price="公共区成人/儿童免费；教堂⛪入内复核"><span class="time">上午</span><span>从酒店🏨大致向南↓步行👣到高堡约 35 到 50 分钟；如果想省体力，可结合地铁/电车大致向南↓，高堡城墙、圣彼得与圣保罗教堂⛪外观和河景建议停留 2 小时；城墙和外观散步不需预订，教堂⛪入内出发前复核。</span></li>
-          <li class="no-booking" data-price="公共区成人/儿童免费；佩特任塔成人 250 克朗、儿童 170 克朗"><span class="time">下午</span><span>从高堡大致向西北↖步行👣或坐电车到康帕岛约 25 到 35 分钟；康帕岛、列侬墙、佩特任山公园和河边慢走建议总停留 2.5 到 3 小时；公共区域不需预订，若登佩特任塔则成人 250 克朗、儿童/优惠 170 克朗。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.davidcerny.cz/work/k-kafka-head" data-link-label="介绍"><span class="time">09:45</span><span>从 The Julius Prague 大致向西南↙步行👣到 Quadrio 的卡夫卡头像约 15 到 20 分钟；这是 David Černý 的动态雕塑，免费开放，适合作为“切尔尼和卡夫卡”主题起点。建议停留 20 到 30 分钟，等它整点前后转动更有意思。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://historyofscience.cz/katalog_en/index.php?id=556" data-link-label="介绍"><span class="time">10:30</span><span>从卡夫卡头像大致向东南↘步行👣到 Karlovo náměstí 6/20 的多普勒纪念牌约 12 到 18 分钟；这里纪念多普勒在布拉格生活、研究并提出多普勒效应相关思想。建议停留 10 到 15 分钟。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://mapy.com/en/?id=2480759&source=base" data-link-label="地图"><span class="time">11:15</span><span>从多普勒纪念牌大致向北↑步行👣到 Karlova 188/4 的开普勒纪念牌约 20 到 30 分钟；这段会穿过新城和老城，作为“科学家在布拉格”的主线。开普勒纪念牌在建筑通道内，停留 10 分钟即可。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">午餐</span><span>在老城或查理大桥附近午餐 60 到 75 分钟；如果小孩累，可以到这里结束主题步行，下午改为酒店🏨休息。</span></li>
+          <li class="no-booking" data-price="公共区成人/儿童免费；佩特任塔成人 250 克朗、儿童 170 克朗"><span class="time">下午</span><span>从老城大致向西←步行👣过查理大桥到康帕岛约 15 到 25 分钟，看 David Černý 的婴儿雕塑，再按体力选择列侬墙、河边慢走或佩特任山；公共区域不需预订，若登佩特任塔则成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="餐费另计"><span class="time">晚上</span><span>从河边或小城大致向东→步行👣或坐电车回老城约 15 到 25 分钟，安排告别晚餐 60 到 90 分钟，然后步行👣、电车或短程出租车🚕大致向东→或东北↗回酒店🏨收拾行李；如要固定餐厅🍽️和时间再订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
+          <figure class="place-card"><img src="photos/prague.jpg" alt="卡夫卡头像"><span>卡夫卡头像 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Quadrio</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="多普勒纪念牌"><span>多普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlovo náměstí 6/20</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="开普勒纪念牌"><span>开普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlova 188/4</small></span></figure>
+          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕婴儿雕塑"><span>康帕婴儿雕塑 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/prague.jpg" alt="高堡"><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区成人免费；儿童免费；场馆另计</small></span></figure>
           <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河"><span>伏尔塔瓦河 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕岛"><span>康帕岛 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
@@ -2224,6 +2493,40 @@
       </article>
     </section>
 
+    <section class="section-head" id="science-walk-section">
+      <h2>主题步行</h2>
+      <p>切尔尼、多普勒、开普勒、卡夫卡：把现代艺术、科学史和文学放在同一条布拉格步行线上。</p>
+    </section>
+
+    <section class="theme-walk" aria-label="布拉格主题步行地图和导览">
+      <div class="theme-map">
+        <svg viewBox="0 0 520 360" role="img" aria-label="切尔尼多普勒开普勒卡夫卡主题步行地图">
+          <rect width="520" height="360" fill="#eef3f1"></rect>
+          <path d="M70 270 C135 230 180 240 225 205 C270 170 318 166 366 132 C400 108 430 95 462 78" fill="none" stroke="#d7e1da" stroke-width="34" stroke-linecap="round"></path>
+          <path class="theme-map-path" d="M112 266 L182 220 L300 164 L384 116"></path>
+          <circle class="theme-map-point" cx="112" cy="266" r="10"></circle>
+          <text x="32" y="306">卡夫卡头像</text>
+          <circle class="theme-map-point" cx="182" cy="220" r="10"></circle>
+          <text x="132" y="198">多普勒纪念牌</text>
+          <circle class="theme-map-point" cx="300" cy="164" r="10"></circle>
+          <text x="266" y="142">开普勒纪念牌</text>
+          <circle class="theme-map-point" cx="384" cy="116" r="10"></circle>
+          <text x="352" y="92">康帕婴儿雕塑</text>
+          <text x="28" y="34">建议方向：酒店 → 卡夫卡头像 → 多普勒 → 开普勒 → 康帕岛</text>
+          <text x="28" y="58">纯步行约 4 到 5 公里；带小孩按 2.5 到 4 小时看体力拆段。</text>
+        </svg>
+      </div>
+      <div class="theme-guide">
+        <h3>导览文字</h3>
+        <ol>
+          <li><strong>卡夫卡头像：</strong>从酒店出发先看 David Černý 的动态卡夫卡头像。它把文学人物做成机械结构，正好打开“现代艺术和技术”的主题。</li>
+          <li><strong>多普勒纪念牌：</strong>走到查理广场附近，看 Christian Doppler 在布拉格研究和生活的纪念牌。这里把萨尔茨堡出生地和布拉格学术生涯连起来。</li>
+          <li><strong>开普勒纪念牌：</strong>继续走到老城 Karlova 188/4，讲 Johannes Kepler 在布拉格完成行星运动定律相关工作的故事。和多普勒一起形成“波、光、天体”的科学线。</li>
+          <li><strong>康帕婴儿雕塑：</strong>过查理大桥到康帕岛，看 David Černý 的婴儿雕塑。这里可以结束主题步行，也可以接列侬墙和伏尔塔瓦河边慢走。</li>
+        </ol>
+      </div>
+    </section>
+
     <section class="feature-grid">
       <article class="photo-card" style="--image: url('photos/salzburg.jpg');">
         <h3>萨尔茨堡锚点</h3>
@@ -2244,9 +2547,9 @@
       <h2>待确认</h2>
       <ul>
         <li>萨尔茨堡抵达和布拉格离境的机场交通细节。</li>
-        <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数。</li>
-        <li>百威酿酒厂参观时间和预约。</li>
-        <li>人骨教堂💀 2026 年 8 月 6 日限时票；出发前复核周五到周日关闭提醒是否仍适用。</li>
+        <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数；购票链接已放在对应日期的票价栏。</li>
+        <li>百威酿酒厂参观时间和预约；预约链接已放在 8 月 3 日票价栏。</li>
+        <li>人骨教堂💀 2026 年 8 月 6 日限时票；购票链接已放在 8 月 6 日票价栏，出发前复核周五到周日关闭提醒是否仍适用。</li>
         <li>确认海尔布伦、萨尔茨堡城堡🏰、布拉格城堡🏰的最新开放时间和票务规则。</li>
         <li>两晚卡比特尔广场放映前确认天气，并准备夜间薄外套。</li>
       </ul>
@@ -2260,11 +2563,11 @@
     <section class="checklist">
       <h2>优先预订</h2>
       <ul>
-        <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数，建议尽快订。</li>
-        <li>海尔布伦戏水宫：可提前买通用门票，2026 年 7 月 30 日下午使用；不是预约固定入场时间。</li>
-        <li>布拉格城堡🏰主线路：建议提前购票或至少提前确认票种，2026 年 8 月 5 日上午直接入场更稳。</li>
-        <li>百威酿酒厂：行程里安排 2026 年 8 月 3 日 14:00，建议提前预约参观时段。</li>
-        <li>人骨教堂💀：官网说明容量有限，票需要按具体日期和时间提前购买；2026 年 8 月 6 日周四优先锁定。</li>
+        <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数，建议尽快订；购票链接已放在对应日期的票价栏。</li>
+        <li>海尔布伦戏水宫：可提前买通用门票，2026 年 7 月 30 日下午使用；不是预约固定入场时间；官网链接已放在 7 月 30 日票价栏。</li>
+        <li>布拉格城堡🏰主线路：建议提前购票或至少提前确认票种，2026 年 8 月 5 日上午直接入场更稳；官网链接已放在 8 月 5 日票价栏。</li>
+        <li>百威酿酒厂：行程里安排 2026 年 8 月 3 日 14:00，建议提前预约参观时段；预约链接已放在 8 月 3 日票价栏。</li>
+        <li>人骨教堂💀：官网说明容量有限，票需要按具体日期和时间提前购买；2026 年 8 月 6 日周四优先锁定；购票链接已放在 8 月 6 日票价栏。</li>
         <li>布拉格热门餐厅🍽️：三世纪餐厅🍽️、卢浮咖啡馆、科尔科夫纳餐厅🍽️如要固定用餐时间，建议提前订桌。</li>
       </ul>
     </section>
@@ -2277,6 +2580,90 @@
         <li>查理大桥、伏尔塔瓦河边散步、小城街区、康帕岛、列侬墙、佩特任山公园、高堡公共区域：通常不需预订。</li>
         <li>林茨圣玛丽大教堂⛪普通入内通常不需预订；特殊导览、音乐会或关闭日另行复核。</li>
       </ul>
+    </section>
+
+    <section class="section-head" id="expense-section">
+      <h2>旅行记账</h2>
+      <p>记录旅途中某一家垫付的费用，按参与家庭分摊，之后统一算总账。</p>
+    </section>
+
+    <section class="expense-panel" aria-label="旅行记账">
+      <form class="expense-form" id="expense-form">
+        <input type="hidden" id="expense-id">
+        <label>
+          日期
+          <select id="expense-date">
+            <option>7 月 29 日</option>
+            <option>7 月 30 日</option>
+            <option>7 月 31 日</option>
+            <option>8 月 1 日</option>
+            <option>8 月 2 日</option>
+            <option>8 月 3 日</option>
+            <option>8 月 4 日</option>
+            <option>8 月 5 日</option>
+            <option>8 月 6 日</option>
+            <option>8 月 7 日</option>
+            <option>8 月 8 日</option>
+          </select>
+        </label>
+        <label>
+          地点
+          <input id="expense-place" autocomplete="off" placeholder="例如：布拉格">
+        </label>
+        <label class="expense-wide">
+          项目
+          <input id="expense-item" autocomplete="off" placeholder="例如：午餐、门票、打车">
+        </label>
+        <label>
+          金额
+          <input id="expense-amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00">
+        </label>
+        <label>
+          币种
+          <select id="expense-currency">
+            <option value="EUR">欧元</option>
+            <option value="CZK">捷克克朗</option>
+            <option value="CNY">人民币</option>
+          </select>
+        </label>
+        <label>
+          垫付
+          <select id="expense-payer"></select>
+        </label>
+        <fieldset>
+          <legend>参与家庭</legend>
+          <div class="expense-participants" id="expense-participants"></div>
+        </fieldset>
+        <label class="expense-full">
+          备注
+          <textarea id="expense-note" placeholder="例如：G 家先垫付，三家都参加；或者只给某两家分摊。"></textarea>
+        </label>
+        <div class="expense-actions expense-full">
+          <button type="submit" id="expense-save">保存账目</button>
+          <button type="button" class="secondary-button" id="expense-sync">同步本机账目</button>
+          <button type="button" class="secondary-button" id="expense-cancel" hidden>取消修改</button>
+        </div>
+      </form>
+      <p class="expense-status" id="expense-status"></p>
+      <div class="expense-summary" id="expense-summary"></div>
+      <div class="expense-table-wrap">
+        <table class="expense-table">
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>地点</th>
+              <th>项目</th>
+              <th>金额</th>
+              <th>约人民币</th>
+              <th>垫付</th>
+              <th>分摊</th>
+              <th>备注</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="expense-list"></tbody>
+        </table>
+      </div>
     </section>
 
     <section class="section-head" id="assistant-section">
@@ -2331,13 +2718,36 @@
         <li>真实地点照片来自维基共享资源，已保存为本地图片。</li>
         <li><a href="https://www.salzburg.info/en">萨尔茨堡官方旅游网站</a></li>
         <li><a href="https://www.salzburg.info/en/sights/top10/mirabell-palace-gardens">米拉贝尔宫和花园🌷官方页面</a></li>
+        <li><a href="https://www.salzburg.info/en/sights/top10/getreidegasse">粮食胡同官方旅游页面</a></li>
+        <li><a href="https://www.christian-doppler.net/en/station/salzburg-where-everything-began/">萨尔茨堡多普勒出生地资料页</a></li>
+        <li><a href="https://mozarteum.at/en/mozart-museums/mozarts-birthplace">莫扎特出生地官网</a></li>
         <li><a href="https://www.hellbrunn.at/en/">海尔布伦宫官网</a></li>
+        <li><a href="https://www.getyourguide.com/hohensalzburg-fortress-l3810/">霍亨萨尔茨堡城堡🏰 GetYourGuide 详情页</a></li>
+        <li><a href="https://www.getyourguide.com/palatul-hellbrunn-l3812/">海尔布伦 GetYourGuide 详情页</a></li>
+        <li><a href="https://www.linztourismus.at/en/leisure/discover-linz/worth-seeing/top10/main-square-and-city-center">林茨中央广场官方旅游页面</a></li>
         <li><a href="https://www.linztourismus.at/en/leisure/discover-linz/worth-seeing/historical-sites/churches/mariendom">林茨圣玛丽大教堂⛪官方旅游页面</a></li>
+        <li><a href="https://ars.electronica.art/center/de/tickets/">电子艺术中心票务和开放时间页</a></li>
+        <li><a href="https://www.linztourismus.at/en/leisure/discover-linz/museums-and-exhibitions/ars-electronica-center">林茨电子艺术中心旅游介绍页</a></li>
+        <li><a href="https://www.budejce.cz/en/activities/2-black-tower">布杰约维采黑塔官方旅游页面</a></li>
+        <li><a href="https://www.seidel.cz/cz/kontakty/">赛德尔摄影工作室博物馆开放时间页</a></li>
         <li><a href="https://prague.eu/en/">布拉格官方旅游网站</a></li>
         <li><a href="https://praha-vysehrad.cz/en/visit/">高堡官方参观页面</a></li>
+        <li><a href="https://prague.eu/en/objevujte/prague-castle-gardens-zahrady-prazskeho-hradu/">布拉格城堡🏰花园官方旅游页面</a></li>
+        <li><a href="https://prague.eu/en/objevujte/prague-castle-cathedral-of-st-vitus-st-wenceslas-and-st-adalbert-katedrala-sv-vita-vaclava-a-vojtecha/">圣维特大教堂⛪官方旅游页面</a></li>
+        <li><a href="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/">老城桥塔官方旅游页面</a></li>
         <li><a href="https://www.hrad.cz/en/prague-castle-for-visitors/tickets">布拉格城堡🏰官网票务页</a></li>
+        <li><a href="https://www.hrad.cz/cn/prague-castle-for-visitors/tickets">布拉格城堡🏰中文票务页</a></li>
+        <li><a href="https://www.getyourguide.com/en-gb/prague-castle-l2720/prague-prague-castle-ticket-t406279/">布拉格城堡🏰 GetYourGuide 门票页</a></li>
+        <li><a href="https://www.davidcerny.cz/work/k-kafka-head">David Černý 卡夫卡头像作品页</a></li>
+        <li><a href="https://prague.eu/en/objevujte/statue-of-kafka/">布拉格卡夫卡头像官方旅游页面</a></li>
+        <li><a href="https://historyofscience.cz/katalog_en/index.php?id=556">布拉格多普勒纪念牌资料页</a></li>
+        <li><a href="https://mapy.com/en/?id=2480759&source=base">布拉格开普勒纪念牌地图页</a></li>
+        <li><a href="https://www.davidcerny.cz/work/babies">David Černý 婴儿雕塑作品页</a></li>
         <li><a href="https://prague.eu/en/objevujte/old-town-hall-with-astronomical-clock-staromestska-radnice-s-orlojem">布拉格老市政厅官网票务页</a></li>
         <li><a href="https://sedlec.info/en/">人骨教堂💀和塞德莱茨官网</a></li>
+        <li><a href="https://www.getyourguide.com/ossuaire-de-sedlec-l34752/">人骨教堂💀 GetYourGuide 详情页</a></li>
+        <li><a href="https://www.getyourguide.com/ceske-budejovice-l152327/ttd/">布杰约维采 GetYourGuide 城市详情页</a></li>
+        <li><a href="https://budweiserbudvar.com/visit-us/">百威酿酒厂预约页</a></li>
         <li><a href="https://zumzirkelwirt.at/en/#speisekarte">Zum Zirkelwirt 英文菜单页</a></li>
         <li><a href="https://www.gasthofgoldgasse.at/en/">Gasthof Goldgasse 英文菜单页</a></li>
         <li><a href="https://www.gasthofgoldgasse.at/en/">Gasthof Goldgasse 图片来源</a></li>
@@ -2348,6 +2758,8 @@
         <li><a href="https://www.residence-marianska.cz/en">Residence Mariánská 图片来源</a></li>
         <li><a href="https://www.thejulius.eu/cs">The Julius Prague 图片来源</a></li>
         <li><a href="https://www.oebb.at/en/">奥地利铁路官网</a></li>
+        <li><a href="https://www.oebb.at/en/reiseplanung-services/oebb-zugverbindungen/zugverbindungen-oesterreich/weststrecke/salzburg-linz">萨尔茨堡到林茨火车购票页</a></li>
+        <li><a href="https://www.cd.cz/en/eshop/">捷克铁路购票页</a></li>
         <li><a href="https://open-meteo.com/">天气预测数据服务</a></li>
       </ul>
       </div>
@@ -2358,6 +2770,7 @@
     const assistantTokenKey = "austria-czech-assistant-token";
     const assistantConversationKey = "austria-czech-assistant-conversation";
     const ticketSignupKey = "austria-czech-ticket-signups";
+    const expenseLedgerKey = "austria-czech-expenses";
     const heroAssistantToken = document.getElementById("hero-assistant-token");
     const assistantToken = document.getElementById("assistant-token");
     const assistantQuestion = document.getElementById("assistant-question");
@@ -2369,9 +2782,25 @@
     const versionNote = document.getElementById("version-note");
     const runtimeVersionStatus = document.getElementById("runtime-version-status");
     const runtimeVersionList = document.getElementById("runtime-version-list");
+    const expenseForm = document.getElementById("expense-form");
+    const expenseId = document.getElementById("expense-id");
+    const expenseDate = document.getElementById("expense-date");
+    const expensePlace = document.getElementById("expense-place");
+    const expenseItem = document.getElementById("expense-item");
+    const expenseAmount = document.getElementById("expense-amount");
+    const expenseCurrency = document.getElementById("expense-currency");
+    const expensePayer = document.getElementById("expense-payer");
+    const expenseParticipants = document.getElementById("expense-participants");
+    const expenseNote = document.getElementById("expense-note");
+    const expenseSync = document.getElementById("expense-sync");
+    const expenseCancel = document.getElementById("expense-cancel");
+    const expenseStatus = document.getElementById("expense-status");
+    const expenseSummary = document.getElementById("expense-summary");
+    const expenseList = document.getElementById("expense-list");
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
     let sharedTicketSignups = null;
+    let sharedExpenses = null;
     let lastAppliedAssistantQuestion = "";
     const baselineVersions = [
       { version: 8, summary: "发布基准：已移除过时概览卡片，并保留智能助手。" },
@@ -2803,6 +3232,303 @@
       czk: 0.32
     };
 
+    function familyNameById(familyId) {
+      return defaultFamilies().find((family) => family.id === familyId)?.name || familyId || "未填";
+    }
+
+    function expenseCurrencyRate(currency) {
+      if (currency === "EUR") {
+        return rmbRates.eur;
+      }
+      if (currency === "CZK") {
+        return rmbRates.czk;
+      }
+      return 1;
+    }
+
+    function expenseCurrencyLabel(currency) {
+      return {
+        EUR: "欧元",
+        CZK: "捷克克朗",
+        CNY: "人民币"
+      }[currency] || currency;
+    }
+
+    function expenseRmbAmount(expense) {
+      return Number(expense.amount || 0) * expenseCurrencyRate(expense.currency);
+    }
+
+    function formatExpenseAmount(amount, currency) {
+      return `${Number(amount || 0).toFixed(2)} ${expenseCurrencyLabel(currency)}`;
+    }
+
+    function formatExpenseRmb(amount) {
+      return `人民币 ${Number(amount || 0).toFixed(2)}`;
+    }
+
+    function normalizeExpenseEntry(entry) {
+      const families = defaultFamilies();
+      const allowedFamilies = new Set(families.map((family) => family.id));
+      const participants = Array.isArray(entry?.participants)
+        ? entry.participants.filter((id) => allowedFamilies.has(id))
+        : families.map((family) => family.id);
+      const payer = allowedFamilies.has(entry?.payer) ? entry.payer : families[0].id;
+      const currency = ["EUR", "CZK", "CNY"].includes(entry?.currency) ? entry.currency : "EUR";
+      const amount = Math.max(0, Number(entry?.amount || 0));
+
+      return {
+        id: String(entry?.id || `expense-${Date.now()}-${Math.random().toString(16).slice(2)}`).slice(0, 80),
+        date: String(entry?.date || expenseDate.value || "7 月 29 日").slice(0, 40),
+        place: String(entry?.place || "").trim().slice(0, 120),
+        item: String(entry?.item || "").trim().slice(0, 160),
+        amount: Math.round(amount * 100) / 100,
+        currency,
+        payer,
+        participants: participants.length ? participants : [payer],
+        note: String(entry?.note || "").trim().slice(0, 500),
+        createdAt: String(entry?.createdAt || new Date().toISOString()).slice(0, 64),
+        updatedAt: String(entry?.updatedAt || new Date().toISOString()).slice(0, 64),
+        updatedBy: String(entry?.updatedBy || "").slice(0, 40)
+      };
+    }
+
+    function normalizeExpenseList(items) {
+      if (!Array.isArray(items)) {
+        return [];
+      }
+      return items.map(normalizeExpenseEntry).filter((entry) => entry.amount > 0 && entry.item && entry.participants.length);
+    }
+
+    function readExpenses() {
+      if (sharedExpenses) {
+        return normalizeExpenseList(sharedExpenses);
+      }
+
+      try {
+        return normalizeExpenseList(JSON.parse(localStorage.getItem(expenseLedgerKey) || "[]"));
+      } catch {
+        return [];
+      }
+    }
+
+    function writeExpenses(expenses) {
+      sharedExpenses = normalizeExpenseList(expenses);
+      localStorage.setItem(expenseLedgerKey, JSON.stringify(sharedExpenses));
+    }
+
+    function renderExpenseControls() {
+      const families = defaultFamilies();
+      expensePayer.innerHTML = "";
+      expenseParticipants.innerHTML = "";
+
+      families.forEach((family) => {
+        const payerOption = document.createElement("option");
+        payerOption.value = family.id;
+        payerOption.textContent = family.name;
+        expensePayer.append(payerOption);
+
+        const label = document.createElement("label");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = family.id;
+        checkbox.checked = true;
+        label.append(checkbox, document.createTextNode(family.name));
+        expenseParticipants.append(label);
+      });
+    }
+
+    function selectedExpenseParticipants() {
+      return Array.from(expenseParticipants.querySelectorAll("input:checked")).map((input) => input.value);
+    }
+
+    function resetExpenseForm() {
+      expenseId.value = "";
+      expenseForm.reset();
+      expenseCurrency.value = "EUR";
+      expenseParticipants.querySelectorAll("input").forEach((input) => {
+        input.checked = true;
+      });
+      expenseCancel.hidden = true;
+      document.getElementById("expense-save").textContent = "保存账目";
+    }
+
+    function fillExpenseForm(entry) {
+      expenseId.value = entry.id;
+      expenseDate.value = entry.date;
+      expensePlace.value = entry.place;
+      expenseItem.value = entry.item;
+      expenseAmount.value = entry.amount;
+      expenseCurrency.value = entry.currency;
+      expensePayer.value = entry.payer;
+      expenseNote.value = entry.note;
+      expenseParticipants.querySelectorAll("input").forEach((input) => {
+        input.checked = entry.participants.includes(input.value);
+      });
+      expenseCancel.hidden = false;
+      document.getElementById("expense-save").textContent = "保存修改";
+      expenseStatus.textContent = "正在修改这一条账目。";
+      expenseForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function expenseSettlement(expenses) {
+      const families = defaultFamilies();
+      const paid = Object.fromEntries(families.map((family) => [family.id, 0]));
+      const owed = Object.fromEntries(families.map((family) => [family.id, 0]));
+      const byCurrency = {};
+      let totalRmb = 0;
+
+      expenses.forEach((expense) => {
+        const amountRmb = expenseRmbAmount(expense);
+        totalRmb += amountRmb;
+        byCurrency[expense.currency] = (byCurrency[expense.currency] || 0) + Number(expense.amount || 0);
+        paid[expense.payer] = (paid[expense.payer] || 0) + amountRmb;
+        const share = amountRmb / Math.max(1, expense.participants.length);
+        expense.participants.forEach((familyId) => {
+          owed[familyId] = (owed[familyId] || 0) + share;
+        });
+      });
+
+      const net = families.map((family) => ({
+        ...family,
+        value: (paid[family.id] || 0) - (owed[family.id] || 0)
+      }));
+      const creditors = net.filter((item) => item.value > 0.01).map((item) => ({ ...item }));
+      const debtors = net.filter((item) => item.value < -0.01).map((item) => ({ ...item, value: -item.value }));
+      const transfers = [];
+      let creditorIndex = 0;
+      let debtorIndex = 0;
+
+      while (creditorIndex < creditors.length && debtorIndex < debtors.length) {
+        const amount = Math.min(creditors[creditorIndex].value, debtors[debtorIndex].value);
+        if (amount > 0.01) {
+          transfers.push(`${debtors[debtorIndex].name} 给 ${creditors[creditorIndex].name} ${formatExpenseRmb(amount)}`);
+        }
+        creditors[creditorIndex].value -= amount;
+        debtors[debtorIndex].value -= amount;
+        if (creditors[creditorIndex].value <= 0.01) creditorIndex += 1;
+        if (debtors[debtorIndex].value <= 0.01) debtorIndex += 1;
+      }
+
+      return { paid, owed, net, transfers, totalRmb, byCurrency };
+    }
+
+    function renderExpenseSummary(expenses) {
+      expenseSummary.innerHTML = "";
+      if (!expenses.length) {
+        return;
+      }
+
+      const settlement = expenseSettlement(expenses);
+      const totals = Object.entries(settlement.byCurrency)
+        .map(([currency, amount]) => formatExpenseAmount(amount, currency))
+        .join("；");
+      const totalLine = document.createElement("div");
+      totalLine.textContent = `总支出：${totals}；合计约 ${formatExpenseRmb(settlement.totalRmb)}`;
+      expenseSummary.append(totalLine);
+
+      const netLine = document.createElement("div");
+      netLine.textContent = settlement.net
+        .map((item) => `${item.name}${item.value >= 0 ? "应收" : "应付"} ${formatExpenseRmb(Math.abs(item.value))}`)
+        .join("；");
+      expenseSummary.append(netLine);
+
+      const transferLine = document.createElement("div");
+      transferLine.textContent = settlement.transfers.length ? `建议转账：${settlement.transfers.join("；")}` : "建议转账：目前不用互相转账。";
+      expenseSummary.append(transferLine);
+    }
+
+    function renderExpenseLedger() {
+      const expenses = readExpenses();
+      expenseList.innerHTML = "";
+      renderExpenseSummary(expenses);
+
+      if (!expenses.length) {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 9;
+        cell.textContent = "还没有账目。";
+        row.append(cell);
+        expenseList.append(row);
+        return;
+      }
+
+      expenses.slice().reverse().forEach((expense) => {
+        const row = document.createElement("tr");
+        [
+          expense.date,
+          expense.place || "未填",
+          expense.item,
+          formatExpenseAmount(expense.amount, expense.currency),
+          formatExpenseRmb(expenseRmbAmount(expense)),
+          familyNameById(expense.payer),
+          expense.participants.map(familyNameById).join("、"),
+          expense.note || ""
+        ].forEach((text) => {
+          const cell = document.createElement("td");
+          cell.textContent = text;
+          row.append(cell);
+        });
+
+        const actionCell = document.createElement("td");
+        const actions = document.createElement("div");
+        actions.className = "expense-row-actions";
+        const edit = document.createElement("button");
+        edit.type = "button";
+        edit.textContent = "修改";
+        edit.className = "secondary-button";
+        edit.addEventListener("click", () => fillExpenseForm(expense));
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "删除";
+        remove.className = "secondary-button";
+        remove.addEventListener("click", () => deleteExpense(expense.id));
+        actions.append(edit, remove);
+        actionCell.append(actions);
+        row.append(actionCell);
+        expenseList.append(row);
+      });
+    }
+
+    async function saveExpenseLedger(expenses, message) {
+      writeExpenses(expenses);
+      renderExpenseLedger();
+
+      const token = assistantToken.value.trim();
+      if (!token) {
+        expenseStatus.textContent = `${message}；已保存在本机，输入访问码后可同步给大家。`;
+        return;
+      }
+
+      expenseStatus.textContent = "正在同步记账。";
+      try {
+        const state = await assistantRequest({ action: "save_expenses", expenses }, token);
+        applyTripState(state);
+        expenseStatus.textContent = message;
+      } catch (error) {
+        if ((error.message || "").includes("没有实际改动")) {
+          expenseStatus.textContent = "服务器上的记账已经是最新。";
+        } else {
+          expenseStatus.textContent = `${message}；服务器暂时没有同步：${error.message || "请求失败"}`;
+        }
+      }
+    }
+
+    function deleteExpense(id) {
+      const target = readExpenses().find((expense) => expense.id === id);
+      if (!target) {
+        return;
+      }
+
+      if (!window.confirm(`删除这条账目：${target.date} ${target.item}？`)) {
+        return;
+      }
+
+      saveExpenseLedger(readExpenses().filter((expense) => expense.id !== id), "已删除账目。");
+      if (expenseId.value === id) {
+        resetExpenseForm();
+      }
+    }
+
     function rmbAmountText(amount, rate) {
       return `¥${Math.round(Number(amount) * rate)}`;
     }
@@ -2883,6 +3609,64 @@
 
     fillTicketNoteRmb();
 
+    const photoDetailLinks = [
+      { terms: ["harry's home Salzburg", "harry's home"], href: "https://salzburg.harrys-home.com/en/" },
+      { terms: ["Courtyard by Marriott Linz", "Courtyard"], href: "https://www.marriott.com/en-us/hotels/lnzcy-courtyard-linz/overview/" },
+      { terms: ["Residence Mariánská", "Residence Marianska"], href: "https://www.residence-marianska.cz/en" },
+      { terms: ["The Julius Prague", "Julius"], href: "https://www.thejulius.eu/cs" },
+      { terms: ["Zum Zirkelwirt", "Zirkelwirt"], href: "https://zumzirkelwirt.at/en/#speisekarte" },
+      { terms: ["Gasthof Goldgasse", "Goldgasse"], href: "https://www.gasthofgoldgasse.at/en/" },
+      { terms: ["Století", "三世纪餐厅"], href: "https://stoleti.cz/en/menu.php" },
+      { terms: ["Kolkovna Dock", "科尔科夫纳餐厅", "Kolkovna"], href: "https://dock.kolkovna.cz/en/?forceVersion=front" },
+      { terms: ["多普勒出生地纪念牌"], href: "https://www.christian-doppler.net/en/station/salzburg-where-everything-began/" },
+      { terms: ["莫扎特出生地"], href: "https://mozarteum.at/en/mozart-museums/mozarts-birthplace" },
+      { terms: ["海尔布伦戏水宫", "海尔布伦", "水机关"], href: "https://www.hellbrunn.at/en/info/opening-hours-prices-arrival" },
+      { terms: ["霍亨萨尔茨堡城堡", "霍亨萨尔茨堡"], href: "https://www.getyourguide.com/hohensalzburg-fortress-l3810/" },
+      { terms: ["米拉贝尔花园", "Mirabell"], href: "https://www.salzburg.info/en/sights/top10/mirabell-palace-gardens" },
+      { terms: ["粮食胡同", "Getreidegasse"], href: "https://www.salzburg.info/en/sights/top10/getreidegasse" },
+      { terms: ["卡比特尔广场", "西门子节日之夜"], href: "https://www.siemens.com/en-gb/events/siemens-festival-nights/" },
+      { terms: ["萨尔茨堡老城"], href: "https://www.salzburg.info/en/sights/top10/getreidegasse" },
+      { terms: ["匹斯特林山", "登山火车"], href: "https://www.linztourismus.at/zh" },
+      { terms: ["林茨圣玛丽大教堂", "圣玛丽大教堂", "Mariendom"], href: "https://www.linztourismus.at/en/leisure/discover-linz/worth-seeing/historical-sites/churches/mariendom" },
+      { terms: ["电子艺术中心", "深空展厅"], href: "https://ars.electronica.art/center/de/tickets/" },
+      { terms: ["林茨中央广场", "Hauptplatz"], href: "https://www.linztourismus.at/en/leisure/discover-linz/worth-seeing/top10/main-square-and-city-center" },
+      { terms: ["黑塔"], href: "https://www.budejce.cz/en/activities/2-black-tower" },
+      { terms: ["赛德尔摄影工作室"], href: "https://www.seidel.cz/cz/kontakty/" },
+      { terms: ["百威酿酒厂", "Budvar"], href: "https://budweiserbudvar.com/visit-us/" },
+      { terms: ["普瑞米斯欧塔卡拉二世广场", "布杰约维采广场"], href: "https://www.budejce.cz/en/" },
+      { terms: ["老城桥塔", "桥塔"], href: "https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/" },
+      { terms: ["卡夫卡头像"], href: "https://www.davidcerny.cz/work/k-kafka-head" },
+      { terms: ["多普勒纪念牌"], href: "https://historyofscience.cz/katalog_en/index.php?id=556" },
+      { terms: ["开普勒纪念牌"], href: "https://mapy.com/en/?id=2480759&source=base" },
+      { terms: ["康帕婴儿雕塑"], href: "https://www.davidcerny.cz/work/babies" },
+      { terms: ["查理大桥"], href: "https://prague.eu/en/objevujte/charles-bridge-karluv-most/" },
+      { terms: ["圣尼古拉教堂"], href: "https://prague.eu/en/objevujte/st-nicholas-church-chram-sv-mikulase/" },
+      { terms: ["皇家花园"], href: "https://prague.eu/en/objevujte/prague-castle-gardens-zahrady-prazskeho-hradu/" },
+      { terms: ["圣维特大教堂", "圣维特"], href: "https://prague.eu/en/objevujte/prague-castle-cathedral-of-st-vitus-st-wenceslas-and-st-adalbert-katedrala-sv-vita-vaclava-a-vojtecha/" },
+      { terms: ["布拉格城堡", "城堡区"], href: "https://www.getyourguide.com/en-gb/prague-castle-l2720/prague-prague-castle-ticket-t406279/" },
+      { terms: ["小城"], href: "https://prague.eu/en/objevujte/lesser-town-mala-strana/" },
+      { terms: ["波希米亚小酒馆"], href: "https://www.getyourguide.com/prague-l10/food-drinks-tc103/" },
+      { terms: ["人骨教堂", "Sedlec"], href: "https://www.sedlec.info/en/ossuary/before-visiting/" },
+      { terms: ["库特纳霍拉"], href: "https://www.getyourguide.com/ossuaire-de-sedlec-l34752/" },
+      { terms: ["高堡", "Vyšehrad"], href: "https://praha-vysehrad.cz/en/visit/" },
+      { terms: ["康帕岛"], href: "https://prague.eu/en/objevujte/kampa-island-ostrov-kampa/" },
+      { terms: ["列侬墙"], href: "https://prague.eu/en/objevujte/lennon-wall-lennonova-zed/" },
+      { terms: ["佩特任山"], href: "https://prague.eu/en/objevujte/petrin-lookout-tower-petrinska-rozhledna/" },
+      { terms: ["伏尔塔瓦河"], href: "https://www.getyourguide.com/prague-l10/boat-tours-tc48/" },
+      { terms: ["犹太区"], href: "https://www.jewishmuseum.cz/en/info/visit/admission/" },
+      { terms: ["布拉格机场"], href: "https://www.prg.aero/en" },
+      { terms: ["布拉格"], href: "https://www.getyourguide.com/prague-l10/" },
+      { terms: ["林茨"], href: "https://www.linztourismus.at/zh" },
+      { terms: ["布杰约维采"], href: "https://www.getyourguide.com/ceske-budejovice-l152327/ttd/" },
+      { terms: ["萨尔茨堡"], href: "https://www.getyourguide.com/salzburg-l4/" }
+    ];
+
+    function photoDetailHref(image) {
+      const cardText = image.closest(".place-card, .day-photo")?.textContent || "";
+      const matchText = `${image.alt || ""} ${cardText}`;
+      return photoDetailLinks.find((item) => item.terms.some((term) => matchText.includes(term)))?.href || image.getAttribute("src");
+    }
+
     function linkTripPhotos(root = document) {
       root.querySelectorAll(".day-photo img, .place-card img").forEach((image) => {
         if (image.closest("a")) {
@@ -2890,10 +3674,11 @@
         }
 
         const link = document.createElement("a");
-        link.href = image.getAttribute("src");
+        link.href = photoDetailHref(image);
         link.target = "_blank";
         link.rel = "noreferrer";
-        link.setAttribute("aria-label", `查看大图：${image.alt || "照片"}`);
+        link.setAttribute("aria-label", `查看景点介绍：${image.alt || "照片"}`);
+        link.title = "查看景点介绍和订票信息";
         image.replaceWith(link);
         link.append(image);
       });
@@ -2911,14 +3696,20 @@
       ["海尔布伦戏水宫", "海尔布伦", "戏水宫", "水机关"],
       ["霍亨萨尔茨堡城堡", "霍亨萨尔茨堡"],
       ["卡比特尔广场", "西门子节日之夜"],
-      ["萨尔茨堡老城", "粮食胡同", "米拉贝尔花园", "莫扎特出生地", "老城"],
+      ["萨尔茨堡老城", "粮食胡同", "米拉贝尔花园", "多普勒出生地", "多普勒出生地纪念牌", "莫扎特出生地", "老城"],
+      ["电子艺术中心", "深空展厅", "Ars Electronica", "Deep Space"],
       ["匹斯特林山登山火车🚆", "匹斯特林山", "登山火车🚆"],
       ["林茨中央广场", "中央广场"],
       ["林茨圣玛丽大教堂", "圣玛丽大教堂"],
       ["布杰约维采广场", "普瑞米斯欧塔卡拉二世广场", "布杰约维采"],
       ["黑塔"],
       ["百威酿酒厂", "酿酒厂"],
+      ["赛德尔摄影工作室", "Fotoatelier Seidel", "Seidel"],
       ["老城桥塔", "查理大桥", "桥塔"],
+      ["卡夫卡头像", "Kafka"],
+      ["多普勒纪念牌", "Doppler"],
+      ["开普勒纪念牌", "Kepler"],
+      ["康帕婴儿雕塑", "婴儿雕塑"],
       ["圣尼古拉教堂"],
       ["Století", "三世纪餐厅"],
       ["皇家花园", "布拉格城堡", "城堡区"],
@@ -3586,10 +4377,24 @@
         localStorage.setItem(ticketSignupKey, JSON.stringify(sharedTicketSignups));
       }
 
+      if (Array.isArray(state.expenses)) {
+        let localExpenses = [];
+        try {
+          localExpenses = normalizeExpenseList(JSON.parse(localStorage.getItem(expenseLedgerKey) || "[]"));
+        } catch {
+          localExpenses = [];
+        }
+        if (assistantToken.value.trim() || state.expenses.length || !localExpenses.length) {
+          sharedExpenses = normalizeExpenseList(state.expenses);
+          localStorage.setItem(expenseLedgerKey, JSON.stringify(sharedExpenses));
+        }
+      }
+
       fillPriceCells();
       linkTripPhotos();
       renderDayQuestionPanels();
       renderTicketSignups();
+      renderExpenseLedger();
       linkContactDetails();
       initPlaceHoverLinks();
       renderRuntimeVersions(state);
@@ -3861,6 +4666,11 @@
           localStorage.setItem(ticketSignupKey, JSON.stringify(sharedTicketSignups));
           renderTicketSignups();
         }
+        if (Array.isArray(state.expenses)) {
+          sharedExpenses = normalizeExpenseList(state.expenses);
+          localStorage.setItem(expenseLedgerKey, JSON.stringify(sharedExpenses));
+          renderExpenseLedger();
+        }
         renderRuntimeVersions(state);
       } catch {
         // Keep the current view when the shared state cannot be reached.
@@ -3899,6 +4709,65 @@
       return editTerms.some((term) => text.includes(term)) && (pageTerms.some((term) => text.includes(term)) || datePattern.test(text));
     }
 
+    expenseForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const amount = Number(expenseAmount.value || 0);
+      const participants = selectedExpenseParticipants();
+
+      if (!expenseItem.value.trim()) {
+        expenseStatus.textContent = "请先填写项目。";
+        return;
+      }
+
+      if (!amount || amount <= 0) {
+        expenseStatus.textContent = "请填写大于 0 的金额。";
+        return;
+      }
+
+      if (!participants.length) {
+        expenseStatus.textContent = "请至少选择一个参与家庭。";
+        return;
+      }
+
+      const existing = readExpenses();
+      const now = new Date().toISOString();
+      const oldEntry = existing.find((entry) => entry.id === expenseId.value);
+      const entry = normalizeExpenseEntry({
+        id: expenseId.value || undefined,
+        date: expenseDate.value,
+        place: expensePlace.value,
+        item: expenseItem.value,
+        amount,
+        currency: expenseCurrency.value,
+        payer: expensePayer.value,
+        participants,
+        note: expenseNote.value,
+        createdAt: oldEntry?.createdAt || now,
+        updatedAt: now
+      });
+      const nextExpenses = oldEntry
+        ? existing.map((item) => (item.id === oldEntry.id ? entry : item))
+        : existing.concat(entry);
+
+      await saveExpenseLedger(nextExpenses, oldEntry ? "已保存账目修改。" : "已保存新账目。");
+      resetExpenseForm();
+    });
+
+    expenseCancel.addEventListener("click", () => {
+      resetExpenseForm();
+      expenseStatus.textContent = "已取消修改。";
+    });
+
+    expenseSync.addEventListener("click", async () => {
+      if (!assistantToken.value.trim()) {
+        expenseStatus.textContent = "请先输入访问码。";
+        return;
+      }
+      await saveExpenseLedger(readExpenses(), "已同步本机账目。");
+    });
+
+    renderExpenseControls();
+    renderExpenseLedger();
     renderAssistantConversation();
     renderTicketSignups();
     renderDayQuestionPanels();
