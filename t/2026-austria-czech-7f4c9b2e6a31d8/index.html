@@ -4558,7 +4558,7 @@
 
         const button = document.createElement("button");
         button.type = "button";
-        button.textContent = "问这一天";
+        button.textContent = "问助手";
 
         const status = document.createElement("div");
         status.className = "day-question-status";
@@ -4590,14 +4590,14 @@
           }
 
           if (!question) {
-            status.textContent = "请先输入关于这一天的问题。";
+            status.textContent = "请先输入要问助手的问题。";
             return;
           }
 
           localStorage.setItem(assistantTokenKey, token);
           button.disabled = true;
           applyButton.hidden = true;
-          status.textContent = "正在询问这一天的安排。";
+          status.textContent = "正在询问助手。";
           answer.textContent = "";
 
           try {
@@ -4636,7 +4636,7 @@
           }
 
           if (!question || !answerText) {
-            status.textContent = "请先收到这一天的建议。";
+            status.textContent = "请先收到助手的建议。";
             return;
           }
 
