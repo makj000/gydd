@@ -1449,6 +1449,28 @@
       gap: 4px;
     }
 
+    .signup-bulk-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .signup-choice-title {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .signup-bulk-actions button {
+      width: auto;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
     .signup-actions .version-note {
       display: none;
     }
@@ -2003,7 +2025,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：87</div>
+    <div class="page-version" aria-label="网页版本">网页版本：88</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3013,6 +3035,56 @@
       }
     }
 
+    function setSignupPanelSelection(panel, item, families, selected) {
+      families.forEach((family) => {
+        const counts = familyItemCounts(family, item.id);
+        counts.adults = selected ? family.maxAdults : 0;
+        counts.children = selected ? family.maxChildren : 0;
+        counts.adultAudit = Array.from({ length: family.maxAdults }, () => ({ by: "正在保存", selected }));
+        counts.childAudit = Array.from({ length: family.maxChildren }, () => ({ by: "正在保存", selected }));
+      });
+
+      writeTicketSignups(families);
+      renderTicketSignups();
+      saveSignupClick(families, {
+        itemId: item.id,
+        kind: selected ? "select_all" : "clear_all",
+        selected
+      }, `${item.name}：${selected ? "全员参加" : "清空参加人数"}`);
+    }
+
+    function renderSignupBulkActions(panel, item, families, canEditSignups) {
+      let title = panel.querySelector("[data-signup-choice-title]");
+      if (!title) {
+        title = document.createElement("div");
+        title.className = "signup-choice-title";
+        title.dataset.signupChoiceTitle = "";
+        panel.querySelector(".signup-actions")?.prepend(title);
+      }
+      title.textContent = `选择参加人数：${item.name}`;
+
+      let actions = panel.querySelector("[data-signup-bulk-actions]");
+      if (!actions) {
+        actions = document.createElement("div");
+        actions.className = "signup-bulk-actions";
+        actions.dataset.signupBulkActions = "";
+        panel.querySelector(".signup-actions")?.append(actions);
+      }
+
+      actions.innerHTML = "";
+      [
+        { label: "全选", selected: true },
+        { label: "清空", selected: false }
+      ].forEach((action) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = action.label;
+        button.disabled = !canEditSignups;
+        button.addEventListener("click", () => setSignupPanelSelection(panel, item, families, action.selected));
+        actions.append(button);
+      });
+    }
+
     function checkboxPack(count, checkedCount, labelText, variant, onChange, figuresOverride = null, labelsOverride = null) {
       const pack = document.createElement("span");
       pack.className = `checkbox-pack ${variant}`;
@@ -3116,6 +3188,9 @@
         familyGrid.innerHTML = "";
         panel.classList.toggle("is-locked", !canEditSignups);
         panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "" : "输入访问码解锁。";
+        if (itemsForPanel[0]) {
+          renderSignupBulkActions(panel, itemsForPanel[0], families, canEditSignups);
+        }
         itemsForPanel.forEach((item) => {
           const row = document.createElement("div");
           row.className = "signup-row";
