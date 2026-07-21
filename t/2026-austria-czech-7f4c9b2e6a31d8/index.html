@@ -1449,28 +1449,6 @@
       gap: 4px;
     }
 
-    .signup-bulk-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .signup-choice-title {
-      color: var(--ink);
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .signup-bulk-actions button {
-      width: auto;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1.1;
-    }
-
     .signup-actions .version-note {
       display: none;
     }
@@ -1502,10 +1480,20 @@
 
     .signup-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(128px, auto)) auto;
+      grid-template-columns: auto repeat(3, minmax(128px, auto)) auto;
       gap: 8px;
       align-items: center;
       padding: 0;
+    }
+
+    .signup-all-toggle {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .signup-total-inline {
@@ -3053,36 +3041,36 @@
       }, `${item.name}：${selected ? "全员参加" : "清空参加人数"}`);
     }
 
-    function renderSignupBulkActions(panel, item, families, canEditSignups) {
-      let title = panel.querySelector("[data-signup-choice-title]");
-      if (!title) {
-        title = document.createElement("div");
-        title.className = "signup-choice-title";
-        title.dataset.signupChoiceTitle = "";
-        panel.querySelector(".signup-actions")?.prepend(title);
-      }
-      title.textContent = `选择参加人数：${item.name}`;
+    function signupItemSelectionState(families, itemId) {
+      const totals = families.reduce((sum, family) => {
+        const counts = familyItemCounts(family, itemId);
+        return {
+          selected: sum.selected + Number(counts.adults || 0) + Number(counts.children || 0),
+          max: sum.max + family.maxAdults + family.maxChildren
+        };
+      }, { selected: 0, max: 0 });
 
-      let actions = panel.querySelector("[data-signup-bulk-actions]");
-      if (!actions) {
-        actions = document.createElement("div");
-        actions.className = "signup-bulk-actions";
-        actions.dataset.signupBulkActions = "";
-        panel.querySelector(".signup-actions")?.append(actions);
-      }
+      return {
+        checked: totals.max > 0 && totals.selected === totals.max,
+        partial: totals.selected > 0 && totals.selected < totals.max
+      };
+    }
 
-      actions.innerHTML = "";
-      [
-        { label: "全选", selected: true },
-        { label: "清空", selected: false }
-      ].forEach((action) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.textContent = action.label;
-        button.disabled = !canEditSignups;
-        button.addEventListener("click", () => setSignupPanelSelection(panel, item, families, action.selected));
-        actions.append(button);
-      });
+    function signupAllToggle(panel, item, families, canEditSignups) {
+      const state = signupItemSelectionState(families, item.id);
+      const label = document.createElement("label");
+      label.className = "signup-all-toggle";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = state.checked;
+      checkbox.indeterminate = state.partial;
+      checkbox.disabled = !canEditSignups;
+      checkbox.setAttribute("aria-label", `${item.name} 全选或清空`);
+      checkbox.addEventListener("change", () => setSignupPanelSelection(panel, item, families, checkbox.checked));
+
+      label.append(checkbox, document.createTextNode("全员"));
+      return label;
     }
 
     function checkboxPack(count, checkedCount, labelText, variant, onChange, figuresOverride = null, labelsOverride = null) {
@@ -3143,6 +3131,11 @@
           return;
         }
 
+        const currentRow = panel.closest(".items li:not(.items-header)");
+        if (currentRow) {
+          return;
+        }
+
         const targetRow = Array.from(day.querySelectorAll(".items li:not(.items-header)")).find((row) => row.innerText.includes(text));
         if (targetRow && panel.parentElement !== targetRow) {
           targetRow.append(panel);
@@ -3188,12 +3181,10 @@
         familyGrid.innerHTML = "";
         panel.classList.toggle("is-locked", !canEditSignups);
         panel.querySelector("[data-signup-lock-note]").textContent = canEditSignups ? "" : "输入访问码解锁。";
-        if (itemsForPanel[0]) {
-          renderSignupBulkActions(panel, itemsForPanel[0], families, canEditSignups);
-        }
         itemsForPanel.forEach((item) => {
           const row = document.createElement("div");
           row.className = "signup-row";
+          row.append(signupAllToggle(panel, item, families, canEditSignups));
 
           families.forEach((family) => {
             const counts = familyItemCounts(family, item.id);
