@@ -1121,14 +1121,16 @@
 
     .day-expense-actions {
       display: flex;
-      justify-content: flex-end;
-      margin: 10px 0 0;
+      justify-content: flex-start;
+      margin: 2px 0 0;
     }
 
     .day-expense-button {
-      min-height: 34px;
-      padding: 7px 11px;
-      font-size: 14px;
+      min-height: 28px;
+      width: auto;
+      padding: 5px 8px;
+      font-size: 12px;
+      line-height: 1.1;
       white-space: nowrap;
     }
 
@@ -3521,8 +3523,8 @@
           return;
         }
 
-        const items = day.querySelector(".items");
-        if (!items) {
+        const dateColumn = day.querySelector(".date");
+        if (!dateColumn) {
           return;
         }
 
@@ -3536,7 +3538,7 @@
         button.textContent = `${dateText} 记账`;
         button.addEventListener("click", () => focusExpenseForDay(dateText, placeText));
         actions.append(button);
-        items.insertAdjacentElement("afterend", actions);
+        dateColumn.append(actions);
       });
     }
 
