@@ -224,6 +224,35 @@
       color: var(--muted);
     }
 
+    .day-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 22px;
+    }
+
+    .day-breadcrumb a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 12px;
+      border: 1px solid rgba(66, 107, 79, 0.35);
+      border-radius: 999px;
+      background: #eef3f1;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .day-breadcrumb a:hover,
+    .day-breadcrumb a:focus {
+      background: #edf4fb;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
     .route {
       display: grid;
       grid-template-columns: repeat(11, minmax(96px, 1fr));
@@ -2266,6 +2295,20 @@
       <h2>详细计划</h2>
       <p>时间是规划锚点，不等于已预订项目；预订栏绿色勾表示已订，黄色感叹号表示还需要提前处理。</p>
     </section>
+
+    <nav class="day-breadcrumb" aria-label="按日期跳转">
+      <a href="#day-0729">7/29 周三</a>
+      <a href="#day-0730">7/30 周四</a>
+      <a href="#day-0731">7/31 周五</a>
+      <a href="#day-0801">8/1 周六</a>
+      <a href="#day-0802">8/2 周日</a>
+      <a href="#day-0803">8/3 周一</a>
+      <a href="#day-0804">8/4 周二</a>
+      <a href="#day-0805">8/5 周三</a>
+      <a href="#day-0806">8/6 周四</a>
+      <a href="#day-0807">8/7 周五</a>
+      <a href="#day-0808">8/8 周六</a>
+    </nav>
 
     <section class="days">
       <article class="day" id="day-0729" data-date="2026-07-29" data-time-zone="Europe/Vienna" data-time-zone-label="奥地利当地时间">
