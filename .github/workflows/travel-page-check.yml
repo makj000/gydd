@@ -1,0 +1,33 @@
+name: Travel page check
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "t/2026-austria-czech-7f4c9b2e6a31d8/**"
+      - "scripts/check-travel-page.mjs"
+      - ".github/workflows/travel-page-check.yml"
+  pull_request:
+    paths:
+      - "t/2026-austria-czech-7f4c9b2e6a31d8/**"
+      - "scripts/check-travel-page.mjs"
+      - ".github/workflows/travel-page-check.yml"
+  workflow_dispatch:
+
+jobs:
+  check-travel-page:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate travel page
+        run: node scripts/check-travel-page.mjs
