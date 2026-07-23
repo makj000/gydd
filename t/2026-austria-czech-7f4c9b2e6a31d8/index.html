@@ -499,6 +499,23 @@
       border-bottom-color: var(--line);
     }
 
+    .items li.city-intro {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(52, 91, 132, 0.16);
+      border-radius: 8px;
+      background: #f4f8fb;
+      color: #27445b;
+      font-size: 14px;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    .items li.city-intro::after {
+      display: none;
+    }
+
     .items li > span:first-child {
       grid-column: 1;
     }
@@ -566,6 +583,32 @@
       border-color: rgba(176, 63, 45, 0.4);
       background: #fff0ea;
       color: #b03f2d;
+    }
+
+    .items li.transport-booking,
+    .items li.critical-booking {
+      padding: 10px;
+      border: 1px solid rgba(155, 61, 48, 0.36);
+      border-left: 6px solid var(--red);
+      border-radius: 8px;
+      background: #fff0ea;
+      box-shadow: 0 1px 0 rgba(155, 61, 48, 0.08);
+    }
+
+    .items li.transport-booking .time,
+    .items li.transport-booking .price-cell,
+    .items li.transport-booking a,
+    .items li.critical-booking .time,
+    .items li.critical-booking .price-cell,
+    .items li.critical-booking a {
+      color: var(--red);
+    }
+
+    .items li.needs-action.urgent-booking.transport-booking::after,
+    .items li.needs-action.critical-booking::after {
+      border-color: rgba(155, 61, 48, 0.56);
+      background: var(--red);
+      color: #fff;
     }
 
     .items li.no-booking::after {
@@ -1324,10 +1367,23 @@
       stroke-linejoin: round;
     }
 
+    .theme-map-branch {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 8 8;
+    }
+
     .theme-map-point {
       fill: var(--red);
       stroke: #fff;
       stroke-width: 4;
+    }
+
+    .theme-map-point.optional {
+      fill: var(--blue);
     }
 
     .theme-map text {
@@ -1721,6 +1777,24 @@
       border-color: rgba(166, 108, 25, 0.32);
       background: #fff7e6;
       color: var(--gold);
+    }
+
+    .overview-tag.transport-booking,
+    .overview-tag.critical-booking {
+      border-color: rgba(155, 61, 48, 0.42);
+      background: #fff0ea;
+      color: var(--red);
+    }
+
+    .checklist li.transport-booking,
+    .checklist li.critical-booking {
+      padding: 8px 10px;
+      border: 1px solid rgba(155, 61, 48, 0.32);
+      border-left: 5px solid var(--red);
+      border-radius: 8px;
+      background: #fff0ea;
+      color: var(--red);
+      font-weight: 900;
     }
 
     a.overview-tag {
@@ -2175,14 +2249,14 @@
       </thead>
       <tbody>
         <tr><td>7/29</td><td>飞往萨尔茨堡</td><td>萨尔茨堡大教堂⛪、自由简餐</td><td><div class="hotel-stay"><strong>harry's home Salzburg</strong><span>Fanny-von-Lehnert-Straße 6, Salzburg, Land Salzburg, 5020, Österreich</span><span>电话：0043-5012142190</span></div></td><td><div class="overview-tags"><span class="overview-tag">萨尔茨堡大教堂⛪可短停</span><span class="overview-tag no-booking">晚餐不固定订位</span><span class="overview-tag">西门子节日之夜免费</span><a class="overview-tag action" href="#day-0729">提前到场占位置</a></div></td><td><a href="#day-0729">查看</a></td></tr>
-        <tr><td>7/30</td><td>萨尔茨堡老城、多普勒、莫扎特</td><td>海尔布伦、Zwettler's Wirtshaus</td><td><div class="hotel-stay"><strong>harry's home Salzburg</strong><span>Fanny-von-Lehnert-Straße 6, Salzburg, Land Salzburg, 5020, Österreich</span><span>电话：0043-5012142190</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0730">海尔布伦戏水宫可提前买通用票</a><span class="overview-tag no-booking">多普勒纪念牌不需预订</span><a class="overview-tag booked" href="#signup-zwettlers">Zwettler's 18:00 已订</a></div></td><td><a href="#day-0730">查看</a></td></tr>
-        <tr><td>7/31</td><td>萨尔茨堡</td><td>林茨</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0731">!!! 火车票全员提前订</a></div></td><td><a href="#day-0731">查看</a></td></tr>
-        <tr><td>8/1</td><td>电子艺术中心和深空展厅</td><td>匹斯特林山⛰️、圣玛丽大教堂</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0801">电子艺术中心可提前买票</a><span class="overview-tag">匹斯特林山⛰️交通票可现场处理</span></div></td><td><a href="#day-0801">查看</a></td></tr>
-        <tr><td>8/2</td><td>林茨到布杰约维采</td><td>布杰约维采</td><td><div class="hotel-stay"><strong>Residence Mariánská</strong><span>1 Pražská třída, České Budějovice, 370 04, Czech Republic</span><span>电话：+420 720 829 866</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0802">!!! 火车/巴士票全员提前订</a><span class="overview-tag no-booking">晚上广场⛲散步不需预订</span></div></td><td><a href="#day-0802">查看</a></td></tr>
+        <tr><td>7/30</td><td>萨尔茨堡老城、多普勒、莫扎特</td><td>海尔布伦、Zwettler's Wirtshaus</td><td><div class="hotel-stay"><strong>harry's home Salzburg</strong><span>Fanny-von-Lehnert-Straße 6, Salzburg, Land Salzburg, 5020, Österreich</span><span>电话：0043-5012142190</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0730">海尔布伦戏水宫提前一天买票</a><span class="overview-tag no-booking">多普勒纪念牌不需预订</span><a class="overview-tag booked" href="#signup-zwettlers">Zwettler's 18:00 已订</a></div></td><td><a href="#day-0730">查看</a></td></tr>
+        <tr><td>7/31</td><td>萨尔茨堡</td><td>林茨</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><a class="overview-tag action transport-booking" href="#day-0731">!!! 火车票全员提前订</a></div></td><td><a href="#day-0731">查看</a></td></tr>
+        <tr><td>8/1</td><td>电子艺术中心和深空展厅</td><td>匹斯特林山⛰️、圣玛丽大教堂</td><td><div class="hotel-stay"><strong>Courtyard by Marriott Linz</strong><span>Europaplatz 2, Linz, Oberösterreich, 4020, Österreich</span><span>电话：0043-73269590</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0801">电子艺术中心提前一天中午买票</a><span class="overview-tag">匹斯特林山⛰️交通票可现场处理</span></div></td><td><a href="#day-0801">查看</a></td></tr>
+        <tr><td>8/2</td><td>林茨到布杰约维采</td><td>布杰约维采</td><td><div class="hotel-stay"><strong>Residence Mariánská</strong><span>1 Pražská třída, České Budějovice, 370 04, Czech Republic</span><span>电话：+420 720 829 866</span></div></td><td><div class="overview-tags"><a class="overview-tag action transport-booking" href="#day-0802">!!! 火车/巴士票全员提前订</a><span class="overview-tag no-booking">晚上广场⛲散步不需预订</span></div></td><td><a href="#day-0802">查看</a></td></tr>
         <tr><td>8/3</td><td>布杰约维采老城</td><td>百威酿酒厂</td><td><div class="hotel-stay"><strong>Residence Mariánská</strong><span>1 Pražská třída, České Budějovice, 370 04, Czech Republic</span><span>电话：+420 720 829 866</span></div></td><td><div class="overview-tags"><a class="overview-tag booked" href="#signup-0803">百威酿酒厂邮件已确认：15:00 开始，14:40 到达</a><span class="overview-tag no-booking">上午老城公共区域不需预订</span></div></td><td><a href="#day-0803">查看</a></td></tr>
-        <tr><td>8/4</td><td>布杰约维采</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0804">!!! 火车/巴士票全员提前订</a><a class="overview-tag action" href="#signup-stoleti">三世纪餐厅🍽️可订桌</a></div></td><td><a href="#day-0804">查看</a></td></tr>
+        <tr><td>8/4</td><td>布杰约维采</td><td>布拉格</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action transport-booking" href="#day-0804">!!! 火车/巴士票全员提前订</a><a class="overview-tag action" href="#signup-stoleti">三世纪餐厅🍽️可订桌</a></div></td><td><a href="#day-0804">查看</a></td></tr>
         <tr><td>8/5</td><td>布拉格轻松日</td><td>伏尔塔瓦河🌊游船、高堡</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#day-0805">下午游船可提前买票</a><span class="overview-tag no-booking">傍晚高堡公共区不需预订</span></div></td><td><a href="#day-0805">查看</a></td></tr>
-        <tr><td>8/6</td><td>布拉格城堡🏰区</td><td>小城、Café Louvre</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action" href="#signup-0806">布拉格城堡🏰主线路门票</a><a class="overview-tag action" href="#signup-bohemia">晚餐可订桌</a></div></td><td><a href="#day-0806">查看</a></td></tr>
+        <tr><td>8/6</td><td>布拉格城堡🏰区</td><td>小城、Café Louvre</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag action critical-booking" href="#signup-0806">布拉格城堡🏰主线路门票</a><a class="overview-tag action" href="#signup-bohemia">晚餐可订桌</a></div></td><td><a href="#day-0806">查看</a></td></tr>
         <tr><td>8/7</td><td>卡夫卡头像、老城、查理大桥🌉、康帕岛</td><td>多普勒和开普勒选走，高堡或佩特任山⛰️备选</td><td><div class="hotel-stay"><strong>The Julius Prague</strong><span>Senovážné nám.3, Prague 1, Prague, 110 00, Czech Republic</span><span>电话：00420-233111222</span></div></td><td><div class="overview-tags"><a class="overview-tag no-booking" href="#science-walk-section">短版主题步行不需预订</a><a class="overview-tag action" href="#day-0807">告别晚餐待定</a></div></td><td><a href="#day-0807">查看</a></td></tr>
         <tr><td>8/8</td><td>布拉格</td><td>返程航班</td><td>交通中</td><td><div class="overview-tags"><span class="overview-tag">机场🛫交通</span><span class="overview-tag">航班值机</span></div></td><td><a href="#day-0808">查看</a></td></tr>
       </tbody>
@@ -2203,9 +2277,10 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li data-price="交通另计"><span class="time">13:55</span><span>抵达萨尔茨堡；这天第一段不是从酒店🏨出发。交通建议：有行李和孩子时优先<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Airport%2C%20Salzburg%2C%20Austria&destination=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&travelmode=driving" target="_blank" rel="noreferrer">打车🚕到 harry's home Salzburg，大致向东北↗约 15 到 25 分钟</a>；如果行李少，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Airport%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">坐 2 路公交🚌大致向东北↗到 Salzburg Hauptbahnhof</a>，再<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&destination=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">向东或东南↘步行👣约 3 到 6 分钟到酒店🏨</a>。建议入住和整理 60 分钟。</span></li>
+          <li class="city-intro"><span>城市介绍：萨尔茨堡是这次行程的第一站，老城紧凑、步行友好，音乐节气氛和莫扎特相关地点是主线。这里先按抵达后的体力安排，重点是不赶路、熟悉老城和酒店周边。</span></li>
+          <li data-price="交通另计"><span class="time">13:55</span><span>抵达萨尔茨堡；这天第一段不是从酒店🏨出发。交通建议：有行李和孩子时优先<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Airport%2C%20Salzburg%2C%20Austria&destination=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&travelmode=driving" target="_blank" rel="noreferrer">打车🚕到 harry's home Salzburg，大致向东北↗约 15 到 25 分钟</a>；如果行李少，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Airport%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">坐 2 路公交🚌大致向东北↗到 Salzburg Hauptbahnhof</a>，再<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&destination=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">向东或东南↘步行👣约 3 到 6 分钟到酒店🏨</a>。入住时跟前台要 Salzburg Guest Mobility Ticket，住宿期间可用于萨尔茨堡州公共交通；如果酒店可提前发 PDF 或手机钱包票，也可问前台补发。建议入住和整理 60 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">15:30</span><span>休息、洗漱；如果体力可以，再短走老城。harry's home Salzburg 到老城核心区<a href="https://www.google.com/maps/dir/?api=1&origin=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">大致向西南↙步行👣约 20 到 30 分钟</a>，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从酒店🏨门口或火车🚆站附近坐公交🚌大致向西南↙约 10 到 15 分钟进城</a>；建议停留 60 到 90 分钟；公共区域不需预订。</span></li>
-          <li data-price="入内成人 €7；14-18 岁 €3.50；13 岁及以下免费" data-link="https://www.salzburg.info/en/travel-info/infos/salzburg-cathedral_az_9900" data-link-label="官网"><span class="time">16:45</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Cathedral%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从老城核心大致向东南↘步行👣到萨尔茨堡大教堂⛪约 5 到 15 分钟</a>。内部可以参观，官网 3-7 月周一到周六通常开到 18:00，成人维护费 €7，14-18 岁 €3.50，13 岁及以下免费；遇弥撒、午间音乐会或节日排练可能调整。值不值得：如果当天体力可以，内部巴洛克空间和莫扎特受洗背景值得看 15 到 25 分钟；不想入内的人可在主教座堂广场、王宫广场或卡比特尔广场⛲等。</span></li>
+          <li data-price="入内成人 €7；14-18 岁 €3.50；13 岁及以下免费" data-link="https://www.salzburg.info/en/travel-info/infos/salzburg-cathedral_az_9900" data-link-label="官网"><span class="time">16:45</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Cathedral%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从老城核心大致向东南↘步行👣到萨尔茨堡大教堂⛪约 5 到 15 分钟</a>。内部可以参观，官网 3-7 月周一到周六通常开到 18:00，成人维护费 €7，14-18 岁 €3.50，13 岁及以下免费；普通参观不需预约具体时段，按开放时间现场入内；遇弥撒、午间音乐会或节日排练可能调整。值不值得：如果当天体力可以，内部巴洛克空间和莫扎特受洗背景值得看 15 到 25 分钟；不想入内的人可在主教座堂广场、王宫广场或卡比特尔广场⛲等。</span></li>
           <li class="no-booking" data-price="约 €15-30/人"><span class="time">17:30</span><span>放映前自由简餐或外带，避免第一天抵达后赶正式饭局；可以在老城核心区就近解决，建议 18:45 到 19:00 左右离开去占位置。老城公共区域和自由简餐不需预订。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">19:00</span><span>从老城简餐地点<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&destination=Kapitelplatz%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">大致向东南↘步行👣到卡比特尔广场⛲约 5 到 15 分钟</a>，提前到场占位置，建议预留 60 分钟；免费户外区域不需预订。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">20:00</span><span><strong>西门子节日之夜：</strong>莫扎特《女人心》，免费入场不需预订，建议停留 135 分钟。注：第二晚 7/30同一地点还有普契尼《三联剧》，如果第一晚体力一般，可以把这晚当作轻量体验，第二晚再完整观看。</span></li>
@@ -2240,7 +2315,7 @@
               <div class="family-grid" data-family-grid></div>
             </section>
           </li>
-          <li class="needs-action" data-price="成人 €16.50；儿童 €6.50" data-link="https://www.hellbrunn.at/en/info/opening-hours-prices-arrival"><span class="time">14:15</span><span>海尔布伦戏水宫和水机关，按最稳节奏安排 14:15 到 16:20，天气热时下午玩水更舒服；官网 7/8 月开放 9:30-19:00，最后入场 18:00。2026 票价为成人 €16.50，儿童/学生 4-18 岁 €6.50。预订建议：可提前买通用门票，7/30下午使用；这不是预约固定入场或固定导览时段，主要是减少现场售票排队。</span>
+          <li class="needs-action" data-price="成人 €16.50；儿童 €6.50" data-link="https://www.hellbrunn.at/en/info/opening-hours-prices-arrival"><span class="time">14:15</span><span>海尔布伦戏水宫和水机关，按最稳节奏安排 14:15 到 16:20，天气热时下午玩水更舒服；官网 7/8 月开放 9:30-19:00，最后入场 18:00。2026 票价为成人 €16.50，儿童/学生 4-18 岁 €6.50。预订建议：提前一天在 7/29下午抵达萨尔茨堡、安顿后买通用门票，7/30下午使用；这不是预约固定入场或固定导览时段，主要是减少现场售票排队。</span>
             <section class="signup-panel day-signup" id="signup-0730" data-signup-item="hellbrunn" data-signup-date="7/30" aria-label="7/30报名与购票统计">
               <div class="signup-actions">
                 <p class="version-note"><strong>海尔布伦戏水宫</strong> 每家选成人 0-2、小孩 0-1。</p>
@@ -2266,7 +2341,7 @@
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">22:50</span><span>放映结束，<a href="https://www.google.com/maps/dir/?api=1&origin=Kapitelplatz%2C%20Salzburg%2C%20Austria&destination=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从卡比特尔广场⛲大致向北↑回 harry's home Salzburg，步行👣约 25 到 35 分钟</a>；孩子累时优先<a href="https://www.google.com/maps/dir/?api=1&origin=Kapitelplatz%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&travelmode=driving" target="_blank" rel="noreferrer">打车🚕或公交🚌大致向北↑回火车🚆站附近</a>。公共区域不需预订。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
+          <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前一天买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
           <figure class="place-card"><img src="photos/salzburg.jpg" alt="多普勒出生地纪念牌"><span>多普勒出生地纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Makartplatz 1</small></span></figure>
           <figure class="place-card"><img src="photos/salzburg.jpg" alt="莫扎特出生地"><span>莫扎特出生地 <em class="booking-tag">入内可买票</em><small class="ticket-note">门票：外观免费；入内成人 €15；儿童/优惠 €4.50</small></span></figure>
           <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡🏰"><span>霍亨萨尔茨堡城堡🏰 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票：Basic 成人 €15.50；儿童 €6.30；All-inclusive 成人 €19.20；儿童 €7.30</small></span></figure>
@@ -2285,9 +2360,10 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
+          <li class="city-intro"><span>城市介绍：林茨是萨尔茨堡和南波希米亚之间的中途城市，节奏比两端更轻，适合用电子艺术中心、中央广场、大教堂和登山火车组成一个恢复型城市日。酒店靠近火车站和市中心交通，行李处理相对简单。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">上午</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&destination=Mirabellgarten%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟</a>；慢节奏恢复上午：米拉贝尔花园🌷、粮食胡同、莫扎特出生地外观或咖啡，<a href="https://www.google.com/maps/dir/?api=1&origin=Mirabellgarten%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">各点步行👣大致向南↓或西南↙约 5 到 20 分钟</a>，建议停留 2 小时；米拉贝尔花园🌷免费入场，不用预约，粮食胡同和外观散步也不用预约。</span></li>
           <li data-price="约 €25-40/人" data-link="https://www.sternbrau.at/food-drink/?lang=en" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Sternbräu 午餐：Griesgasse 23, 5020 Salzburg；电话 +43 662 84 21 40；<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Altstadt%2C%20Salzburg%2C%20Austria&destination=Sternbr%C3%A4u%2C%20Griesgasse%2023%2C%205020%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从老城核心大致向西←步行👣约 5 到 15 分钟</a>，餐费标准约 €25-40/人，建议用餐 60 分钟；午餐后<a href="https://www.google.com/maps/dir/?api=1&origin=Sternbr%C3%A4u%2C%20Griesgasse%2023%2C%205020%20Salzburg%2C%20Austria&destination=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从老城大致向北↑步行👣或坐公交🚌回 Salzburg Hauptbahnhof 约 15 到 25 分钟</a>。若退房后不想带箱子，优先把行李留酒店🏨；临时改线时 Salzburg Hauptbahnhof 有多功能储物柜，<a href="https://www.google.com/maps/dir/?api=1&origin=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣约 3 到 6 分钟</a>，不需预订，按柜子空位现场使用。</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计" data-link="https://www.oebb.at/en/reiseplanung-services/oebb-zugverbindungen/zugverbindungen-oesterreich/weststrecke/salzburg-linz" data-link-label="购票"><span class="time">下午</span><span>!!! 全员参加，不用统计人数；需要提前订萨尔茨堡到林茨火车票，官方购票链接见本行“购票”。<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&destination=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从 Salzburg Hauptbahnhof 坐火车🚆大致向东北↗前往林茨并入住 Courtyard by Marriott Linz，萨尔茨堡到林茨火车🚆约 1.5 小时</a>；<a href="https://www.google.com/maps/dir/?api=1&origin=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&destination=Europaplatz%202%2C%204020%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">林茨火车🚆站到 Europaplatz 酒店🏨大致向东北↗步行👣或短程出租车🚕约 10 到 15 分钟</a>，入住整理约 45 分钟。</span></li>
+          <li class="needs-action urgent-booking transport-booking" data-price="交通另计" data-link="https://www.oebb.at/en/reiseplanung-services/oebb-zugverbindungen/zugverbindungen-oesterreich/weststrecke/salzburg-linz" data-link-label="购票"><span class="time">下午</span><span>!!! 全员参加，不用统计人数；需要提前订萨尔茨堡到林茨火车票，官方购票链接见本行“购票”。<a href="https://www.google.com/maps/dir/?api=1&origin=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&destination=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从 Salzburg Hauptbahnhof 坐火车🚆大致向东北↗前往林茨并入住 Courtyard by Marriott Linz，萨尔茨堡到林茨火车🚆约 1.5 小时</a>；<a href="https://www.google.com/maps/dir/?api=1&origin=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&destination=Europaplatz%202%2C%204020%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">林茨火车🚆站到 Europaplatz 酒店🏨大致向东北↗步行👣或短程出租车🚕约 10 到 15 分钟</a>，入住整理约 45 分钟。</span></li>
           <li data-price="约 €25-45/人" data-link="https://www.klosterhof.at/kontakt-service/kontakt/" data-link-label="官网"><span class="time">晚上</span><span>推荐 Stiegl-Klosterhof 晚餐：Landstraße 30, 4020 Linz；电话 +43 732 773373；<a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西←步行👣约 20 到 30 分钟</a>，或<a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">电车/出租车🚕约 10 到 15 分钟</a>；餐费标准约 €25-45/人，建议用餐 60 到 90 分钟；固定时间建议订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
@@ -2307,7 +2383,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action" data-price="成人 €14；优惠 €12；儿童约 €5.50" data-link="https://ars.electronica.art/center/en/tickets/" data-link-label="购票"><span class="time">10:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Ars%20Electronica%20Center%2C%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西北↖坐电车或短程出租车🚕到电子艺术中心和深空展厅约 15 到 25 分钟</a>；电子艺术中心周二到周日 10:00-17:00 开放，建议 10:00-12:30 参观。深空展厅是重点：深空家庭场次通常 11:30、12:30、15:30，不需提前登记；若想参加英文亮点导览，官网节目表列 13:30-14:30，需要到售票处登记，和午餐/登山火车可能冲突。门票成人 €14，优惠 €12，儿童约 €5.50；可提前买票，先用下方报名统计确认人数。</span>
+          <li class="needs-action" data-price="成人 €14；优惠 €12；儿童约 €5.50" data-link="https://ars.electronica.art/center/en/tickets/" data-link-label="购票"><span class="time">10:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Ars%20Electronica%20Center%2C%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西北↖坐电车或短程出租车🚕到电子艺术中心和深空展厅约 15 到 25 分钟</a>；电子艺术中心周二到周日 10:00-17:00 开放，建议 10:00-12:30 参观。深空展厅是重点：深空家庭场次通常 11:30、12:30、15:30，不需提前登记；若想参加英文亮点导览，官网节目表列 13:30-14:30，需要到售票处登记，和午餐/登山火车可能冲突。门票成人 €14，优惠 €12，儿童约 €5.50；普通线上门票不是固定时段票，建议 7/31中午提前一天购买，先用下方报名统计确认人数。</span>
             <section class="signup-panel day-signup" id="signup-0801" data-signup-item="ars" data-signup-date="8/1" aria-label="8/1报名与购票统计">
               <div class="signup-actions">
                 <p class="version-note"><strong>电子艺术中心和深空展厅</strong> 每家选成人 0-2、小孩 0-1。</p>
@@ -2318,13 +2394,16 @@
             </section>
           </li>
           <li data-price="约 €20-35/人" data-link="https://www.qube-linz.at/" data-link-label="官网"><span class="time">12:45</span><span>推荐电子艺术中心楼上的 Qube 午餐，或<a href="https://www.google.com/maps/dir/?api=1&origin=Ars%20Electronica%20Center%2C%20Linz%2C%20Austria&destination=Hauptplatz%2C%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从电子艺术中心大致向南↓过桥🌉到中央广场⛲周边用餐，步行👣约 10 到 20 分钟</a>；Qube 在电子艺术中心三、四层，适合不折返，餐费估计约 €20-35/人；若要靠窗或大桌，建议提前确认营业和订位。</span></li>
+          <li class="needs-action" data-price="门票现场复核" data-link="https://www.lentos.at/en/" data-link-label="官网"><span class="time">备选</span><span><strong>Lentos 美术馆备选：</strong>如果大人想补现代/当代美术，或天气不适合上匹斯特林山⛰️，可把 Lentos 加在电子艺术中心之后。<a href="https://www.google.com/maps/dir/?api=1&origin=Ars%20Electronica%20Center%2C%20Linz%2C%20Austria&destination=Lentos%20Kunstmuseum%20Linz%2C%20Ernst-Koref-Promenade%201%2C%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从电子艺术中心大致向南↓过桥🌉步行👣到 Lentos 约 10 到 15 分钟</a>，离中央广场⛲也近。重点看 Klimt、Schiele、Kokoschka、Expressionism、VALIE EXPORT 等现代艺术线索；建议 45 到 75 分钟。若孩子已经在电子艺术中心玩累，这项直接跳过。</span></li>
+          <li class="needs-action" data-price="彩窗/教堂体验成人 €9.50、儿童 €5.50；天梯成人 €19、儿童 €10" data-link="https://www.dioezese-linz.at/mariendom/erleben/fenster-ins-land" data-link-label="导览"><span class="time">导览备选</span><span>林茨圣玛丽大教堂⛪8/1公开导览备选：13:00-14:00“彩窗导览”，成人 €9.50、儿童 €5.50；15:00-16:00“教堂体验”，成人 €9.50、儿童 €5.50；16:00-17:30“天梯 633 级”，成人 €19、儿童 €10，6 岁以下不适合。公开排期没有查到中文或英文团，页面标注为德语；如果要英文，只能提前联系 DomCenter 问能否安排个别导览。若选 13:00，午餐要提前或压缩；若选 15:00，匹斯特林山⛰️要压缩或取消；若选 16:00，普通 16:30 入内短停改为导览。</span></li>
           <li data-price="成人 €9.00；儿童/优惠 €4.50"><span class="time">14:15</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Hauptplatz%2C%20Linz%2C%20Austria&destination=P%C3%B6stlingberg%2C%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从中央广场⛲或接驳点坐匹斯特林山⛰️登山⛰️火车🚆大致向北↑上山⛰️看城市景观，从市中心上山⛰️约 30 到 40 分钟</a>；山⛰️上建议停留 60 到 75 分钟，往返票成人 €9.00，儿童/优惠 €4.50。若电子艺术中心玩得久，这一项可压缩或取消。</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.dioezese-linz.at/mariendom" data-link-label="官网"><span class="time">16:30</span><span>回到市中心后，<a href="https://www.google.com/maps/dir/?api=1&origin=Hauptplatz%2C%20Linz%2C%20Austria&destination=Neuer%20Dom%20%28Mariendom%29%2C%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从中央广场⛲大致向南↓到林茨圣玛丽大教堂⛪，步行👣约 10 到 15 分钟</a>；8/1是周六，官网写周一到周六 8:00-19:00，所以普通参观最晚按 19:00 结束；弥撒和活动期间不能作为游客参观。普通入内通常不需预订，现场捐赠另计。若孩子累，这一项只看外观。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.dioezese-linz.at/mariendom" data-link-label="官网"><span class="time">16:30</span><span>回到市中心后，<a href="https://www.google.com/maps/dir/?api=1&origin=Hauptplatz%2C%20Linz%2C%20Austria&destination=Neuer%20Dom%20%28Mariendom%29%2C%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从中央广场⛲大致向南↓到林茨圣玛丽大教堂⛪，步行👣约 10 到 15 分钟</a>；8/1是周六，官网写周一到周六 8:00-19:00，所以普通参观最晚按 19:00 结束；弥撒和活动期间不能作为游客参观。普通入内不需预约具体时段，现场捐赠另计；导览和登塔另按 DomCenter 时间表报名。若孩子累，这一项只看外观。</span></li>
           <li data-price="约 €25-45/人" data-link="https://www.klosterhof.at/kontakt-service/kontakt/" data-link-label="官网"><span class="time">晚餐</span><span>推荐 Stiegl-Klosterhof 晚餐：Landstraße 30, 4020 Linz；<a href="https://www.google.com/maps/dir/?api=1&origin=Neuer%20Dom%20%28Mariendom%29%2C%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从圣玛丽大教堂⛪大致向北↑步行👣约 8 到 15 分钟</a>，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Neuer%20Dom%20%28Mariendom%29%2C%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">坐电车或短程出租车🚕约 10 分钟</a>；餐费标准约 €25-45/人，建议用餐 60 到 90 分钟；固定时间建议订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山⛰️登山⛰️火车🚆"><span>匹斯特林山⛰️登山⛰️火车🚆 <small class="ticket-note">门票：往返成人 €9.00；儿童/优惠 €4.50</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="电子艺术中心和深空展厅"><span>电子艺术中心和深空展厅 <em class="booking-tag">可提前买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="电子艺术中心和深空展厅"><span>电子艺术中心和深空展厅 <em class="booking-tag">提前一天中午买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="Lentos 美术馆"><span>Lentos 美术馆 <em class="booking-tag">备选</em><small class="ticket-note">现代/当代美术；离电子艺术中心和中央广场都近；门票现场复核</small></span></figure>
           <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂⛪"><span>林茨圣玛丽大教堂⛪ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；现场捐赠另计</small></span></figure>
         </div>
@@ -2339,7 +2418,8 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计；快餐约 €8-15/人" data-link="https://www.oebb.at/en/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订林茨到布杰约维采火车/巴士票，先用 ÖBB 官方购票链接查询跨境段。<a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西南↙步行👣或短程出租车🚕到 Linz Hauptbahnhof 约 10 到 20 分钟</a>；退房后<a href="https://www.google.com/maps/dir/?api=1&origin=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&destination=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐火车🚆或长途巴士大致向北↑或东北↗前往布杰约维采，建议选择换乘少、总时长约 3 到 4 小时的城际交通</a>。若想先吃再走，Linz Hauptbahnhof 有 ÖBB 储物柜，不需预订，现场按空位使用；小/中/大/加大柜约 €2、€2.50、€3.50、€4.50，通常按 24 小时计费。</span></li>
+          <li class="city-intro"><span>城市介绍：布杰约维采是南波希米亚的停靠点，核心体验是大广场、黑塔、河边老城和百威酿酒厂。这里不适合塞太多跨城项目，最好把节奏放慢，给换乘、入住和孩子休息留余量。</span></li>
+          <li class="needs-action urgent-booking transport-booking" data-price="交通另计；快餐约 €8-15/人" data-link="https://www.oebb.at/en/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订林茨到布杰约维采火车/巴士票，先用 ÖBB 官方购票链接查询跨境段。<a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西南↙步行👣或短程出租车🚕到 Linz Hauptbahnhof 约 10 到 20 分钟</a>；退房后<a href="https://www.google.com/maps/dir/?api=1&origin=Linz%20Hauptbahnhof%2C%20Linz%2C%20Austria&destination=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐火车🚆或长途巴士大致向北↑或东北↗前往布杰约维采，建议选择换乘少、总时长约 3 到 4 小时的城际交通</a>。若想先吃再走，Linz Hauptbahnhof 有 ÖBB 储物柜，不需预订，现场按空位使用；小/中/大/加大柜约 €2、€2.50、€3.50、€4.50，通常按 24 小时计费。</span></li>
           <li data-price="约 €8-15/人" data-link="https://www.leberkaspepi.at/" data-link-label="官网"><span class="time">午餐</span><span>推荐在 Linz Hauptbahnhof 站内解决：BahnhofCity Linz 地下层 Leberkas Pepi，地址 Bahnhofplatz 1, 4020 Linz；电话 +43 732 796 868-30；就在车站里，不用额外走路，适合登车前快速吃完；快餐约 €8-15/人，不需预订。</span></li>
           <li data-price="交通另计"><span class="time">下午</span><span>抵达布杰约维采后，<a href="https://www.google.com/maps/dir/?api=1&origin=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从车站大致向西北↖到 Residence Mariánská，步行👣或短程车约 10 到 20 分钟</a>；入住和整理建议 45 到 60 分钟。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://www.masne-kramy.cz/cs/menujidelni-listek/" data-link-label="菜单"><span class="time">晚上</span><span>推荐 Masné krámy 晚餐：Krajinská 13, 370 01 České Budějovice；电话 +420 387 201 301；<a href="https://www.google.com/maps/dir/?api=1&origin=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Masn%C3%A9%20kr%C3%A1my%2C%20Krajinsk%C3%A1%2013%2C%20370%2001%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从公寓大致向西南↙步行👣到餐厅🍽️约 5 到 15 分钟</a>，餐费标准约 350-650 克朗/人，建议用餐 60 到 90 分钟；公共广场⛲不需预订，但餐厅固定时间建议订桌。</span></li>
@@ -2360,8 +2440,9 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="广场⛲成人/儿童免费；黑塔🗼成人约 80 克朗、儿童约 40 克朗" data-link="https://www.budejce.cz/en/activities/2-black-tower"><span class="time">09:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从公寓大致向西南↙步行👣到普瑞米斯欧塔卡拉二世广场⛲约 5 到 15 分钟</a>；上午只安排布杰约维采老城，不跨城。广场⛲、参孙喷泉⛲、市政厅外观和黑塔🗼都在同一区域，公共区域不需预订；黑塔🗼登塔🗼参考价成人约 80 克朗、儿童约 40 克朗，出发前复核。建议停留 90 到 120 分钟，保留下午百威酿酒厂前的体力。</span></li>
-          <li class="no-booking" data-price="外观成人/儿童免费；入内现场复核"><span class="time">10:45</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Katedr%C3%A1la%20svat%C3%A9ho%20Mikul%C3%A1%C5%A1e%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从广场⛲大致向东南↘步行👣到布杰约维采圣尼古拉主教座堂⛪约 3 到 8 分钟</a>。这不是重项目，建议 10 到 20 分钟看外观或短入内；如果不是全体都想参观，其他人可以留在参孙喷泉⛲、市政厅外观、黑塔🗼周边拍照或买饮料，不影响集合。</span></li>
+          <li class="no-booking" data-price="外观成人/儿童免费；入内现场复核"><span class="time">10:45</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Katedr%C3%A1la%20svat%C3%A9ho%20Mikul%C3%A1%C5%A1e%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从广场⛲大致向东南↘步行👣到布杰约维采圣尼古拉主教座堂⛪约 3 到 8 分钟</a>。这不是重项目，普通参观不需预约具体时段，建议 10 到 20 分钟看外观或短入内；如果不是全体都想参观，其他人可以留在参孙喷泉⛲、市政厅外观、黑塔🗼周边拍照或买饮料，不影响集合。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">11:15</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Katedr%C3%A1la%20svat%C3%A9ho%20Mikul%C3%A1%C5%A1e%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Piaristick%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从圣尼古拉主教座堂⛪大致向西北↖步行👣到皮亚里斯特广场和盐仓外观约 5 到 10 分钟</a>；这是适合孩子的短散步，河边和修道院外观可看 30 到 45 分钟，不需预订。若天气热或孩子累，直接跳到午餐。</span></li>
+          <li class="needs-action" data-price="门票现场复核" data-link="https://www.budejce.cz/en/activities/13-south-bohemian-museum-in-ceske-budejovice" data-link-label="介绍"><span class="time">备选</span><span><strong>南波希米亚博物馆备选：</strong>如果上午下雨、太热，或大家想补一点地方历史，可以从老城核心<a href="https://www.google.com/maps/dir/?api=1&origin=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=South%20Bohemian%20Museum%20in%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Dukelsk%C3%A1%20242%2F1%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">大致向东南↘步行👣约 10 到 15 分钟到南波希米亚博物馆</a>。内容偏南波希米亚历史、文化、民俗和自然，建议 45 到 75 分钟；不要压缩 14:40 百威酿酒厂到达时间。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://www.masne-kramy.cz/cs/menujidelni-listek/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Masné krámy 午餐：Krajinská 13, 370 01 České Budějovice；<a href="https://www.google.com/maps/dir/?api=1&origin=%C4%8Cern%C3%A1%20v%C4%9B%C5%BE%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Masn%C3%A9%20kr%C3%A1my%2C%20Krajinsk%C3%A1%2013%2C%20370%2001%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从黑塔🗼大致向东北↗步行👣到餐厅🍽️约 5 到 10 分钟</a>，传统捷克菜和百威啤酒更贴合下午酿酒厂，餐费标准约 350-650 克朗/人，建议用餐 60 分钟；大桌建议订位。</span></li>
           <li class="is-booked urgent-booking" data-price="成人 290 克朗；儿童/优惠 220 克朗" data-link="https://budweiserbudvar.com/visit-us/" data-link-label="预约"><span class="time">14:40</span><span><strong>百威酿酒厂导览邮件已确认：8/3 15:00 开始，要求 14:40 到达。</strong>从市中心大致向北↑去百威酿酒厂，建议优先<a href="https://www.google.com/maps/dir/?api=1&origin=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Budweiser%20Budvar%20Brewery%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐公交🚌或短程出租车🚕约 15 到 25 分钟</a>；体力好也可<a href="https://www.google.com/maps/dir/?api=1&origin=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Budweiser%20Budvar%20Brewery%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">步行👣约 25 到 35 分钟</a>。官网写导览约 70-80 分钟，预计 16:20 左右结束；标准票 290 克朗，儿童/学生等优惠票 220 克朗。出发前把确认邮件和最终人数准备好。</span>
             <section class="signup-panel day-signup" id="signup-0803" data-signup-item="budvar" data-signup-date="8/3" aria-label="8/3报名与购票统计">
@@ -2380,6 +2461,7 @@
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场⛲"><span>普瑞米斯欧塔卡拉二世广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/blacktower.jpg" alt="黑塔🗼"><span>黑塔🗼 <small class="ticket-note">门票：成人约 80 克朗；儿童约 40 克朗，现场复核</small></span></figure>
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="布杰约维采圣尼古拉主教座堂⛪"><span>圣尼古拉主教座堂⛪ <em class="booking-tag no-booking">短停</em><small class="ticket-note">外观免费；入内现场复核；建议 10 到 20 分钟</small></span></figure>
+          <figure class="place-card"><img src="photos/budejovice.jpg" alt="南波希米亚博物馆"><span>南波希米亚博物馆 <em class="booking-tag">备选</em><small class="ticket-note">雨天或热天备选；门票现场复核</small></span></figure>
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="百威酿酒厂"><span>百威酿酒厂 <em class="booking-tag">已确认</em><small class="ticket-note">15:00 参观；14:40 到达；成人 290 克朗；儿童/优惠 220 克朗</small></span></figure>
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="市政厅夏季音乐会"><span>市政厅夏季音乐会 <em class="booking-tag">可选</em><small class="ticket-note">20:00；市政厅庭院；音乐会约 290-320 克朗/人，出发前复核</small></span></figure>
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="广场音乐夜"><span>广场音乐夜 <em class="booking-tag no-booking">相邻备选</em><small class="ticket-note">免费；没有 8/3 场次，8/4仍在本城才考虑</small></span></figure>
@@ -2395,8 +2477,10 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action urgent-booking" data-price="交通另计；午餐约 600-1000 克朗/人" data-link="https://www.cd.cz/en/eshop/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票，官方购票链接见本行“购票”。<a href="https://www.google.com/maps/dir/?api=1&origin=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟</a>；退房后<a href="https://www.google.com/maps/dir/?api=1&origin=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Prague%20main%20railway%20station%20%28Praha%20hlavn%C3%AD%20n%C3%A1dra%C5%BE%C3%AD%29%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时</a>。布杰约维采火车站大厅有 15 个自助存包柜，L 和 XL 两种尺寸，只能刷卡，早到或退房后想先吃饭时可现场使用，不需预订；<a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20main%20railway%20station%20%28Praha%20hlavn%C3%AD%20n%C3%A1dra%C5%BE%C3%AD%29%2C%20Prague%2C%20Czech%20Republic&destination=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">到布拉格后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟</a>。</span></li>
+          <li class="city-intro"><span>城市介绍：布拉格是最后一段的主停留城市，景点密度高、步行量也高，所以安排分成轻松日、城堡日和主题步行日。酒店位置适合用步行、电车和短程出租车混合移动，重点是每天只抓一两个主线，避免连续重体力。</span></li>
+          <li class="needs-action urgent-booking transport-booking" data-price="交通另计；午餐约 600-1000 克朗/人" data-link="https://www.cd.cz/en/eshop/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票，官方购票链接见本行“购票”。<a href="https://www.google.com/maps/dir/?api=1&origin=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟</a>；退房后<a href="https://www.google.com/maps/dir/?api=1&origin=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Prague%20main%20railway%20station%20%28Praha%20hlavn%C3%AD%20n%C3%A1dra%C5%BE%C3%AD%29%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时</a>。布杰约维采火车站大厅有 15 个自助存包柜，L 和 XL 两种尺寸，只能刷卡，早到或退房后想先吃饭时可现场使用，不需预订；<a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20main%20railway%20station%20%28Praha%20hlavn%C3%AD%20n%C3%A1dra%C5%BE%C3%AD%29%2C%20Prague%2C%20Czech%20Republic&destination=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">到布拉格后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟</a>。布拉格公共交通建议每人先买 72 小时票，从第一次坐车时开始算；它覆盖不了 8/4到8/8全部时间，后段如果 8/8不用打车去机场🛫，再补 24 小时票或按次买 90 分钟票。</span></li>
           <li data-price="约 600-1000 克朗/人" data-link="https://cafeimperial.cz/en/menu/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Café Imperial 午餐：Na Poříčí 15, Prague 1；电话 +420 246 011 440；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Imperial%2C%20Na%20Po%C5%99%C3%AD%C4%8D%C3%AD%2015%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从 The Julius Prague 大致向东北↗步行👣约 8 到 12 分钟</a>；抵达布拉格入住前后都可安排，餐费标准约 600-1000 克朗/人，建议提前订位。</span></li>
+          <li class="needs-action" data-price="门票现场复核" data-link="https://www.nm.cz/en/visit-us/buildings/museum-complex-of-the-national-museum" data-link-label="官网"><span class="time">备选</span><span><strong>布拉格国家博物馆备选：</strong>如果 8/4抵达后天气差、孩子需要室内项目，或不想直接去桥区，可以从 The Julius Prague <a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=National%20Museum%2C%20V%C3%A1clavsk%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2068%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">大致向南↓步行👣约 10 到 15 分钟到国家博物馆</a>；它也离 Praha hlavní nádraží 很近。建议 60 到 90 分钟，作为抵达日或 8/5上午的室内备选，不要和城堡🏰日叠加。</span></li>
           <li class="no-booking" data-price="桥🌉面成人/儿童免费；老城桥🌉塔🗼成人 250 克朗、儿童 170 克朗" data-link="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店🏨，整理约 45 分钟；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Old%20Town%20Bridge%20Tower%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣或坐电车到老城桥🌉塔🗼约 15 到 25 分钟</a>，查理大桥🌉和小城附近建议停留 2 小时；桥🌉面和外观散步不需预订，老城桥🌉塔🗼登塔🗼成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="约 550-850 克朗/人" data-link="https://stoleti.cz/en/menu.php" data-link-label="菜单"><span class="time">晚餐</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Mal%C3%A1%20Strana%2C%20Prague%2C%20Czech%20Republic&destination=Stolet%C3%AD%2C%20Karol%C3%ADny%20Sv%C4%9Btl%C3%A9%2021/320%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从小城大致向东→步行👣到 Století（三世纪餐厅🍽️）或晚餐地点约 5 到 15 分钟</a>；地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span>
             <section class="signup-panel day-signup" id="signup-stoleti" data-signup-item="stoleti" aria-label="Století 晚餐人数统计">
@@ -2411,6 +2495,7 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-the-julius-prague.jpg" alt="The Julius Prague 外观"><span>The Julius Prague <small class="ticket-note">住宿：8/4到8/8</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="布拉格国家博物馆"><span>布拉格国家博物馆 <em class="booking-tag">备选</em><small class="ticket-note">抵达日或雨天室内备选；门票现场复核</small></span></figure>
           <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥🌉塔🗼"><span>老城桥🌉塔🗼 <small class="ticket-note">门票：成人 250 克朗；儿童/优惠 170 克朗；外观免费</small></span></figure>
           <figure class="place-card"><img src="photos/prague.jpg" alt="查理大桥🌉"><span>查理大桥🌉 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/prague.jpg" alt="圣尼古拉教堂⛪附近"><span>圣尼古拉教堂⛪附近 <small class="ticket-note">门票：外观免费；入内成人 150 克朗，儿童/学生 10-26 岁 90 克朗，10 岁以下免费</small></span></figure>
@@ -2458,7 +2543,7 @@
         </div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
-          <li class="needs-action" data-price="成人 450 克朗；儿童 300 克朗" data-link="https://book.praguecastletickets.com/book/8905/select/?cookieBanner=false&currencyCode=EUR&date=2026-08-06&tourId=93323&variantId=96797" data-link-label="预订"><span class="time">09:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟</a>；如果想省体力，可<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">结合电车大致向西←上坡约 25 到 35 分钟</a>，或<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=driving" target="_blank" rel="noreferrer">打车🚕大致向西←或西北↖上坡约 15 到 25 分钟</a>。建议 9:00-11:30 参观城堡🏰区；官网夏季历史建筑 9:00-17:00，圣维特大教堂⛪周一到周六 9:00-17:00、最后入场 16:40，皇家花园🌷7/8 月 10:00-20:00。主线路票不是固定导览时段；如果另订导览，要按导览票指定时间到场。主线路成人 450 克朗，儿童/学生优惠 300 克朗。首选预订渠道 Prague Castle Tickets（预订链接见本行“预订”）；备选平台 <a href="https://www.getyourguide.com/prague-l10/prague-prague-castle-ticket-t406279?date_from=2026-08-06" target="_blank" rel="noreferrer">GetYourGuide</a> 或 <a href="https://www.booking.com/attractions/cz/pr4ktwl2mxdu-prague-castle-admission.zh-cn.html?selected_currency=USD" target="_blank" rel="noreferrer">Booking.com</a>。建议提前买 8/6上午可用的票，现场直接排入场安检和检票。</span>
+          <li class="needs-action critical-booking" data-price="成人 450 克朗；儿童 300 克朗；官方导览另加 250 克朗/人/小时" data-link="https://www.hrad.cz/cn/prague-castle-for-visitors/guided-tours" data-link-label="导览"><span class="time">09:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟</a>；如果想省体力，可<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">结合电车大致向西←上坡约 25 到 35 分钟</a>，或<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=driving" target="_blank" rel="noreferrer">打车🚕大致向西←或西北↖上坡约 15 到 25 分钟</a>。建议 9:00-11:30 参观城堡🏰区；官网夏季历史建筑 9:00-17:00，圣维特大教堂⛪周一到周六 9:00-17:00、最后入场 16:40，皇家花园🌷7/8 月 10:00-20:00。主线路成人 450 克朗，儿童/学生优惠 300 克朗。官方 1 小时导览可预约英文，价格另加 250 克朗/人/小时，标准线路含圣维特大教堂⛪和旧皇宫；官网没有列中文真人导览，中文页面也只列捷克语、英语、法语、德语、意大利语、西班牙语、俄语。导览时间是集合讲解时间，不是圣维特大教堂⛪固定入场时段；若安检或教堂排队长，导游通常调整顺序，但不能保证免排队。建议若订英文导览，约 9:30 或 10:00 比较稳；若要中文，只能找第三方中文私导或改用中文资料自助。</span>
             <section class="signup-panel day-signup" id="signup-0806" data-signup-item="castle" data-signup-date="8/6" aria-label="8/6报名与购票统计">
               <div class="signup-actions">
                 <p class="version-note"><strong>布拉格城堡🏰主线路</strong> 每家选成人 0-2、小孩 0-1。</p>
@@ -2468,7 +2553,7 @@
               <div class="family-grid" data-family-grid></div>
             </section>
           </li>
-          <li class="included-ticket" data-price="随布拉格城堡🏰主线路票"><span class="time">10:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Royal%20Garden%2C%20Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&destination=St.%20Vitus%20Cathedral%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从皇家花园🌷大致向南↓步行👣到圣维特大教堂⛪约 5 到 10 分钟</a>，教堂⛪建议 10:30-11:20 参观；按城堡🏰主线路门票入内，不另行预订。官网旅游入内周一到周六 9:00-17:00，最后入场 16:40；遇宗教仪式或文化活动可能暂停游客参观。</span></li>
+          <li class="included-ticket" data-price="随布拉格城堡🏰主线路票"><span class="time">10:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Royal%20Garden%2C%20Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&destination=St.%20Vitus%20Cathedral%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从皇家花园🌷大致向南↓步行👣到圣维特大教堂⛪约 5 到 10 分钟</a>，教堂⛪建议 10:30-11:20 参观；按城堡🏰主线路门票入内，不需预约具体入内时段。官网旅游入内周一到周六 9:00-17:00，最后入场 16:40；遇宗教仪式或文化活动可能暂停游客参观。若另订导览，则按导览预约时间集合。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://lokal-ubilekuzelky.ambi.cz/en/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Lokál U Bílé kuželky 午餐：Míšeňská 12, 118 00 Prague 1；电话 +420 257 212 014；<a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&destination=Lok%C3%A1l%20U%20B%C3%ADl%C3%A9%20ku%C5%BEelky%2C%20M%C3%AD%C5%A1e%C5%88sk%C3%A1%2012%2C%20118%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从城堡🏰区大致向东南↘下坡到小城，步行👣或坐电车约 15 到 25 分钟</a>；餐费标准约 350-650 克朗/人，建议用餐 60 分钟；大桌建议订位。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">下午</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&destination=Mal%C3%A1%20Strana%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从城堡🏰区大致向东南↘步行👣慢慢下行到小城约 20 到 30 分钟</a>，小城街区建议停留 90 分钟；公共街区不需预订。</span></li>
           <li data-price="约 600-1000 克朗/人" data-link="https://www.cafelouvre.cz/en/contact" data-link-label="官网"><span class="time">晚餐</span><span>推荐 Café Louvre 晚餐或甜点：Národní 22, Prague 1；电话 +420 224 930 949；<a href="https://www.google.com/maps/dir/?api=1&origin=Mal%C3%A1%20Strana%2C%20Prague%2C%20Czech%20Republic&destination=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从小城大致向东→步行👣、电车或短程出租车🚕约 10 到 20 分钟</a>，餐费标准约 600-1000 克朗/人；营业到较晚，固定时间建议订位。</span>
@@ -2545,12 +2630,19 @@
 
     <section class="theme-walk" aria-label="布拉格主题步行地图和导览">
       <div class="theme-map">
-        <svg viewBox="0 0 520 360" role="img" aria-label="卡夫卡查理大桥康帕岛短版主题步行地图">
-          <rect width="520" height="360" fill="#eef3f1"></rect>
+        <svg viewBox="0 0 520 390" role="img" aria-label="卡夫卡查理大桥康帕岛短版主题步行地图，含多普勒和开普勒选走点">
+          <rect width="520" height="390" fill="#eef3f1"></rect>
           <path d="M70 270 C135 230 180 240 225 205 C270 170 318 166 366 132 C400 108 430 95 462 78" fill="none" stroke="#d7e1da" stroke-width="34" stroke-linecap="round"></path>
           <path class="theme-map-path" d="M112 266 L182 220 L300 164 L384 116"></path>
+          <path class="theme-map-branch" d="M112 266 L126 326 L248 304"></path>
           <circle class="theme-map-point" cx="112" cy="266" r="10"></circle>
           <text x="32" y="306">卡夫卡头像</text>
+          <circle class="theme-map-point optional" cx="126" cy="326" r="9"></circle>
+          <text x="34" y="350">选走：多普勒纪念牌</text>
+          <text x="34" y="370">Karlovo náměstí 6/20</text>
+          <circle class="theme-map-point optional" cx="248" cy="304" r="9"></circle>
+          <text x="264" y="312">选走：开普勒纪念牌</text>
+          <text x="264" y="332">Karlova 188/4</text>
           <circle class="theme-map-point" cx="182" cy="220" r="10"></circle>
           <text x="132" y="198">老城桥🌉塔🗼</text>
           <circle class="theme-map-point" cx="300" cy="164" r="10"></circle>
@@ -2558,7 +2650,7 @@
           <circle class="theme-map-point" cx="384" cy="116" r="10"></circle>
           <text x="352" y="92">康帕婴儿雕塑</text>
           <text x="28" y="34">建议方向：酒店 → 卡夫卡头像 → 老城 → 查理大桥🌉 → 康帕岛</text>
-          <text x="28" y="58">主线约 2.5 到 3 公里；多普勒和开普勒只作为选走支线。</text>
+          <text x="28" y="58">红点是主线，蓝色虚线是多普勒和开普勒选走支线。</text>
         </svg>
       </div>
       <div class="theme-guide">
@@ -2592,7 +2684,8 @@
       <h2>待确认</h2>
       <ul>
         <li>萨尔茨堡抵达和布拉格离境的机场🛫交通细节。</li>
-        <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数；购票链接已放在对应日期的票价栏。</li>
+        <li class="transport-booking">!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数；购票链接已放在对应日期的票价栏。</li>
+        <li>布拉格公共交通票：8/3提醒购买或准备每人 72 小时票；8/4第一次坐车时启用。72 小时票不能覆盖 8/4到8/8全段，后段按实际需要补 24 小时票或 90 分钟票。</li>
         <li>百威酿酒厂 8/3 15:00 参观已收到邮件确认；14:40 到达；预约链接已放在 8/3票价栏。</li>
         <li>8/5下午伏尔塔瓦河🌊游船；建议提前买票或当天上午确认班次。</li>
         <li>确认海尔布伦、萨尔茨堡城堡🏰、布拉格城堡🏰的最新开放时间和票务规则。</li>
@@ -2608,9 +2701,10 @@
     <section class="checklist">
       <h2>优先预订</h2>
       <ul>
-        <li>!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数，建议尽快订；购票链接已放在对应日期的票价栏。</li>
-        <li>海尔布伦戏水宫：可提前买通用门票，7/30下午使用；不是预约固定入场时间；官网链接已放在 7/30票价栏。</li>
-        <li>布拉格城堡🏰主线路：建议提前购票或至少提前确认票种，8/6上午直接入场更稳；官网链接已放在 8/6票价栏。</li>
+        <li class="transport-booking">!!! 城际火车/巴士票：萨尔茨堡到林茨、林茨到布杰约维采、布杰约维采到布拉格；全员参加，不用统计人数，建议尽快订；购票链接已放在对应日期的票价栏。</li>
+        <li>海尔布伦戏水宫：建议 7/29下午抵达萨尔茨堡、安顿后买通用门票，7/30下午使用；不是预约固定入场时间；官网链接已放在 7/30票价栏。</li>
+        <li>电子艺术中心和深空展厅：建议 7/31中午提前一天买普通线上门票，8/1上午使用；普通线上门票不是固定时段票，官网链接已放在 8/1票价栏。</li>
+        <li class="critical-booking">布拉格城堡🏰主线路：建议提前购票或至少提前确认票种，8/6上午直接入场更稳；官网链接已放在 8/6票价栏。</li>
         <li>百威酿酒厂：8/3 15:00 参观已收到邮件确认；14:40 到达；预约链接已放在 8/3票价栏。</li>
         <li>伏尔塔瓦河🌊游船：8/5下午作为轻松项目，建议提前买票或当天上午确认班次；订票链接已放在 8/5票价栏。</li>
         <li>布拉格热门餐厅🍽️：三世纪餐厅🍽️、卢浮咖啡馆、科尔科夫纳餐厅🍽️如要固定用餐时间，建议提前订桌。</li>
@@ -3766,6 +3860,9 @@
     function fillPriceCells(root = document) {
       root.querySelectorAll(".items li:not(.items-header)").forEach((item) => {
         if (item.querySelector(":scope > .price-cell")) {
+          return;
+        }
+        if (!item.dataset.price) {
           return;
         }
 
