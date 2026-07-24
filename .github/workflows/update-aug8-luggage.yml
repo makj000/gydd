@@ -1,0 +1,56 @@
+name: Update Aug 8 luggage details
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-aug8-luggage.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-page:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Aug 8 itinerary
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          page = Path('t/2026-austria-czech-7f4c9b2e6a31d8/index.html')
+          text = page.read_text(encoding='utf-8')
+
+          old = ('退房和整理建议 90 分钟；若退房后还想逛，优先问 The Julius Prague 是否可寄存行李；'
+                 '备选 EasyLocker 小城店，地址 Prokopská 625/3，靠近查理大桥🌉，9:00-20:00 开放，可现场刷卡，也可线上预留；'
+                 '若直接去机场🛫，没必要存包。')
+
+          maps = ('https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%20993%2F3%2C%20110%2000%20Prague%201%2C%20Czech%20Republic'
+                  '&destination=EasyLocker%2C%20Prokopsk%C3%A1%20625%2F3%2C%20118%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking')
+
+          new = ('退房和整理建议 90 分钟。🧳 <strong>行李安排：</strong>'
+                 '✅ <strong>首选：</strong>先询问 The Julius Prague 前台是否可以免费寄存行李；'
+                 '📦 <strong>备选：</strong><a href="' + maps + '" target="_blank" rel="noreferrer">EasyLocker Malá Strana（Prokopská 625/3）</a>，'
+                 '从酒店步行约 25 到 30 分钟、约 2 公里，实际路线以地图为准；营业时间 9:00-20:00，可现场刷卡，也可线上预留。'
+                 '若直接去机场🛫，没必要存包。')
+
+          if old not in text:
+              if 'EasyLocker Malá Strana（Prokopská 625/3）' in text:
+                  print('Aug 8 luggage details already updated.')
+              else:
+                  raise SystemExit('Expected Aug 8 luggage text not found; no changes made.')
+          else:
+              text = text.replace(old, new, 1)
+              page.write_text(text, encoding='utf-8')
+
+          Path('.github/workflows/update-aug8-luggage.yml').unlink()
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add t/2026-austria-czech-7f4c9b2e6a31d8/index.html .github/workflows/update-aug8-luggage.yml
+          git commit -m 'Improve Aug 8 luggage storage instructions'
+          git push
