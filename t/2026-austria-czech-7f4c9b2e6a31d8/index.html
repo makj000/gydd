@@ -1374,6 +1374,40 @@
       background: var(--panel);
     }
 
+    .theme-walk.text-guide {
+      grid-template-columns: 1fr;
+    }
+
+    .statue-guide-list {
+      columns: 2;
+      column-gap: 18px;
+    }
+
+    .statue-guide-list li {
+      break-inside: avoid;
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .statue-photo {
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ece8de;
+      aspect-ratio: 4 / 5;
+    }
+
+    .statue-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
     .theme-map {
       min-height: 320px;
       border: 1px solid var(--line);
@@ -2020,6 +2054,14 @@
         grid-template-columns: 1fr;
       }
 
+      .statue-guide-list {
+        columns: 1;
+      }
+
+      .statue-guide-list li {
+        grid-template-columns: 76px minmax(0, 1fr);
+      }
+
       .assistant-grid {
         grid-template-columns: 1fr;
       }
@@ -2332,7 +2374,7 @@
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-harrys-home-salzburg.jpg" alt="harry's home Salzburg 外观"><span>harry's home Salzburg <small class="ticket-note">住宿：7/29到7/31；Fanny-von-Lehnert-Straße 6</small></span></figure>
           <figure class="place-card"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"><span>萨尔茨堡老城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="萨尔茨堡大教堂⛪"><span>萨尔茨堡大教堂⛪ <small class="ticket-note">入内成人 €7；14-18 岁 €3.50；13 岁及以下免费</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg-cathedral-interior.jpg" alt="萨尔茨堡大教堂⛪"><span>萨尔茨堡大教堂⛪ <small class="ticket-note">入内成人 €7；14-18 岁 €3.50；13 岁及以下免费</small></span></figure>
           <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场⛲"><span>卡比特尔广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
       </article>
@@ -2385,8 +2427,8 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前一天买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="多普勒出生地纪念牌"><span>多普勒出生地纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Makartplatz 1</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="莫扎特出生地"><span>莫扎特出生地 <em class="booking-tag">入内可买票</em><small class="ticket-note">门票：外观免费；入内成人 €15；儿童/优惠 €4.50</small></span></figure>
+          <figure class="place-card"><img src="photos/doppler-birthplace-plaque.jpg" alt="多普勒出生地纪念牌"><span>多普勒出生地纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Makartplatz 1</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Salzburg_Mozart_Geburtshaus_04.jpg/330px-Salzburg_Mozart_Geburtshaus_04.jpg" alt="莫扎特出生地"><span>莫扎特出生地 <em class="booking-tag">入内可买票</em><small class="ticket-note">门票：外观免费；入内成人 €15；儿童/优惠 €4.50</small></span></figure>
           <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡🏰"><span>霍亨萨尔茨堡城堡🏰 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票：Basic 成人 €15.50；儿童 €6.30；All-inclusive 成人 €19.20；儿童 €7.30</small></span></figure>
           <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场⛲"><span>卡比特尔广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/gasthof-goldgasse.jpg" alt="Gasthof Goldgasse 餐厅🍽️"><span>Gasthof Goldgasse <em class="booking-tag">推荐午餐</em><small class="ticket-note">地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费：约 €35-55/人；菜单见午餐行官网链接</small></span></figure>
@@ -2411,7 +2453,7 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/mirabell.jpg" alt="米拉贝尔花园🌷"><span>米拉贝尔花园🌷 <em class="booking-tag no-booking">不用预约</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="粮食胡同"><span>粮食胡同 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Getreidegasse%2C_Salzburg-0398.jpg/330px-Getreidegasse%2C_Salzburg-0398.jpg" alt="粮食胡同"><span>粮食胡同 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/hotel-courtyard-linz.jpg" alt="Courtyard by Marriott Linz 酒店🏨"><span>Courtyard by Marriott Linz <small class="ticket-note">住宿：7/31到8/2</small></span></figure>
           <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
@@ -2445,8 +2487,8 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山⛰️登山⛰️火车🚆"><span>匹斯特林山⛰️登山⛰️火车🚆 <small class="ticket-note">门票：往返成人 €9.00；儿童/优惠 €4.50</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="电子艺术中心和深空展厅"><span>电子艺术中心和深空展厅 <em class="booking-tag">提前一天中午买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="Lentos 美术馆"><span>Lentos 美术馆 <em class="booking-tag">备选</em><small class="ticket-note">现代/当代美术；离电子艺术中心和中央广场都近；门票现场复核</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linz_Ars_Electronica_center-5529.jpg/330px-Linz_Ars_Electronica_center-5529.jpg" alt="电子艺术中心和深空展厅"><span>电子艺术中心和深空展厅 <em class="booking-tag">提前一天中午买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Lentos_Kunstmuseum_Linz_2008a.jpg/330px-Lentos_Kunstmuseum_Linz_2008a.jpg" alt="Lentos 美术馆"><span>Lentos 美术馆 <em class="booking-tag">备选</em><small class="ticket-note">现代/当代美术；离电子艺术中心和中央广场都近；门票现场复核</small></span></figure>
           <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂⛪"><span>林茨圣玛丽大教堂⛪ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；现场捐赠另计</small></span></figure>
         </div>
@@ -2503,11 +2545,11 @@
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场⛲"><span>普瑞米斯欧塔卡拉二世广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/blacktower.jpg" alt="黑塔🗼"><span>黑塔🗼 <small class="ticket-note">门票：成人约 80 克朗；儿童约 40 克朗，现场复核</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="布杰约维采圣尼古拉主教座堂⛪"><span>圣尼古拉主教座堂⛪ <em class="booking-tag no-booking">短停</em><small class="ticket-note">外观免费；入内现场复核；建议 10 到 20 分钟</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="南波希米亚博物馆"><span>南波希米亚博物馆 <em class="booking-tag">备选</em><small class="ticket-note">雨天或热天备选；门票现场复核</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="百威酿酒厂"><span>百威酿酒厂 <em class="booking-tag">已确认</em><small class="ticket-note">15:00 参观；14:40 到达；成人 290 克朗；儿童/优惠 220 克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="市政厅夏季音乐会"><span>市政厅夏季音乐会 <em class="booking-tag">可选</em><small class="ticket-note">20:00；市政厅庭院；音乐会约 290-320 克朗/人，出发前复核</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="广场音乐夜"><span>广场音乐夜 <em class="booking-tag no-booking">相邻备选</em><small class="ticket-note">免费；没有 8/3 场次，8/4仍在本城才考虑</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/2018-02-09_%28201%29_Cathedral_of_Saint_Nicholas%2C_%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Czech_Republic.jpg/330px-2018-02-09_%28201%29_Cathedral_of_Saint_Nicholas%2C_%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Czech_Republic.jpg" alt="布杰约维采圣尼古拉主教座堂⛪"><span>圣尼古拉主教座堂⛪ <em class="booking-tag no-booking">短停</em><small class="ticket-note">外观免费；入内现场复核；建议 10 到 20 分钟</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Dukelsk%C3%A1%2C_Jiho%C4%8Desk%C3%A9_muzeum.JPG/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Dukelsk%C3%A1%2C_Jiho%C4%8Desk%C3%A9_muzeum.JPG" alt="南波希米亚博物馆"><span>南波希米亚博物馆 <em class="booking-tag">备选</em><small class="ticket-note">雨天或热天备选；门票现场复核</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Budweiser_Budvar_brewery%2C_01.jpg/330px-Budweiser_Budvar_brewery%2C_01.jpg" alt="百威酿酒厂"><span>百威酿酒厂 <em class="booking-tag">已确认</em><small class="ticket-note">15:00 参观；14:40 到达；成人 290 克朗；儿童/优惠 220 克朗</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_radni%C4%8Dn%C3%AD_n%C3%A1dvo%C5%99%C3%AD.jpg/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_radni%C4%8Dn%C3%AD_n%C3%A1dvo%C5%99%C3%AD.jpg" alt="市政厅夏季音乐会"><span>市政厅夏季音乐会 <em class="booking-tag">可选</em><small class="ticket-note">20:00；市政厅庭院；音乐会约 290-320 克朗/人，出发前复核</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_n%C3%A1m%C4%9Bst%C3%AD_a_ka%C5%A1na_z_radnice.jpg/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_n%C3%A1m%C4%9Bst%C3%AD_a_ka%C5%A1na_z_radnice.jpg" alt="广场音乐夜"><span>广场音乐夜 <em class="booking-tag no-booking">相邻备选</em><small class="ticket-note">免费；没有 8/3 场次，8/4仍在本城才考虑</small></span></figure>
         </div>
       </article>
 
@@ -2524,7 +2566,7 @@
           <li class="needs-action urgent-booking transport-booking" data-price="交通另计；午餐约 600-1000 克朗/人" data-link="https://www.cd.cz/en/eshop/" data-link-label="购票"><span class="time">上午</span><span>!!! 全员参加，不用统计人数；需要提前订布杰约维采到布拉格火车/巴士票，官方购票链接见本行“购票”。<a href="https://www.google.com/maps/dir/?api=1&origin=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从公寓大致向东南↘步行👣到布杰约维采出发站点约 10 到 20 分钟</a>；退房后<a href="https://www.google.com/maps/dir/?api=1&origin=%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%20train%20station%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=Prague%20main%20railway%20station%20%28Praha%20hlavn%C3%AD%20n%C3%A1dra%C5%BE%C3%AD%29%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐火车🚆或长途巴士大致向北↑前往布拉格，布杰约维采到布拉格约 2.5 到 3 小时</a>。布杰约维采火车站大厅有 15 个自助存包柜，L 和 XL 两种尺寸，只能刷卡，早到或退房后想先吃饭时可现场使用，不需预订；<a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20main%20railway%20station%20%28Praha%20hlavn%C3%AD%20n%C3%A1dra%C5%BE%C3%AD%29%2C%20Prague%2C%20Czech%20Republic&destination=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">到布拉格后步行👣、坐电车或短程出租车🚕大致向西←或西北↖到酒店🏨约 15 到 25 分钟</a>。布拉格公共交通建议每人先买 72 小时票，从第一次坐车时开始算；它覆盖不了 8/4到8/8全部时间，后段如果 8/8不用打车去机场🛫，再补 24 小时票或按次买 90 分钟票。</span></li>
           <li data-price="约 600-1000 克朗/人" data-link="https://cafeimperial.cz/en/menu/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Café Imperial 午餐：Na Poříčí 15, Prague 1；电话 +420 246 011 440；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Imperial%2C%20Na%20Po%C5%99%C3%AD%C4%8D%C3%AD%2015%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从 The Julius Prague 大致向东北↗步行👣约 8 到 12 分钟</a>；抵达布拉格入住前后都可安排，餐费标准约 600-1000 克朗/人，建议提前订位。</span></li>
           <li class="needs-action" data-price="门票现场复核" data-link="https://www.nm.cz/en/visit-us/buildings/museum-complex-of-the-national-museum" data-link-label="官网"><span class="time">备选</span><span><strong>布拉格国家博物馆备选：</strong>如果 8/4抵达后天气差、孩子需要室内项目，或不想直接去桥区，可以从 The Julius Prague <a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=National%20Museum%2C%20V%C3%A1clavsk%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2068%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">大致向南↓步行👣约 10 到 15 分钟到国家博物馆</a>；它也离 Praha hlavní nádraží 很近。建议 60 到 90 分钟，作为抵达日或 8/5上午的室内备选，不要和城堡🏰日叠加。</span></li>
-          <li class="no-booking" data-price="桥🌉面成人/儿童免费；老城桥🌉塔🗼成人 250 克朗、儿童 170 克朗" data-link="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店🏨，整理约 45 分钟；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Old%20Town%20Bridge%20Tower%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣或坐电车到老城桥🌉塔🗼约 15 到 25 分钟</a>，查理大桥🌉和小城附近建议停留 2 小时；桥🌉面和外观散步不需预订，老城桥🌉塔🗼登塔🗼成人 250 克朗、儿童/优惠 170 克朗。</span></li>
+          <li class="no-booking" data-price="桥🌉面成人/儿童免费；老城桥🌉塔🗼成人 250 克朗、儿童 170 克朗" data-link="https://prague.eu/en/objevujte/old-town-bridge-tower-staromestska-mostecka-vez/"><span class="time">下午</span><span>入住朱利叶斯布拉格酒店🏨，整理约 45 分钟；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Old%20Town%20Bridge%20Tower%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣或坐电车到老城桥🌉塔🗼约 15 到 25 分钟</a>，查理大桥🌉和小城附近建议停留 2 小时；桥🌉面和外观散步不需预订，老城桥🌉塔🗼登塔🗼成人 250 克朗、儿童/优惠 170 克朗。桥上雕塑按<a href="#charles-bridge-statues-section">查理大桥雕塑详解</a>挑重点看。</span></li>
           <li data-price="约 550-850 克朗/人" data-link="https://stoleti.cz/en/menu.php" data-link-label="菜单"><span class="time">晚餐</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Mal%C3%A1%20Strana%2C%20Prague%2C%20Czech%20Republic&destination=Stolet%C3%AD%2C%20Karol%C3%ADny%20Sv%C4%9Btl%C3%A9%2021/320%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从小城大致向东→步行👣到 Století（三世纪餐厅🍽️）或晚餐地点约 5 到 15 分钟</a>；地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费标准约 550-850 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span>
             <section class="signup-panel day-signup" id="signup-stoleti" data-signup-item="stoleti" aria-label="Století 晚餐人数统计">
               <div class="signup-actions">
@@ -2538,11 +2580,11 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-the-julius-prague.jpg" alt="The Julius Prague 外观"><span>The Julius Prague <small class="ticket-note">住宿：8/4到8/8</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="布拉格国家博物馆"><span>布拉格国家博物馆 <em class="booking-tag">备选</em><small class="ticket-note">抵达日或雨天室内备选；门票现场复核</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Prag%2C_Nationalmuseum_--_2019_--_6836.jpg/330px-Prag%2C_Nationalmuseum_--_2019_--_6836.jpg" alt="布拉格国家博物馆"><span>布拉格国家博物馆 <em class="booking-tag">备选</em><small class="ticket-note">抵达日或雨天室内备选；门票现场复核</small></span></figure>
           <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥🌉塔🗼"><span>老城桥🌉塔🗼 <small class="ticket-note">门票：成人 250 克朗；儿童/优惠 170 克朗；外观免费</small></span></figure>
           <figure class="place-card"><img src="photos/prague.jpg" alt="查理大桥🌉"><span>查理大桥🌉 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="圣尼古拉教堂⛪附近"><span>圣尼古拉教堂⛪附近 <small class="ticket-note">门票：外观免费；入内成人 150 克朗，儿童/学生 10-26 岁 90 克朗，10 岁以下免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="三世纪餐厅🍽️"><span>Století（三世纪餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费：约 550-850 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Prague_07-2016_View_from_Lesser_Town_Nicholas_Church_img1.jpg/330px-Prague_07-2016_View_from_Lesser_Town_Nicholas_Church_img1.jpg" alt="圣尼古拉教堂⛪附近"><span>圣尼古拉教堂⛪附近 <small class="ticket-note">门票：外观免费；入内成人 150 克朗，儿童/学生 10-26 岁 90 克朗，10 岁以下免费</small></span></figure>
+          <figure class="place-card"><img src="https://stoleti.cz/img/gallery/g1.jpg" alt="三世纪餐厅🍽️"><span>Století（三世纪餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费：约 550-850 克朗/人</small></span></figure>
         </div>
       </article>
 
@@ -2558,6 +2600,7 @@
           <li class="no-booking" data-price="约 250-450 克朗/人" data-link="https://www.cafelouvre.cz/en/contact" data-link-label="官网"><span class="time">上午</span><span>推荐 Café Louvre 早餐或早午餐：Národní 22, Prague 1；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西南↙步行👣约 15 到 20 分钟</a>，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐电车约 10 到 15 分钟</a>；布拉格轻量安排：早餐、短走或休息，建议停留 60 到 90 分钟；固定大桌建议订位。</span></li>
           <li data-price="约 350-650 克朗/人" data-link="https://lokal-ubilekuzelky.ambi.cz/en/" data-link-label="菜单"><span class="time">中午</span><span>推荐 Lokál U Bílé kuželky 午餐：Míšeňská 12, 118 00 Prague 1；<a href="https://www.google.com/maps/dir/?api=1&origin=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&destination=Lok%C3%A1l%20U%20B%C3%ADl%C3%A9%20ku%C5%BEelky%2C%20M%C3%AD%C5%A1e%C5%88sk%C3%A1%2012%2C%20118%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从 Café Louvre 大致向西←步行👣到餐厅🍽️约 15 到 25 分钟</a>，也可坐电车或短程出租车🚕约 10 到 15 分钟；餐费标准约 350-650 克朗/人，建议用餐 60 到 75 分钟；大桌建议订位。</span></li>
           <li class="needs-action" data-price="成人 550 克朗；儿童 350 克朗" data-link="https://prague.eu/en/produkt/prague-venice-sightseeing-cruise/" data-link-label="订票"><span class="time">15:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Lok%C3%A1l%20U%20B%C3%ADl%C3%A9%20ku%C5%BEelky%2C%20M%C3%AD%C5%A1e%C5%88sk%C3%A1%2012%2C%20118%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Venice%20Boat%20Trip%2C%20K%C5%99i%C5%BEovnick%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从午餐地点大致向东→或东北↗步行👣到伏尔塔瓦河🌊游船登船点约 5 到 12 分钟</a>；建议锁定 15:00 左右班次，安排 45 到 60 分钟布拉格游船，轻松看查理大桥🌉、河🌊景和城堡🏰方向。游船不是导览步行项目，班次以订票页为准；参考票价成人 550 克朗，儿童 350 克朗，建议提前买票或当天上午确认班次。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://prague.eu/en/objevujte/old-town-hall-with-astronomical-clock-staromestska-radnice-s-orlojem" data-link-label="介绍"><span class="time">傍晚</span><span>如果游船后体力还可以，把布拉格天文钟作为轻量短停：<a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20Venice%20Boat%20Trip%2C%20K%C5%99i%C5%BEovnick%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&destination=Old%20Town%20Hall%20with%20Astronomical%20Clock%2C%20Starom%C4%9Bstsk%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从游船点大致向东→步行👣到老城广场和天文钟约 5 到 12 分钟</a>，赶 17:00 或 18:00 整点表演；每天 8:00 到 23:00 每个整点内容基本相同，十二使徒、骷髅和公鸡依次出现。外墙观看免费，不需预订；塔楼或老市政厅内部另买票。</span></li>
           <li class="no-booking" data-price="公共区成人/儿童免费；教堂⛪入内另计" data-link="https://praha-vysehrad.cz/en/visit/" data-link-label="官网"><span class="time">傍晚</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20Venice%20Boat%20Trip%2C%20K%C5%99i%C5%BEovnick%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&destination=Vy%C5%A1ehrad%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">从游船点大致向南↓坐电车/地铁到高堡约 25 到 35 分钟</a>，或<a href="https://www.google.com/maps/dir/?api=1&origin=Prague%20Venice%20Boat%20Trip%2C%20K%C5%99i%C5%BEovnick%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&destination=Vy%C5%A1ehrad%2C%20Prague%2C%20Czech%20Republic&travelmode=driving" target="_blank" rel="noreferrer">打车🚕大致向南↓约 15 到 25 分钟</a>。不要从河边硬爬上去；优先地铁 C 线到 Vyšehrad 站或打车到入口，再慢走城墙视野和圣彼得与圣保罗教堂⛪外观。公共区不需预订。</span></li>
           <li data-price="约 500-800 克朗/人" data-link="https://dock.kolkovna.cz/en/?forceVersion=front" data-link-label="菜单"><span class="time">晚餐</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Vy%C5%A1ehrad%2C%20Prague%2C%20Czech%20Republic&destination=Kolkovna%20Dock%2C%20Boudn%C3%ADkova%202506/1%2C%20180%2000%20Praha%208%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">从高堡大致向东北↗坐地铁/电车或短程出租车🚕到 Kolkovna Dock（科尔科夫纳餐厅🍽️）约 20 到 30 分钟</a>；地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费标准约 500-800 克朗/人，建议用餐 60 到 90 分钟；如要固定时间建议订桌。</span>
             <section class="signup-panel day-signup" id="signup-kolkovna" data-signup-item="kolkovna" aria-label="Kolkovna Dock 晚餐人数统计">
@@ -2572,8 +2615,9 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊游船"><span>伏尔塔瓦河🌊游船 <em class="booking-tag">可提前买票</em><small class="ticket-note">参考票价：成人 550 克朗；儿童 350 克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="高堡"><span>高堡 <em class="booking-tag no-booking">公共区不需预订</em><small class="ticket-note">公共区成人免费；儿童免费；场馆另计</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="科尔科夫纳餐厅🍽️"><span>Kolkovna Dock（科尔科夫纳餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费：约 500-800 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="photos/clock.jpg" alt="布拉格天文钟"><span>布拉格天文钟 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">外墙整点表演免费；8:00到23:00每小时一次</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG/330px-Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG" alt="高堡"><span>高堡 <em class="booking-tag no-booking">公共区不需预订</em><small class="ticket-note">公共区成人免费；儿童免费；场馆另计</small></span></figure>
+          <figure class="place-card"><img src="https://dock.kolkovna.cz/temp/images/front/ophp/changer/dock-8_1920x1920_0.jpg" alt="科尔科夫纳餐厅🍽️"><span>Kolkovna Dock（科尔科夫纳餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费：约 500-800 克朗/人</small></span></figure>
         </div>
       </article>
 
@@ -2613,8 +2657,8 @@
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园🌷"><span>皇家花园🌷 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；开放时间复核</small></span></figure>
           <figure class="place-card"><img src="photos/stvitus.jpg" alt="圣维特大教堂⛪"><span>圣维特大教堂⛪ <em class="booking-tag">随票</em><small class="ticket-note">按布拉格城堡🏰主线路票入内</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="小城"><span>小城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="Café Louvre"><span>Café Louvre <em class="booking-tag">建议订位</em><small class="ticket-note">地址：Národní 22, Prague 1；餐费：约 600-1000 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/20190817_View_of_Mal%C3%A1_Strana_from_Pet%C5%99%C3%ADn_1354_5556.jpg/330px-20190817_View_of_Mal%C3%A1_Strana_from_Pet%C5%99%C3%ADn_1354_5556.jpg" alt="小城"><span>小城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Praha_Caf%C3%A9_Louvre.JPG/330px-Praha_Caf%C3%A9_Louvre.JPG" alt="Café Louvre"><span>Café Louvre <em class="booking-tag">建议订位</em><small class="ticket-note">地址：Národní 22, Prague 1；餐费：约 600-1000 克朗/人</small></span></figure>
         </div>
       </article>
 
@@ -2628,23 +2672,25 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.davidcerny.cz/work/k-kafka-head" data-link-label="介绍"><span class="time">09:45</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Franz%20Kafka%20Rotating%20Head%20statue%2C%20Quadrio%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从 The Julius Prague 大致向西南↙步行👣到 Quadrio 的卡夫卡头像约 15 到 20 分钟</a>；这是 David Černý 的动态雕塑，免费开放，适合作为“切尔尼和卡夫卡”主题起点。建议停留 20 到 30 分钟，等它整点前后转动更有意思。</span></li>
-          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://prague.eu/en/objevujte/charles-bridge-karluv-most/" data-link-label="介绍"><span class="time">10:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Franz%20Kafka%20Rotating%20Head%20statue%2C%20Quadrio%2C%20Prague%2C%20Czech%20Republic&destination=Charles%20Bridge%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从卡夫卡头像大致向北↑步行👣穿过老城街巷到查理大桥🌉约 20 到 30 分钟</a>；这段比直接绕去多普勒和开普勒更好看，适合边走边看橱窗、街景和桥塔🗼。公共街区不需预订。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://prague.eu/en/objevujte/old-town-hall-with-astronomical-clock-staromestska-radnice-s-orlojem" data-link-label="介绍"><span class="time">10:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Franz%20Kafka%20Rotating%20Head%20statue%2C%20Quadrio%2C%20Prague%2C%20Czech%20Republic&destination=Old%20Town%20Hall%20with%20Astronomical%20Clock%2C%20Starom%C4%9Bstsk%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从卡夫卡头像大致向东北↗步行👣到老城广场和布拉格天文钟约 15 到 25 分钟</a>，目标 10:45 左右到场，11:00 看整点表演。每天 8:00 到 23:00 每个整点内容基本相同，十二使徒、骷髅和公鸡依次出现；外墙观看免费，不需预订。若错过 11:00，也可继续路线，不必等下一小时。</span></li>
+          <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://prague.eu/en/objevujte/charles-bridge-karluv-most/" data-link-label="介绍"><span class="time">11:05</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Old%20Town%20Hall%20with%20Astronomical%20Clock%2C%20Starom%C4%9Bstsk%C3%A9%20n%C3%A1m%C4%9Bst%C3%AD%2C%20Prague%2C%20Czech%20Republic&destination=Charles%20Bridge%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从天文钟和老城广场大致向西←步行👣穿过老城街巷到查理大桥🌉约 10 到 20 分钟</a>；这段比直接绕去多普勒和开普勒更好看，适合边走边看橱窗、街景和桥塔🗼。公共街区不需预订；桥上雕塑按<a href="#charles-bridge-statues-section">查理大桥雕塑详解</a>挑重点看。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://historyofscience.cz/katalog_en/index.php?id=556" data-link-label="介绍"><span class="time">选走</span><span>如果大人想补“多普勒、开普勒”科学线，可<a href="https://www.google.com/maps/dir/?api=1&origin=Franz%20Kafka%20Rotating%20Head%20statue%2C%20Quadrio%2C%20Prague%2C%20Czech%20Republic&destination=Doppler%20memorial%20plaque%2C%20Karlovo%20n%C3%A1m%C4%9Bst%C3%AD%206%2F20%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从卡夫卡头像大致向东南↘绕到多普勒纪念牌</a>，再<a href="https://www.google.com/maps/dir/?api=1&origin=Doppler%20memorial%20plaque%2C%20Karlovo%20n%C3%A1m%C4%9Bst%C3%AD%206%2F20%2C%20Prague%2C%20Czech%20Republic&destination=Kepler%20memorial%20plaque%2C%20Karlova%20188%2F4%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">大致向北↑去开普勒纪念牌</a>；这段风景普通，主要是科学史意义，孩子累就跳过。两个纪念牌都不需预订。</span></li>
           <li class="no-booking" data-price="约 350-650 克朗/人" data-link="https://lokal-ubilekuzelky.ambi.cz/en/" data-link-label="菜单"><span class="time">午餐</span><span>推荐 Lokál U Bílé kuželky 午餐：Míšeňská 12, 118 00 Prague 1；<a href="https://www.google.com/maps/dir/?api=1&origin=Charles%20Bridge%2C%20Prague%2C%20Czech%20Republic&destination=Lok%C3%A1l%20U%20B%C3%ADl%C3%A9%20ku%C5%BEelky%2C%20M%C3%AD%C5%A1e%C5%88sk%C3%A1%2012%2C%20118%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从查理大桥🌉东侧大致向西←或西北↖步行👣到餐厅🍽️约 3 到 8 分钟</a>；餐费标准约 350-650 克朗/人，建议用餐 60 到 75 分钟；如果小孩累，可以到这里结束主题步行，下午改为酒店🏨休息。</span></li>
           <li class="no-booking" data-price="公共区成人/儿童免费；佩特任塔🗼成人 250 克朗、儿童 170 克朗"><span class="time">下午</span><span>饭后<a href="https://www.google.com/maps/dir/?api=1&origin=Lok%C3%A1l%20U%20B%C3%ADl%C3%A9%20ku%C5%BEelky%2C%20M%C3%AD%C5%A1e%C5%88sk%C3%A1%2012%2C%20118%2000%20Prague%201%2C%20Czech%20Republic&destination=Kampa%20Island%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">大致向西←步行👣过查理大桥🌉到康帕岛约 10 到 20 分钟</a>，看 David Černý 的婴儿雕塑，再按体力选择列侬墙、河🌊边慢走或佩特任山⛰️；公共区域不需预订，若登佩特任塔🗼则成人 250 克朗、儿童/优惠 170 克朗。</span></li>
           <li data-price="约 1000-1800 克朗/人" data-link="https://www.vzatisi.cz/en/" data-link-label="订桌"><span class="time">晚上</span><span>推荐 V Zátiší 告别晚餐：Liliová 1, Praha 1；电话 +420 222 221 155；<a href="https://www.google.com/maps/dir/?api=1&origin=Kampa%20Island%2C%20Prague%2C%20Czech%20Republic&destination=V%20Z%C3%A1ti%C5%A1%C3%AD%2C%20Liliov%C3%A1%201%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从河🌊边或小城大致向东→步行👣或坐电车回老城约 15 到 25 分钟</a>，餐厅离查理大桥🌉约 3 分钟步行；餐费标准约 1000-1800 克朗/人，建议提前订桌。饭后<a href="https://www.google.com/maps/dir/?api=1&origin=V%20Z%C3%A1ti%C5%A1%C3%AD%2C%20Liliov%C3%A1%201%2C%20Prague%201%2C%20Czech%20Republic&destination=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">步行👣、电车或短程出租车🚕大致向东→或东北↗回酒店🏨收拾行李</a>。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/prague.jpg" alt="卡夫卡头像"><span>卡夫卡头像 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Quadrio</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="多普勒纪念牌"><span>多普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlovo náměstí 6/20</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="开普勒纪念牌"><span>开普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlova 188/4</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Head_of_Franz_Kafka_-_kinetic_sculpture_04.jpg/330px-Head_of_Franz_Kafka_-_kinetic_sculpture_04.jpg" alt="卡夫卡头像"><span>卡夫卡头像 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Quadrio</small></span></figure>
+          <figure class="place-card"><img src="photos/clock.jpg" alt="布拉格天文钟"><span>布拉格天文钟 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">外墙整点表演免费；8:00到23:00每小时一次</small></span></figure>
+          <figure class="place-card"><img src="photos/doppler-prague-plaque.jpg" alt="多普勒纪念牌"><span>多普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlovo náměstí 6/20</small></span></figure>
+          <figure class="place-card"><img src="photos/kepler-prague-plaque.jpg" alt="开普勒纪念牌"><span>开普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlova 188/4</small></span></figure>
           <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕婴儿雕塑"><span>康帕婴儿雕塑 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="高堡"><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区成人免费；儿童免费；场馆另计</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG/330px-Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG" alt="高堡"><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区成人免费；儿童免费；场馆另计</small></span></figure>
           <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊"><span>伏尔塔瓦河🌊 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕岛"><span>康帕岛 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="列侬墙"><span>列侬墙 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/vltava.jpg" alt="佩特任山⛰️"><span>佩特任山⛰️ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公园成人免费；儿童免费；佩特任塔🗼成人 250 克朗、儿童/优惠 170 克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="犹太区"><span>犹太区 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：街区成人免费；儿童免费；犹太博物馆成人 600 克朗、儿童 7-15 岁 200 克朗</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/John_Lennon_Wall_Prague_023.jpg/330px-John_Lennon_Wall_Prague_023.jpg" alt="列侬墙"><span>列侬墙 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Petrin_Hill_Gardens_-_Prague%2C_Czech_Rep._-_panoramio.jpg/330px-Petrin_Hill_Gardens_-_Prague%2C_Czech_Rep._-_panoramio.jpg" alt="佩特任山⛰️"><span>佩特任山⛰️ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公园成人免费；儿童免费；佩特任塔🗼成人 250 克朗、儿童/优惠 170 克朗</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Prague_Jewish_Quarter_building.jpg/330px-Prague_Jewish_Quarter_building.jpg" alt="犹太区"><span>犹太区 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：街区成人免费；儿童免费；犹太博物馆成人 600 克朗、儿童 7-15 岁 200 克朗</small></span></figure>
         </div>
       </article>
 
@@ -2703,6 +2749,62 @@
           <li><strong>老城和查理大桥🌉：</strong>从卡夫卡头像转向老城和查理大桥🌉，这段景观更密集，也更适合孩子边走边看。</li>
           <li><strong>多普勒和开普勒选走：</strong>这两个点更适合大人补科学史背景；如果当天热、累、或孩子无聊，直接跳过。</li>
           <li><strong>康帕岛：</strong>过查理大桥🌉到康帕岛，看 David Černý 的婴儿雕塑。这里可以结束主题步行，也可以接列侬墙和伏尔塔瓦河🌊边慢走。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section-head" id="charles-bridge-statues-section">
+      <h2>查理大桥雕塑详解</h2>
+      <p>从老城桥塔走向小城方向时，可以把桥当成一条露天巴洛克雕塑廊。桥上主栏杆有 30 组圣徒雕塑；桥墩旁的布伦茨维克骑士像常被当作第 31 组彩蛋。</p>
+    </section>
+
+    <section class="theme-walk text-guide" aria-label="查理大桥三十组雕塑导览">
+      <div class="theme-guide">
+        <h3>推荐看法</h3>
+        <ol>
+          <li><strong>带孩子版本：</strong>不要逐个讲太久，先在老城桥塔看桥面和城堡方向，再找圣约翰内波穆克、十字架和加尔瓦略、圣卢特加德、圣伊沃、布伦茨维克这几个容易讲故事的点。</li>
+          <li><strong>方向判断：</strong>下面按从老城桥塔走向小城的顺序分左右两侧。刚上桥时，面向城堡和小城，左手边是一组，右手边是一组。</li>
+          <li><strong>原作说明：</strong>很多雕塑因为洪水、风化和战争损坏，桥上现在多为复制品；原作常被移到博物馆或高堡地下展厅保存。</li>
+        </ol>
+        <h3>左侧十五组</h3>
+        <ol class="statue-guide-list">
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Svat%C3%BD_Ivo.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Svat%C3%BD_Ivo.jpg/160px-Svat%C3%BD_Ivo.jpg" alt="圣伊沃雕塑"></a><div><strong>圣伊沃：</strong>律师守护圣人，旁边有象征公正的持剑人物；可以给孩子讲“有人替弱者打官司”的故事。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Sv_Barbora_Marketa_Alzbeta.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Sv_Barbora_Marketa_Alzbeta.jpg/160px-Sv_Barbora_Marketa_Alzbeta.jpg" alt="圣巴巴拉、圣玛格丽特、圣伊丽莎白雕塑"></a><div><strong>圣巴巴拉、圣玛格丽特、圣伊丽莎白：</strong>三位女性圣徒组合，适合看人物各自分开的姿态和手中象征物。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_Pieta.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Charles_Bridge_Pieta.jpg/180px-Charles_Bridge_Pieta.jpg" alt="圣母哀悼基督雕塑"></a><div><strong>圣母哀悼基督：</strong>表现耶稣受难后的哀悼场景，情绪最直观，孩子容易看懂“悲伤的一组”。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge-saint_Josef.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Charles_Bridge-saint_Josef.jpg/160px-Charles_Bridge-saint_Josef.jpg" alt="圣约瑟和小耶稣雕塑"></a><div><strong>圣约瑟和小耶稣：</strong>父亲带孩子的形象，气氛比受难题材温和，适合快速看。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Francis-Xavier.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Charles_Bridge_St_Francis-Xavier.jpg/160px-Charles_Bridge_St_Francis-Xavier.jpg" alt="圣方济各沙勿略雕塑"></a><div><strong>圣方济各沙勿略：</strong>耶稣会传教士，雕塑常带有海外传教背景，可以一句话讲“大航海时代的宗教传播”。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge-Krystof.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Charles_Bridge-Krystof.jpg/160px-Charles_Bridge-Krystof.jpg" alt="圣克里斯托弗雕塑"></a><div><strong>圣克里斯托弗：</strong>传说中背着小耶稣过河的巨人，和桥、河的场景很搭，适合孩子。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Francis_Borgias.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Charles_Bridge_St_Francis_Borgias.jpg/160px-Charles_Bridge_St_Francis_Borgias.jpg" alt="圣方济各博尔吉亚雕塑"></a><div><strong>圣方济各博尔吉亚：</strong>出身贵族后加入耶稣会，底座象征物常提示他从权力转向宗教生活。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Ludmila%26Venceslas.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Charles_Bridge_St_Ludmila%26Venceslas.jpg/160px-Charles_Bridge_St_Ludmila%26Venceslas.jpg" alt="圣柳德米拉和小瓦茨拉夫雕塑"></a><div><strong>圣柳德米拉和小瓦茨拉夫：</strong>祖母教小瓦茨拉夫读书，是捷克本土历史感很强的一组。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Francis.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Charles_Bridge_St_Francis.jpg/160px-Charles_Bridge_St_Francis.jpg" alt="亚西西的圣方济各雕塑"></a><div><strong>亚西西的圣方济各：</strong>以清贫和亲近自然著称；如果孩子问为什么很多雕像穿长袍，可以从这一组讲修会。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Vincent%26Prokop.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Charles_Bridge_St_Vincent%26Prokop.jpg/160px-Charles_Bridge_St_Vincent%26Prokop.jpg" alt="圣文森特和圣普罗科皮乌斯雕塑"></a><div><strong>圣文森特和圣普罗科皮乌斯：</strong>两位圣人组合，适合作为“桥上很多不是单人像”的例子。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Nicholas_Tolentino.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Charles_Bridge_St_Nicholas_Tolentino.jpg/160px-Charles_Bridge_St_Nicholas_Tolentino.jpg" alt="托伦蒂诺的圣尼古拉雕塑"></a><div><strong>托伦蒂诺的圣尼古拉：</strong>常被表现为向穷人分发食物或关怀病人，可以讲“帮助别人”的主题。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Luitgard%27s_dream.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Charles_Bridge_St_Luitgard%27s_dream.jpg/160px-Charles_Bridge_St_Luitgard%27s_dream.jpg" alt="圣卢特加德梦见基督雕塑"></a><div><strong>圣卢特加德梦见基督：</strong>艺术质量很高的一组，人物动作最有戏剧性，建议重点停 2 分钟。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Adalbert.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Charles_Bridge_St_Adalbert.jpg/160px-Charles_Bridge_St_Adalbert.jpg" alt="圣阿德尔伯特雕塑"></a><div><strong>圣阿德尔伯特：</strong>与捷克早期基督教历史有关，适合只看外形，不必展开太多。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Sv_Jan_z_Malty.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sv_Jan_z_Malty.jpg/160px-Sv_Jan_z_Malty.jpg" alt="圣若望、圣费利克斯和圣伊凡雕塑"></a><div><strong>圣若望、圣费利克斯和圣伊凡：</strong>有解救俘虏的主题，雕塑中常能看到囚禁和守卫元素，孩子会比较容易注意到。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Sv_V%C3%A1clav.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sv_V%C3%A1clav.jpg/120px-Sv_V%C3%A1clav.jpg" alt="圣瓦茨拉夫雕塑"></a><div><strong>圣瓦茨拉夫：</strong>捷克重要守护圣人；如果之后看瓦茨拉夫广场，可把两处联系起来。</div></li>
+        </ol>
+        <h3>右侧十五组</h3>
+        <ol class="statue-guide-list">
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_Madona%26St_Bernard.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Charles_Bridge_Madona%26St_Bernard.jpg/160px-Charles_Bridge_Madona%26St_Bernard.jpg" alt="圣母和圣伯尔纳德雕塑"></a><div><strong>圣母和圣伯尔纳德：</strong>修会和圣母崇敬主题，适合看跪姿、天使和受难器物。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_Madona%26St_Dominic%26Thomas.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Charles_Bridge_Madona%26St_Dominic%26Thomas.jpg/180px-Charles_Bridge_Madona%26St_Dominic%26Thomas.jpg" alt="圣母、圣多明我和圣托马斯雕塑"></a><div><strong>圣母、圣多明我和圣托马斯：</strong>多明我会相关主题；重点看人物层次，不必细讲神学。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Kalv%C3%A1rie_-_svat%C3%BD_K%C5%99%C3%AD%C5%BE.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Kalv%C3%A1rie_-_svat%C3%BD_K%C5%99%C3%AD%C5%BE.jpg/180px-Kalv%C3%A1rie_-_svat%C3%BD_K%C5%99%C3%AD%C5%BE.jpg" alt="十字架和加尔瓦略雕塑"></a><div><strong>十字架和加尔瓦略：</strong>桥上最醒目的宗教符号之一，带金色希伯来文；适合讲布拉格历史中不同宗教记忆叠在一起。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Anna.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Charles_Bridge_St_Anna.jpg/160px-Charles_Bridge_St_Anna.jpg" alt="圣安妮雕塑"></a><div><strong>圣安妮：</strong>圣母玛利亚的母亲，家庭主题较明显，适合快速看。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Cyril%26Methodus.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Charles_Bridge_St_Cyril%26Methodus.jpg/160px-Charles_Bridge_St_Cyril%26Methodus.jpg" alt="圣西里尔和圣美多德雕塑"></a><div><strong>圣西里尔和圣美多德：</strong>斯拉夫传教士，和文字、语言传播有关，适合讲“他们把信仰和文字带到斯拉夫世界”。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge-saint_John.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Charles_Bridge-saint_John.jpg/160px-Charles_Bridge-saint_John.jpg" alt="施洗者圣约翰雕塑"></a><div><strong>施洗者圣约翰：</strong>常带洗礼象征，是辨识度较高的圣经人物。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Norbert_Venceslas_Sigmund.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Charles_Bridge_St_Norbert_Venceslas_Sigmund.jpg/180px-Charles_Bridge_St_Norbert_Venceslas_Sigmund.jpg" alt="圣诺伯特、圣瓦茨拉夫和圣西吉斯蒙德雕塑"></a><div><strong>圣诺伯特、圣瓦茨拉夫和圣西吉斯蒙德：</strong>三人组合，可作为“捷克本地和欧洲圣人混在一起”的例子。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Svat%C3%BD_Jan_Nepomuck%C3%BD.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Svat%C3%BD_Jan_Nepomuck%C3%BD.jpg/180px-Svat%C3%BD_Jan_Nepomuck%C3%BD.jpg" alt="圣约翰内波穆克雕塑"></a><div><strong>圣约翰内波穆克：</strong>最有名的一组，传说他因保守王后告解秘密被扔进伏尔塔瓦河；底座浮雕常被游客触摸祈福。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Anthony_Padova.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Charles_Bridge_St_Anthony_Padova.jpg/160px-Charles_Bridge_St_Anthony_Padova.jpg" alt="帕多瓦的圣安东尼雕塑"></a><div><strong>帕多瓦的圣安东尼：</strong>常和小耶稣一起出现，也是容易辨认的一组。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Thadeas.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Charles_Bridge_St_Thadeas.jpg/160px-Charles_Bridge_St_Thadeas.jpg" alt="圣犹达雕塑"></a><div><strong>圣犹达：</strong>常被视为困境中的守护圣人，适合简单带过。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Augustin.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Charles_Bridge_St_Augustin.jpg/160px-Charles_Bridge_St_Augustin.jpg" alt="圣奥古斯丁雕塑"></a><div><strong>圣奥古斯丁：</strong>重要神学家，桥上可看主教形象和书卷元素。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Charles_Bridge_St_Caetan.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Charles_Bridge_St_Caetan.jpg/160px-Charles_Bridge_St_Caetan.jpg" alt="圣加耶当雕塑"></a><div><strong>圣加耶当：</strong>与教会改革和慈善有关，适合快速看。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Svat%C3%BD_Filip_Benicius.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Svat%C3%BD_Filip_Benicius.jpg/160px-Svat%C3%BD_Filip_Benicius.jpg" alt="圣斐理伯贝尼修雕塑"></a><div><strong>圣斐理伯贝尼修：</strong>材料和造型与多数砂岩雕塑略有不同，适合找“哪一组看起来不太一样”。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Svat%C3%BD_V%C3%ADt.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Svat%C3%BD_V%C3%ADt.jpg/160px-Svat%C3%BD_V%C3%ADt.jpg" alt="圣维特雕塑"></a><div><strong>圣维特：</strong>和圣维特大教堂同名，可和 8/6 城堡日联系起来。</div></li>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Svat%C3%BD_Kosma_a_Dami%C3%A1n_se_Salv%C3%A1torem.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Svat%C3%BD_Kosma_a_Dami%C3%A1n_se_Salv%C3%A1torem.jpg/180px-Svat%C3%BD_Kosma_a_Dami%C3%A1n_se_Salv%C3%A1torem.jpg" alt="救世主、圣科斯马和圣达弥盎雕塑"></a><div><strong>救世主、圣科斯马和圣达弥盎：</strong>医生兄弟圣人组合，适合讲“医学和守护”的主题。</div></li>
+        </ol>
+        <h3>桥墩彩蛋</h3>
+        <ol>
+          <li><a class="statue-photo" href="https://commons.wikimedia.org/wiki/File:Praha_2005-09-15_Charles_Bridge.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Praha_2005-09-15_Charles_Bridge.jpg/160px-Praha_2005-09-15_Charles_Bridge.jpg" alt="布伦茨维克骑士雕塑"></a><div><strong>布伦茨维克骑士：</strong>不算主栏杆 30 组之一，但常被游客算作第 31 组。它在康帕一侧桥墩旁，带金剑和狮子传说；如果已经走到康帕岛，可以顺路找一下。</div></li>
         </ol>
       </div>
     </section>
