@@ -66,6 +66,10 @@ const css = `    .day-breadcrumb {
       scroll-margin-top: 112px;
     }
 
+    #detailed-plan.collapsed-section {
+      overflow: visible;
+    }
+
 `;
 
 if (!html.includes(cssMarker)) {
@@ -73,17 +77,16 @@ if (!html.includes(cssMarker)) {
 }
 html = html.replace(cssMarker, css + cssMarker);
 
-const detailMarker = `    <section class="section-head" id="detailed-plan">
-      <h2>详细计划</h2>
+const detailMarker = `    <details class="collapsed-section" id="detailed-plan" open>
+      <summary>详细计划</summary>
+      <div class="collapsed-section-body">
       <p>时间是规划锚点，不等于已预订项目；预订栏绿色勾表示已订，黄色感叹号表示还需要提前处理。</p>
-    </section>
-
     <section class="days">`;
 
-const dayNav = `    <section class="section-head" id="detailed-plan">
-      <h2>详细计划</h2>
+const dayNav = `    <details class="collapsed-section" id="detailed-plan" open>
+      <summary>详细计划</summary>
+      <div class="collapsed-section-body">
       <p>时间是规划锚点，不等于已预订项目；预订栏绿色勾表示已订，黄色感叹号表示还需要提前处理。</p>
-    </section>
 
     <nav class="day-breadcrumb" aria-label="每日行程快速导航">
       <strong>快速跳转</strong>
@@ -120,7 +123,7 @@ const script = `
 
       const activate = (day) => {
         for (const link of links) {
-          const active = link.getAttribute("href") === `#${day.id}`;
+          const active = link.getAttribute("href") === "#" + day.id;
           if (active) {
             link.setAttribute("aria-current", "date");
             link.scrollIntoView({ block: "nearest", inline: "center" });
