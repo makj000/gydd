@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2026年奥地利捷克旅行计划</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root {
       color-scheme: light;
@@ -2186,6 +2187,59 @@
         border-bottom: 1px solid var(--line);
       }
     }
+
+    .day-map {
+      height: 260px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-bottom: 14px;
+      background: #eef1ec;
+    }
+
+    .day-map .leaflet-container {
+      font-family: inherit;
+      background: #eef1ec;
+    }
+
+    .day-map-marker {
+      background: transparent;
+      border: none;
+    }
+
+    .day-map-pin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .day-map-pin-hotel {
+      background: var(--red);
+      font-size: 14px;
+    }
+
+    .day-map-pin-poi {
+      background: var(--blue);
+    }
+
+    .day-map-popup {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 620px) {
+      .day-map {
+        height: 200px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2394,6 +2448,7 @@
           <div class="city">萨尔茨堡</div>
           <div class="day-photo"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"></div>
         </div>
+        <div class="day-map" data-day="0729" role="img" aria-label="7/29地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="city-intro"><span>城市介绍：萨尔茨堡是这次行程的第一站，老城紧凑、步行友好，音乐节气氛和莫扎特相关地点是主线。这里先按抵达后的体力安排，重点是不赶路、熟悉老城和酒店周边。</span></li>
@@ -2420,6 +2475,7 @@
           <div class="city">萨尔茨堡</div>
           <div class="day-photo"><img src="photos/hellbrunn.jpg" alt="海尔布伦宫"></div>
         </div>
+        <div class="day-map" data-day="0730" role="img" aria-label="7/30地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.christian-doppler.net/en/station/salzburg-where-everything-began/" data-link-label="介绍"><span class="time">09:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&destination=Mirabellgarten%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 harry's home Salzburg 大致向西南↙步行👣到米拉贝尔花园🌷约 10 到 15 分钟</a>；之后<a href="https://www.google.com/maps/dir/?api=1&origin=Mirabellgarten%2C%20Salzburg%2C%20Austria&destination=Makartplatz%201%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">大致向西←步行👣到 Makartplatz 1 的多普勒出生地纪念牌约 5 到 10 分钟</a>，再<a href="https://www.google.com/maps/dir/?api=1&origin=Makartplatz%201%2C%20Salzburg%2C%20Austria&destination=Getreidegasse%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">大致向南↓步行👣过河🌊到粮食胡同和老城核心区约 10 到 20 分钟</a>。建议总停留 2 到 2.5 小时；多普勒纪念牌、米拉贝尔花园🌷和老城公共区域不需预订。</span></li>
@@ -2476,6 +2532,7 @@
           <div class="city">萨尔茨堡到林茨</div>
           <div class="day-photo"><img src="photos/linz.jpg" alt="林茨中央广场⛲"></div>
         </div>
+        <div class="day-map" data-day="0731" role="img" aria-label="7/31地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="city-intro"><span>城市介绍：林茨是萨尔茨堡和南波希米亚之间的中途城市，节奏比两端更轻，适合用电子艺术中心、中央广场、大教堂和登山火车组成一个恢复型城市日。酒店靠近火车站和市中心交通，行李处理相对简单。</span></li>
@@ -2498,6 +2555,7 @@
           <div class="city">林茨</div>
           <div class="day-photo"><img src="photos/postlingberg.jpg" alt="林茨登山⛰️火车🚆"></div>
         </div>
+        <div class="day-map" data-day="0801" role="img" aria-label="8/1地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="needs-action" data-price="成人 €14；优惠 €12；儿童约 €5.50" data-link="https://ars.electronica.art/center/en/tickets/" data-link-label="购票"><span class="time">10:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Ars%20Electronica%20Center%2C%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西北↖坐电车或短程出租车🚕到电子艺术中心和深空展厅约 15 到 25 分钟</a>；电子艺术中心周二到周日 10:00-17:00 开放，建议 10:00-12:30 参观。深空展厅是重点：深空家庭场次通常 11:30、12:30、15:30，不需提前登记；若想参加英文亮点导览，官网节目表列 13:30-14:30，需要到售票处登记，和午餐/登山火车可能冲突。门票成人 €14，优惠 €12，儿童约 €5.50；普通线上门票不是固定时段票，建议 7/31中午提前一天购买，先用下方报名统计确认人数。入口在 Ars-Electronica-Straße 1，面朝多瑙河和 Nibelungenbrücke 桥；没有传统语音导览，深空展厅是现场固定场次讲解，其余展项以互动体验为主，一楼（Level 0）就是深空展厅 Deep Space 8K，往上几层是 Understanding AI、Kids' Research Lab 等互动展区，入口处可取楼层导览图。</span>
@@ -2533,6 +2591,7 @@
           <div class="city">林茨到布杰约维采</div>
           <div class="day-photo"><img src="photos/budejovice.jpg" alt="布杰约维采广场⛲"></div>
         </div>
+        <div class="day-map" data-day="0802" role="img" aria-label="8/2地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="city-intro"><span>城市介绍：布杰约维采是南波希米亚的停靠点，核心体验是大广场、黑塔、河边老城和百威酿酒厂。这里不适合塞太多跨城项目，最好把节奏放慢，给换乘、入住和孩子休息留余量。</span></li>
@@ -2556,6 +2615,7 @@
           <div class="city">布杰约维采</div>
           <div class="day-photo"><img src="photos/budejovice.jpg" alt="布杰约维采广场⛲"></div>
         </div>
+        <div class="day-map" data-day="0803" role="img" aria-label="8/3地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="广场⛲成人/儿童免费；黑塔🗼成人约 80 克朗、儿童约 40 克朗" data-link="https://www.budejce.cz/en/activities/2-black-tower"><span class="time">09:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=1%20Pra%C5%BEsk%C3%A1%20t%C5%99%C3%ADda%2C%20370%2004%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&destination=N%C3%A1m%C4%9Bst%C3%AD%20P%C5%99emysla%20Otakara%20II%2C%20%C4%8Cesk%C3%A9%20Bud%C4%9Bjovice%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从公寓大致向西南↙步行👣到普瑞米斯欧塔卡拉二世广场⛲约 5 到 15 分钟</a>；上午只安排布杰约维采老城，不跨城。广场⛲、参孙喷泉⛲、市政厅外观和黑塔🗼都在同一区域，公共区域不需预订；黑塔🗼登塔🗼参考价成人约 80 克朗、儿童约 40 克朗，出发前复核。建议停留 90 到 120 分钟，保留下午百威酿酒厂前的体力。</span></li>
@@ -2594,6 +2654,7 @@
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/prague.jpg" alt="布拉格查理大桥🌉"></div>
         </div>
+        <div class="day-map" data-day="0804" role="img" aria-label="8/4地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="city-intro"><span>城市介绍：布拉格是最后一段的主停留城市，景点密度高、步行量也高，所以安排分成轻松日、城堡日和主题步行日。酒店位置适合用步行、电车和短程出租车混合移动，重点是每天只抓一两个主线，避免连续重体力。</span></li>
@@ -2629,6 +2690,7 @@
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊"></div>
         </div>
+        <div class="day-map" data-day="0805" role="img" aria-label="8/5地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="约 250-450 克朗/人" data-link="https://www.cafelouvre.cz/en/contact" data-link-label="官网"><span class="time">上午</span><span>推荐 Café Louvre 早餐或早午餐：Národní 22, Prague 1；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西南↙步行👣约 15 到 20 分钟</a>，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">坐电车约 10 到 15 分钟</a>；布拉格轻量安排：早餐、短走或休息，建议停留 60 到 90 分钟；固定大桌建议订位。</span></li>
@@ -2664,6 +2726,7 @@
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/stvitus.jpg" alt="圣维特大教堂⛪"></div>
         </div>
+        <div class="day-map" data-day="0806" role="img" aria-label="8/6地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="needs-action critical-booking" data-price="成人 450 克朗；儿童 300 克朗；官方导览另加 250 克朗/人/小时" data-link="https://www.hrad.cz/cn/prague-castle-for-visitors/guided-tours" data-link-label="导览"><span class="time">09:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西←步行👣到皇家花园🌷和布拉格城堡🏰区域约 45 到 60 分钟</a>；如果想省体力，可<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">结合电车大致向西←上坡约 25 到 35 分钟</a>，或<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Prague%20Castle%2C%20Prague%2C%20Czech%20Republic&travelmode=driving" target="_blank" rel="noreferrer">打车🚕大致向西←或西北↖上坡约 15 到 25 分钟</a>。建议 9:00-11:30 参观城堡🏰区；官网夏季历史建筑 9:00-17:00，圣维特大教堂⛪周一到周六 9:00-17:00、最后入场 16:40，皇家花园🌷7/8 月 10:00-20:00。主线路成人 450 克朗，儿童/学生优惠 300 克朗。官方 1 小时导览可预约英文，价格另加 250 克朗/人/小时，标准线路含圣维特大教堂⛪和旧皇宫；官网没有列中文真人导览，中文页面也只列捷克语、英语、法语、德语、意大利语、西班牙语、俄语。导览时间是集合讲解时间，不是圣维特大教堂⛪固定入场时段；若安检或教堂排队长，导游通常调整顺序，但不能保证免排队。建议若订英文导览，约 9:30 或 10:00 比较稳；若要中文，只能找第三方中文私导或改用中文资料自助。</span>
@@ -2706,6 +2769,7 @@
           <div class="city">布拉格</div>
           <div class="day-photo"><img src="photos/vltava.jpg" alt="布拉格伏尔塔瓦河🌊"></div>
         </div>
+        <div class="day-map" data-day="0807" role="img" aria-label="8/7地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费" data-link="https://www.davidcerny.cz/work/k-kafka-head" data-link-label="介绍"><span class="time">09:45</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Franz%20Kafka%20Rotating%20Head%20statue%2C%20Quadrio%2C%20Prague%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从 The Julius Prague 大致向西南↙步行👣到 Quadrio 的卡夫卡头像约 15 到 20 分钟</a>；这是 David Černý 的动态雕塑，免费开放，适合作为“切尔尼和卡夫卡”主题起点。建议停留 20 到 30 分钟，等它整点前后转动更有意思。</span></li>
@@ -2738,6 +2802,7 @@
           <div class="city">布拉格到北京</div>
           <div class="day-photo"><img src="photos/airport.jpg" alt="布拉格机场🛫"></div>
         </div>
+        <div class="day-map" data-day="0808" role="img" aria-label="8/8地图：住宿和景点位置"></div>
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li data-price="早餐约 250-450 克朗/人；交通另计"><span class="time">上午</span><span>推荐酒店🏨早餐或 Café Louvre 早餐：Národní 22, Prague 1；<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=Caf%C3%A9%20Louvre%2C%20N%C3%A1rodn%C3%AD%2022%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从酒店🏨大致向西南↙步行👣约 15 到 20 分钟</a>。退房和整理建议 90 分钟；若退房后还想逛，优先问 The Julius Prague 是否可寄存行李；备选 EasyLocker 小城店，地址 Prokopská 625/3，靠近查理大桥🌉，9:00-20:00 开放，可现场刷卡，也可线上预留；若直接去机场🛫，没必要存包。交通建议：有行李时<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=V%C3%A1clav%20Havel%20Airport%20Prague%2C%20Prague%2C%20Czech%20Republic&travelmode=driving" target="_blank" rel="noreferrer">从 The Julius Prague 直接打车🚕或官方 Uber 大致向西←到布拉格机场🛫最省心，通常约 25 到 40 分钟</a>；若行李少，可<a href="https://www.google.com/maps/dir/?api=1&origin=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&destination=V%C3%A1clav%20Havel%20Airport%20Prague%2C%20Prague%2C%20Czech%20Republic&travelmode=transit" target="_blank" rel="noreferrer">大致向东→步行👣到主站坐 AE 机场🛫巴士，或地铁 A 线转 59 路机场🛫车大致向西←去机场🛫，约 40 到 50 分钟</a>。无论哪种方式，都额外留 30 分钟缓冲。</span></li>
@@ -3223,6 +3288,177 @@
       </div>
     </details>
   </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      const DAY_MAP_PLACES = {
+        "0729": [
+          { name: "harry's home Salzburg", lat: 47.8103, lng: 13.0470, type: "hotel" },
+          { name: "萨尔茨堡老城", lat: 47.7981, lng: 13.0450, type: "poi" },
+          { name: "萨尔茨堡大教堂", lat: 47.7975, lng: 13.0466, type: "poi" },
+          { name: "卡比特尔广场", lat: 47.7965, lng: 13.0473, type: "poi" }
+        ],
+        "0730": [
+          { name: "harry's home Salzburg", lat: 47.8103, lng: 13.0470, type: "hotel" },
+          { name: "海尔布伦戏水宫", lat: 47.7614, lng: 13.0603, type: "poi" },
+          { name: "多普勒出生地纪念牌", lat: 47.8036, lng: 13.0421, type: "poi" },
+          { name: "莫扎特出生地", lat: 47.7996, lng: 13.0442, type: "poi" },
+          { name: "霍亨萨尔茨堡城堡", lat: 47.7950, lng: 13.0480, type: "poi" },
+          { name: "卡比特尔广场", lat: 47.7965, lng: 13.0473, type: "poi" },
+          { name: "Gasthof Goldgasse", lat: 47.7986, lng: 13.0438, type: "poi" },
+          { name: "Zwettler's Wirtshaus", lat: 47.7958, lng: 13.0455, type: "poi" }
+        ],
+        "0731": [
+          { name: "harry's home Salzburg", lat: 47.8103, lng: 13.0470, type: "hotel" },
+          { name: "米拉贝尔花园", lat: 47.8049, lng: 13.0400, type: "poi" },
+          { name: "粮食胡同", lat: 47.7998, lng: 13.0441, type: "poi" },
+          { name: "Courtyard by Marriott Linz", lat: 48.2925, lng: 14.2871, type: "hotel" },
+          { name: "林茨中央广场", lat: 48.3059, lng: 14.2862, type: "poi" }
+        ],
+        "0801": [
+          { name: "Courtyard by Marriott Linz", lat: 48.2925, lng: 14.2871, type: "hotel" },
+          { name: "匹斯特林山", lat: 48.3151, lng: 14.2632, type: "poi" },
+          { name: "电子艺术中心和深空展厅", lat: 48.3096, lng: 14.2843, type: "poi" },
+          { name: "Lentos 美术馆", lat: 48.3069, lng: 14.2860, type: "poi" },
+          { name: "林茨中央广场", lat: 48.3059, lng: 14.2862, type: "poi" },
+          { name: "林茨圣玛丽大教堂", lat: 48.3006, lng: 14.2887, type: "poi" }
+        ],
+        "0802": [
+          { name: "Residence Mariánská", lat: 48.9744, lng: 14.4780, type: "hotel" },
+          { name: "布杰约维采广场", lat: 48.9747, lng: 14.4744, type: "poi" }
+        ],
+        "0803": [
+          { name: "Residence Mariánská", lat: 48.9744, lng: 14.4780, type: "hotel" },
+          { name: "普瑞米斯欧塔卡拉二世广场", lat: 48.9747, lng: 14.4744, type: "poi" },
+          { name: "黑塔", lat: 48.9752, lng: 14.4746, type: "poi" },
+          { name: "圣尼古拉主教座堂", lat: 48.9754, lng: 14.4751, type: "poi" },
+          { name: "南波希米亚博物馆", lat: 48.9762, lng: 14.4708, type: "poi" },
+          { name: "百威酿酒厂", lat: 48.9958, lng: 14.4906, type: "poi" }
+        ],
+        "0804": [
+          { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
+          { name: "布拉格国家博物馆", lat: 50.0810, lng: 14.4308, type: "poi" },
+          { name: "老城桥塔", lat: 50.0865, lng: 14.4114, type: "poi" },
+          { name: "查理大桥", lat: 50.0863, lng: 14.4108, type: "poi" },
+          { name: "圣尼古拉教堂", lat: 50.0885, lng: 14.4038, type: "poi" },
+          { name: "三世纪餐厅", lat: 50.0839, lng: 14.4147, type: "poi" }
+        ],
+        "0805": [
+          { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
+          { name: "伏尔塔瓦河游船", lat: 50.0880, lng: 14.4127, type: "poi" },
+          { name: "高堡", lat: 50.0651, lng: 14.4207, type: "poi" },
+          { name: "科尔科夫纳餐厅", lat: 50.1004, lng: 14.4508, type: "poi" }
+        ],
+        "0806": [
+          { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
+          { name: "皇家花园", lat: 50.0930, lng: 14.4021, type: "poi" },
+          { name: "圣维特大教堂", lat: 50.0906, lng: 14.4006, type: "poi" },
+          { name: "小城", lat: 50.0879, lng: 14.4048, type: "poi" },
+          { name: "Café Louvre", lat: 50.0813, lng: 14.4187, type: "poi" }
+        ],
+        "0807": [
+          { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
+          { name: "卡夫卡头像", lat: 50.0838, lng: 14.4211, type: "poi" },
+          { name: "多普勒纪念牌", lat: 50.0793, lng: 14.4185, type: "poi" },
+          { name: "开普勒纪念牌", lat: 50.0866, lng: 14.4144, type: "poi" },
+          { name: "康帕婴儿雕塑", lat: 50.0839, lng: 14.4067, type: "poi" },
+          { name: "高堡", lat: 50.0651, lng: 14.4207, type: "poi" },
+          { name: "伏尔塔瓦河", lat: 50.0865, lng: 14.4114, type: "poi" },
+          { name: "康帕岛", lat: 50.0839, lng: 14.4072, type: "poi" },
+          { name: "列侬墙", lat: 50.0873, lng: 14.4054, type: "poi" },
+          { name: "佩特任山", lat: 50.0836, lng: 14.3958, type: "poi" },
+          { name: "犹太区", lat: 50.0906, lng: 14.4187, type: "poi" }
+        ],
+        "0808": [
+          { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
+          { name: "布拉格机场", lat: 50.1008, lng: 14.2600, type: "poi" }
+        ]
+      };
+
+      function makeIcon(place, poiIndex) {
+        const isHotel = place.type === "hotel";
+        const cls = isHotel ? "day-map-pin day-map-pin-hotel" : "day-map-pin day-map-pin-poi";
+        const label = isHotel ? "🏨" : String(poiIndex);
+        return L.divIcon({
+          className: "day-map-marker",
+          html: '<div class="' + cls + '">' + label + "</div>",
+          iconSize: [26, 26],
+          iconAnchor: [13, 13],
+          popupAnchor: [0, -14]
+        });
+      }
+
+      function initDayMap(container) {
+        if (container.dataset.mapReady) {
+          return;
+        }
+        const dayId = container.getAttribute("data-day");
+        const places = DAY_MAP_PLACES[dayId];
+        if (!places || !places.length || typeof L === "undefined") {
+          return;
+        }
+        container.dataset.mapReady = "1";
+
+        const map = L.map(container, {
+          scrollWheelZoom: false,
+          attributionControl: true
+        });
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        const markers = [];
+        let poiIndex = 0;
+        places.forEach((place) => {
+          if (place.type !== "hotel") {
+            poiIndex += 1;
+          }
+          const marker = L.marker([place.lat, place.lng], {
+            icon: makeIcon(place, poiIndex)
+          }).addTo(map);
+          const label = place.type === "hotel" ? "🏨 " + place.name + "（住宿）" : poiIndex + ". " + place.name;
+          marker.bindPopup('<span class="day-map-popup">' + label + "</span>");
+          markers.push(marker);
+        });
+
+        if (markers.length === 1) {
+          map.setView(markers[0].getLatLng(), 15);
+        } else {
+          map.fitBounds(L.featureGroup(markers).getBounds().pad(0.25));
+        }
+      }
+
+      function setupDayMaps() {
+        const containers = document.querySelectorAll(".day-map[data-day]");
+        if (!containers.length) {
+          return;
+        }
+        if (!("IntersectionObserver" in window)) {
+          containers.forEach(initDayMap);
+          return;
+        }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                initDayMap(entry.target);
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "200px 0px" }
+        );
+        containers.forEach((el) => observer.observe(el));
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupDayMaps);
+      } else {
+        setupDayMaps();
+      }
+    })();
+  </script>
   <script>
     const assistantEndpoint = "https://vuwqcxqokoeo23yei6bw2mvjnu0yiqyv.lambda-url.us-west-2.on.aws/";
     const assistantTokenKey = "austria-czech-assistant-token";
