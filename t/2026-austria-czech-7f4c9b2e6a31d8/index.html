@@ -579,6 +579,17 @@
       display: none;
     }
 
+    .items li.day-map-inline {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0;
+      border: none;
+    }
+
+    .items li.day-map-inline::after {
+      display: none;
+    }
+
     .items li > span:first-child {
       grid-column: 1;
     }
@@ -2549,6 +2560,7 @@
         <ul class="items">
           <li class="items-header"><span>时间</span><span>行程</span><span>票价</span><span>预订</span></li>
           <li class="city-intro"><span>城市介绍：林茨是萨尔茨堡和南波希米亚之间的中途城市，节奏比两端更轻，适合用电子艺术中心、中央广场、大教堂和登山火车组成一个恢复型城市日。酒店靠近火车站和市中心交通，行李处理相对简单。</span></li>
+          <li class="day-map-inline"><div class="day-map" data-day="0731-morning" role="img" aria-label="7/31上午地图：霍亨萨尔茨堡城堡、圣彼得墓地、洗马池"></div></li>
           <li class="needs-action" data-price="Panorama(缆车+庭院) 成人 €12.80、儿童 €5.20；Basic 成人 €15.50、儿童 €6.30；All-inclusive 成人 €19.20、儿童 €7.30" data-link="https://www.5schaetze.at/en/festungsbahn/prices.html" data-link-label="官网票价"><span class="time">09:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&destination=Festungsbahn%2C%20Festungsgasse%204%2C%205020%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 harry's home Salzburg 大致向南↓步行👣穿过老城到 Festungsbahn 缆车🚡站（Festungsgasse 4）约 20 到 30 分钟</a>，坐缆车🚡上山⛰️到霍亨萨尔茨堡城堡🏰；夏季（5-8月）开放 8:30-21:00，缆车🚡每 10 分钟一班。带孩子建议以城墙⛰️视野和庭院为主，不必逛完全部展馆，建议停留 90 到 120 分钟。门票含缆车🚡：Panorama（缆车+庭院+瞭望台，不含展馆）成人 €12.80、儿童 €5.20；Basic（含部分展馆）成人 €15.50、儿童 €6.30；All-inclusive（含全部展馆和城堡博物馆）成人 €19.20、儿童 €7.30；建议提前线上买票，避免现场排队。</span></li>
           <li class="no-booking" data-price="墓地成人免费；儿童免费；地下墓穴票价现场复核" data-link="https://www.stift-stpeter.at/en/catacombs" data-link-label="官网"><span class="time">11:00</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=Festungsbahn%2C%20Festungsgasse%204%2C%205020%20Salzburg%2C%20Austria&destination=St.%20Peter%27s%20Cemetery%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">缆车🚡下山⛰️后大致向北↑步行👣到圣彼得墓地⚰️约 3 到 5 分钟</a>；墓地紧贴僧侣山⛰️崖壁，免费进入，铁艺墓碑和小礼拜堂很有氛围；地下墓穴(Katakomben)是刻进崖壁的小教堂，小额门票现场买，具体价格和开放时间现场复核。建议停留 20 到 30 分钟。</span></li>
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">11:30</span><span><a href="https://www.google.com/maps/dir/?api=1&origin=St.%20Peter%27s%20Cemetery%2C%20Salzburg%2C%20Austria&destination=Pferdeschwemme%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从圣彼得墓地⚰️大致向西北↖步行👣到洗马池(Pferdeschwemme)约 5 到 10 分钟</a>；巴洛克大理石马浴池，后墙有一幅壮观的驯马壁画，17世纪真的用来给马洗澡；免费，不需预订，拍照打卡 5 到 10 分钟即可。</span></li>
@@ -3332,6 +3344,11 @@
           { name: "洗马池", lat: 47.7988, lng: 13.0428, type: "poi" },
           { name: "Courtyard by Marriott Linz", lat: 48.2925, lng: 14.2871, type: "hotel" },
           { name: "林茨中央广场", lat: 48.3059, lng: 14.2862, type: "poi" }
+        ],
+        "0731-morning": [
+          { name: "霍亨萨尔茨堡城堡", lat: 47.7950, lng: 13.0480, type: "poi" },
+          { name: "圣彼得墓地", lat: 47.7972, lng: 13.0459, type: "poi" },
+          { name: "洗马池", lat: 47.7988, lng: 13.0428, type: "poi" }
         ],
         "0801": [
           { name: "Courtyard by Marriott Linz", lat: 48.2925, lng: 14.2871, type: "hotel" },
