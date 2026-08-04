@@ -403,6 +403,15 @@
       stroke-width: 4;
     }
 
+    .map-point-num {
+      fill: white;
+      font-size: 12px;
+      font-weight: 900;
+      text-anchor: middle;
+      dominant-baseline: central;
+      pointer-events: none;
+    }
+
     .map-side {
       display: grid;
       align-content: start;
@@ -761,6 +770,25 @@
 
     .place-card.place-linked {
       cursor: pointer;
+    }
+
+    .place-num {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 2px;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     }
 
     .place-card.place-linked.is-linked-active {
@@ -1500,6 +1528,15 @@
       fill: var(--ink);
     }
 
+    .theme-map-point-num {
+      font-size: 11px !important;
+      font-weight: 900;
+      fill: white !important;
+      text-anchor: middle;
+      dominant-baseline: central;
+      pointer-events: none;
+    }
+
     .theme-guide {
       display: grid;
       gap: 10px;
@@ -1517,6 +1554,14 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfaf6;
+    }
+
+    .theme-guide-note {
+      margin: 0;
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .day-question {
@@ -2337,34 +2382,38 @@
           <path d="M40 235 C135 205 200 175 288 182 C385 190 445 235 545 218 C640 202 700 165 825 170" fill="none" stroke="#cbd8d0" stroke-width="34" stroke-linecap="round" opacity="0.75"></path>
           <path class="map-path" d="M198 290 L332 260 L570 172 L682 138"></path>
           <circle class="map-point" cx="198" cy="290" r="11"></circle>
+          <text class="map-point-num" x="198" y="290">1</text>
           <circle class="map-point" cx="332" cy="260" r="11"></circle>
+          <text class="map-point-num" x="332" y="260">2</text>
           <circle class="map-point" cx="570" cy="172" r="11"></circle>
+          <text class="map-point-num" x="570" y="172">3</text>
           <circle class="map-point" cx="682" cy="138" r="11"></circle>
+          <text class="map-point-num" x="682" y="138">4</text>
 
           <line class="map-leader" x1="198" y1="290" x2="142" y2="236"></line>
           <rect class="map-label-box" x="54" y="190" width="220" height="78" rx="8"></rect>
-          <text class="map-label" x="70" y="214">萨尔茨堡 Salzburg</text>
+          <text class="map-label" x="70" y="214">① 萨尔茨堡 Salzburg</text>
           <text class="map-date" x="70" y="235">7/29-7/31</text>
           <svg class="map-weather-icon" x="70" y="243" width="16" height="16"><use data-map-weather-icon="salzburg" href="#weather-cloud"></use></svg>
           <text class="map-note" x="92" y="256" data-map-weather="salzburg">天气：正在查询</text>
 
           <line class="map-leader" x1="332" y1="260" x2="332" y2="318"></line>
           <rect class="map-label-box" x="246" y="318" width="204" height="78" rx="8"></rect>
-          <text class="map-label" x="262" y="342">林茨 Linz</text>
+          <text class="map-label" x="262" y="342">② 林茨 Linz</text>
           <text class="map-date" x="262" y="363">7/31-8/2</text>
           <svg class="map-weather-icon" x="262" y="371" width="16" height="16"><use data-map-weather-icon="linz" href="#weather-cloud"></use></svg>
           <text class="map-note" x="284" y="384" data-map-weather="linz">天气：正在查询</text>
 
           <line class="map-leader" x1="570" y1="172" x2="610" y2="258"></line>
           <rect class="map-label-box" x="494" y="258" width="246" height="78" rx="8"></rect>
-          <text class="map-label" x="510" y="282">布杰约维采 České Budějovice</text>
+          <text class="map-label" x="510" y="282">③ 布杰约维采 České Budějovice</text>
           <text class="map-date" x="510" y="303">8/2-8/4</text>
           <svg class="map-weather-icon" x="510" y="311" width="16" height="16"><use data-map-weather-icon="budejovice" href="#weather-cloud"></use></svg>
           <text class="map-note" x="532" y="324" data-map-weather="budejovice">天气：正在查询</text>
 
           <line class="map-leader" x1="682" y1="138" x2="724" y2="78"></line>
           <rect class="map-label-box" x="616" y="26" width="222" height="78" rx="8"></rect>
-          <text class="map-label" x="632" y="50">布拉格 Praha</text>
+          <text class="map-label" x="632" y="50">④ 布拉格 Praha</text>
           <text class="map-date" x="632" y="71">8/4-8/8</text>
           <svg class="map-weather-icon" x="632" y="79" width="16" height="16"><use data-map-weather-icon="prague" href="#weather-cloud"></use></svg>
           <text class="map-note" x="654" y="92" data-map-weather="prague">天气：正在查询</text>
@@ -2483,9 +2532,9 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-harrys-home-salzburg.jpg" alt="harry's home Salzburg 外观"><span>harry's home Salzburg <small class="ticket-note">住宿：7/29到7/31；Fanny-von-Lehnert-Straße 6</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"><span>萨尔茨堡老城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg-cathedral-interior.jpg" alt="萨尔茨堡大教堂⛪"><span>萨尔茨堡大教堂⛪ <small class="ticket-note">入内成人 €7；14-18 岁 €3.50；13 岁及以下免费</small></span></figure>
-          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场⛲"><span>卡比特尔广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="萨尔茨堡老城"><b class="place-num">①</b><span>萨尔茨堡老城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg-cathedral-interior.jpg" alt="萨尔茨堡大教堂⛪"><b class="place-num">②</b><span>萨尔茨堡大教堂⛪ <small class="ticket-note">入内成人 €7；14-18 岁 €3.50；13 岁及以下免费</small></span></figure>
+          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场⛲"><b class="place-num">③</b><span>卡比特尔广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
       </article>
 
@@ -2539,13 +2588,13 @@
           <li class="no-booking" data-price="成人免费；儿童免费"><span class="time">22:50</span><span>放映结束，<a href="https://www.google.com/maps/dir/?api=1&origin=Kapitelplatz%2C%20Salzburg%2C%20Austria&destination=Fanny-von-Lehnert-Stra%C3%9Fe%206%2C%20Salzburg%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从卡比特尔广场⛲大致向北↑回 harry's home Salzburg，步行👣约 25 到 35 分钟</a>；孩子累时优先<a href="https://www.google.com/maps/dir/?api=1&origin=Kapitelplatz%2C%20Salzburg%2C%20Austria&destination=Salzburg%20Hauptbahnhof%2C%20Salzburg%2C%20Austria&travelmode=driving" target="_blank" rel="noreferrer">打车🚕或公交🚌大致向北↑回火车🚆站附近</a>。公共区域不需预订。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/mirabell.jpg" alt="米拉贝尔宫大理石厅"><span>米拉贝尔宫大理石厅和天使阶梯🪽 <em class="booking-tag no-booking">免费不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；婚礼当天可能关闭</small></span></figure>
-          <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><span>海尔布伦戏水宫 <em class="booking-tag">提前一天买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
-          <figure class="place-card"><img src="photos/doppler-birthplace-plaque.jpg" alt="多普勒出生地纪念牌"><span>多普勒出生地纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Makartplatz 1</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Salzburg_Mozart_Geburtshaus_04.jpg/330px-Salzburg_Mozart_Geburtshaus_04.jpg" alt="莫扎特出生地"><span>莫扎特出生地 <em class="booking-tag">入内可买票</em><small class="ticket-note">门票：外观免费；入内成人 €15；儿童/优惠 €4.50</small></span></figure>
-          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场⛲"><span>卡比特尔广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/gasthof-goldgasse.jpg" alt="Gasthof Goldgasse 餐厅🍽️"><span>Gasthof Goldgasse <em class="booking-tag">推荐午餐</em><small class="ticket-note">地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费：约 €35-55/人；菜单见午餐行官网链接</small></span></figure>
-          <figure class="place-card"><img src="photos/zwettlers-wirtshaus.jpg" alt="Zwettler's Wirtshaus 餐厅🍽️"><span>Zwettler's Wirtshaus <em class="booking-tag booked">18:00 已订</em><small class="ticket-note">地址：Kaigasse 3, 5020 Salzburg；电话：+43 662 274018</small></span></figure>
+          <figure class="place-card"><img src="photos/mirabell.jpg" alt="米拉贝尔宫大理石厅"><b class="place-num">①</b><span>米拉贝尔宫大理石厅和天使阶梯🪽 <em class="booking-tag no-booking">免费不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；婚礼当天可能关闭</small></span></figure>
+          <figure class="place-card"><img src="photos/hellbrunn.jpg" alt="海尔布伦戏水宫"><b class="place-num">②</b><span>海尔布伦戏水宫 <em class="booking-tag">提前一天买票</em><small class="ticket-note">门票：成人 €16.50；儿童 €6.50</small></span></figure>
+          <figure class="place-card"><img src="photos/doppler-birthplace-plaque.jpg" alt="多普勒出生地纪念牌"><b class="place-num">③</b><span>多普勒出生地纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Makartplatz 1</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Salzburg_Mozart_Geburtshaus_04.jpg/330px-Salzburg_Mozart_Geburtshaus_04.jpg" alt="莫扎特出生地"><b class="place-num">④</b><span>莫扎特出生地 <em class="booking-tag">入内可买票</em><small class="ticket-note">门票：外观免费；入内成人 €15；儿童/优惠 €4.50</small></span></figure>
+          <figure class="place-card"><img src="photos/kapitelplatz.jpg" alt="卡比特尔广场⛲"><b class="place-num">⑤</b><span>卡比特尔广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/gasthof-goldgasse.jpg" alt="Gasthof Goldgasse 餐厅🍽️"><b class="place-num">⑥</b><span>Gasthof Goldgasse <em class="booking-tag">推荐午餐</em><small class="ticket-note">地址：Goldgasse 10, 5020 Salzburg；电话：+43 662 84 82 00；餐费：约 €35-55/人；菜单见午餐行官网链接</small></span></figure>
+          <figure class="place-card"><img src="photos/zwettlers-wirtshaus.jpg" alt="Zwettler's Wirtshaus 餐厅🍽️"><b class="place-num">⑦</b><span>Zwettler's Wirtshaus <em class="booking-tag booked">18:00 已订</em><small class="ticket-note">地址：Kaigasse 3, 5020 Salzburg；电话：+43 662 274018</small></span></figure>
         </div>
       </article>
 
@@ -2569,11 +2618,11 @@
           <li data-price="约 €25-45/人" data-link="https://www.klosterhof.at/kontakt-service/kontakt/" data-link-label="官网"><span class="time">晚上</span><span>推荐 Stiegl-Klosterhof 晚餐：Landstraße 30, 4020 Linz；电话 +43 732 773373；<a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从 Courtyard by Marriott Linz 大致向西←步行👣约 20 到 30 分钟</a>，或<a href="https://www.google.com/maps/dir/?api=1&origin=Europaplatz%202%2C%204020%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">电车/出租车🚕约 10 到 15 分钟</a>；餐费标准约 €25-45/人，建议用餐 60 到 90 分钟；固定时间建议订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡🏰"><span>霍亨萨尔茨堡城堡🏰 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票含缆车：Panorama 成人 €12.80/儿童 €5.20；Basic 成人 €15.50/儿童 €6.30；All-inclusive 成人 €19.20/儿童 €7.30</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="圣彼得墓地⚰️"><span>圣彼得墓地⚰️和地下墓穴 <em class="booking-tag no-booking">墓地免费</em><small class="ticket-note">墓地成人免费；儿童免费；地下墓穴票价现场复核</small></span></figure>
-          <figure class="place-card"><img src="photos/salzburg.jpg" alt="洗马池"><span>洗马池(Pferdeschwemme) <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/hohensalzburg.jpg" alt="霍亨萨尔茨堡城堡🏰"><b class="place-num">①</b><span>霍亨萨尔茨堡城堡🏰 <em class="booking-tag">建议提前买票</em><small class="ticket-note">门票含缆车：Panorama 成人 €12.80/儿童 €5.20；Basic 成人 €15.50/儿童 €6.30；All-inclusive 成人 €19.20/儿童 €7.30</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="圣彼得墓地⚰️"><b class="place-num">②</b><span>圣彼得墓地⚰️和地下墓穴 <em class="booking-tag no-booking">墓地免费</em><small class="ticket-note">墓地成人免费；儿童免费；地下墓穴票价现场复核</small></span></figure>
+          <figure class="place-card"><img src="photos/salzburg.jpg" alt="洗马池"><b class="place-num">③</b><span>洗马池(Pferdeschwemme) <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
           <figure class="place-card"><img src="photos/hotel-courtyard-linz.jpg" alt="Courtyard by Marriott Linz 酒店🏨"><span>Courtyard by Marriott Linz <small class="ticket-note">住宿：7/31到8/2</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><b class="place-num">④</b><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
         </div>
       </article>
 
@@ -2605,11 +2654,11 @@
           <li data-price="约 €25-45/人" data-link="https://www.klosterhof.at/kontakt-service/kontakt/" data-link-label="官网"><span class="time">晚餐</span><span>推荐 Stiegl-Klosterhof 晚餐：Landstraße 30, 4020 Linz；<a href="https://www.google.com/maps/dir/?api=1&origin=Neuer%20Dom%20%28Mariendom%29%2C%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=walking" target="_blank" rel="noreferrer">从圣玛丽大教堂⛪大致向北↑步行👣约 8 到 15 分钟</a>，也可<a href="https://www.google.com/maps/dir/?api=1&origin=Neuer%20Dom%20%28Mariendom%29%2C%20Linz%2C%20Austria&destination=Stiegl-Klosterhof%2C%20Landstra%C3%9Fe%2030%2C%204020%20Linz%2C%20Austria&travelmode=transit" target="_blank" rel="noreferrer">坐电车或短程出租车🚕约 10 分钟</a>；餐费标准约 €25-45/人，建议用餐 60 到 90 分钟；固定时间建议订桌。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山⛰️登山⛰️火车🚆"><span>匹斯特林山⛰️登山⛰️火车🚆 <small class="ticket-note">门票：往返成人 €9.00；儿童/优惠 €4.50</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linz_Ars_Electronica_center-5529.jpg/330px-Linz_Ars_Electronica_center-5529.jpg" alt="电子艺术中心和深空展厅"><span>电子艺术中心和深空展厅 <em class="booking-tag">提前一天中午买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Lentos_Kunstmuseum_Linz_2008a.jpg/330px-Lentos_Kunstmuseum_Linz_2008a.jpg" alt="Lentos 美术馆"><span>Lentos 美术馆 <em class="booking-tag">备选</em><small class="ticket-note">现代/当代美术；离电子艺术中心和中央广场都近；门票现场复核</small></span></figure>
-          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂⛪"><span>林茨圣玛丽大教堂⛪ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；现场捐赠另计</small></span></figure>
+          <figure class="place-card"><img src="photos/postlingberg.jpg" alt="匹斯特林山⛰️登山⛰️火车🚆"><b class="place-num">①</b><span>匹斯特林山⛰️登山⛰️火车🚆 <small class="ticket-note">门票：往返成人 €9.00；儿童/优惠 €4.50</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linz_Ars_Electronica_center-5529.jpg/330px-Linz_Ars_Electronica_center-5529.jpg" alt="电子艺术中心和深空展厅"><b class="place-num">②</b><span>电子艺术中心和深空展厅 <em class="booking-tag">提前一天中午买票</em><small class="ticket-note">门票：成人 €14；优惠 €12；儿童约 €5.50</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Lentos_Kunstmuseum_Linz_2008a.jpg/330px-Lentos_Kunstmuseum_Linz_2008a.jpg" alt="Lentos 美术馆"><b class="place-num">③</b><span>Lentos 美术馆 <em class="booking-tag">备选</em><small class="ticket-note">现代/当代美术；离电子艺术中心和中央广场都近；门票现场复核</small></span></figure>
+          <figure class="place-card"><img src="photos/linz.jpg" alt="林茨中央广场⛲"><b class="place-num">④</b><span>林茨中央广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/mariendom.jpg" alt="林茨圣玛丽大教堂⛪"><b class="place-num">⑤</b><span>林茨圣玛丽大教堂⛪ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；现场捐赠另计</small></span></figure>
         </div>
       </article>
 
@@ -2632,8 +2681,8 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-residence-marianska.jpg" alt="Residence Mariánská 外观"><span>Residence Mariánská <small class="ticket-note">住宿：8/2到8/4</small></span></figure>
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="布杰约维采广场⛲"><span>布杰约维采广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_plaveck%C3%BD_baz%C3%A9n.JPG/250px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_plaveck%C3%BD_baz%C3%A9n.JPG" alt="Sokolský ostrov 游泳池"><span>Sokolský ostrov 游泳池 <em class="booking-tag">备选</em><small class="ticket-note">室外全天成人 150 克朗/儿童 100 克朗；室内按时段收费</small></span></figure>
+          <figure class="place-card"><img src="photos/budejovice.jpg" alt="布杰约维采广场⛲"><b class="place-num">①</b><span>布杰约维采广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_plaveck%C3%BD_baz%C3%A9n.JPG/250px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_plaveck%C3%BD_baz%C3%A9n.JPG" alt="Sokolský ostrov 游泳池"><b class="place-num">②</b><span>Sokolský ostrov 游泳池 <em class="booking-tag">备选</em><small class="ticket-note">室外全天成人 150 克朗/儿童 100 克朗；室内按时段收费</small></span></figure>
         </div>
       </article>
 
@@ -2666,12 +2715,12 @@
           <li class="needs-action" data-price="市政厅夏季音乐会约 290-320 克朗/人；广场音乐夜免费" data-link="https://www.budejce.cz/en/calendar/1160964929-town-hall-summer" data-link-label="活动"><span class="time">20:00</span><span>可选：市政厅夏季音乐会，在市政厅庭院，离主广场⛲和晚餐地点很近；从 Solnice 大致向东南↘步行👣到市政厅约 3 到 6 分钟。官方活动页确认夏季系列和市政厅庭院地点，订票页显示音乐会票价约 290-320 克朗/人；8/3 具体节目和是否需要提前买票，出发前按官方活动页或订票页再复核。另一个相邻活动是<a href="https://www.budejce.cz/en/calendar/1160970812-musical-evenings-on-the-square" target="_blank" rel="noreferrer">广场音乐夜</a>，地点就在普瑞米斯欧塔卡拉二世广场⛲，免费，但官网列出的 8 月场次是 8/4、8/6、8/11 等，没有 8/3；只有 8/4 行程改变、晚上仍在布杰约维采时才作为可选项。小孩累的话可以直接回公寓。<strong>提醒：</strong>明天 8/4 下午会去布拉格国家博物馆，睡前先用 Wi-Fi 下载好官方 App「National museum in your pocket」（免费语音导览），到馆当天可能没稳定网络现场下载。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场⛲"><span>普瑞米斯欧塔卡拉二世广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/blacktower.jpg" alt="黑塔🗼"><span>黑塔🗼 <small class="ticket-note">门票：成人约 80 克朗；儿童约 40 克朗，现场复核</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/2018-02-09_%28201%29_Cathedral_of_Saint_Nicholas%2C_%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Czech_Republic.jpg/330px-2018-02-09_%28201%29_Cathedral_of_Saint_Nicholas%2C_%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Czech_Republic.jpg" alt="布杰约维采圣尼古拉主教座堂⛪"><span>圣尼古拉主教座堂⛪ <em class="booking-tag no-booking">短停</em><small class="ticket-note">外观免费；入内现场复核；建议 10 到 20 分钟</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Dukelsk%C3%A1%2C_Jiho%C4%8Desk%C3%A9_muzeum.JPG/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Dukelsk%C3%A1%2C_Jiho%C4%8Desk%C3%A9_muzeum.JPG" alt="南波希米亚博物馆"><span>南波希米亚博物馆 <em class="booking-tag">备选</em><small class="ticket-note">雨天或热天备选；门票现场复核</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Budweiser_Budvar_brewery%2C_01.jpg/330px-Budweiser_Budvar_brewery%2C_01.jpg" alt="百威酿酒厂"><span>百威酿酒厂 <em class="booking-tag">已确认</em><small class="ticket-note">15:00 参观；14:40 到达；成人 290 克朗；儿童/优惠 220 克朗</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_radni%C4%8Dn%C3%AD_n%C3%A1dvo%C5%99%C3%AD.jpg/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_radni%C4%8Dn%C3%AD_n%C3%A1dvo%C5%99%C3%AD.jpg" alt="市政厅夏季音乐会"><span>市政厅夏季音乐会 <em class="booking-tag">可选</em><small class="ticket-note">20:00；市政厅庭院；音乐会约 290-320 克朗/人，出发前复核</small></span></figure>
+          <figure class="place-card"><img src="photos/budejovice.jpg" alt="普瑞米斯欧塔卡拉二世广场⛲"><b class="place-num">①</b><span>普瑞米斯欧塔卡拉二世广场⛲ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/blacktower.jpg" alt="黑塔🗼"><b class="place-num">②</b><span>黑塔🗼 <small class="ticket-note">门票：成人约 80 克朗；儿童约 40 克朗，现场复核</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/2018-02-09_%28201%29_Cathedral_of_Saint_Nicholas%2C_%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Czech_Republic.jpg/330px-2018-02-09_%28201%29_Cathedral_of_Saint_Nicholas%2C_%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Czech_Republic.jpg" alt="布杰约维采圣尼古拉主教座堂⛪"><b class="place-num">③</b><span>圣尼古拉主教座堂⛪ <em class="booking-tag no-booking">短停</em><small class="ticket-note">外观免费；入内现场复核；建议 10 到 20 分钟</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Dukelsk%C3%A1%2C_Jiho%C4%8Desk%C3%A9_muzeum.JPG/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice%2C_Dukelsk%C3%A1%2C_Jiho%C4%8Desk%C3%A9_muzeum.JPG" alt="南波希米亚博物馆"><b class="place-num">④</b><span>南波希米亚博物馆 <em class="booking-tag">备选</em><small class="ticket-note">雨天或热天备选；门票现场复核</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Budweiser_Budvar_brewery%2C_01.jpg/330px-Budweiser_Budvar_brewery%2C_01.jpg" alt="百威酿酒厂"><b class="place-num">⑤</b><span>百威酿酒厂 <em class="booking-tag">已确认</em><small class="ticket-note">15:00 参观；14:40 到达；成人 290 克朗；儿童/优惠 220 克朗</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_radni%C4%8Dn%C3%AD_n%C3%A1dvo%C5%99%C3%AD.jpg/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_radni%C4%8Dn%C3%AD_n%C3%A1dvo%C5%99%C3%AD.jpg" alt="市政厅夏季音乐会"><b class="place-num">⑥</b><span>市政厅夏季音乐会 <em class="booking-tag">可选</em><small class="ticket-note">20:00；市政厅庭院；音乐会约 290-320 克朗/人，出发前复核</small></span></figure>
           <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_n%C3%A1m%C4%9Bst%C3%AD_a_ka%C5%A1na_z_radnice.jpg/330px-%C4%8Cesk%C3%A9_Bud%C4%9Bjovice_-_n%C3%A1m%C4%9Bst%C3%AD_a_ka%C5%A1na_z_radnice.jpg" alt="广场音乐夜"><span>广场音乐夜 <em class="booking-tag no-booking">相邻备选</em><small class="ticket-note">免费；没有 8/3 场次，8/4仍在本城才考虑</small></span></figure>
         </div>
       </article>
@@ -2704,11 +2753,11 @@
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
           <figure class="place-card"><img src="photos/hotel-the-julius-prague.jpg" alt="The Julius Prague 外观"><span>The Julius Prague <small class="ticket-note">住宿：8/4到8/8</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Prag%2C_Nationalmuseum_--_2019_--_6836.jpg/330px-Prag%2C_Nationalmuseum_--_2019_--_6836.jpg" alt="布拉格国家博物馆"><span>布拉格国家博物馆 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">14:00安排；成人 300 克朗，学生/长者 150 克朗，儿童多数免费</small></span></figure>
-          <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥🌉塔🗼"><span>老城桥🌉塔🗼 <small class="ticket-note">门票：成人 250 克朗；儿童/优惠 170 克朗；外观免费</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="查理大桥🌉"><span>查理大桥🌉 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Prague_07-2016_View_from_Lesser_Town_Nicholas_Church_img1.jpg/330px-Prague_07-2016_View_from_Lesser_Town_Nicholas_Church_img1.jpg" alt="圣尼古拉教堂⛪附近"><span>圣尼古拉教堂⛪附近 <small class="ticket-note">门票：外观免费；入内成人 150 克朗，儿童/学生 10-26 岁 90 克朗，10 岁以下免费</small></span></figure>
-          <figure class="place-card"><img src="https://stoleti.cz/img/gallery/g1.jpg" alt="三世纪餐厅🍽️"><span>Století（三世纪餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费：约 550-850 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Prag%2C_Nationalmuseum_--_2019_--_6836.jpg/330px-Prag%2C_Nationalmuseum_--_2019_--_6836.jpg" alt="布拉格国家博物馆"><b class="place-num">①</b><span>布拉格国家博物馆 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">14:00安排；成人 300 克朗，学生/长者 150 克朗，儿童多数免费</small></span></figure>
+          <figure class="place-card"><img src="photos/bridge_tower.jpg" alt="老城桥🌉塔🗼"><b class="place-num">②</b><span>老城桥🌉塔🗼 <small class="ticket-note">门票：成人 250 克朗；儿童/优惠 170 克朗；外观免费</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="查理大桥🌉"><b class="place-num">③</b><span>查理大桥🌉 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Prague_07-2016_View_from_Lesser_Town_Nicholas_Church_img1.jpg/330px-Prague_07-2016_View_from_Lesser_Town_Nicholas_Church_img1.jpg" alt="圣尼古拉教堂⛪附近"><b class="place-num">④</b><span>圣尼古拉教堂⛪附近 <small class="ticket-note">门票：外观免费；入内成人 150 克朗，儿童/学生 10-26 岁 90 克朗，10 岁以下免费</small></span></figure>
+          <figure class="place-card"><img src="https://stoleti.cz/img/gallery/g1.jpg" alt="三世纪餐厅🍽️"><b class="place-num">⑤</b><span>Století（三世纪餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Karolíny Světlé 21/320, 110 00 Prague 1；电话：+420 222 220 008；餐费：约 550-850 克朗/人</small></span></figure>
         </div>
       </article>
 
@@ -2740,11 +2789,11 @@
           </li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Hergetova_cihelna%2C_muzeum_Franze_Kafky.jpg/250px-Hergetova_cihelna%2C_muzeum_Franze_Kafky.jpg" alt="卡夫卡博物馆"><span>卡夫卡博物馆 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人 300 克朗；儿童/学生/长者 220 克朗</small></span></figure>
-          <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊游船"><span>伏尔塔瓦河🌊游船 <em class="booking-tag">可提前买票</em><small class="ticket-note">参考票价：成人 550 克朗；儿童 350 克朗；改到 19:00 傍晚场</small></span></figure>
-          <figure class="place-card"><img src="photos/clock.jpg" alt="布拉格天文钟"><span>布拉格天文钟 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">外墙整点表演免费；8:00到23:00每小时一次</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG/330px-Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG" alt="高堡"><span>高堡 <em class="booking-tag no-booking">公共区不需预订</em><small class="ticket-note">公共区成人免费；儿童免费；场馆另计</small></span></figure>
-          <figure class="place-card"><img src="https://dock.kolkovna.cz/temp/images/front/ophp/changer/dock-8_1920x1920_0.jpg" alt="科尔科夫纳餐厅🍽️"><span>Kolkovna Dock（科尔科夫纳餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费：约 500-800 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Hergetova_cihelna%2C_muzeum_Franze_Kafky.jpg/250px-Hergetova_cihelna%2C_muzeum_Franze_Kafky.jpg" alt="卡夫卡博物馆"><b class="place-num">①</b><span>卡夫卡博物馆 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人 300 克朗；儿童/学生/长者 220 克朗</small></span></figure>
+          <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊游船"><b class="place-num">②</b><span>伏尔塔瓦河🌊游船 <em class="booking-tag">可提前买票</em><small class="ticket-note">参考票价：成人 550 克朗；儿童 350 克朗；改到 19:00 傍晚场</small></span></figure>
+          <figure class="place-card"><img src="photos/clock.jpg" alt="布拉格天文钟"><b class="place-num">③</b><span>布拉格天文钟 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">外墙整点表演免费；8:00到23:00每小时一次</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG/330px-Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG" alt="高堡"><b class="place-num">④</b><span>高堡 <em class="booking-tag no-booking">公共区不需预订</em><small class="ticket-note">公共区成人免费；儿童免费；场馆另计</small></span></figure>
+          <figure class="place-card"><img src="https://dock.kolkovna.cz/temp/images/front/ophp/changer/dock-8_1920x1920_0.jpg" alt="科尔科夫纳餐厅🍽️"><b class="place-num">⑤</b><span>Kolkovna Dock（科尔科夫纳餐厅🍽️） <em class="booking-tag">建议订桌</em><small class="ticket-note">地址：Boudníkova 2506/1, 180 00 Praha 8；电话：+420 226 521 510；餐费：约 500-800 克朗/人</small></span></figure>
         </div>
       </article>
 
@@ -2784,12 +2833,12 @@
           </li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园🌷"><span>皇家花园🌷 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；开放时间复核</small></span></figure>
-          <figure class="place-card"><img src="photos/stvitus.jpg" alt="圣维特大教堂⛪"><span>圣维特大教堂⛪ <em class="booking-tag">随票</em><small class="ticket-note">按布拉格城堡🏰主线路票入内</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="Rocking Horse Toy Shop"><span>Rocking Horse Toy Shop <em class="booking-tag no-booking">进店免费</em><small class="ticket-note">Loretánské náměstí 3；传统玩具，含鼹鼠(Krtek)周边</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/20190817_View_of_Mal%C3%A1_Strana_from_Pet%C5%99%C3%ADn_1354_5556.jpg/330px-20190817_View_of_Mal%C3%A1_Strana_from_Pet%C5%99%C3%ADn_1354_5556.jpg" alt="小城"><span>小城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/kampa.jpg" alt="卡帕岛美术馆"><span>卡帕岛美术馆（Museum Kampa） <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人 250 克朗；学生/长者 150 克朗；6 岁以下免费</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Praha_Caf%C3%A9_Louvre.JPG/330px-Praha_Caf%C3%A9_Louvre.JPG" alt="Café Louvre"><span>Café Louvre <em class="booking-tag">建议订位</em><small class="ticket-note">地址：Národní 22, Prague 1；餐费：约 600-1000 克朗/人</small></span></figure>
+          <figure class="place-card"><img src="photos/royal_garden.jpg" alt="皇家花园🌷"><b class="place-num">①</b><span>皇家花园🌷 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；开放时间复核</small></span></figure>
+          <figure class="place-card"><img src="photos/stvitus.jpg" alt="圣维特大教堂⛪"><b class="place-num">②</b><span>圣维特大教堂⛪ <em class="booking-tag">随票</em><small class="ticket-note">按布拉格城堡🏰主线路票入内</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="Rocking Horse Toy Shop"><b class="place-num">③</b><span>Rocking Horse Toy Shop <em class="booking-tag no-booking">进店免费</em><small class="ticket-note">Loretánské náměstí 3；传统玩具，含鼹鼠(Krtek)周边</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/20190817_View_of_Mal%C3%A1_Strana_from_Pet%C5%99%C3%ADn_1354_5556.jpg/330px-20190817_View_of_Mal%C3%A1_Strana_from_Pet%C5%99%C3%ADn_1354_5556.jpg" alt="小城"><b class="place-num">④</b><span>小城 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/kampa.jpg" alt="卡帕岛美术馆"><b class="place-num">⑤</b><span>卡帕岛美术馆（Museum Kampa） <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人 250 克朗；学生/长者 150 克朗；6 岁以下免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Praha_Caf%C3%A9_Louvre.JPG/330px-Praha_Caf%C3%A9_Louvre.JPG" alt="Café Louvre"><b class="place-num">⑥</b><span>Café Louvre <em class="booking-tag">建议订位</em><small class="ticket-note">地址：Národní 22, Prague 1；餐费：约 600-1000 克朗/人</small></span></figure>
         </div>
       </article>
 
@@ -2813,18 +2862,18 @@
           <li data-price="约 1000-1800 克朗/人" data-link="https://www.vzatisi.cz/en/" data-link-label="订桌"><span class="time">晚上</span><span>推荐 V Zátiší 告别晚餐：Liliová 1, Praha 1；电话 +420 222 221 155；<a href="https://www.google.com/maps/dir/?api=1&origin=Kampa%20Island%2C%20Prague%2C%20Czech%20Republic&destination=V%20Z%C3%A1ti%C5%A1%C3%AD%2C%20Liliov%C3%A1%201%2C%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">从河🌊边或小城大致向东→步行👣或坐电车回老城约 15 到 25 分钟</a>，餐厅离查理大桥🌉约 3 分钟步行；餐费标准约 1000-1800 克朗/人，建议提前订桌。饭后<a href="https://www.google.com/maps/dir/?api=1&origin=V%20Z%C3%A1ti%C5%A1%C3%AD%2C%20Liliov%C3%A1%201%2C%20Prague%201%2C%20Czech%20Republic&destination=Senov%C3%A1%C5%BEn%C3%A9%20n%C3%A1m.%203%2C%20110%2000%20Prague%201%2C%20Czech%20Republic&travelmode=walking" target="_blank" rel="noreferrer">步行👣、电车或短程出租车🚕大致向东→或东北↗回酒店🏨收拾行李</a>。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Head_of_Franz_Kafka_-_kinetic_sculpture_04.jpg/330px-Head_of_Franz_Kafka_-_kinetic_sculpture_04.jpg" alt="卡夫卡头像"><span>卡夫卡头像 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Quadrio</small></span></figure>
-          <figure class="place-card"><img src="photos/clock.jpg" alt="布拉格天文钟"><span>布拉格天文钟 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">外墙整点表演免费；8:00到23:00每小时一次</small></span></figure>
-          <figure class="place-card"><img src="photos/prague.jpg" alt="Hračky U Krtečka 鼹鼠玩具店"><span>Hračky U Krtečka <em class="booking-tag no-booking">进店免费</em><small class="ticket-note">Karlova 老城街；专卖《鼹鼠的故事》(Krtek)周边</small></span></figure>
-          <figure class="place-card"><img src="photos/doppler-prague-plaque.jpg" alt="多普勒纪念牌"><span>多普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlovo náměstí 6/20</small></span></figure>
-          <figure class="place-card"><img src="photos/kepler-prague-plaque.jpg" alt="开普勒纪念牌"><span>开普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlova 188/4</small></span></figure>
-          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕婴儿雕塑"><span>康帕婴儿雕塑 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG/330px-Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG" alt="高堡"><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区成人免费；儿童免费；场馆另计</small></span></figure>
-          <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊"><span>伏尔塔瓦河🌊 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕岛"><span>康帕岛 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/John_Lennon_Wall_Prague_023.jpg/330px-John_Lennon_Wall_Prague_023.jpg" alt="列侬墙"><span>列侬墙 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Petrin_Hill_Gardens_-_Prague%2C_Czech_Rep._-_panoramio.jpg/330px-Petrin_Hill_Gardens_-_Prague%2C_Czech_Rep._-_panoramio.jpg" alt="佩特任山⛰️"><span>佩特任山⛰️ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公园成人免费；儿童免费；镜宫普通票 90 克朗/优惠 65 克朗；佩特任塔🗼成人 250 克朗、儿童/优惠 170 克朗</small></span></figure>
-          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Prague_Jewish_Quarter_building.jpg/330px-Prague_Jewish_Quarter_building.jpg" alt="犹太区"><span>犹太区 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：街区成人免费；儿童免费；犹太博物馆成人 600 克朗、儿童 7-15 岁 200 克朗</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Head_of_Franz_Kafka_-_kinetic_sculpture_04.jpg/330px-Head_of_Franz_Kafka_-_kinetic_sculpture_04.jpg" alt="卡夫卡头像"><b class="place-num">①</b><span>卡夫卡头像 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Quadrio</small></span></figure>
+          <figure class="place-card"><img src="photos/clock.jpg" alt="布拉格天文钟"><b class="place-num">②</b><span>布拉格天文钟 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">外墙整点表演免费；8:00到23:00每小时一次</small></span></figure>
+          <figure class="place-card"><img src="photos/prague.jpg" alt="Hračky U Krtečka 鼹鼠玩具店"><b class="place-num">③</b><span>Hračky U Krtečka <em class="booking-tag no-booking">进店免费</em><small class="ticket-note">Karlova 老城街；专卖《鼹鼠的故事》(Krtek)周边</small></span></figure>
+          <figure class="place-card"><img src="photos/doppler-prague-plaque.jpg" alt="多普勒纪念牌"><b class="place-num">④</b><span>多普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlovo náměstí 6/20</small></span></figure>
+          <figure class="place-card"><img src="photos/kepler-prague-plaque.jpg" alt="开普勒纪念牌"><b class="place-num">⑤</b><span>开普勒纪念牌 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费；Karlova 188/4</small></span></figure>
+          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕婴儿雕塑"><b class="place-num">⑥</b><span>康帕婴儿雕塑 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG/330px-Czech-2013-Prague-Vy%C5%A1ehrad-Saints_Peter_and_Paul.JPG" alt="高堡"><b class="place-num">⑦</b><span>高堡 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公共区成人免费；儿童免费；场馆另计</small></span></figure>
+          <figure class="place-card"><img src="photos/vltava.jpg" alt="伏尔塔瓦河🌊"><b class="place-num">⑧</b><span>伏尔塔瓦河🌊 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="photos/kampa.jpg" alt="康帕岛"><b class="place-num">⑨</b><span>康帕岛 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/John_Lennon_Wall_Prague_023.jpg/330px-John_Lennon_Wall_Prague_023.jpg" alt="列侬墙"><b class="place-num">⑩</b><span>列侬墙 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：成人免费；儿童免费</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Petrin_Hill_Gardens_-_Prague%2C_Czech_Rep._-_panoramio.jpg/330px-Petrin_Hill_Gardens_-_Prague%2C_Czech_Rep._-_panoramio.jpg" alt="佩特任山⛰️"><b class="place-num">⑪</b><span>佩特任山⛰️ <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：公园成人免费；儿童免费；镜宫普通票 90 克朗/优惠 65 克朗；佩特任塔🗼成人 250 克朗、儿童/优惠 170 克朗</small></span></figure>
+          <figure class="place-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Prague_Jewish_Quarter_building.jpg/330px-Prague_Jewish_Quarter_building.jpg" alt="犹太区"><b class="place-num">⑫</b><span>犹太区 <em class="booking-tag no-booking">不需预订</em><small class="ticket-note">门票：街区成人免费；儿童免费；犹太博物馆成人 600 克朗、儿童 7-15 岁 200 克朗</small></span></figure>
         </div>
       </article>
 
@@ -2842,7 +2891,7 @@
           <li data-price="机票已另计"><span class="time">14:20</span><span>按你的表格，14:20 从布拉格出发，建议至少提前 2.5 到 3 小时到机场🛫。</span></li>
         </ul>
         <div class="place-gallery" aria-label="当天地点照片">
-          <figure class="place-card"><img src="photos/airport.jpg" alt="布拉格机场🛫"><span>布拉格机场🛫 <small class="ticket-note">门票：成人免费；儿童免费；交通另计</small></span></figure>
+          <figure class="place-card"><img src="photos/airport.jpg" alt="布拉格机场🛫"><b class="place-num">①</b><span>布拉格机场🛫 <small class="ticket-note">门票：成人免费；儿童免费；交通另计</small></span></figure>
         </div>
       </article>
     </section>
@@ -2861,31 +2910,36 @@
           <path class="theme-map-path" d="M112 266 L182 220 L300 164 L384 116"></path>
           <path class="theme-map-branch" d="M112 266 L126 326 L248 304"></path>
           <circle class="theme-map-point" cx="112" cy="266" r="10"></circle>
-          <text x="32" y="306">卡夫卡头像</text>
+          <text class="theme-map-point-num" x="112" y="266">1</text>
+          <text x="32" y="306">① 卡夫卡头像</text>
           <circle class="theme-map-point optional" cx="126" cy="326" r="9"></circle>
-          <text x="34" y="350">选走：多普勒纪念牌</text>
+          <text x="34" y="350">选：多普勒纪念牌</text>
           <text x="34" y="370">Karlovo náměstí 6/20</text>
           <circle class="theme-map-point optional" cx="248" cy="304" r="9"></circle>
-          <text x="264" y="312">选走：开普勒纪念牌</text>
+          <text x="264" y="312">选：开普勒纪念牌</text>
           <text x="264" y="332">Karlova 188/4</text>
           <circle class="theme-map-point" cx="182" cy="220" r="10"></circle>
-          <text x="132" y="198">老城桥🌉塔🗼</text>
+          <text class="theme-map-point-num" x="182" y="220">2</text>
+          <text x="132" y="198">② 老城桥🌉塔🗼</text>
           <circle class="theme-map-point" cx="300" cy="164" r="10"></circle>
-          <text x="266" y="142">查理大桥🌉</text>
+          <text class="theme-map-point-num" x="300" y="164">3</text>
+          <text x="266" y="142">③ 查理大桥🌉</text>
           <circle class="theme-map-point" cx="384" cy="116" r="10"></circle>
-          <text x="352" y="92">康帕婴儿雕塑</text>
-          <text x="28" y="34">建议方向：酒店 → 卡夫卡头像 → 老城 → 查理大桥🌉 → 康帕岛</text>
-          <text x="28" y="58">红点是主线，蓝色虚线是多普勒和开普勒选走支线。</text>
+          <text class="theme-map-point-num" x="384" y="116">4</text>
+          <text x="352" y="92">④ 康帕婴儿雕塑</text>
+          <text x="28" y="34">建议方向：酒店 → ①卡夫卡 → ②老城 → ③大桥 → ④康帕岛</text>
+          <text x="28" y="58">①-④为主线；虚线"选"为选走支线，不编号。</text>
         </svg>
       </div>
       <div class="theme-guide">
-        <h3>导览文字</h3>
+        <h3>导览文字（编号对应地图上的①-④）</h3>
         <ol>
-          <li><strong>卡夫卡头像：</strong>从酒店出发先看 David Černý 的动态卡夫卡头像。它把文学人物做成机械结构，正好打开“现代艺术和技术”的主题。</li>
-          <li><strong>老城和查理大桥🌉：</strong>从卡夫卡头像转向老城和查理大桥🌉，这段景观更密集，也更适合孩子边走边看。</li>
-          <li><strong>多普勒和开普勒选走：</strong>这两个点更适合大人补科学史背景；如果当天热、累、或孩子无聊，直接跳过。</li>
-          <li><strong>康帕岛：</strong>过查理大桥🌉到康帕岛，看 David Černý 的婴儿雕塑。这里可以结束主题步行，也可以接列侬墙和伏尔塔瓦河🌊边慢走。</li>
+          <li><strong>① 卡夫卡头像：</strong>从酒店出发先看 David Černý 的动态卡夫卡头像。它把文学人物做成机械结构，正好打开“现代艺术和技术”的主题。</li>
+          <li><strong>② 老城桥🌉塔🗼：</strong>从卡夫卡头像转向老城，这段景观更密集，也更适合孩子边走边看。</li>
+          <li><strong>③ 查理大桥🌉：</strong>从老城桥塔过桥，桥上雕塑按<a href="#charles-bridge-statues-section">查理大桥雕塑详解</a>挑重点看。</li>
+          <li><strong>④ 康帕岛：</strong>过桥后到康帕岛，看 David Černý 的婴儿雕塑。这里可以结束主题步行，也可以接列侬墙和伏尔塔瓦河🌊边慢走。</li>
         </ol>
+        <p class="theme-guide-note"><strong>选走（不计入编号）：</strong>多普勒和开普勒纪念牌更适合大人补科学史背景，位置见地图上的蓝色虚线；如果当天热、累、或孩子无聊，直接跳过。</p>
       </div>
     </section>
       </div>
@@ -3333,10 +3387,10 @@
         ],
         "0730": [
           { name: "harry's home Salzburg", lat: 47.8103, lng: 13.0470, type: "hotel" },
+          { name: "米拉贝尔宫大理石厅", lat: 47.8053, lng: 13.0431, type: "poi" },
           { name: "海尔布伦戏水宫", lat: 47.7614, lng: 13.0603, type: "poi" },
           { name: "多普勒出生地纪念牌", lat: 47.8036, lng: 13.0421, type: "poi" },
           { name: "莫扎特出生地", lat: 47.7996, lng: 13.0442, type: "poi" },
-          { name: "霍亨萨尔茨堡城堡", lat: 47.7950, lng: 13.0480, type: "poi" },
           { name: "卡比特尔广场", lat: 47.7965, lng: 13.0473, type: "poi" },
           { name: "Gasthof Goldgasse", lat: 47.7986, lng: 13.0438, type: "poi" },
           { name: "Zwettler's Wirtshaus", lat: 47.7958, lng: 13.0455, type: "poi" }
@@ -3364,7 +3418,8 @@
         ],
         "0802": [
           { name: "Residence Mariánská", lat: 48.9744, lng: 14.4780, type: "hotel" },
-          { name: "布杰约维采广场", lat: 48.9747, lng: 14.4744, type: "poi" }
+          { name: "布杰约维采广场", lat: 48.9747, lng: 14.4744, type: "poi" },
+          { name: "Sokolský ostrov 游泳池", lat: 48.9747, lng: 14.4701, type: "poi" }
         ],
         "0803": [
           { name: "Residence Mariánská", lat: 48.9744, lng: 14.4780, type: "hotel" },
@@ -3372,7 +3427,8 @@
           { name: "黑塔", lat: 48.9752, lng: 14.4746, type: "poi" },
           { name: "圣尼古拉主教座堂", lat: 48.9754, lng: 14.4751, type: "poi" },
           { name: "南波希米亚博物馆", lat: 48.9762, lng: 14.4708, type: "poi" },
-          { name: "百威酿酒厂", lat: 48.9958, lng: 14.4906, type: "poi" }
+          { name: "百威酿酒厂", lat: 48.9958, lng: 14.4906, type: "poi" },
+          { name: "市政厅", lat: 48.9749, lng: 14.4746, type: "poi" }
         ],
         "0804": [
           { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
@@ -3384,7 +3440,9 @@
         ],
         "0805": [
           { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
+          { name: "卡夫卡博物馆", lat: 50.0881, lng: 14.4098, type: "poi" },
           { name: "伏尔塔瓦河游船", lat: 50.0880, lng: 14.4127, type: "poi" },
+          { name: "布拉格天文钟", lat: 50.0870, lng: 14.4209, type: "poi" },
           { name: "高堡", lat: 50.0651, lng: 14.4207, type: "poi" },
           { name: "科尔科夫纳餐厅", lat: 50.1004, lng: 14.4508, type: "poi" }
         ],
@@ -3392,12 +3450,16 @@
           { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
           { name: "皇家花园", lat: 50.0930, lng: 14.4021, type: "poi" },
           { name: "圣维特大教堂", lat: 50.0906, lng: 14.4006, type: "poi" },
+          { name: "Rocking Horse Toy Shop", lat: 50.0908, lng: 14.3928, type: "poi" },
           { name: "小城", lat: 50.0879, lng: 14.4048, type: "poi" },
+          { name: "卡帕岛美术馆", lat: 50.0840, lng: 14.4085, type: "poi" },
           { name: "Café Louvre", lat: 50.0813, lng: 14.4187, type: "poi" }
         ],
         "0807": [
           { name: "The Julius Prague", lat: 50.0850, lng: 14.4326, type: "hotel" },
           { name: "卡夫卡头像", lat: 50.0838, lng: 14.4211, type: "poi" },
+          { name: "布拉格天文钟", lat: 50.0870, lng: 14.4209, type: "poi" },
+          { name: "Hračky U Krtečka", lat: 50.0865, lng: 14.4145, type: "poi" },
           { name: "多普勒纪念牌", lat: 50.0793, lng: 14.4185, type: "poi" },
           { name: "开普勒纪念牌", lat: 50.0866, lng: 14.4144, type: "poi" },
           { name: "康帕婴儿雕塑", lat: 50.0839, lng: 14.4067, type: "poi" },
