@@ -2335,7 +2335,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：109</div>
+    <div class="page-version" aria-label="网页版本">网页版本：110</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -4182,20 +4182,62 @@
       return `人民币 ${Number(amount || 0).toFixed(2)}`;
     }
 
+    function parseChineseCount(text) {
+      const value = String(text || "").trim();
+      const digits = value.match(/\d+/);
+      if (digits) {
+        return Number(digits[0]);
+      }
+      return {
+        一: 1,
+        二: 2,
+        两: 2,
+        三: 3,
+        四: 4,
+        五: 5,
+        六: 6,
+        七: 7,
+        八: 8,
+        九: 9,
+        十: 10
+      }[value] || 0;
+    }
+
+    function expenseParticipantWeights(expense) {
+      const weights = Object.fromEntries((expense.participants || []).map((familyId) => [familyId, 1]));
+      const note = String(expense.note || "");
+      defaultFamilies().forEach((family) => {
+        if (!weights[family.id]) {
+          return;
+        }
+        const pattern = new RegExp(`${family.name}\\s*(?:家)?\\s*([一二两三四五六七八九十\\d]+)\\s*(?:口|人)`);
+        const match = note.match(pattern);
+        const count = match ? parseChineseCount(match[1]) : 0;
+        if (count > 0) {
+          weights[family.id] = count;
+        }
+      });
+      return weights;
+    }
+
+    function expenseParticipantShare(expense, familyId) {
+      const weights = expenseParticipantWeights(expense);
+      const totalWeight = Object.values(weights).reduce((sum, value) => sum + value, 0) || 1;
+      return expenseRmbAmount(expense) * (weights[familyId] || 0) / totalWeight;
+    }
+
     function expensePayerReceivables(expense) {
-      const share = expenseRmbAmount(expense) / Math.max(1, expense.participants.length);
       return expense.participants
         .filter((familyId) => familyId !== expense.payer)
-        .map((familyId) => `${familyNameById(familyId)} ${formatExpenseRmb(share)}`)
+        .map((familyId) => `${familyNameById(familyId)} ${formatExpenseRmb(expenseParticipantShare(expense, familyId))}`)
         .join("；") || "无需收款";
     }
 
     function expensePaymentDirections(expense) {
       const payerName = familyNameById(expense.payer);
-      const share = expenseRmbAmount(expense) / Math.max(1, expense.participants.length);
       return expense.participants
         .filter((familyId) => familyId !== expense.payer)
-        .map((familyId) => `${familyNameById(familyId)} 给 ${payerName} ${formatExpenseRmb(share)}`)
+        .map((familyId) => `${familyNameById(familyId)} 给 ${payerName} ${formatExpenseRmb(expenseParticipantShare(expense, familyId))}`)
         .join("；") || "无需转账";
     }
 
@@ -4408,9 +4450,8 @@
         totalRmb += amountRmb;
         byCurrency[expense.currency] = (byCurrency[expense.currency] || 0) + Number(expense.amount || 0);
         paid[expense.payer] = (paid[expense.payer] || 0) + amountRmb;
-        const share = amountRmb / Math.max(1, expense.participants.length);
         expense.participants.forEach((familyId) => {
-          owed[familyId] = (owed[familyId] || 0) + share;
+          owed[familyId] = (owed[familyId] || 0) + expenseParticipantShare(expense, familyId);
         });
       });
 
