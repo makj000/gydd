@@ -2335,7 +2335,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：99</div>
+    <div class="page-version" aria-label="网页版本">网页版本：100</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -2355,7 +2355,7 @@
     <span>/</span>
     <a class="breadcrumb-button" href="#assistant-section">智能助手</a>
     <span>/</span>
-    <a href="#expense-section">旅行记账</a>
+    <a href="#expense-section" id="expense-nav-link" hidden>旅行记账</a>
     <span>/</span>
     <a href="#pending-section">待确认事项</a>
     <span>/</span>
@@ -3175,7 +3175,7 @@
       </div>
     </details>
 
-    <details class="collapsed-section" id="expense-section">
+    <details class="collapsed-section" id="expense-section" hidden>
       <summary>旅行记账</summary>
       <div class="collapsed-section-body">
       <p>记录旅途中某一家垫付的费用，按参与家庭分摊，之后统一算总账。</p>
@@ -3265,6 +3265,11 @@
     </section>
       </div>
     </details>
+
+    <section class="collapsed-section" id="expense-locked-section">
+      <h2>旅行记账</h2>
+      <p>请输入访问码后查看和同步记账。</p>
+    </section>
 
     <details class="collapsed-section" id="assistant-section">
       <summary>智能助手</summary>
@@ -3604,6 +3609,9 @@
     const runtimeVersionStatus = document.getElementById("runtime-version-status");
     const runtimeVersionList = document.getElementById("runtime-version-list");
     const pageVersionBadge = document.querySelector(".page-version");
+    const expenseSection = document.getElementById("expense-section");
+    const expenseLockedSection = document.getElementById("expense-locked-section");
+    const expenseNavLink = document.getElementById("expense-nav-link");
     const expenseForm = document.getElementById("expense-form");
     const expenseId = document.getElementById("expense-id");
     const expenseDate = document.getElementById("expense-date");
@@ -4094,6 +4102,7 @@
       } else {
         localStorage.removeItem(assistantTokenKey);
       }
+      updateExpenseAccess();
       renderTicketSignups();
       if (sourceInput) {
         sourceInput.focus();
@@ -4115,6 +4124,31 @@
 
     function familyNameById(familyId) {
       return defaultFamilies().find((family) => family.id === familyId)?.name || familyId || "未填";
+    }
+
+    function hasExpenseAccess() {
+      return Boolean(assistantToken.value.trim());
+    }
+
+    function updateExpenseAccess() {
+      const allowed = hasExpenseAccess();
+      if (expenseSection) {
+        expenseSection.hidden = !allowed;
+      }
+      if (expenseLockedSection) {
+        expenseLockedSection.hidden = allowed;
+      }
+      if (expenseNavLink) {
+        expenseNavLink.hidden = !allowed;
+      }
+      if (!allowed) {
+        sharedExpenses = null;
+        expenseList.innerHTML = "";
+        expenseSummary.innerHTML = "";
+        expenseStatus.textContent = "";
+      } else {
+        renderExpenseLedger();
+      }
     }
 
     function expenseCurrencyRate(currency) {
@@ -4232,6 +4266,9 @@
     }
 
     function readExpenses() {
+      if (!hasExpenseAccess()) {
+        return [];
+      }
       if (sharedExpenses) {
         return normalizeExpenseList(sharedExpenses);
       }
@@ -4714,6 +4751,10 @@
     }
 
     function exportExpenseImage(kind) {
+      if (!hasExpenseAccess()) {
+        expenseStatus.textContent = "请先输入访问码。";
+        return;
+      }
       const expenses = readExpenses();
       if (!expenses.length) {
         expenseStatus.textContent = "还没有账目，暂时不能导出图片。";
@@ -5735,7 +5776,7 @@
         localStorage.setItem(ticketSignupKey, JSON.stringify(sharedTicketSignups));
       }
 
-      if (Array.isArray(state.expenses)) {
+      if (hasExpenseAccess() && Array.isArray(state.expenses)) {
         let localExpenses = [];
         try {
           localExpenses = normalizeExpenseList(JSON.parse(localStorage.getItem(expenseLedgerKey) || "[]"));
@@ -5752,7 +5793,7 @@
       linkTripPhotos();
       renderDayQuestionPanels();
       renderTicketSignups();
-      renderExpenseLedger();
+      updateExpenseAccess();
       linkContactDetails();
       initPlaceHoverLinks();
       renderRuntimeVersions(state);
@@ -6027,7 +6068,7 @@
           localStorage.setItem(ticketSignupKey, JSON.stringify(sharedTicketSignups));
           renderTicketSignups();
         }
-        if (Array.isArray(state.expenses)) {
+        if (hasExpenseAccess() && Array.isArray(state.expenses)) {
           sharedExpenses = normalizeExpenseList(state.expenses);
           localStorage.setItem(expenseLedgerKey, JSON.stringify(sharedExpenses));
           renderExpenseLedger();
@@ -6072,6 +6113,10 @@
 
     expenseForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (!hasExpenseAccess()) {
+        expenseStatus.textContent = "请先输入访问码。";
+        return;
+      }
       const amount = Number(expenseAmount.value || 0);
       const participants = selectedExpenseParticipants();
 
@@ -6120,7 +6165,7 @@
     });
 
     expenseSync.addEventListener("click", async () => {
-      if (!assistantToken.value.trim()) {
+      if (!hasExpenseAccess()) {
         expenseStatus.textContent = "请先输入访问码。";
         return;
       }
@@ -6131,7 +6176,7 @@
     expenseExportSummary.addEventListener("click", () => exportExpenseImage("summary"));
 
     renderExpenseControls();
-    renderExpenseLedger();
+    updateExpenseAccess();
     initDayExpenseButtons();
     renderAssistantConversation();
     renderTicketSignups();
