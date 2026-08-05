@@ -2340,7 +2340,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：112</div>
+    <div class="page-version" aria-label="网页版本">网页版本：113</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3258,7 +3258,6 @@
               <th>约人民币</th>
               <th>垫付</th>
               <th>分摊</th>
-              <th>垫付者应收</th>
               <th>本条应付方向</th>
               <th>截至本条总账</th>
               <th>垫付检查</th>
@@ -4244,13 +4243,6 @@
       return expenseRmbAmount(expense) * (weights[familyId] || 0) / totalWeight;
     }
 
-    function expensePayerReceivables(expense) {
-      return expense.participants
-        .filter((familyId) => familyId !== expense.payer)
-        .map((familyId) => `${familyNameById(familyId)} ${formatExpenseRmb(expenseParticipantShare(expense, familyId))}`)
-        .join("；") || "无需收款";
-    }
-
     function expensePaymentDirections(expense) {
       const payerName = familyNameById(expense.payer);
       return expense.participants
@@ -4555,7 +4547,7 @@
       if (!expenses.length) {
         const row = document.createElement("tr");
         const cell = document.createElement("td");
-        cell.colSpan = 13;
+        cell.colSpan = 12;
         cell.textContent = "还没有账目。";
         row.append(cell);
         expenseList.append(row);
@@ -4573,7 +4565,6 @@
           formatExpenseRmb(expenseRmbAmount(expense)),
           familyNameById(expense.payer),
           expense.participants.map(familyNameById).join("、"),
-          expensePayerReceivables(expense),
           expensePaymentDirections(expense),
           runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
           expensePayerWarning(expense),
@@ -4581,7 +4572,7 @@
         ].forEach((text, cellIndex) => {
           const cell = document.createElement("td");
           cell.textContent = text;
-          if (cellIndex === 10 && text) {
+          if (cellIndex === 9 && text) {
             cell.className = "expense-payer-warning";
           }
           row.append(cell);
@@ -4664,7 +4655,6 @@
         formatExpenseRmb(expenseRmbAmount(expense)),
         familyNameById(expense.payer),
         expense.participants.map(familyNameById).join("、"),
-        expensePayerReceivables(expense),
         expensePaymentDirections(expense),
         runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
         expensePayerWarning(expense),
@@ -4673,7 +4663,7 @@
     }
 
     function buildExpenseDetailCanvas(expenses) {
-      const width = 2820;
+      const width = 2540;
       const padding = 42;
       const columns = [
         { header: "#", width: 58 },
@@ -4684,7 +4674,6 @@
         { header: "约人民币", width: 170 },
         { header: "垫付", width: 130 },
         { header: "分摊", width: 210 },
-        { header: "垫付者应收", width: 280 },
         { header: "本条应付方向", width: 300 },
         { header: "截至本条总账", width: 340 },
         { header: "垫付检查", width: 300 },
