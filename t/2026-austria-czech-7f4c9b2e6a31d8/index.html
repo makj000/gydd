@@ -1450,6 +1450,11 @@
       border-bottom: 0;
     }
 
+    .expense-payer-warning {
+      color: #9f2d20;
+      font-weight: 900;
+    }
+
     .expense-row-actions {
       display: flex;
       gap: 8px;
@@ -2335,7 +2340,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：110</div>
+    <div class="page-version" aria-label="网页版本">网页版本：111</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3256,6 +3261,7 @@
               <th>垫付者应收</th>
               <th>本条应付方向</th>
               <th>截至本条总账</th>
+              <th>垫付检查</th>
               <th>备注</th>
               <th>操作</th>
             </tr>
@@ -4127,6 +4133,18 @@
       return defaultFamilies().find((family) => family.id === familyId)?.name || familyId || "未填";
     }
 
+    function familyAliasMap() {
+      return {
+        MQ: "family-mq",
+        M: "family-mq",
+        Q: "family-mq",
+        GS: "family-gs",
+        G: "family-gs",
+        S: "family-gs",
+        X: "family-x"
+      };
+    }
+
     function hasExpenseAccess() {
       return Boolean(assistantToken.value.trim());
     }
@@ -4239,6 +4257,23 @@
         .filter((familyId) => familyId !== expense.payer)
         .map((familyId) => `${familyNameById(familyId)} 给 ${payerName} ${formatExpenseRmb(expenseParticipantShare(expense, familyId))}`)
         .join("；") || "无需转账";
+    }
+
+    function notePayerFamilyId(expense) {
+      const note = String(expense.note || "");
+      const match = note.match(/(^|[，,。；;\s])((MQ|GS|M|Q|G|S|X))\s*(家)?\s*出的钱/);
+      if (!match) {
+        return "";
+      }
+      return familyAliasMap()[match[2]] || "";
+    }
+
+    function expensePayerWarning(expense) {
+      const notePayer = notePayerFamilyId(expense);
+      if (!notePayer || notePayer === expense.payer) {
+        return "";
+      }
+      return `注意：备注说 ${familyNameById(notePayer)} 出钱，当前垫付是 ${familyNameById(expense.payer)}`;
     }
 
     function runningExpenseSettlementText(expensesThroughCurrent) {
@@ -4512,7 +4547,7 @@
       if (!expenses.length) {
         const row = document.createElement("tr");
         const cell = document.createElement("td");
-        cell.colSpan = 12;
+        cell.colSpan = 13;
         cell.textContent = "还没有账目。";
         row.append(cell);
         expenseList.append(row);
@@ -4533,10 +4568,14 @@
           expensePayerReceivables(expense),
           expensePaymentDirections(expense),
           runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
+          expensePayerWarning(expense),
           expense.note || ""
-        ].forEach((text) => {
+        ].forEach((text, cellIndex) => {
           const cell = document.createElement("td");
           cell.textContent = text;
+          if (cellIndex === 10 && text) {
+            cell.className = "expense-payer-warning";
+          }
           row.append(cell);
         });
 
@@ -4620,12 +4659,13 @@
         expensePayerReceivables(expense),
         expensePaymentDirections(expense),
         runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
+        expensePayerWarning(expense),
         expense.note || ""
       ]);
     }
 
     function buildExpenseDetailCanvas(expenses) {
-      const width = 2520;
+      const width = 2820;
       const padding = 42;
       const columns = [
         { header: "#", width: 58 },
@@ -4639,6 +4679,7 @@
         { header: "垫付者应收", width: 280 },
         { header: "本条应付方向", width: 300 },
         { header: "截至本条总账", width: 340 },
+        { header: "垫付检查", width: 300 },
         { header: "备注", width: 300 }
       ];
       const canvas = document.createElement("canvas");
