@@ -2335,7 +2335,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：108</div>
+    <div class="page-version" aria-label="网页版本">网页版本：109</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3255,6 +3255,7 @@
               <th>分摊</th>
               <th>垫付者应收</th>
               <th>本条应付方向</th>
+              <th>截至本条总账</th>
               <th>备注</th>
               <th>操作</th>
             </tr>
@@ -4198,6 +4199,13 @@
         .join("；") || "无需转账";
     }
 
+    function runningExpenseSettlementText(expensesThroughCurrent) {
+      const settlement = expenseSettlement(expensesThroughCurrent);
+      return settlement.transfers.length
+        ? settlement.transfers.join("；")
+        : "截至目前不用互相转账";
+    }
+
     function expenseDateSortValue(dateText) {
       const value = String(dateText || "").trim();
       const slashParts = value.match(/^(\d{1,2})\/(\d{1,2})$/);
@@ -4463,14 +4471,15 @@
       if (!expenses.length) {
         const row = document.createElement("tr");
         const cell = document.createElement("td");
-        cell.colSpan = 11;
+        cell.colSpan = 12;
         cell.textContent = "还没有账目。";
         row.append(cell);
         expenseList.append(row);
         return;
       }
 
-      sortedExpensesByDate(expenses).forEach((expense) => {
+      const sortedExpenses = sortedExpensesByDate(expenses);
+      sortedExpenses.forEach((expense, index) => {
         const row = document.createElement("tr");
         [
           expense.date,
@@ -4482,6 +4491,7 @@
           expense.participants.map(familyNameById).join("、"),
           expensePayerReceivables(expense),
           expensePaymentDirections(expense),
+          runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
           expense.note || ""
         ].forEach((text) => {
           const cell = document.createElement("td");
@@ -4556,7 +4566,8 @@
     }
 
     function expenseRowsForExport(expenses) {
-      return sortedExpensesByDate(expenses).map((expense, index) => [
+      const sortedExpenses = sortedExpensesByDate(expenses);
+      return sortedExpenses.map((expense, index) => [
         String(index + 1),
         expense.date,
         expense.place || "未填",
@@ -4567,12 +4578,13 @@
         expense.participants.map(familyNameById).join("、"),
         expensePayerReceivables(expense),
         expensePaymentDirections(expense),
+        runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
         expense.note || ""
       ]);
     }
 
     function buildExpenseDetailCanvas(expenses) {
-      const width = 2180;
+      const width = 2520;
       const padding = 42;
       const columns = [
         { header: "#", width: 58 },
@@ -4585,6 +4597,7 @@
         { header: "分摊", width: 210 },
         { header: "垫付者应收", width: 280 },
         { header: "本条应付方向", width: 300 },
+        { header: "截至本条总账", width: 340 },
         { header: "备注", width: 300 }
       ];
       const canvas = document.createElement("canvas");
