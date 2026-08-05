@@ -2340,7 +2340,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：113</div>
+    <div class="page-version" aria-label="网页版本">网页版本：114</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -4237,7 +4237,46 @@
       return weights;
     }
 
+    function expenseFareSplitShares(expense) {
+      const note = String(expense.note || "");
+      const adultFare = Number((note.match(/成人\s*[$€¥]?\s*(\d+(?:\.\d+)?)/) || [])[1] || 0);
+      const childFare = Number((note.match(/(?:小孩|儿童)\s*[$€¥]?\s*(\d+(?:\.\d+)?)/) || [])[1] || 0);
+      if (!adultFare || !childFare) {
+        return null;
+      }
+
+      const rawShares = {};
+      let totalRaw = 0;
+      defaultFamilies().forEach((family) => {
+        if (!(expense.participants || []).includes(family.id)) {
+          return;
+        }
+        const pattern = new RegExp(`${family.name}\\s*(?:家)?\\s*[:：]?\\s*(?:(\\d+)\\s*(?:大|成人))?\\s*(?:(\\d+)\\s*(?:小|小孩|儿童))?`);
+        const match = note.match(pattern);
+        const adults = Number(match?.[1] || 0);
+        const children = Number(match?.[2] || 0);
+        if (adults || children) {
+          rawShares[family.id] = adults * adultFare + children * childFare;
+          totalRaw += rawShares[family.id];
+        }
+      });
+
+      if (!totalRaw) {
+        return null;
+      }
+
+      const totalRmb = expenseRmbAmount(expense);
+      return Object.fromEntries(Object.entries(rawShares).map(([familyId, rawShare]) => [
+        familyId,
+        totalRmb * rawShare / totalRaw
+      ]));
+    }
+
     function expenseParticipantShare(expense, familyId) {
+      const fareShares = expenseFareSplitShares(expense);
+      if (fareShares) {
+        return fareShares[familyId] || 0;
+      }
       const weights = expenseParticipantWeights(expense);
       const totalWeight = Object.values(weights).reduce((sum, value) => sum + value, 0) || 1;
       return expenseRmbAmount(expense) * (weights[familyId] || 0) / totalWeight;
