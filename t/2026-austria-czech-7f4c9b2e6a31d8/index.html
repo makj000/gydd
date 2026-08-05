@@ -1373,6 +1373,25 @@
       color: var(--green);
     }
 
+    .expense-export-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .expense-export-actions button {
+      min-height: 36px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--green);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
     .expense-status {
       min-height: 24px;
       color: var(--muted);
@@ -2316,7 +2335,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：98</div>
+    <div class="page-version" aria-label="网页版本">网页版本：99</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3219,6 +3238,10 @@
       </form>
       <p class="expense-status" id="expense-status"></p>
       <div class="expense-summary" id="expense-summary"></div>
+      <div class="expense-export-actions" aria-label="导出记账图片">
+        <button type="button" id="expense-export-detail">导出记账明细图片</button>
+        <button type="button" id="expense-export-summary">导出总账图片</button>
+      </div>
       <div class="expense-table-wrap">
         <table class="expense-table">
           <thead>
@@ -3230,6 +3253,8 @@
               <th>约人民币</th>
               <th>垫付</th>
               <th>分摊</th>
+              <th>垫付者应收</th>
+              <th>本条应付方向</th>
               <th>备注</th>
               <th>操作</th>
             </tr>
@@ -3593,6 +3618,8 @@
     const expenseCancel = document.getElementById("expense-cancel");
     const expenseStatus = document.getElementById("expense-status");
     const expenseSummary = document.getElementById("expense-summary");
+    const expenseExportDetail = document.getElementById("expense-export-detail");
+    const expenseExportSummary = document.getElementById("expense-export-summary");
     const expenseList = document.getElementById("expense-list");
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
@@ -4120,6 +4147,57 @@
       return `人民币 ${Number(amount || 0).toFixed(2)}`;
     }
 
+    function expensePayerReceivables(expense) {
+      const share = expenseRmbAmount(expense) / Math.max(1, expense.participants.length);
+      return expense.participants
+        .filter((familyId) => familyId !== expense.payer)
+        .map((familyId) => `${familyNameById(familyId)} ${formatExpenseRmb(share)}`)
+        .join("；") || "无需收款";
+    }
+
+    function expensePaymentDirections(expense) {
+      const payerName = familyNameById(expense.payer);
+      const share = expenseRmbAmount(expense) / Math.max(1, expense.participants.length);
+      return expense.participants
+        .filter((familyId) => familyId !== expense.payer)
+        .map((familyId) => `${familyNameById(familyId)} 给 ${payerName} ${formatExpenseRmb(share)}`)
+        .join("；") || "无需转账";
+    }
+
+    function expenseDateSortValue(dateText) {
+      const value = String(dateText || "").trim();
+      const slashParts = value.match(/^(\d{1,2})\/(\d{1,2})$/);
+      if (slashParts) {
+        return Number(slashParts[1]) * 100 + Number(slashParts[2]);
+      }
+      const chineseParts = value.match(/^(\d{1,2})\s*月\s*(\d{1,2})\s*(日|号)?$/);
+      if (chineseParts) {
+        return Number(chineseParts[1]) * 100 + Number(chineseParts[2]);
+      }
+      const isoParts = value.match(/^20\d{2}-(\d{2})-(\d{2})$/);
+      if (isoParts) {
+        return Number(isoParts[1]) * 100 + Number(isoParts[2]);
+      }
+      const looseParts = value.match(/(\d{1,2})\D+(\d{1,2})/);
+      if (looseParts) {
+        return Number(looseParts[1]) * 100 + Number(looseParts[2]);
+      }
+      if (!value) {
+        return 9999;
+      }
+      return 9998;
+    }
+
+    function sortedExpensesByDate(expenses) {
+      return expenses.slice().sort((left, right) => {
+        const dateDiff = expenseDateSortValue(left.date) - expenseDateSortValue(right.date);
+        if (dateDiff) {
+          return dateDiff;
+        }
+        return String(left.createdAt || "").localeCompare(String(right.createdAt || ""));
+      });
+    }
+
     function normalizeExpenseEntry(entry) {
       const families = defaultFamilies();
       const allowedFamilies = new Set(families.map((family) => family.id));
@@ -4166,7 +4244,7 @@
     }
 
     function writeExpenses(expenses) {
-      sharedExpenses = normalizeExpenseList(expenses);
+      sharedExpenses = sortedExpensesByDate(normalizeExpenseList(expenses));
       localStorage.setItem(expenseLedgerKey, JSON.stringify(sharedExpenses));
     }
 
@@ -4348,14 +4426,14 @@
       if (!expenses.length) {
         const row = document.createElement("tr");
         const cell = document.createElement("td");
-        cell.colSpan = 9;
+        cell.colSpan = 11;
         cell.textContent = "还没有账目。";
         row.append(cell);
         expenseList.append(row);
         return;
       }
 
-      expenses.slice().reverse().forEach((expense) => {
+      sortedExpensesByDate(expenses).forEach((expense) => {
         const row = document.createElement("tr");
         [
           expense.date,
@@ -4365,6 +4443,8 @@
           formatExpenseRmb(expenseRmbAmount(expense)),
           familyNameById(expense.payer),
           expense.participants.map(familyNameById).join("、"),
+          expensePayerReceivables(expense),
+          expensePaymentDirections(expense),
           expense.note || ""
         ].forEach((text) => {
           const cell = document.createElement("td");
@@ -4390,6 +4470,263 @@
         row.append(actionCell);
         expenseList.append(row);
       });
+    }
+
+    function currentExportDateText() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    }
+
+    function wrapCanvasText(context, text, maxWidth) {
+      const source = String(text || "");
+      const lines = [];
+      source.split("\n").forEach((paragraph) => {
+        let line = "";
+        Array.from(paragraph || " ").forEach((char) => {
+          const next = line + char;
+          if (line && context.measureText(next).width > maxWidth) {
+            lines.push(line);
+            line = char;
+          } else {
+            line = next;
+          }
+        });
+        lines.push(line || " ");
+      });
+      return lines;
+    }
+
+    function drawRoundedRect(context, x, y, width, height, radius) {
+      const safeRadius = Math.min(radius, width / 2, height / 2);
+      context.beginPath();
+      context.moveTo(x + safeRadius, y);
+      context.arcTo(x + width, y, x + width, y + height, safeRadius);
+      context.arcTo(x + width, y + height, x, y + height, safeRadius);
+      context.arcTo(x, y + height, x, y, safeRadius);
+      context.arcTo(x, y, x + width, y, safeRadius);
+      context.closePath();
+    }
+
+    function drawExpenseImageHeader(context, title, subtitle, width) {
+      context.fillStyle = "#fbf6e9";
+      context.fillRect(0, 0, width, 10000);
+      context.fillStyle = "#202631";
+      context.font = "800 34px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      context.fillText(title, 42, 58);
+      context.fillStyle = "#647083";
+      context.font = "700 18px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      context.fillText(subtitle, 42, 88);
+    }
+
+    function expenseRowsForExport(expenses) {
+      return sortedExpensesByDate(expenses).map((expense, index) => [
+        String(index + 1),
+        expense.date,
+        expense.place || "未填",
+        expense.item,
+        formatExpenseAmount(expense.amount, expense.currency),
+        formatExpenseRmb(expenseRmbAmount(expense)),
+        familyNameById(expense.payer),
+        expense.participants.map(familyNameById).join("、"),
+        expensePayerReceivables(expense),
+        expensePaymentDirections(expense),
+        expense.note || ""
+      ]);
+    }
+
+    function buildExpenseDetailCanvas(expenses) {
+      const width = 2180;
+      const padding = 42;
+      const columns = [
+        { header: "#", width: 58 },
+        { header: "日期", width: 90 },
+        { header: "地点", width: 150 },
+        { header: "项目", width: 260 },
+        { header: "金额", width: 160 },
+        { header: "约人民币", width: 170 },
+        { header: "垫付", width: 130 },
+        { header: "分摊", width: 210 },
+        { header: "垫付者应收", width: 280 },
+        { header: "本条应付方向", width: 300 },
+        { header: "备注", width: 300 }
+      ];
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      context.font = "500 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      const rows = expenseRowsForExport(expenses);
+      const rowHeights = rows.length
+        ? rows.map((row) => Math.max(50, ...row.map((text, index) => wrapCanvasText(context, text, columns[index].width - 20).length * 25 + 24)))
+        : [70];
+      const tableHeight = 54 + rowHeights.reduce((sum, height) => sum + height, 0);
+      const height = Math.max(360, 130 + tableHeight + padding);
+      const scale = Math.max(2, window.devicePixelRatio || 1);
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      context.scale(scale, scale);
+
+      drawExpenseImageHeader(context, "旅行记账明细", `2026 奥捷之行 · 导出日期 ${currentExportDateText()}`, width);
+      let y = 124;
+      let x = padding;
+      context.fillStyle = "#eef3f1";
+      context.fillRect(x, y, width - padding * 2, 54);
+      context.strokeStyle = "#d9c8a9";
+      context.lineWidth = 1;
+      context.strokeRect(x, y, width - padding * 2, 54);
+      context.fillStyle = "#426b4f";
+      context.font = "900 20px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      columns.forEach((column) => {
+        context.fillText(column.header, x + 10, y + 34);
+        x += column.width;
+      });
+      y += 54;
+
+      if (!rows.length) {
+        context.fillStyle = "#ffffff";
+        context.fillRect(padding, y, width - padding * 2, 70);
+        context.strokeStyle = "#d9c8a9";
+        context.strokeRect(padding, y, width - padding * 2, 70);
+        context.fillStyle = "#647083";
+        context.font = "700 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+        context.fillText("还没有账目。", padding + 14, y + 43);
+        return canvas;
+      }
+
+      context.font = "500 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      rows.forEach((row, rowIndex) => {
+        const rowHeight = rowHeights[rowIndex];
+        x = padding;
+        context.fillStyle = rowIndex % 2 ? "#fffaf1" : "#ffffff";
+        context.fillRect(x, y, width - padding * 2, rowHeight);
+        context.strokeStyle = "#d9c8a9";
+        context.strokeRect(x, y, width - padding * 2, rowHeight);
+        row.forEach((text, columnIndex) => {
+          const column = columns[columnIndex];
+          const lines = wrapCanvasText(context, text, column.width - 20);
+          context.fillStyle = "#202631";
+          lines.forEach((line, lineIndex) => {
+            context.fillText(line, x + 10, y + 28 + lineIndex * 25);
+          });
+          x += column.width;
+        });
+        y += rowHeight;
+      });
+      return canvas;
+    }
+
+    function buildExpenseSummaryCanvas(expenses) {
+      const width = 1180;
+      const scale = Math.max(2, window.devicePixelRatio || 1);
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const settlement = expenseSettlement(expenses);
+      const families = defaultFamilies();
+      const rows = families.map((family) => ({
+        name: family.name,
+        paid: settlement.paid[family.id] || 0,
+        owed: settlement.owed[family.id] || 0,
+        net: settlement.net.find((item) => item.id === family.id)?.value || 0
+      }));
+      const height = 560 + Math.max(0, settlement.transfers.length - 1) * 32;
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      context.scale(scale, scale);
+
+      drawExpenseImageHeader(context, "旅行总账", `2026 奥捷之行 · 导出日期 ${currentExportDateText()}`, width);
+
+      const totals = Object.entries(settlement.byCurrency)
+        .map(([currency, amount]) => formatExpenseAmount(amount, currency))
+        .join("；") || "0";
+      const cardX = 42;
+      const cardY = 124;
+      const cardWidth = width - 84;
+      drawRoundedRect(context, cardX, cardY, cardWidth, 112, 10);
+      context.fillStyle = "#f3f7f2";
+      context.fill();
+      context.strokeStyle = "#bfd0c3";
+      context.stroke();
+      context.fillStyle = "#202631";
+      context.font = "900 24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      context.fillText(`总支出：${totals}`, cardX + 22, cardY + 42);
+      context.fillText(`合计约 ${formatExpenseRmb(settlement.totalRmb)}`, cardX + 22, cardY + 78);
+
+      const tableX = 42;
+      let y = 270;
+      const columns = [
+        { header: "家庭", width: 240 },
+        { header: "已垫付", width: 260 },
+        { header: "应分摊", width: 260 },
+        { header: "净额", width: 260 }
+      ];
+      context.fillStyle = "#eef3f1";
+      context.fillRect(tableX, y, cardWidth, 54);
+      context.strokeStyle = "#d9c8a9";
+      context.strokeRect(tableX, y, cardWidth, 54);
+      context.fillStyle = "#426b4f";
+      context.font = "900 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      let x = tableX;
+      columns.forEach((column) => {
+        context.fillText(column.header, x + 14, y + 35);
+        x += column.width;
+      });
+      y += 54;
+
+      context.font = "600 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      rows.forEach((row, index) => {
+        x = tableX;
+        context.fillStyle = index % 2 ? "#fffaf1" : "#ffffff";
+        context.fillRect(tableX, y, cardWidth, 56);
+        context.strokeStyle = "#d9c8a9";
+        context.strokeRect(tableX, y, cardWidth, 56);
+        [
+          row.name,
+          formatExpenseRmb(row.paid),
+          formatExpenseRmb(row.owed),
+          `${row.net >= 0 ? "应收" : "应付"} ${formatExpenseRmb(Math.abs(row.net))}`
+        ].forEach((text, columnIndex) => {
+          context.fillStyle = "#202631";
+          context.fillText(text, x + 14, y + 36);
+          x += columns[columnIndex].width;
+        });
+        y += 56;
+      });
+
+      y += 32;
+      context.fillStyle = "#202631";
+      context.font = "900 24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      context.fillText("建议转账", tableX, y);
+      y += 36;
+      context.fillStyle = "#647083";
+      context.font = "700 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
+      const transferLines = settlement.transfers.length ? settlement.transfers : ["目前不用互相转账。"];
+      transferLines.forEach((line) => {
+        context.fillText(line, tableX, y);
+        y += 32;
+      });
+
+      return canvas;
+    }
+
+    function downloadCanvasPng(canvas, filename) {
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    function exportExpenseImage(kind) {
+      const expenses = readExpenses();
+      if (!expenses.length) {
+        expenseStatus.textContent = "还没有账目，暂时不能导出图片。";
+        return;
+      }
+      const dateText = currentExportDateText();
+      if (kind === "summary") {
+        downloadCanvasPng(buildExpenseSummaryCanvas(expenses), `austria-czech-expense-summary-${dateText}.png`);
+        expenseStatus.textContent = "已导出总账图片。";
+        return;
+      }
+      downloadCanvasPng(buildExpenseDetailCanvas(expenses), `austria-czech-expense-detail-${dateText}.png`);
+      expenseStatus.textContent = "已导出记账明细图片。";
     }
 
     async function saveExpenseLedger(expenses, message) {
@@ -5789,6 +6126,9 @@
       }
       await saveExpenseLedger(readExpenses(), "已同步本机账目。");
     });
+
+    expenseExportDetail.addEventListener("click", () => exportExpenseImage("detail"));
+    expenseExportSummary.addEventListener("click", () => exportExpenseImage("summary"));
 
     renderExpenseControls();
     renderExpenseLedger();
