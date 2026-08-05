@@ -2340,7 +2340,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：111</div>
+    <div class="page-version" aria-label="网页版本">网页版本：112</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -4312,6 +4312,14 @@
         const dateDiff = expenseDateSortValue(left.date) - expenseDateSortValue(right.date);
         if (dateDiff) {
           return dateDiff;
+        }
+        const itemDiff = String(left.item || "").localeCompare(String(right.item || ""), "zh-Hans-CN");
+        if (itemDiff) {
+          return itemDiff;
+        }
+        const placeDiff = String(left.place || "").localeCompare(String(right.place || ""), "zh-Hans-CN");
+        if (placeDiff) {
+          return placeDiff;
         }
         return String(left.createdAt || "").localeCompare(String(right.createdAt || ""));
       });
