@@ -2340,7 +2340,7 @@
       <span>捷克使用捷克克朗：1 捷克克朗约 0.32 人民币</span>
       <span>汇率日期：7/15</span>
     </div>
-    <div class="page-version" aria-label="网页版本">网页版本：116</div>
+    <div class="page-version" aria-label="网页版本">网页版本：117</div>
     <label class="hero-access">
       访问码
       <input id="hero-assistant-token" type="password" autocomplete="off" placeholder="输入访问码">
@@ -3246,6 +3246,7 @@
       <div class="expense-export-actions" aria-label="导出记账图片">
         <button type="button" id="expense-export-detail">导出记账明细图片</button>
         <button type="button" id="expense-export-summary">导出总账图片</button>
+        <button type="button" id="expense-export-csv">导出 CSV</button>
       </div>
       <div class="expense-table-wrap">
         <table class="expense-table">
@@ -3634,6 +3635,7 @@
     const expenseSummary = document.getElementById("expense-summary");
     const expenseExportDetail = document.getElementById("expense-export-detail");
     const expenseExportSummary = document.getElementById("expense-export-summary");
+    const expenseExportCsv = document.getElementById("expense-export-csv");
     const expenseList = document.getElementById("expense-list");
     let lastAssistantExchange = null;
     let sharedAssistantConversation = null;
@@ -4879,6 +4881,36 @@
       link.download = filename;
       link.href = canvas.toDataURL("image/png");
       link.click();
+    }
+
+    function csvEscape(value) {
+      return `"${String(value ?? "").replace(/"/g, '""')}"`;
+    }
+
+    function downloadTextFile(text, filename, type) {
+      const blob = new Blob([text], { type });
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    }
+
+    function exportExpenseCsv() {
+      if (!hasExpenseAccess()) {
+        expenseStatus.textContent = "请先输入访问码。";
+        return;
+      }
+      const expenses = readExpenses();
+      if (!expenses.length) {
+        expenseStatus.textContent = "还没有账目，暂时不能导出 CSV。";
+        return;
+      }
+      const headers = ["序号", "日期", "地点", "项目", "金额", "约人民币", "垫付", "分摊", "本条应付方向", "截至本条总账", "垫付检查", "备注"];
+      const rows = expenseRowsForExport(expenses);
+      const csv = [headers].concat(rows).map((row) => row.map(csvEscape).join(",")).join("\r\n");
+      downloadTextFile(`\ufeff${csv}`, `austria-czech-expenses-${currentExportDateText()}.csv`, "text/csv;charset=utf-8");
+      expenseStatus.textContent = "已导出 CSV。";
     }
 
     function exportExpenseImage(kind) {
@@ -6305,6 +6337,7 @@
 
     expenseExportDetail.addEventListener("click", () => exportExpenseImage("detail"));
     expenseExportSummary.addEventListener("click", () => exportExpenseImage("summary"));
+    expenseExportCsv.addEventListener("click", exportExpenseCsv);
 
     renderExpenseControls();
     updateExpenseAccess();
