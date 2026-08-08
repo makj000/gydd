@@ -4696,27 +4696,23 @@
         formatExpenseRmb(expenseRmbAmount(expense)),
         familyNameById(expense.payer),
         expense.participants.map(familyNameById).join("、"),
-        expensePaymentDirections(expense),
-        runningExpenseSettlementText(sortedExpenses.slice(0, index + 1)),
         expensePayerWarning(expense),
         expense.note || ""
       ]);
     }
 
     function buildExpenseDetailCanvas(expenses) {
-      const width = 2540;
+      const width = 2020;
       const padding = 42;
       const columns = [
         { header: "#", width: 58 },
         { header: "日期", width: 90 },
-        { header: "地点", width: 150 },
-        { header: "项目", width: 260 },
-        { header: "金额", width: 160 },
-        { header: "约人民币", width: 170 },
-        { header: "垫付", width: 130 },
-        { header: "分摊", width: 210 },
-        { header: "本条应付方向", width: 300 },
-        { header: "截至本条总账", width: 340 },
+        { header: "地点", width: 160 },
+        { header: "项目", width: 300 },
+        { header: "金额", width: 170 },
+        { header: "约人民币", width: 180 },
+        { header: "垫付", width: 140 },
+        { header: "分摊", width: 220 },
         { header: "垫付检查", width: 300 },
         { header: "备注", width: 300 }
       ];
@@ -4906,7 +4902,7 @@
         expenseStatus.textContent = "还没有账目，暂时不能导出 CSV。";
         return;
       }
-      const headers = ["序号", "日期", "地点", "项目", "金额", "约人民币", "垫付", "分摊", "本条应付方向", "截至本条总账", "垫付检查", "备注"];
+      const headers = ["序号", "日期", "地点", "项目", "金额", "约人民币", "垫付", "分摊", "垫付检查", "备注"];
       const rows = expenseRowsForExport(expenses);
       const csv = [headers].concat(rows).map((row) => row.map(csvEscape).join(",")).join("\r\n");
       downloadTextFile(`\ufeff${csv}`, `austria-czech-expenses-${currentExportDateText()}.csv`, "text/csv;charset=utf-8");
